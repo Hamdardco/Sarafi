@@ -1,1 +1,275 @@
 
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سیستم حسابداری صرافی</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #f4f6f8;
+      color: #222;
+    }
+    .header {
+      background: #111827;
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+    .balance {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+    .balance-title {
+      color: #666;
+      font-size: 15px;
+    }
+    .balance-number {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .currency {
+      font-size: 16px;
+      color: #666;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 17px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .receive {
+      background: #16a34a;
+      color: white;
+    }
+    .withdraw {
+      background: #dc2626;
+      color: white;
+    }
+    .history {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .history h2 {
+      margin-top: 0;
+      font-size: 19px;
+    }
+    .empty {
+      text-align: center;
+      color: #888;
+      padding: 25px 0;
+    }
+    .form-box {
+      display: none;
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .form-box h2 {
+      margin-top: 0;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .save {
+      background: #111827;
+      color: white;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .cancel {
+      background: #e5e7eb;
+      color: #222;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .transaction {
+      border-bottom: 1px solid #eee;
+      padding: 13px 0;
+    }
+    .transaction:last-child {
+      border-bottom: none;
+    }
+    .receive-text {
+      color: #16a34a;
+      font-weight: bold;
+    }
+    .withdraw-text {
+      color: #dc2626;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>سیستم حسابداری صرافی</h1>
+  </div>
+  <div class="container">
+    <div class="balance">
+      <div class="balance-title">موجودی فعلی</div>
+      <div class="balance-number" id="balance">0</div>
+      <div class="currency">واحد پول</div>
+    </div>
+    <div class="buttons">
+      <button class="receive" onclick="openForm('receive')">
+        ثبت دریافت
+      </button>
+      <button class="withdraw" onclick="openForm('withdraw')">
+        ثبت برداشت
+      </button>
+    </div>
+    <div class="form-box" id="formBox">
+      <h2 id="formTitle">ثبت تراکنش</h2>
+      <input id="person" type="text" placeholder="نام شخص">
+      <input id="amount" type="number" placeholder="مبلغ">
+      <textarea id="description" placeholder="توضیحات"></textarea>
+      <button class="save" onclick="saveTransaction()">
+        ثبت تراکنش
+      </button>
+      <button class="cancel" onclick="closeForm()">
+        لغو
+      </button>
+    </div>
+    <div class="history">
+      <h2>تاریخچه تراکنش‌ها</h2>
+      <div id="historyList">
+        <div class="empty">
+          هنوز تراکنشی ثبت نشده است.
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+let transactions = [];
+let currentType = "";
+function openForm(type) {
+  currentType = type;
+  document.getElementById("formBox").style.display = "block";
+  if (type === "receive") {
+    document.getElementById("formTitle").innerText = "ثبت دریافت";
+  } else {
+    document.getElementById("formTitle").innerText = "ثبت برداشت";
+  }
+  window.scrollTo({
+    top: document.getElementById("formBox").offsetTop - 20,
+    behavior: "smooth"
+  });
+}
+function closeForm() {
+  document.getElementById("formBox").style.display = "none";
+  document.getElementById("person").value = "";
+  document.getElementById("amount").value = "";
+  document.getElementById("description").value = "";
+}
+function saveTransaction() {
+  const person = document.getElementById("person").value;
+  const amount = Number(document.getElementById("amount").value);
+  const description = document.getElementById("description").value;
+  if (!person || !amount || amount <= 0) {
+    alert("نام شخص و مبلغ را وارد کنید.");
+    return;
+  }
+  transactions.push({
+    type: currentType,
+    person: person,
+    amount: amount,
+    description: description,
+    date: new Date().toLocaleString("fa-AF")
+  });
+  updateBalance();
+  updateHistory();
+  closeForm();
+}
+function updateBalance() {
+  let balance = 0;
+  transactions.forEach(function(transaction) {
+    if (transaction.type === "receive") {
+      balance += transaction.amount;
+    } else {
+      balance -= transaction.amount;
+    }
+  });
+  document.getElementById("balance").innerText =
+    balance.toLocaleString("en-US");
+}
+function updateHistory() {
+  const list = document.getElementById("historyList");
+  if (transactions.length === 0) {
+    list.innerHTML =
+      '<div class="empty">هنوز تراکنشی ثبت نشده است.</div>';
+    return;
+  }
+  list.innerHTML = "";
+  [...transactions].reverse().forEach(function(transaction) {
+    const div = document.createElement("div");
+    div.className = "transaction";
+    const typeText =
+      transaction.type === "receive"
+      ? "دریافت"
+      : "برداشت";
+    const typeClass =
+      transaction.type === "receive"
+      ? "receive-text"
+      : "withdraw-text";
+    div.innerHTML = `
+      <div>
+        <span class="${typeClass}">
+          ${typeText}
+        </span>
+        — ${transaction.person}
+      </div>
+      <div>
+        مبلغ: ${transaction.amount.toLocaleString("en-US")}
+      </div>
+      <div>
+        ${transaction.description || ""}
+      </div>
+      <small>
+        ${transaction.date}
+      </small>
+    `;
+    list.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
