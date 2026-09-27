@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -331,7 +330,7 @@ textarea{
     130px
     120px
     80px
-    110px
+    180px
     120px
     90px
     220px
@@ -354,10 +353,40 @@ textarea{
   border-radius:8px;
 }
 
-/* چاپ */
+/* صفحه رسید */
 
 #printArea{
   display:none;
+}
+
+.print-page{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#f3f4f6;
+  overflow:auto;
+  padding:20px;
+}
+
+.print-toolbar{
+  max-width:700px;
+  margin:0 auto 15px;
+  display:flex;
+  gap:10px;
+}
+
+.print-toolbar button{
+  flex:1;
+}
+
+.real-print-button{
+  background:#111827;
+  color:white;
+}
+
+.close-print-button{
+  background:#e5e7eb;
+  color:#111827;
 }
 
 .receipt{
@@ -367,6 +396,7 @@ textarea{
   background:white;
   padding:30px;
   color:#000;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
 }
 
 .receipt-title{
@@ -412,29 +442,48 @@ textarea{
   .receipt-footer{
     flex-direction:column;
   }
+
+  .print-page{
+    padding:10px;
+  }
+
+  .receipt{
+    padding:20px;
+  }
 }
 
 @media print{
 
-  body *{
-    visibility:hidden !important;
+  body{
+    background:white !important;
   }
 
-  #printArea,
-  #printArea *{
-    visibility:visible !important;
+  body > *:not(#printArea){
+    display:none !important;
   }
 
   #printArea{
     display:block !important;
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
+    position:static !important;
+    padding:0 !important;
+    background:white !important;
+  }
+
+  .print-page{
+    position:static !important;
+    padding:0 !important;
+    background:white !important;
+  }
+
+  .print-toolbar{
+    display:none !important;
   }
 
   .receipt{
-    box-shadow:none;
+    box-shadow:none !important;
+    max-width:none !important;
+    width:100% !important;
+    padding:15px !important;
   }
 }
 </style>
@@ -621,10 +670,10 @@ textarea{
 
         <input
           id="receiveAmount"
-          type="number"
-          min="0.01"
-          step="0.01"
-          placeholder="مبلغ به AFN">
+          type="text"
+          inputmode="numeric"
+          placeholder="مبلغ به AFN"
+          oninput="formatAmountField(this)">
 
         <label>بابت / توضیحات *</label>
 
@@ -761,10 +810,10 @@ textarea{
 
         <input
           id="withdrawAmount"
-          type="number"
-          min="0.01"
-          step="0.01"
-          placeholder="مبلغ به AFN">
+          type="text"
+          inputmode="numeric"
+          placeholder="مبلغ به AFN"
+          oninput="formatAmountField(this)">
 
         <label>بابت / توضیحات *</label>
 
@@ -850,6 +899,8 @@ textarea{
 </div>
 
 
+<!-- ناحیه چاپ -->
+
 <div id="printArea"></div>
 
 
@@ -861,23 +912,227 @@ let receiveReceiptNumber = 1;
 let withdrawReceiptNumber = 1;
 
 
-/* تاریخ امروز */
+/* =========================
+   تاریخ میلادی به شمسی
+========================= */
 
-function updateTodayDate(){
+function gregorianToJalali(gy, gm, gd){
 
-  const now = new Date();
+  const gdm = [
+    0,31,59,90,120,151,
+    181,212,243,273,304,334
+  ];
 
-  document.getElementById("todayDate").innerText =
-    now.toLocaleDateString("fa-AF",{
-      year:"numeric",
-      month:"long",
-      day:"numeric"
-    });
+  let jy = (gy <= 1600) ? 0 : 979;
+
+  gy -= (gy <= 1600) ? 621 : 1600;
+
+  const gy2 =
+    (gm > 2)
+    ? gy + 1
+    : gy;
+
+  let days =
+    (365 * gy) +
+    Math.floor((gy2 + 3) / 4) -
+    Math.floor((gy2 + 99) / 100) +
+    Math.floor((gy2 + 399) / 400) -
+    80 +
+    gd +
+    gdm[gm - 1];
+
+  jy +=
+    33 * Math.floor(days / 12053);
+
+  days %= 12053;
+
+  jy +=
+    4 * Math.floor(days / 1461);
+
+  days %= 1461;
+
+  if(days > 365){
+
+    jy +=
+      Math.floor((days - 1) / 365);
+
+    days =
+      (days - 1) % 365;
+
+  }
+
+  const jm =
+    days < 186
+    ? 1 + Math.floor(days / 31)
+    : 7 + Math.floor((days - 186) / 30);
+
+  const jd =
+    1 +
+    (
+      days < 186
+      ? days % 31
+      : (days - 186) % 30
+    );
+
+  return [jy,jm,jd];
 
 }
 
 
-/* صفحات */
+/* =========================
+   ابزار تاریخ و ساعت
+========================= */
+
+function pad2(number){
+
+  return String(number).padStart(2,"0");
+
+}
+
+
+function getDateInfo(date){
+
+  const gy =
+    date.getFullYear();
+
+  const gm =
+    date.getMonth() + 1;
+
+  const gd =
+    date.getDate();
+
+  const jalali =
+    gregorianToJalali(
+      gy,
+      gm,
+      gd
+    );
+
+  const jy = jalali[0];
+  const jm = jalali[1];
+  const jd = jalali[2];
+
+  return {
+
+    gregorian:
+      gy +
+      "/" +
+      pad2(gm) +
+      "/" +
+      pad2(gd),
+
+    jalali:
+      jy +
+      "/" +
+      pad2(jm) +
+      "/" +
+      pad2(jd),
+
+    combined:
+      gy +
+      "/" +
+      pad2(gm) +
+      "/" +
+      pad2(gd) +
+      " | " +
+      jy +
+      "/" +
+      pad2(jm) +
+      "/" +
+      pad2(jd),
+
+    key:
+      gy +
+      "-" +
+      pad2(gm) +
+      "-" +
+      pad2(gd)
+
+  };
+
+}
+
+
+function getTime(date){
+
+  return (
+    pad2(date.getHours()) +
+    ":" +
+    pad2(date.getMinutes())
+  );
+
+}
+
+
+/* =========================
+   فرمت مبلغ
+========================= */
+
+function formatAmount(amount){
+
+  const number =
+    Number(amount);
+
+  if(!Number.isFinite(number)){
+    return "0";
+  }
+
+  return number.toLocaleString(
+    "en-US",
+    {
+      maximumFractionDigits:0
+    }
+  );
+
+}
+
+
+function formatAmountField(input){
+
+  let value =
+    input.value.replace(
+      /[^0-9]/g,
+      ""
+    );
+
+  if(!value){
+
+    input.value = "";
+    return;
+
+  }
+
+  input.value =
+    Number(value).toLocaleString(
+      "en-US"
+    );
+
+}
+
+
+/* =========================
+   تاریخ امروز
+========================= */
+
+function updateTodayDate(){
+
+  const now =
+    new Date();
+
+  const date =
+    getDateInfo(now);
+
+  document.getElementById(
+    "todayDate"
+  ).innerText =
+    date.combined;
+
+}
+
+
+/* =========================
+   صفحات
+========================= */
 
 function hideAllPages(){
 
@@ -885,7 +1140,9 @@ function hideAllPages(){
     .querySelectorAll(".page")
     .forEach(function(page){
 
-      page.classList.remove("active");
+      page.classList.remove(
+        "active"
+      );
 
     });
 
@@ -917,7 +1174,9 @@ function openTransactionPage(type){
       .getElementById("receivePage")
       .classList.add("active");
 
-    prepareNewTransaction("receive");
+    prepareNewTransaction(
+      "receive"
+    );
 
   }else{
 
@@ -925,7 +1184,9 @@ function openTransactionPage(type){
       .getElementById("withdrawPage")
       .classList.add("active");
 
-    prepareNewTransaction("withdraw");
+    prepareNewTransaction(
+      "withdraw"
+    );
 
   }
 
@@ -945,7 +1206,9 @@ function openAllHistory(){
 }
 
 
-/* تب ها */
+/* =========================
+   تب ها
+========================= */
 
 function showTab(type,tab){
 
@@ -980,7 +1243,11 @@ function showTab(type,tab){
       );
 
     if(tab === "history"){
-      renderTransactions("receive");
+
+      renderTransactions(
+        "receive"
+      );
+
     }
 
   }else{
@@ -1014,7 +1281,11 @@ function showTab(type,tab){
       );
 
     if(tab === "history"){
-      renderTransactions("withdraw");
+
+      renderTransactions(
+        "withdraw"
+      );
+
     }
 
   }
@@ -1022,43 +1293,59 @@ function showTab(type,tab){
 }
 
 
-/* آماده کردن تراکنش جدید */
+/* =========================
+   آماده کردن تراکنش
+========================= */
 
 function prepareNewTransaction(type){
 
-  const now = new Date();
+  const now =
+    new Date();
 
   const date =
-    now.toLocaleDateString("fa-AF");
+    getDateInfo(now);
 
   const time =
-    now.toLocaleTimeString("fa-AF",{
-      hour:"2-digit",
-      minute:"2-digit"
-    });
+    getTime(now);
 
   if(type === "receive"){
 
-    document.getElementById("receiveReceipt").value =
+    document.getElementById(
+      "receiveReceipt"
+    ).value =
       "REC-" +
-      String(receiveReceiptNumber).padStart(6,"0");
+      String(
+        receiveReceiptNumber
+      ).padStart(6,"0");
 
-    document.getElementById("receiveDate").value =
-      date;
+    document.getElementById(
+      "receiveDate"
+    ).value =
+      date.combined;
 
-    document.getElementById("receiveTime").value =
+    document.getElementById(
+      "receiveTime"
+    ).value =
       time;
 
   }else{
 
-    document.getElementById("withdrawReceipt").value =
+    document.getElementById(
+      "withdrawReceipt"
+    ).value =
       "PAY-" +
-      String(withdrawReceiptNumber).padStart(6,"0");
+      String(
+        withdrawReceiptNumber
+      ).padStart(6,"0");
 
-    document.getElementById("withdrawDate").value =
-      date;
+    document.getElementById(
+      "withdrawDate"
+    ).value =
+      date.combined;
 
-    document.getElementById("withdrawTime").value =
+    document.getElementById(
+      "withdrawTime"
+    ).value =
       time;
 
   }
@@ -1066,7 +1353,9 @@ function prepareNewTransaction(type){
 }
 
 
-/* ثبت تراکنش */
+/* =========================
+   ثبت تراکنش
+========================= */
 
 function saveTransaction(type){
 
@@ -1077,41 +1366,68 @@ function saveTransaction(type){
   if(type === "receive"){
 
     person =
-      document.getElementById("receivePerson")
-      .value.trim();
+      document
+        .getElementById(
+          "receivePerson"
+        )
+        .value
+        .trim();
 
     amount =
       Number(
-        document.getElementById("receiveAmount")
-        .value
+        document
+          .getElementById(
+            "receiveAmount"
+          )
+          .value
+          .replace(/,/g,"")
       );
 
     description =
-      document.getElementById("receiveDescription")
-      .value.trim();
+      document
+        .getElementById(
+          "receiveDescription"
+        )
+        .value
+        .trim();
 
   }else{
 
     person =
-      document.getElementById("withdrawPerson")
-      .value.trim();
+      document
+        .getElementById(
+          "withdrawPerson"
+        )
+        .value
+        .trim();
 
     amount =
       Number(
-        document.getElementById("withdrawAmount")
-        .value
+        document
+          .getElementById(
+            "withdrawAmount"
+          )
+          .value
+          .replace(/,/g,"")
       );
 
     description =
-      document.getElementById("withdrawDescription")
-      .value.trim();
+      document
+        .getElementById(
+          "withdrawDescription"
+        )
+        .value
+        .trim();
 
   }
 
 
   if(!person){
 
-    alert("نام شخص را وارد کنید.");
+    alert(
+      "نام شخص را وارد کنید."
+    );
+
     return;
 
   }
@@ -1119,7 +1435,10 @@ function saveTransaction(type){
 
   if(!amount || amount <= 0){
 
-    alert("مبلغ را وارد کنید.");
+    alert(
+      "مبلغ را وارد کنید."
+    );
+
     return;
 
   }
@@ -1127,45 +1446,60 @@ function saveTransaction(type){
 
   if(!description){
 
-    alert("قسمت «بابت / توضیحات» اجباری است.");
+    alert(
+      "قسمت «بابت / توضیحات» اجباری است."
+    );
+
     return;
 
   }
 
 
-  const now = new Date();
+  const now =
+    new Date();
+
+  const date =
+    getDateInfo(now);
 
   const transaction = {
 
-    id: Date.now(),
+    id:
+      Date.now(),
 
-    type:type,
+    type:
+      type,
 
-    person:person,
+    person:
+      person,
 
-    amount:amount,
+    amount:
+      amount,
 
-    description:description,
+    description:
+      description,
 
     receipt:
       type === "receive"
       ? "REC-" +
-        String(receiveReceiptNumber)
-        .padStart(6,"0")
+        String(
+          receiveReceiptNumber
+        ).padStart(6,"0")
       : "PAY-" +
-        String(withdrawReceiptNumber)
-        .padStart(6,"0"),
+        String(
+          withdrawReceiptNumber
+        ).padStart(6,"0"),
 
     date:
-      now.toLocaleDateString("fa-AF"),
+      date.combined,
+
+    dateKey:
+      date.key,
 
     time:
-      now.toLocaleTimeString("fa-AF",{
-        hour:"2-digit",
-        minute:"2-digit"
-      }),
+      getTime(now),
 
-    registeredBy:"مدیر"
+    registeredBy:
+      "مدیر"
 
   };
 
@@ -1181,78 +1515,108 @@ function saveTransaction(type){
   }
 
 
-  transactions.push(transaction);
+  transactions.push(
+    transaction
+  );
+
 
   updateBalance();
-
   updateTodaySummary();
 
   clearForm(type);
 
-  alert("تراکنش با موفقیت ثبت شد.");
+  alert(
+    "تراکنش با موفقیت ثبت شد."
+  );
 
-  printReceipt(transaction);
+  showReceipt(transaction);
 
 }
 
 
-/* پاک کردن فرم */
+/* =========================
+   پاک کردن فرم
+========================= */
 
 function clearForm(type){
 
   if(type === "receive"){
 
-    document.getElementById("receivePerson").value = "";
+    document.getElementById(
+      "receivePerson"
+    ).value = "";
 
-    document.getElementById("receiveAmount").value = "";
+    document.getElementById(
+      "receiveAmount"
+    ).value = "";
 
-    document.getElementById("receiveDescription").value = "";
+    document.getElementById(
+      "receiveDescription"
+    ).value = "";
 
-    prepareNewTransaction("receive");
+    prepareNewTransaction(
+      "receive"
+    );
 
   }else{
 
-    document.getElementById("withdrawPerson").value = "";
+    document.getElementById(
+      "withdrawPerson"
+    ).value = "";
 
-    document.getElementById("withdrawAmount").value = "";
+    document.getElementById(
+      "withdrawAmount"
+    ).value = "";
 
-    document.getElementById("withdrawDescription").value = "";
+    document.getElementById(
+      "withdrawDescription"
+    ).value = "";
 
-    prepareNewTransaction("withdraw");
+    prepareNewTransaction(
+      "withdraw"
+    );
 
   }
 
 }
 
 
-/* موجودی */
+/* =========================
+   موجودی
+========================= */
 
 function updateBalance(){
 
   let balance = 0;
 
-  transactions.forEach(function(t){
+  transactions.forEach(
+    function(t){
 
-    if(t.type === "receive"){
+      if(t.type === "receive"){
 
-      balance += t.amount;
+        balance += t.amount;
 
-    }else{
+      }else{
 
-      balance -= t.amount;
+        balance -= t.amount;
+
+      }
 
     }
+  );
 
-  });
 
-
-  document.getElementById("balance").innerText =
-    balance.toLocaleString("en-US");
+  document.getElementById(
+    "balance"
+  ).innerText =
+    formatAmount(balance);
 
 }
 
 
-/* خلاصه امروز */
+/* =========================
+   خلاصه امروز
+========================= */
 
 function updateTodaySummary(){
 
@@ -1260,47 +1624,62 @@ function updateTodaySummary(){
   let withdraw = 0;
 
   const today =
-    new Date().toLocaleDateString("fa-AF");
+    getDateInfo(
+      new Date()
+    ).key;
 
 
-  transactions.forEach(function(t){
+  transactions.forEach(
+    function(t){
 
-    if(t.date !== today) return;
+      if(t.dateKey !== today){
+        return;
+      }
 
+      if(t.type === "receive"){
 
-    if(t.type === "receive"){
+        receive += t.amount;
 
-      receive += t.amount;
+      }else{
 
-    }else{
+        withdraw += t.amount;
 
-      withdraw += t.amount;
+      }
 
     }
+  );
 
-  });
 
-
-  document.getElementById("todayReceive").innerText =
-    receive.toLocaleString("en-US") +
+  document.getElementById(
+    "todayReceive"
+  ).innerText =
+    formatAmount(receive) +
     " AFN";
 
 
-  document.getElementById("todayWithdraw").innerText =
-    withdraw.toLocaleString("en-US") +
+  document.getElementById(
+    "todayWithdraw"
+  ).innerText =
+    formatAmount(withdraw) +
     " AFN";
 
 }
 
 
-/* تراکنش های دریافت و برداشت */
+/* =========================
+   تراکنش های دریافت/برداشت
+========================= */
 
 function renderTransactions(type){
 
   const searchInput =
     type === "receive"
-    ? document.getElementById("receiveSearch")
-    : document.getElementById("withdrawSearch");
+    ? document.getElementById(
+        "receiveSearch"
+      )
+    : document.getElementById(
+        "withdrawSearch"
+      );
 
 
   const search =
@@ -1311,8 +1690,12 @@ function renderTransactions(type){
 
   const list =
     type === "receive"
-    ? document.getElementById("receiveList")
-    : document.getElementById("withdrawList");
+    ? document.getElementById(
+        "receiveList"
+      )
+    : document.getElementById(
+        "withdrawList"
+      );
 
 
   const filtered =
@@ -1324,11 +1707,18 @@ function renderTransactions(type){
       })
       .filter(function(t){
 
-        if(!search) return true;
+        if(!search){
+          return true;
+        }
 
         return (
-          t.person.toLowerCase().includes(search) ||
-          t.receipt.toLowerCase().includes(search)
+          t.person
+            .toLowerCase()
+            .includes(search) ||
+
+          t.receipt
+            .toLowerCase()
+            .includes(search)
         );
 
       })
@@ -1348,41 +1738,57 @@ function renderTransactions(type){
   list.innerHTML = "";
 
 
-  filtered.forEach(function(t){
+  filtered.forEach(
+    function(t){
 
-    list.appendChild(
-      createTransactionElement(t)
-    );
+      list.appendChild(
+        createTransactionElement(t)
+      );
 
-  });
+    }
+  );
 
 }
 
 
-/* تاریخچه کلی خطی */
+/* =========================
+   تاریخچه کلی
+========================= */
 
 function renderAllHistory(){
 
   const search =
-    document.getElementById("allSearch")
+    document
+      .getElementById(
+        "allSearch"
+      )
       .value
       .trim()
       .toLowerCase();
 
 
   const list =
-    document.getElementById("allHistoryList");
+    document.getElementById(
+      "allHistoryList"
+    );
 
 
   const filtered =
     [...transactions]
       .filter(function(t){
 
-        if(!search) return true;
+        if(!search){
+          return true;
+        }
 
         return (
-          t.person.toLowerCase().includes(search) ||
-          t.receipt.toLowerCase().includes(search)
+          t.person
+            .toLowerCase()
+            .includes(search) ||
+
+          t.receipt
+            .toLowerCase()
+            .includes(search)
         );
 
       })
@@ -1412,7 +1818,7 @@ function renderAllHistory(){
           <div>ساعت</div>
           <div>تاریخ</div>
           <div>مبلغ</div>
-          <div>نوع</div>
+          <div>نوع تراکنش</div>
           <div>توضیحات</div>
           <div>چاپ</div>
 
@@ -1421,67 +1827,69 @@ function renderAllHistory(){
   `;
 
 
-  filtered.forEach(function(t){
+  filtered.forEach(
+    function(t){
 
-    const typeText =
-      t.type === "receive"
-      ? "دریافت"
-      : "برداشت";
-
-
-    const typeClass =
-      t.type === "receive"
-      ? "green-text"
-      : "red-text";
+      const typeText =
+        t.type === "receive"
+        ? "دریافت"
+        : "برداشت";
 
 
-    html += `
+      const typeClass =
+        t.type === "receive"
+        ? "green-text"
+        : "red-text";
 
-      <div class="history-row">
 
-        <div>
-          ${t.receipt}
+      html += `
+
+        <div class="history-row">
+
+          <div>
+            ${t.receipt}
+          </div>
+
+          <div>
+            ${escapeHtml(t.person)}
+          </div>
+
+          <div>
+            ${t.time}
+          </div>
+
+          <div>
+            ${t.date}
+          </div>
+
+          <div>
+            ${formatAmount(t.amount)} AFN
+          </div>
+
+          <div class="${typeClass}">
+            ${typeText}
+          </div>
+
+          <div>
+            ${escapeHtml(t.description)}
+          </div>
+
+          <div>
+
+            <button
+              class="print-button"
+              onclick="printReceiptById(${t.id})">
+              چاپ
+            </button>
+
+          </div>
+
         </div>
 
-        <div>
-          ${escapeHtml(t.person)}
-        </div>
+      `;
 
-        <div>
-          ${t.time}
-        </div>
-
-        <div>
-          ${t.date}
-        </div>
-
-        <div>
-          ${t.amount.toLocaleString("en-US")} AFN
-        </div>
-
-        <div class="${typeClass}">
-          ${typeText}
-        </div>
-
-        <div>
-          ${escapeHtml(t.description)}
-        </div>
-
-        <div>
-
-          <button
-            class="print-button"
-            onclick="printReceiptById(${t.id})">
-            چاپ
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  });
+    }
+  );
 
 
   html += `
@@ -1493,17 +1901,22 @@ function renderAllHistory(){
   `;
 
 
-  list.innerHTML = html;
+  list.innerHTML =
+    html;
 
 }
 
 
-/* کارت تراکنش */
+/* =========================
+   کارت تراکنش
+========================= */
 
 function createTransactionElement(t){
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   div.className =
     "transaction";
@@ -1530,7 +1943,7 @@ function createTransactionElement(t){
       </span>
 
       <span class="amount ${typeClass}">
-        ${t.amount.toLocaleString("en-US")} AFN
+        ${formatAmount(t.amount)} AFN
       </span>
 
     </div>
@@ -1565,7 +1978,7 @@ function createTransactionElement(t){
       &nbsp; | &nbsp;
       ساعت: ${t.time}
       &nbsp; | &nbsp;
-      ثبت توسط: ${t.registeredBy}
+      ثبت توسط: ${escapeHtml(t.registeredBy)}
 
     </div>
 
@@ -1583,23 +1996,42 @@ function createTransactionElement(t){
 }
 
 
-/* جلوگیری از HTML شدن متن */
+/* =========================
+   جلوگیری از HTML شدن متن
+========================= */
 
 function escapeHtml(text){
 
   return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-/* چاپ رسید */
+/* =========================
+   نمایش رسید داخل خود سایت
+========================= */
 
-function printReceipt(transaction){
+function showReceipt(transaction){
 
   const typeText =
     transaction.type === "receive"
@@ -1607,244 +2039,161 @@ function printReceipt(transaction){
     : "رسید برداشت";
 
 
-  const printWindow =
-    window.open(
-      "",
-      "_blank"
-    );
+  document.getElementById(
+    "printArea"
+  ).innerHTML = `
+
+    <div class="print-page">
+
+      <div class="print-toolbar">
+
+        <button
+          class="real-print-button"
+          onclick="window.print()">
+          چاپ رسید
+        </button>
+
+        <button
+          class="close-print-button"
+          onclick="closePrintPage()">
+          بستن
+        </button>
+
+      </div>
+
+      <div class="receipt">
+
+        <div class="receipt-title">
+          شرکت همدرد
+        </div>
+
+        <div class="receipt-type">
+          ${typeText}
+        </div>
+
+        <div class="receipt-row">
+          <strong>شماره رسید</strong>
+          <span>
+            ${transaction.receipt}
+          </span>
+        </div>
+
+        <div class="receipt-row">
+          <strong>نام شخص</strong>
+          <span>
+            ${escapeHtml(transaction.person)}
+          </span>
+        </div>
+
+        <div class="receipt-row">
+          <strong>مبلغ</strong>
+          <span>
+            ${formatAmount(transaction.amount)} AFN
+          </span>
+        </div>
+
+        <div class="receipt-row">
+          <strong>بابت</strong>
+          <span>
+            ${escapeHtml(transaction.description)}
+          </span>
+        </div>
+
+        <div class="receipt-row">
+          <strong>تاریخ</strong>
+          <span>
+            ${transaction.date}
+          </span>
+        </div>
+
+        <div class="receipt-row">
+          <strong>ساعت</strong>
+          <span>
+            ${transaction.time}
+          </span>
+        </div>
+
+        <div class="receipt-row">
+          <strong>ثبت توسط</strong>
+          <span>
+            ${escapeHtml(transaction.registeredBy)}
+          </span>
+        </div>
+
+        <div class="receipt-footer">
+
+          <div>
+            مهر شرکت:
+            ______________
+          </div>
+
+          <div>
+            امضا:
+            ______________
+          </div>
+
+        </div>
+
+      </div>
 
-
-  if(!printWindow){
-
-    alert(
-      "پنجره چاپ باز نشد. اجازه باز شدن پنجره جدید را فعال کنید."
-    );
-
-    return;
-
-  }
-
-
-  const receiptHTML = `
-
-<!DOCTYPE html>
-
-<html lang="fa" dir="rtl">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0">
-
-<title>
-  ${transaction.receipt}
-</title>
-
-<style>
-
-body{
-
-  font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
-
-  color:#000;
-
-  padding:30px;
-
-}
-
-.receipt{
-
-  max-width:700px;
-
-  margin:auto;
-
-}
-
-.title{
-
-  text-align:center;
-
-  font-size:24px;
-
-  font-weight:bold;
-
-}
-
-.type{
-
-  text-align:center;
-
-  font-size:20px;
-
-  font-weight:bold;
-
-  margin:15px 0 25px;
-
-}
-
-.row{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:20px;
-
-  padding:12px 0;
-
-  border-bottom:1px solid #ddd;
-
-}
-
-.footer{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-top:60px;
-
-}
-
-@media print{
-
-  body{
-
-    padding:10px;
-
-  }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="receipt">
-
-  <div class="title">
-    شرکت همدرد
-  </div>
-
-  <div class="type">
-    ${typeText}
-  </div>
-
-  <div class="row">
-    <strong>شماره رسید</strong>
-    <span>${transaction.receipt}</span>
-  </div>
-
-  <div class="row">
-    <strong>نام شخص</strong>
-    <span>${escapeHtml(transaction.person)}</span>
-  </div>
-
-  <div class="row">
-    <strong>مبلغ</strong>
-    <span>
-      ${transaction.amount.toLocaleString("en-US")} AFN
-    </span>
-  </div>
-
-  <div class="row">
-    <strong>بابت</strong>
-    <span>${escapeHtml(transaction.description)}</span>
-  </div>
-
-  <div class="row">
-    <strong>تاریخ</strong>
-    <span>${transaction.date}</span>
-  </div>
-
-  <div class="row">
-    <strong>ساعت</strong>
-    <span>${transaction.time}</span>
-  </div>
-
-  <div class="row">
-    <strong>ثبت توسط</strong>
-    <span>${transaction.registeredBy}</span>
-  </div>
-
-  <div class="footer">
-
-    <div>
-      مهر شرکت:
-      ______________
     </div>
 
-    <div>
-      امضا:
-      ______________
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-
-window.onload = function(){
-
-  setTimeout(function(){
-
-    window.print();
-
-  },500);
-
-};
-
-<\/script>
-
-</body>
-
-</html>
-
-`;
+  `;
 
 
-  printWindow.document.open();
-
-  printWindow.document.write(
-    receiptHTML
-  );
-
-  printWindow.document.close();
+  document.getElementById(
+    "printArea"
+  ).style.display =
+    "block";
 
 }
 
 
-/* چاپ از لیست */
+function closePrintPage(){
+
+  document.getElementById(
+    "printArea"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "printArea"
+  ).innerHTML =
+    "";
+
+}
+
+
+/* =========================
+   چاپ از لیست
+========================= */
 
 function printReceiptById(id){
 
   const transaction =
-    transactions.find(function(t){
+    transactions.find(
+      function(t){
 
-      return t.id === id;
+        return t.id === id;
 
-    });
+      }
+    );
 
 
   if(transaction){
 
-    printReceipt(transaction);
+    showReceipt(
+      transaction
+    );
 
   }
 
 }
 
 
-/* شروع */
+/* =========================
+   شروع
+========================= */
 
 updateTodayDate();
 
@@ -1856,5 +2205,3 @@ updateTodaySummary();
 
 </body>
 </html>
- 
-        
