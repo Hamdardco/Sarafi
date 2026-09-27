@@ -31,7 +31,7 @@ body{
 }
 
 .container{
-  max-width:850px;
+  max-width:900px;
   margin:0 auto;
   padding:18px 15px 40px;
 }
@@ -131,8 +131,6 @@ button{
   color:white;
 }
 
-/* صفحات */
-
 .page{
   display:none;
 }
@@ -162,8 +160,6 @@ button{
   font-size:22px;
 }
 
-/* تب ها */
-
 .tabs{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -184,8 +180,6 @@ button{
   background:#111827;
   color:white;
 }
-
-/* فرم */
 
 .tab-content{
   display:none;
@@ -242,15 +236,6 @@ textarea{
   margin-top:18px;
 }
 
-.cancel{
-  width:100%;
-  background:#e5e7eb;
-  color:#111827;
-  margin-top:8px;
-}
-
-/* جستجو */
-
 .search-box{
   background:white;
   border-radius:18px;
@@ -262,8 +247,6 @@ textarea{
 .search-box input{
   margin:0;
 }
-
-/* لیست تراکنش ها */
 
 .transactions-box{
   background:white;
@@ -323,13 +306,52 @@ textarea{
   padding:30px 10px;
 }
 
-/* صفحه اصلی */
-
 .home-history-button{
   width:100%;
   background:#111827;
   color:white;
   margin-top:15px;
+}
+
+/* تاریخچه خطی */
+
+.history-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.history-table{
+  min-width:950px;
+}
+
+.history-row{
+  display:grid;
+  grid-template-columns:
+    130px
+    120px
+    80px
+    110px
+    120px
+    90px
+    220px
+    70px;
+
+  align-items:center;
+  border-bottom:1px solid #e5e7eb;
+  padding:12px 5px;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.history-row > div{
+  padding:0 6px;
+}
+
+.history-header{
+  font-weight:bold;
+  background:#f3f4f6;
+  border-radius:8px;
 }
 
 /* چاپ */
@@ -378,10 +400,6 @@ textarea{
 
 @media(max-width:600px){
 
-  .summary{
-    grid-template-columns:1fr 1fr;
-  }
-
   .transaction-head{
     flex-direction:column;
   }
@@ -399,16 +417,16 @@ textarea{
 @media print{
 
   body *{
-    visibility:hidden;
+    visibility:hidden !important;
   }
 
   #printArea,
   #printArea *{
-    visibility:visible;
+    visibility:visible !important;
   }
 
   #printArea{
-    display:block;
+    display:block !important;
     position:absolute;
     left:0;
     top:0;
@@ -424,7 +442,7 @@ textarea{
 
 <body>
 
-<!-- ================= صفحه اصلی ================= -->
+<!-- صفحه اصلی -->
 
 <div id="homePage" class="page active">
 
@@ -513,7 +531,7 @@ textarea{
 </div>
 
 
-<!-- ================= صفحه دریافت ================= -->
+<!-- صفحه دریافت -->
 
 <div id="receivePage" class="page">
 
@@ -550,9 +568,6 @@ textarea{
       </button>
 
     </div>
-
-
-    <!-- تراکنش جدید دریافت -->
 
     <div
       id="receiveNew"
@@ -627,9 +642,6 @@ textarea{
 
     </div>
 
-
-    <!-- تراکنش های دریافت -->
-
     <div
       id="receiveHistory"
       class="tab-content">
@@ -659,7 +671,7 @@ textarea{
 </div>
 
 
-<!-- ================= صفحه برداشت ================= -->
+<!-- صفحه برداشت -->
 
 <div id="withdrawPage" class="page">
 
@@ -696,9 +708,6 @@ textarea{
       </button>
 
     </div>
-
-
-    <!-- تراکنش جدید برداشت -->
 
     <div
       id="withdrawNew"
@@ -773,9 +782,6 @@ textarea{
 
     </div>
 
-
-    <!-- تراکنش های برداشت -->
-
     <div
       id="withdrawHistory"
       class="tab-content">
@@ -805,7 +811,7 @@ textarea{
 </div>
 
 
-<!-- ================= تاریخچه کلی ================= -->
+<!-- تاریخچه کلی -->
 
 <div id="allHistoryPage" class="page">
 
@@ -855,7 +861,7 @@ let receiveReceiptNumber = 1;
 let withdrawReceiptNumber = 1;
 
 
-/* ================= تاریخ امروز ================= */
+/* تاریخ امروز */
 
 function updateTodayDate(){
 
@@ -871,14 +877,16 @@ function updateTodayDate(){
 }
 
 
-/* ================= باز کردن صفحه ================= */
+/* صفحات */
 
 function hideAllPages(){
 
   document
     .querySelectorAll(".page")
     .forEach(function(page){
+
       page.classList.remove("active");
+
     });
 
 }
@@ -937,7 +945,7 @@ function openAllHistory(){
 }
 
 
-/* ================= تب ها ================= */
+/* تب ها */
 
 function showTab(type,tab){
 
@@ -1014,7 +1022,7 @@ function showTab(type,tab){
 }
 
 
-/* ================= آماده کردن تراکنش جدید ================= */
+/* آماده کردن تراکنش جدید */
 
 function prepareNewTransaction(type){
 
@@ -1029,16 +1037,11 @@ function prepareNewTransaction(type){
       minute:"2-digit"
     });
 
-  let receipt;
-
   if(type === "receive"){
 
-    receipt =
+    document.getElementById("receiveReceipt").value =
       "REC-" +
       String(receiveReceiptNumber).padStart(6,"0");
-
-    document.getElementById("receiveReceipt").value =
-      receipt;
 
     document.getElementById("receiveDate").value =
       date;
@@ -1048,12 +1051,9 @@ function prepareNewTransaction(type){
 
   }else{
 
-    receipt =
+    document.getElementById("withdrawReceipt").value =
       "PAY-" +
       String(withdrawReceiptNumber).padStart(6,"0");
-
-    document.getElementById("withdrawReceipt").value =
-      receipt;
 
     document.getElementById("withdrawDate").value =
       date;
@@ -1066,7 +1066,7 @@ function prepareNewTransaction(type){
 }
 
 
-/* ================= ثبت تراکنش ================= */
+/* ثبت تراکنش */
 
 function saveTransaction(type){
 
@@ -1112,24 +1112,24 @@ function saveTransaction(type){
   if(!person){
 
     alert("نام شخص را وارد کنید.");
-
     return;
+
   }
 
 
   if(!amount || amount <= 0){
 
     alert("مبلغ را وارد کنید.");
-
     return;
+
   }
 
 
   if(!description){
 
     alert("قسمت «بابت / توضیحات» اجباری است.");
-
     return;
+
   }
 
 
@@ -1183,26 +1183,20 @@ function saveTransaction(type){
 
   transactions.push(transaction);
 
-
   updateBalance();
 
   updateTodaySummary();
 
-
   clearForm(type);
 
-
-  alert(
-    "تراکنش با موفقیت ثبت شد."
-  );
-
+  alert("تراکنش با موفقیت ثبت شد.");
 
   printReceipt(transaction);
 
 }
 
 
-/* ================= پاک کردن فرم ================= */
+/* پاک کردن فرم */
 
 function clearForm(type){
 
@@ -1231,7 +1225,7 @@ function clearForm(type){
 }
 
 
-/* ================= موجودی ================= */
+/* موجودی */
 
 function updateBalance(){
 
@@ -1258,12 +1252,11 @@ function updateBalance(){
 }
 
 
-/* ================= خلاصه امروز ================= */
+/* خلاصه امروز */
 
 function updateTodaySummary(){
 
   let receive = 0;
-
   let withdraw = 0;
 
   const today =
@@ -1300,7 +1293,7 @@ function updateTodaySummary(){
 }
 
 
-/* ================= نمایش تراکنش ها ================= */
+/* تراکنش های دریافت و برداشت */
 
 function renderTransactions(type){
 
@@ -1366,7 +1359,7 @@ function renderTransactions(type){
 }
 
 
-/* ================= تاریخچه کلی ================= */
+/* تاریخچه کلی خطی */
 
 function renderAllHistory(){
 
@@ -1406,21 +1399,106 @@ function renderAllHistory(){
   }
 
 
-  list.innerHTML = "";
+  let html = `
+
+    <div class="history-table-wrapper">
+
+      <div class="history-table">
+
+        <div class="history-row history-header">
+
+          <div>شماره رسید</div>
+          <div>نام</div>
+          <div>ساعت</div>
+          <div>تاریخ</div>
+          <div>مبلغ</div>
+          <div>نوع</div>
+          <div>توضیحات</div>
+          <div>چاپ</div>
+
+        </div>
+
+  `;
 
 
   filtered.forEach(function(t){
 
-    list.appendChild(
-      createTransactionElement(t)
-    );
+    const typeText =
+      t.type === "receive"
+      ? "دریافت"
+      : "برداشت";
+
+
+    const typeClass =
+      t.type === "receive"
+      ? "green-text"
+      : "red-text";
+
+
+    html += `
+
+      <div class="history-row">
+
+        <div>
+          ${t.receipt}
+        </div>
+
+        <div>
+          ${escapeHtml(t.person)}
+        </div>
+
+        <div>
+          ${t.time}
+        </div>
+
+        <div>
+          ${t.date}
+        </div>
+
+        <div>
+          ${t.amount.toLocaleString("en-US")} AFN
+        </div>
+
+        <div class="${typeClass}">
+          ${typeText}
+        </div>
+
+        <div>
+          ${escapeHtml(t.description)}
+        </div>
+
+        <div>
+
+          <button
+            class="print-button"
+            onclick="printReceiptById(${t.id})">
+            چاپ
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
 
   });
+
+
+  html += `
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  list.innerHTML = html;
 
 }
 
 
-/* ================= ساخت کارت تراکنش ================= */
+/* کارت تراکنش */
 
 function createTransactionElement(t){
 
@@ -1467,6 +1545,7 @@ function createTransactionElement(t){
     <div class="transaction-line">
 
       <strong>نوع:</strong>
+
       <span class="${typeClass}">
         ${typeText}
       </span>
@@ -1504,7 +1583,7 @@ function createTransactionElement(t){
 }
 
 
-/* ================= جلوگیری از HTML شدن متن ================= */
+/* جلوگیری از HTML شدن متن */
 
 function escapeHtml(text){
 
@@ -1518,7 +1597,7 @@ function escapeHtml(text){
 }
 
 
-/* ================= چاپ رسید ================= */
+/* چاپ رسید */
 
 function printReceipt(transaction){
 
@@ -1528,84 +1607,223 @@ function printReceipt(transaction){
     : "رسید برداشت";
 
 
-  document.getElementById("printArea").innerHTML = `
+  const printWindow =
+    window.open(
+      "",
+      "_blank"
+    );
 
-    <div class="receipt">
 
-      <div class="receipt-title">
-        شرکت همدرد
-      </div>
+  if(!printWindow){
 
-      <div class="receipt-type">
-        ${typeText}
-      </div>
+    alert(
+      "پنجره چاپ باز نشد. اجازه باز شدن پنجره جدید را فعال کنید."
+    );
 
-      <div class="receipt-row">
-        <strong>شماره رسید</strong>
-        <span>${transaction.receipt}</span>
-      </div>
+    return;
 
-      <div class="receipt-row">
-        <strong>نام شخص</strong>
-        <span>${escapeHtml(transaction.person)}</span>
-      </div>
+  }
 
-      <div class="receipt-row">
-        <strong>مبلغ</strong>
-        <span>
-          ${transaction.amount.toLocaleString("en-US")} AFN
-        </span>
-      </div>
 
-      <div class="receipt-row">
-        <strong>بابت</strong>
-        <span>${escapeHtml(transaction.description)}</span>
-      </div>
+  const receiptHTML = `
 
-      <div class="receipt-row">
-        <strong>تاریخ</strong>
-        <span>${transaction.date}</span>
-      </div>
+<!DOCTYPE html>
 
-      <div class="receipt-row">
-        <strong>ساعت</strong>
-        <span>${transaction.time}</span>
-      </div>
+<html lang="fa" dir="rtl">
 
-      <div class="receipt-row">
-        <strong>ثبت توسط</strong>
-        <span>${transaction.registeredBy}</span>
-      </div>
+<head>
 
-      <div class="receipt-footer">
+<meta charset="UTF-8">
 
-        <div>
-          مهر شرکت:
-          ______________
-        </div>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
 
-        <div>
-          امضا:
-          ______________
-        </div>
+<title>
+  ${transaction.receipt}
+</title>
 
-      </div>
+<style>
 
+body{
+
+  font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+  color:#000;
+
+  padding:30px;
+
+}
+
+.receipt{
+
+  max-width:700px;
+
+  margin:auto;
+
+}
+
+.title{
+
+  text-align:center;
+
+  font-size:24px;
+
+  font-weight:bold;
+
+}
+
+.type{
+
+  text-align:center;
+
+  font-size:20px;
+
+  font-weight:bold;
+
+  margin:15px 0 25px;
+
+}
+
+.row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:12px 0;
+
+  border-bottom:1px solid #ddd;
+
+}
+
+.footer{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:60px;
+
+}
+
+@media print{
+
+  body{
+
+    padding:10px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="receipt">
+
+  <div class="title">
+    شرکت همدرد
+  </div>
+
+  <div class="type">
+    ${typeText}
+  </div>
+
+  <div class="row">
+    <strong>شماره رسید</strong>
+    <span>${transaction.receipt}</span>
+  </div>
+
+  <div class="row">
+    <strong>نام شخص</strong>
+    <span>${escapeHtml(transaction.person)}</span>
+  </div>
+
+  <div class="row">
+    <strong>مبلغ</strong>
+    <span>
+      ${transaction.amount.toLocaleString("en-US")} AFN
+    </span>
+  </div>
+
+  <div class="row">
+    <strong>بابت</strong>
+    <span>${escapeHtml(transaction.description)}</span>
+  </div>
+
+  <div class="row">
+    <strong>تاریخ</strong>
+    <span>${transaction.date}</span>
+  </div>
+
+  <div class="row">
+    <strong>ساعت</strong>
+    <span>${transaction.time}</span>
+  </div>
+
+  <div class="row">
+    <strong>ثبت توسط</strong>
+    <span>${transaction.registeredBy}</span>
+  </div>
+
+  <div class="footer">
+
+    <div>
+      مهر شرکت:
+      ______________
     </div>
 
-  `;
+    <div>
+      امضا:
+      ______________
+    </div>
 
+  </div>
+
+</div>
+
+<script>
+
+window.onload = function(){
 
   setTimeout(function(){
 
     window.print();
 
-  },300);
+  },500);
+
+};
+
+<\/script>
+
+</body>
+
+</html>
+
+`;
+
+
+  printWindow.document.open();
+
+  printWindow.document.write(
+    receiptHTML
+  );
+
+  printWindow.document.close();
 
 }
 
 
-/* ================= چاپ از لیست ================= */
+/* چاپ از لیست */
 
 function printReceiptById(id){
 
@@ -1626,7 +1844,7 @@ function printReceiptById(id){
 }
 
 
-/* ================= شروع ================= */
+/* شروع */
 
 updateTodayDate();
 
@@ -1638,3 +1856,5 @@ updateTodaySummary();
 
 </body>
 </html>
+ 
+        
