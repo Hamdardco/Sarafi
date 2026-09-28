@@ -1,355 +1,351 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سیستم حسابداری شرکت همدرد</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سیستم حسابداری شرکت همدرد</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Tahoma, Arial, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Tahoma,Arial,sans-serif;
+}
 
-    body {
-      margin: 0;
-      background: #f5f7f9;
-      color: #222;
-    }
+body{
+  margin:0;
+  background:#f5f7f9;
+  color:#222;
+}
 
-    .container {
-      width: 94%;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px 0 40px;
-    }
+.container{
+  width:94%;
+  max-width:900px;
+  margin:auto;
+  padding:20px 0 40px;
+}
 
-    .login-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      background: white;
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 5px 25px rgba(0,0,0,.08);
-    }
+.login-card{
+  width:100%;
+  max-width:420px;
+  background:white;
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 5px 25px rgba(0,0,0,.08);
+}
 
-    .login-card h1 {
-      text-align: center;
-      font-size: 22px;
-      margin: 0 0 8px;
-    }
+.login-card h1{
+  text-align:center;
+  font-size:22px;
+  margin:0 0 8px;
+}
 
-    .login-subtitle {
-      text-align: center;
-      color: #777;
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
+.login-subtitle{
+  text-align:center;
+  color:#777;
+  font-size:14px;
+  margin-bottom:25px;
+}
 
-    .login-btn {
-      width: 100%;
-      background: #222;
-      color: white;
-      margin-top: 18px;
-    }
+.login-btn{
+  width:100%;
+  background:#222;
+  color:white;
+  margin-top:18px;
+}
 
-    .logout-btn {
-      background: #eee;
-      color: #222;
-      padding: 9px 14px;
-      font-size: 13px;
-      margin-top: 12px;
-    }
+.logout-btn{
+  background:#eee;
+  color:#222;
+  padding:9px 14px;
+  font-size:13px;
+  margin-top:12px;
+}
 
-    .user-info {
-      text-align: center;
-      color: #666;
-      font-size: 13px;
-      margin-top: 8px;
-    }
+.user-info{
+  text-align:center;
+  color:#666;
+  font-size:13px;
+  margin-top:8px;
+}
 
-    .header {
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 3px 15px rgba(0,0,0,.06);
-    }
+.header{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
 
-    .header h1 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      text-align: center;
-    }
+.header h1{
+  margin:0 0 10px;
+  font-size:22px;
+  text-align:center;
+}
 
-    .date {
-      text-align: center;
-      color: #666;
-      font-size: 14px;
-    }
+.date{
+  text-align:center;
+  color:#666;
+  font-size:14px;
+}
 
-    .balance-box {
-      background: white;
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 18px;
-      text-align: center;
-      box-shadow: 0 3px 15px rgba(0,0,0,.06);
-    }
+.balance-box{
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  margin-bottom:18px;
+  text-align:center;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
 
-    .balance-title {
-      color: #777;
-      margin-bottom: 8px;
-    }
+.balance-title{
+  color:#777;
+  margin-bottom:8px;
+}
 
-    .balance {
-      font-size: 32px;
-      font-weight: bold;
-    }
+.balance{
+  font-size:32px;
+  font-weight:bold;
+}
 
-    .currency {
-      font-size: 16px;
-      color: #777;
-    }
+.currency{
+  font-size:16px;
+  color:#777;
+}
 
-    .buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:12px;
+}
 
-    button {
-      border: 0;
-      border-radius: 14px;
-      padding: 16px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+button{
+  border:0;
+  border-radius:14px;
+  padding:16px;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    .receive-btn {
-      background: #168a52;
-      color: white;
-    }
+.receive-btn{
+  background:#168a52;
+  color:white;
+}
 
-    .withdraw-btn {
-      background: #d93636;
-      color: white;
-    }
+.withdraw-btn{
+  background:#d93636;
+  color:white;
+}
 
-    .history-btn {
-      width: 100%;
-      background: #222;
-      color: white;
-      margin-bottom: 18px;
-    }
+.history-btn{
+  width:100%;
+  background:#222;
+  color:white;
+  margin-bottom:18px;
+}
 
-    .page {
-      display: none;
-    }
+.page{
+  display:none;
+}
 
-    .page.active {
-      display: block;
-    }
+.page.active{
+  display:block;
+}
 
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 15px;
-      box-shadow: 0 3px 15px rgba(0,0,0,.06);
-    }
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 19px;
-    }
+.card h2{
+  margin-top:0;
+  font-size:19px;
+}
 
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 15px;
-    }
+.tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:15px;
+}
 
-    .tab {
-      flex: 1;
-      background: #eee;
-      color: #333;
-    }
+.tab{
+  flex:1;
+  background:#eee;
+  color:#333;
+}
 
-    .tab.active {
-      background: #222;
-      color: white;
-    }
+.tab.active{
+  background:#222;
+  color:white;
+}
 
-    label {
-      display: block;
-      margin: 12px 0 6px;
-      font-size: 14px;
-      color: #555;
-    }
+label{
+  display:block;
+  margin:12px 0 6px;
+  font-size:14px;
+  color:#555;
+}
 
-    input,
-    textarea {
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 13px;
-      font-size: 15px;
-      outline: none;
-      background: white;
-    }
+input,
+textarea{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:13px;
+  font-size:15px;
+  outline:none;
+  background:white;
+}
 
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
 
-    .save-receive {
-      width: 100%;
-      background: #168a52;
-      color: white;
-      margin-top: 16px;
-    }
+.save-receive{
+  width:100%;
+  background:#168a52;
+  color:white;
+  margin-top:16px;
+}
 
-    .save-withdraw {
-      width: 100%;
-      background: #d93636;
-      color: white;
-      margin-top: 16px;
-    }
+.save-withdraw{
+  width:100%;
+  background:#d93636;
+  color:white;
+  margin-top:16px;
+}
 
-    .back-btn {
-      background: #eee;
-      width: 100%;
-      margin-bottom: 15px;
-    }
+.back-btn{
+  background:#eee;
+  width:100%;
+  margin-bottom:15px;
+}
 
-    .search {
-      margin-bottom: 15px;
-    }
+.search{
+  margin-bottom:15px;
+}
 
-    .transaction {
-      border: 1px solid #eee;
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 10px;
-      background: #fff;
-    }
+.transaction{
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:10px;
+  background:#fff;
+}
 
-    .transaction-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
+.transaction-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+  font-weight:bold;
+}
 
-    .receive-text {
-      color: #168a52;
-    }
+.receive-text{
+  color:#168a52;
+}
 
-    .withdraw-text {
-      color: #d93636;
-    }
+.withdraw-text{
+  color:#d93636;
+}
 
-    .transaction-row {
-      color: #666;
-      font-size: 13px;
-      margin-top: 5px;
-    }
+.transaction-row{
+  color:#666;
+  font-size:13px;
+  margin-top:5px;
+}
 
-    .empty {
-      text-align: center;
-      color: #888;
-      padding: 30px 10px;
-    }
+.empty{
+  text-align:center;
+  color:#888;
+  padding:30px 10px;
+}
 
-    .error-box {
-      display: none;
-      background: #fff0f0;
-      color: #a40000;
-      border: 1px solid #ffbcbc;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 15px;
-      font-size: 13px;
-      word-break: break-word;
-    }
+.error-box{
+  display:none;
+  background:#fff0f0;
+  color:#a40000;
+  border:1px solid #ffbcbc;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:15px;
+  font-size:13px;
+  word-break:break-word;
+}
 
-    .summary {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
 
-    .summary-box {
-      background: white;
-      border-radius: 14px;
-      padding: 15px;
-      text-align: center;
-    }
+.summary-box{
+  background:white;
+  border-radius:14px;
+  padding:15px;
+  text-align:center;
+}
 
-    .summary-box small {
-      display: block;
-      color: #777;
-      margin-bottom: 6px;
-    }
+.summary-box small{
+  display:block;
+  color:#777;
+  margin-bottom:6px;
+}
 
-    .summary-box strong {
-      font-size: 19px;
-    }
+.summary-box strong{
+  font-size:19px;
+}
 
-    .print-receipt {
-      background: #222;
-      color: white;
-      width: 100%;
-      margin-top: 10px;
-    }
+.print-receipt{
+  background:#222;
+  color:white;
+  width:100%;
+  margin-top:10px;
+}
 
-    #printArea {
-      display: none;
-    }
+#printArea{
+  display:none;
+}
 
-    @media print {
-      body * {
-        visibility: hidden;
-      }
+@media print{
+  body *{
+    visibility:hidden;
+  }
 
-      #printArea,
-      #printArea * {
-        visibility: visible;
-      }
+  #printArea,
+  #printArea *{
+    visibility:visible;
+  }
 
-      #printArea {
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        padding: 30px;
-        direction: rtl;
-      }
-    }
-  </style>
+  #printArea{
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    padding:30px;
+    direction:rtl;
+  }
+}
+</style>
 </head>
 
 <body>
-
-<!-- =========================
-     صفحه ورود
-========================= -->
 
 <div id="loginPage" class="login-page">
 
@@ -364,6 +360,7 @@
     <div id="loginError" class="error-box"></div>
 
     <label>ایمیل</label>
+
     <input
       id="loginEmail"
       type="email"
@@ -372,6 +369,7 @@
     >
 
     <label>رمز عبور</label>
+
     <input
       id="loginPassword"
       type="password"
@@ -390,15 +388,11 @@
 </div>
 
 
-<!-- =========================
-     سیستم اصلی
-========================= -->
-
 <div id="appContainer" class="container" style="display:none;">
 
   <div id="errorBox" class="error-box"></div>
 
-  <!-- صفحه اصلی -->
+
   <div id="homePage" class="page active">
 
     <div class="header">
@@ -412,14 +406,17 @@
       <div id="userInfo" class="user-info"></div>
 
       <div style="text-align:center;">
+
         <button
           class="logout-btn"
           onclick="logout()">
           خروج از حساب
         </button>
+
       </div>
 
     </div>
+
 
     <div class="balance-box">
 
@@ -428,6 +425,7 @@
       </div>
 
       <div>
+
         <span id="balance" class="balance">
           0
         </span>
@@ -435,9 +433,11 @@
         <span class="currency">
           AFN
         </span>
+
       </div>
 
     </div>
+
 
     <div class="buttons">
 
@@ -455,11 +455,13 @@
 
     </div>
 
+
     <button
       class="history-btn"
       onclick="openAllHistory()">
       تاریخچه تراکنش‌ها
     </button>
+
 
     <div class="summary">
 
@@ -492,7 +494,8 @@
   </div>
 
 
-  <!-- صفحه دریافت -->
+  <!-- دریافت -->
+
   <div id="receivePage" class="page">
 
     <button
@@ -523,24 +526,43 @@
 
       </div>
 
+
       <div id="receiveNew">
 
         <label>شماره رسید</label>
-        <input id="receiveReceipt" readonly>
+
+        <input
+          id="receiveReceipt"
+          readonly
+        >
 
         <label>تاریخ</label>
-        <input id="receiveDate" readonly>
+
+        <input
+          id="receiveDate"
+          readonly
+        >
 
         <label>ساعت</label>
-        <input id="receiveTime" readonly>
+
+        <input
+          id="receiveTime"
+          readonly
+        >
 
         <label>ثبت کننده</label>
-        <input id="receiveRegisteredBy" readonly>
+
+        <input
+          id="receiveRegisteredBy"
+          readonly
+        >
 
         <label>نام شخص / مشتری</label>
+
         <input
           id="receivePerson"
-          placeholder="نام شخص را وارد کنید">
+          placeholder="نام شخص را وارد کنید"
+        >
 
         <label>مبلغ (AFN)</label>
 
@@ -548,14 +570,14 @@
           id="receiveAmount"
           type="number"
           min="0"
-          placeholder="مثلاً 10000">
+          placeholder="مبلغ را وارد کنید"
+        >
 
         <label>بابت</label>
 
         <textarea
           id="receiveDescription"
-          placeholder="توضیحات دریافت">
-        </textarea>
+          placeholder="توضیحات دریافت"></textarea>
 
         <button
           class="save-receive"
@@ -565,6 +587,7 @@
 
       </div>
 
+
       <div
         id="receiveHistory"
         style="display:none;">
@@ -573,7 +596,8 @@
           id="receiveSearch"
           class="search"
           placeholder="جستجو بر اساس شماره رسید یا نام"
-          oninput="renderTransactions('receive')">
+          oninput="renderTransactions('receive')"
+        >
 
         <div id="receiveList"></div>
 
@@ -584,7 +608,8 @@
   </div>
 
 
-  <!-- صفحه برداشت -->
+  <!-- برداشت -->
+
   <div id="withdrawPage" class="page">
 
     <button
@@ -615,25 +640,43 @@
 
       </div>
 
+
       <div id="withdrawNew">
 
         <label>شماره رسید</label>
-        <input id="withdrawReceipt" readonly>
+
+        <input
+          id="withdrawReceipt"
+          readonly
+        >
 
         <label>تاریخ</label>
-        <input id="withdrawDate" readonly>
+
+        <input
+          id="withdrawDate"
+          readonly
+        >
 
         <label>ساعت</label>
-        <input id="withdrawTime" readonly>
+
+        <input
+          id="withdrawTime"
+          readonly
+        >
 
         <label>ثبت کننده</label>
-        <input id="withdrawRegisteredBy" readonly>
+
+        <input
+          id="withdrawRegisteredBy"
+          readonly
+        >
 
         <label>نام شخص</label>
 
         <input
           id="withdrawPerson"
-          placeholder="نام شخص را وارد کنید">
+          placeholder="نام شخص را وارد کنید"
+        >
 
         <label>مبلغ (AFN)</label>
 
@@ -641,14 +684,14 @@
           id="withdrawAmount"
           type="number"
           min="0"
-          placeholder="مثلاً 10000">
+          placeholder="مبلغ را وارد کنید"
+        >
 
         <label>بابت</label>
 
         <textarea
           id="withdrawDescription"
-          placeholder="توضیحات برداشت">
-        </textarea>
+          placeholder="توضیحات برداشت"></textarea>
 
         <button
           class="save-withdraw"
@@ -658,6 +701,7 @@
 
       </div>
 
+
       <div
         id="withdrawHistory"
         style="display:none;">
@@ -666,7 +710,8 @@
           id="withdrawSearch"
           class="search"
           placeholder="جستجو بر اساس شماره رسید یا نام"
-          oninput="renderTransactions('withdraw')">
+          oninput="renderTransactions('withdraw')"
+        >
 
         <div id="withdrawList"></div>
 
@@ -677,7 +722,8 @@
   </div>
 
 
-  <!-- تاریخچه کامل -->
+  <!-- تاریخچه -->
+
   <div id="allHistoryPage" class="page">
 
     <button
@@ -694,7 +740,8 @@
         id="allSearch"
         class="search"
         placeholder="جستجو بر اساس شماره رسید یا نام"
-        oninput="renderAllHistory()">
+        oninput="renderAllHistory()"
+      >
 
       <div id="allHistoryList"></div>
 
@@ -705,7 +752,6 @@
 </div>
 
 
-<!-- چاپ رسید -->
 <div id="printArea"></div>
 
 
@@ -713,51 +759,19 @@
 "use strict";
 
 
-/* =========================
-   اتصال به Supabase
-========================= */
-
 const SUPABASE_URL =
   "https://pxlvwdwznlklqdofbspv.supabase.co";
 
 const SUPABASE_KEY =
   "sb_publishable_5J-p7w5eYZTMsSGPYLtd9g_QiitckBc";
 
+const TABLE_NAME = "transaction";
+
 let supabaseClient = null;
 
-try {
-
-  if (!window.supabase) {
-    throw new Error(
-      "کتابخانه Supabase بارگذاری نشده است."
-    );
-  }
-
-  supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-} catch (error) {
-
-  console.error(error);
-}
-
-
-/* =========================
-   متغیرهای ورود
-========================= */
-
 let currentUser = null;
+
 let currentProfile = null;
-
-
-/* =========================
-   متغیرهای سیستم
-========================= */
-
-const TABLE_NAME = "transaction";
 
 let transactions = [];
 
@@ -766,18 +780,25 @@ let receiveReceiptNumber = 1;
 let withdrawReceiptNumber = 1;
 
 
-/* =========================
-   ابزار خطا
-========================= */
+try {
 
-function showError(message) {
+  supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+} catch(error) {
+
+  console.error(error);
+
+}
+
+
+function showError(message){
 
   const box =
     document.getElementById("errorBox");
-
-  if (!box) {
-    return;
-  }
 
   box.style.display = "block";
 
@@ -785,18 +806,16 @@ function showError(message) {
 }
 
 
-function hideError() {
+function hideError(){
 
   const box =
     document.getElementById("errorBox");
 
-  if (box) {
-    box.style.display = "none";
-  }
+  box.style.display = "none";
 }
 
 
-function showLoginError(message) {
+function showLoginError(message){
 
   const box =
     document.getElementById("loginError");
@@ -807,11 +826,7 @@ function showLoginError(message) {
 }
 
 
-/* =========================
-   ورود
-========================= */
-
-async function login() {
+async function login(){
 
   const email =
     document
@@ -824,7 +839,7 @@ async function login() {
       .getElementById("loginPassword")
       .value;
 
-  if (!email) {
+  if(!email){
 
     showLoginError(
       "لطفاً ایمیل را وارد کنید."
@@ -833,7 +848,7 @@ async function login() {
     return;
   }
 
-  if (!password) {
+  if(!password){
 
     showLoginError(
       "لطفاً رمز عبور را وارد کنید."
@@ -842,25 +857,21 @@ async function login() {
     return;
   }
 
-  if (!supabaseClient) {
-
-    showLoginError(
-      "اتصال به Supabase برقرار نشده است."
-    );
-
-    return;
-  }
-
-  try {
+  try{
 
     const result =
       await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
+
+        email:email,
+
+        password:password
+
       });
 
-    if (result.error) {
+    if(result.error){
+
       throw result.error;
+
     }
 
     currentUser =
@@ -868,25 +879,21 @@ async function login() {
 
     await loadProfile();
 
-  } catch (error) {
-
-    console.error(error);
+  }catch(error){
 
     showLoginError(
       "ورود انجام نشد: " +
-      (error.message || error)
+      error.message
     );
+
   }
+
 }
 
 
-/* =========================
-   گرفتن پروفایل و نقش
-========================= */
+async function loadProfile(){
 
-async function loadProfile() {
-
-  if (!currentUser) {
+  if(!currentUser){
     return;
   }
 
@@ -894,12 +901,10 @@ async function loadProfile() {
     await supabaseClient
       .from("profiles")
       .select("*")
-      .eq("id", currentUser.id)
+      .eq("id",currentUser.id)
       .single();
 
-  if (result.error) {
-
-    console.error(result.error);
+  if(result.error){
 
     await supabaseClient.auth.signOut();
 
@@ -916,14 +921,11 @@ async function loadProfile() {
     result.data;
 
   enterApp();
+
 }
 
 
-/* =========================
-   ورود به برنامه
-========================= */
-
-async function enterApp() {
+async function enterApp(){
 
   document
     .getElementById("loginPage")
@@ -933,21 +935,13 @@ async function enterApp() {
     .getElementById("appContainer")
     .style.display = "block";
 
-  const name =
-    currentProfile.full_name ||
-    "کاربر";
-
-  const role =
-    currentProfile.role ||
-    "cashier";
-
   document
     .getElementById("userInfo")
     .innerText =
       "کاربر: " +
-      name +
+      (currentProfile.full_name || "کاربر") +
       " | نقش: " +
-      role;
+      (currentProfile.role || "cashier");
 
   updateTodayDate();
 
@@ -956,14 +950,11 @@ async function enterApp() {
   prepareNewTransaction("withdraw");
 
   await loadTransactions();
+
 }
 
 
-/* =========================
-   خروج
-========================= */
-
-async function logout() {
+async function logout(){
 
   await supabaseClient.auth.signOut();
 
@@ -989,82 +980,59 @@ async function logout() {
     .getElementById("loginPassword")
     .value = "";
 
-  hideError();
-
-  document
-    .getElementById("loginError")
-    .style.display = "none";
 }
 
 
-/* =========================
-   بررسی نشست موجود
-========================= */
-
-async function checkExistingSession() {
-
-  if (!supabaseClient) {
-    return;
-  }
+async function checkExistingSession(){
 
   const result =
     await supabaseClient.auth.getSession();
 
-  if (result.error) {
+  if(result.error){
     return;
   }
 
-  const session =
-    result.data.session;
-
-  if (!session) {
+  if(!result.data.session){
     return;
   }
 
   currentUser =
-    session.user;
+    result.data.session.user;
 
   await loadProfile();
+
 }
 
 
-/* =========================
-   ابزارهای عمومی
-========================= */
+function pad2(number){
 
-function pad2(number) {
+  return String(number).padStart(2,"0");
 
-  return String(number)
-    .padStart(2, "0");
 }
 
 
-function getTime() {
+function getTime(){
 
-  const now =
-    new Date();
+  const now = new Date();
 
   return (
     pad2(now.getHours()) +
     ":" +
     pad2(now.getMinutes())
   );
+
 }
 
 
-function getDateInfo() {
+function getDateInfo(){
 
-  const now =
-    new Date();
+  const now = new Date();
 
-  const gy =
-    now.getFullYear();
+  const gy = now.getFullYear();
 
-  const gm =
-    now.getMonth() + 1;
+  const gm = now.getMonth()+1;
 
-  const gd =
-    now.getDate();
+  const gd = now.getDate();
 
   const jalali =
     gregorianToJalali(
@@ -1076,90 +1044,70 @@ function getDateInfo() {
   return {
 
     gregorian:
-      gy +
-      "/" +
-      pad2(gm) +
-      "/" +
+      gy + "/" +
+      pad2(gm) + "/" +
       pad2(gd),
 
     jalali:
-      jalali[0] +
-      "/" +
-      pad2(jalali[1]) +
-      "/" +
+      jalali[0] + "/" +
+      pad2(jalali[1]) + "/" +
       pad2(jalali[2]),
 
     combined:
-      gy +
-      "/" +
-      pad2(gm) +
-      "/" +
+      gy + "/" +
+      pad2(gm) + "/" +
       pad2(gd) +
       " | " +
-      jalali[0] +
-      "/" +
-      pad2(jalali[1]) +
-      "/" +
+      jalali[0] + "/" +
+      pad2(jalali[1]) + "/" +
       pad2(jalali[2]),
 
     key:
-      gy +
-      "-" +
-      pad2(gm) +
-      "-" +
+      gy + "-" +
+      pad2(gm) + "-" +
       pad2(gd)
+
   };
+
 }
 
 
-function updateTodayDate() {
+function updateTodayDate(){
 
   const info =
     getDateInfo();
 
-  const element =
-    document.getElementById(
-      "todayDate"
-    );
-
-  if (element) {
-
-    element.innerText =
+  document
+    .getElementById("todayDate")
+    .innerText =
       "امروز: " +
       info.combined;
-  }
+
 }
 
 
-function formatAmount(amount) {
+function formatAmount(amount){
 
-  const number =
-    Number(amount) || 0;
+  return (
+    Number(amount) || 0
+  ).toLocaleString("en-US");
 
-  return number.toLocaleString("en-US");
 }
 
 
-function escapeHtml(value) {
+function escapeHtml(value){
 
   return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
 }
 
 
-/* =========================
-   تبدیل میلادی به شمسی
-========================= */
-
-function gregorianToJalali(
-  gy,
-  gm,
-  gd
-) {
+function gregorianToJalali(gy,gm,gd){
 
   const gdm = [
     0,31,59,90,120,151,
@@ -1167,157 +1115,128 @@ function gregorianToJalali(
   ];
 
   const gy2 =
-    gm > 2
-      ? gy + 1
-      : gy;
+    gm > 2 ? gy+1 : gy;
 
   let days =
     355666 +
-    365 * gy +
-    Math.floor((gy2 + 3) / 4) -
-    Math.floor((gy2 + 99) / 100) +
-    Math.floor((gy2 + 399) / 400) +
+    365*gy +
+    Math.floor((gy2+3)/4) -
+    Math.floor((gy2+99)/100) +
+    Math.floor((gy2+399)/400) +
     gd +
-    gdm[gm - 1];
+    gdm[gm-1];
 
   let jy =
     -1595 +
-    33 *
-    Math.floor(days / 12053);
+    33*Math.floor(days/12053);
 
   days %= 12053;
 
   jy +=
-    4 *
-    Math.floor(days / 1461);
+    4*Math.floor(days/1461);
 
   days %= 1461;
 
-  if (days > 365) {
+  if(days > 365){
 
     jy +=
-      Math.floor(
-        (days - 1) / 365
-      );
+      Math.floor((days-1)/365);
 
     days =
-      (days - 1) % 365;
+      (days-1)%365;
+
   }
 
   let jm;
 
-  if (days < 186) {
+  if(days < 186){
 
     jm =
-      1 +
-      Math.floor(days / 31);
+      1 + Math.floor(days/31);
 
-  } else {
+  }else{
 
     jm =
       7 +
-      Math.floor(
-        (days - 186) / 30
-      );
+      Math.floor((days-186)/30);
+
   }
 
   const jd =
     1 +
     (
       days < 186
-        ? days % 31
-        : (days - 186) % 30
+        ? days%31
+        : (days-186)%30
     );
 
-  return [
-    jy,
-    jm,
-    jd
-  ];
+  return [jy,jm,jd];
+
 }
 
 
-/* =========================
-   خواندن تراکنش‌ها
-========================= */
-
-async function loadTransactions() {
+async function loadTransactions(){
 
   hideError();
 
-  if (!supabaseClient) {
-    return;
-  }
-
-  try {
+  try{
 
     const result =
       await supabaseClient
         .from(TABLE_NAME)
         .select("*")
-        .order("id", {
-          ascending: false
-        });
+        .order("id",{ascending:false});
 
-    if (result.error) {
+    if(result.error){
+
       throw result.error;
+
     }
 
-    const rows =
-      result.data || [];
-
     transactions =
-      rows.map(function(t) {
+      (result.data || []).map(function(t){
 
         let dateKey = "";
 
-        if (t.date) {
+        if(t.date){
 
           dateKey =
             String(t.date)
-              .substring(0, 10)
-              .replace(/\//g, "-");
+              .substring(0,10)
+              .replace(/\//g,"-");
+
         }
 
         return {
 
-          id: t.id,
+          id:t.id,
 
-          type: t.type,
+          type:t.type,
 
-          currency:
-            t.currency || "AFN",
+          currency:t.currency || "AFN",
 
-          amount:
-            Number(t.amount) || 0,
+          amount:Number(t.amount) || 0,
 
-          description:
-            t.description || "",
+          description:t.description || "",
 
-          person:
-            t.customer_name || "",
+          person:t.customer_name || "",
 
-          createdAt:
-            t.created_at || "",
+          createdAt:t.created_at || "",
 
-          rate:
-            t.rate || 1,
+          rate:t.rate || 1,
 
-          receipt:
-            t.receipt || "",
+          receipt:t.receipt || "",
 
-          date:
-            t.date || "",
+          date:t.date || "",
 
-          time:
-            t.time || "",
+          time:t.time || "",
 
-          registeredBy:
-            t.registered_by || "",
+          registeredBy:t.registered_by || "",
 
-          dateKey:
-            dateKey
+          dateKey:dateKey
+
         };
+
       });
 
     updateReceiptNumbers();
@@ -1332,77 +1251,72 @@ async function loadTransactions() {
 
     renderAllHistory();
 
-  } catch (error) {
-
-    console.error(error);
+  }catch(error){
 
     showError(
       "خطا در خواندن اطلاعات از Supabase: " +
-      (error.message || error)
+      error.message
     );
+
   }
+
 }
 
 
-/* =========================
-   شماره رسید
-========================= */
-
-function updateReceiptNumbers() {
+function updateReceiptNumbers(){
 
   let maxReceive = 0;
 
   let maxWithdraw = 0;
 
-  transactions.forEach(function(t) {
+  transactions.forEach(function(t){
 
     const number =
-      parseInt(t.receipt, 10);
+      parseInt(t.receipt,10);
 
-    if (!number) {
+    if(!number){
       return;
     }
 
-    if (t.type === "receive") {
+    if(t.type === "receive"){
 
-      if (number > maxReceive) {
-        maxReceive = number;
-      }
+      maxReceive =
+        Math.max(maxReceive,number);
 
-    } else if (
-      t.type === "withdraw"
-    ) {
-
-      if (number > maxWithdraw) {
-        maxWithdraw = number;
-      }
     }
+
+    if(t.type === "withdraw"){
+
+      maxWithdraw =
+        Math.max(maxWithdraw,number);
+
+    }
+
   });
 
   receiveReceiptNumber =
-    maxReceive + 1;
+    maxReceive+1;
 
   withdrawReceiptNumber =
-    maxWithdraw + 1;
+    maxWithdraw+1;
+
 }
 
 
-/* =========================
-   صفحه‌ها
-========================= */
-
-function hideAllPages() {
+function hideAllPages(){
 
   document
     .querySelectorAll(".page")
-    .forEach(function(page) {
+    .forEach(function(page){
 
       page.classList.remove("active");
+
     });
+
 }
 
 
-function goHome() {
+function goHome(){
 
   hideAllPages();
 
@@ -1413,32 +1327,30 @@ function goHome() {
   updateBalance();
 
   updateTodaySummary();
+
 }
 
 
-function openTransactionPage(type) {
+function openTransactionPage(type){
 
   hideAllPages();
 
-  const page =
-    document.getElementById(
+  document
+    .getElementById(
       type === "receive"
         ? "receivePage"
         : "withdrawPage"
-    );
-
-  page.classList.add("active");
+    )
+    .classList.add("active");
 
   prepareNewTransaction(type);
 
-  showTab(
-    type,
-    "new"
-  );
+  showTab(type,"new");
+
 }
 
 
-function openAllHistory() {
+function openAllHistory(){
 
   hideAllPages();
 
@@ -1447,33 +1359,23 @@ function openAllHistory() {
     .classList.add("active");
 
   renderAllHistory();
+
 }
 
 
-/* =========================
-   تب‌ها
-========================= */
+function showTab(type,tab){
 
-function showTab(
-  type,
-  tab
-) {
-
-  if (type === "receive") {
+  if(type === "receive"){
 
     document
       .getElementById("receiveNew")
       .style.display =
-        tab === "new"
-          ? "block"
-          : "none";
+        tab === "new" ? "block" : "none";
 
     document
       .getElementById("receiveHistory")
       .style.display =
-        tab === "history"
-          ? "block"
-          : "none";
+        tab === "history" ? "block" : "none";
 
     document
       .getElementById("receiveNewTab")
@@ -1489,21 +1391,17 @@ function showTab(
         tab === "history"
       );
 
-  } else {
+  }else{
 
     document
       .getElementById("withdrawNew")
       .style.display =
-        tab === "new"
-          ? "block"
-          : "none";
+        tab === "new" ? "block" : "none";
 
     document
       .getElementById("withdrawHistory")
       .style.display =
-        tab === "history"
-          ? "block"
-          : "none";
+        tab === "history" ? "block" : "none";
 
     document
       .getElementById("withdrawNewTab")
@@ -1518,15 +1416,13 @@ function showTab(
         "active",
         tab === "history"
       );
+
   }
+
 }
 
 
-/* =========================
-   فرم جدید
-========================= */
-
-function prepareNewTransaction(type) {
+function prepareNewTransaction(type){
 
   const info =
     getDateInfo();
@@ -1539,7 +1435,7 @@ function prepareNewTransaction(type) {
       ? currentProfile.full_name
       : "";
 
-  if (type === "receive") {
+  if(type === "receive"){
 
     document
       .getElementById("receiveReceipt")
@@ -1561,7 +1457,7 @@ function prepareNewTransaction(type) {
       .value =
         registeredBy;
 
-  } else {
+  }else{
 
     document
       .getElementById("withdrawReceipt")
@@ -1582,50 +1478,37 @@ function prepareNewTransaction(type) {
       .getElementById("withdrawRegisteredBy")
       .value =
         registeredBy;
+
   }
+
 }
 
 
-/* =========================
-   ذخیره تراکنش
-========================= */
-
-async function saveTransaction(type) {
+async function saveTransaction(type){
 
   hideError();
 
-  if (!supabaseClient) {
+  if(!currentUser){
 
-    showError(
-      "اتصال به Supabase برقرار نشده است."
-    );
+    alert("ابتدا وارد حساب خود شوید.");
 
     return;
   }
 
-  if (!currentUser) {
+  let person = "";
 
-    alert(
-      "ابتدا وارد حساب خود شوید."
-    );
+  let amount = 0;
 
-    return;
-  }
+  let description = "";
 
-  let person;
+  let receipt = "";
 
-  let amount;
+  let date = "";
 
-  let description;
-
-  let receipt;
-
-  let date;
-
-  let time;
+  let time = "";
 
 
-  if (type === "receive") {
+  if(type === "receive"){
 
     person =
       document
@@ -1661,7 +1544,7 @@ async function saveTransaction(type) {
         .getElementById("receiveTime")
         .value;
 
-  } else {
+  }else{
 
     person =
       document
@@ -1696,10 +1579,11 @@ async function saveTransaction(type) {
       document
         .getElementById("withdrawTime")
         .value;
+
   }
 
 
-  if (!person) {
+  if(!person){
 
     alert(
       "لطفاً نام شخص را وارد کنید."
@@ -1709,7 +1593,7 @@ async function saveTransaction(type) {
   }
 
 
-  if (!amount || amount <= 0) {
+  if(!amount || amount <= 0){
 
     alert(
       "لطفاً مبلغ معتبر وارد کنید."
@@ -1719,7 +1603,7 @@ async function saveTransaction(type) {
   }
 
 
-  if (!description) {
+  if(!description){
 
     alert(
       "لطفاً قسمت بابت را وارد کنید."
@@ -1729,26 +1613,23 @@ async function saveTransaction(type) {
   }
 
 
-  /* جلوگیری از برداشت بیشتر از موجودی */
-
-  if (type === "withdraw") {
+  if(type === "withdraw"){
 
     let balance = 0;
 
-    transactions.forEach(
-      function(t) {
+    transactions.forEach(function(t){
 
-        if (t.type === "receive") {
-          balance += Number(t.amount);
-        }
-
-        if (t.type === "withdraw") {
-          balance -= Number(t.amount);
-        }
+      if(t.type === "receive"){
+        balance += Number(t.amount);
       }
-    );
 
-    if (amount > balance) {
+      if(t.type === "withdraw"){
+        balance -= Number(t.amount);
+      }
+
+    });
+
+    if(amount > balance){
 
       alert(
         "موجودی کافی نیست.\n\n" +
@@ -1759,52 +1640,54 @@ async function saveTransaction(type) {
 
       return;
     }
+
   }
-
-
-  const now =
-    new Date().toISOString();
 
 
   const row = {
 
-    type: type,
+    type:type,
 
-    currency: "AFN",
+    currency:"AFN",
 
-    amount: amount,
+    amount:amount,
 
-    description: description,
+    description:description,
 
-    customer_name: person,
+    customer_name:person,
 
-    rate: 1,
+    rate:1,
 
-    receipt: String(receipt),
+    receipt:String(receipt),
 
-    date: date,
+    date:date,
 
-    time: time,
+    time:time,
 
     registered_by:
       currentProfile.full_name,
 
-    created_at: now
+    created_at:
+      new Date().toISOString()
+
   };
 
 
-  try {
+  try{
 
     const result =
       await supabaseClient
         .from(TABLE_NAME)
         .insert(row)
-        .select()
+        .select("*")
         .single();
 
-    if (result.error) {
+    if(result.error){
+
       throw result.error;
+
     }
+
 
     const t =
       result.data;
@@ -1812,57 +1695,50 @@ async function saveTransaction(type) {
 
     transactions.unshift({
 
-      id: t.id,
+      id:t.id,
 
-      type: t.type,
+      type:t.type,
 
-      currency: t.currency,
+      currency:t.currency || "AFN",
 
-      amount:
-        Number(t.amount),
+      amount:Number(t.amount) || 0,
 
-      description:
-        t.description,
+      description:t.description || "",
 
-      person:
-        t.customer_name,
+      person:t.customer_name || "",
 
-      createdAt:
-        t.created_at,
+      createdAt:t.created_at || "",
 
-      rate:
-        t.rate,
+      rate:t.rate || 1,
 
-      receipt:
-        t.receipt,
+      receipt:t.receipt || "",
 
-      date:
-        t.date,
+      date:t.date || "",
 
-      time:
-        t.time,
+      time:t.time || "",
 
-      registeredBy:
-        t.registered_by,
+      registeredBy:t.registered_by || "",
 
       dateKey:
-        String(t.date)
-          .substring(0, 10)
-          .replace(/\//g, "-")
+        String(t.date || "")
+          .substring(0,10)
+          .replace(/\//g,"-")
+
     });
 
 
-    if (type === "receive") {
+    if(type === "receive"){
 
       receiveReceiptNumber++;
 
       clearForm("receive");
 
-    } else {
+    }else{
 
       withdrawReceiptNumber++;
 
       clearForm("withdraw");
+
     }
 
 
@@ -1878,25 +1754,24 @@ async function saveTransaction(type) {
 
     showReceipt(t);
 
-  } catch (error) {
+
+  }catch(error){
 
     console.error(error);
 
     showError(
       "ثبت تراکنش انجام نشد:\n" +
-      (error.message || error)
+      error.message
     );
+
   }
+
 }
 
 
-/* =========================
-   پاک کردن فرم
-========================= */
+function clearForm(type){
 
-function clearForm(type) {
-
-  if (type === "receive") {
+  if(type === "receive"){
 
     document
       .getElementById("receivePerson")
@@ -1910,11 +1785,9 @@ function clearForm(type) {
       .getElementById("receiveDescription")
       .value = "";
 
-    prepareNewTransaction(
-      "receive"
-    );
+    prepareNewTransaction("receive");
 
-  } else {
+  }else{
 
     document
       .getElementById("withdrawPerson")
@@ -1928,46 +1801,38 @@ function clearForm(type) {
       .getElementById("withdrawDescription")
       .value = "";
 
-    prepareNewTransaction(
-      "withdraw"
-    );
+    prepareNewTransaction("withdraw");
+
   }
+
 }
 
 
-/* =========================
-   موجودی
-========================= */
-
-function updateBalance() {
+function updateBalance(){
 
   let balance = 0;
 
-  transactions.forEach(
-    function(t) {
+  transactions.forEach(function(t){
 
-      if (t.type === "receive") {
-        balance += Number(t.amount);
-      }
-
-      if (t.type === "withdraw") {
-        balance -= Number(t.amount);
-      }
+    if(t.type === "receive"){
+      balance += Number(t.amount);
     }
-  );
+
+    if(t.type === "withdraw"){
+      balance -= Number(t.amount);
+    }
+
+  });
 
   document
     .getElementById("balance")
     .innerText =
       formatAmount(balance);
+
 }
 
 
-/* =========================
-   خلاصه امروز
-========================= */
-
-function updateTodaySummary() {
+function updateTodaySummary(){
 
   const today =
     getDateInfo().key;
@@ -1976,22 +1841,21 @@ function updateTodaySummary() {
 
   let withdraw = 0;
 
-  transactions.forEach(
-    function(t) {
+  transactions.forEach(function(t){
 
-      if (t.dateKey !== today) {
-        return;
-      }
-
-      if (t.type === "receive") {
-        receive += Number(t.amount);
-      }
-
-      if (t.type === "withdraw") {
-        withdraw += Number(t.amount);
-      }
+    if(t.dateKey !== today){
+      return;
     }
-  );
+
+    if(t.type === "receive"){
+      receive += Number(t.amount);
+    }
+
+    if(t.type === "withdraw"){
+      withdraw += Number(t.amount);
+    }
+
+  });
 
 
   document
@@ -2006,14 +1870,11 @@ function updateTodaySummary() {
     .innerText =
       formatAmount(withdraw) +
       " AFN";
+
 }
 
 
-/* =========================
-   لیست دریافت / برداشت
-========================= */
-
-function renderTransactions(type) {
+function renderTransactions(type){
 
   const list =
     document.getElementById(
@@ -2023,45 +1884,42 @@ function renderTransactions(type) {
     );
 
   const search =
-    document.getElementById(
-      type === "receive"
-        ? "receiveSearch"
-        : "withdrawSearch"
-    )
+    document
+      .getElementById(
+        type === "receive"
+          ? "receiveSearch"
+          : "withdrawSearch"
+      )
       .value
       .trim()
       .toLowerCase();
 
 
   const filtered =
-    transactions.filter(
-      function(t) {
+    transactions.filter(function(t){
 
-        if (t.type !== type) {
-          return false;
-        }
-
-        if (!search) {
-          return true;
-        }
-
-        return (
-
-          String(t.receipt)
-            .toLowerCase()
-            .includes(search)
-
-          ||
-
-          String(t.person)
-            .toLowerCase()
-            .includes(search)
-        );
+      if(t.type !== type){
+        return false;
       }
-    );
+
+      if(!search){
+        return true;
+      }
+
+      return (
+        String(t.receipt)
+          .toLowerCase()
+          .includes(search)
+        ||
+        String(t.person)
+          .toLowerCase()
+          .includes(search)
+      );
+
+    });
 
 
-  if (!filtered.length) {
+  if(!filtered.length){
 
     list.innerHTML =
       '<div class="empty">تراکنشی وجود ندارد.</div>';
@@ -2074,14 +1932,11 @@ function renderTransactions(type) {
     filtered
       .map(createTransactionElement)
       .join("");
+
 }
 
 
-/* =========================
-   تاریخچه کامل
-========================= */
-
-function renderAllHistory() {
+function renderAllHistory(){
 
   const list =
     document.getElementById(
@@ -2097,30 +1952,26 @@ function renderAllHistory() {
 
 
   const filtered =
-    transactions.filter(
-      function(t) {
+    transactions.filter(function(t){
 
-        if (!search) {
-          return true;
-        }
-
-        return (
-
-          String(t.receipt)
-            .toLowerCase()
-            .includes(search)
-
-          ||
-
-          String(t.person)
-            .toLowerCase()
-            .includes(search)
-        );
+      if(!search){
+        return true;
       }
-    );
+
+      return (
+        String(t.receipt)
+          .toLowerCase()
+          .includes(search)
+        ||
+        String(t.person)
+          .toLowerCase()
+          .includes(search)
+      );
+
+    });
 
 
-  if (!filtered.length) {
+  if(!filtered.length){
 
     list.innerHTML =
       '<div class="empty">تراکنشی وجود ندارد.</div>';
@@ -2133,14 +1984,11 @@ function renderAllHistory() {
     filtered
       .map(createTransactionElement)
       .join("");
+
 }
 
 
-/* =========================
-   کارت تراکنش
-========================= */
-
-function createTransactionElement(t) {
+function createTransactionElement(t){
 
   const isReceive =
     t.type === "receive";
@@ -2211,15 +2059,13 @@ function createTransactionElement(t) {
       </button>
 
     </div>
+
   `;
+
 }
 
 
-/* =========================
-   رسید
-========================= */
-
-function showReceipt(t) {
+function showReceipt(t){
 
   const printArea =
     document.getElementById(
@@ -2291,34 +2137,28 @@ function showReceipt(t) {
       </p>
 
     </div>
+
   `;
 
-
   window.print();
+
 }
 
 
-/* =========================
-   چاپ از تاریخچه
-========================= */
-
-function printReceiptById(id) {
+function printReceiptById(id){
 
   const t =
-    transactions.find(
-      function(item) {
+    transactions.find(function(item){
 
-        return Number(item.id) ===
-          Number(id);
-      }
-    );
+      return Number(item.id) ===
+        Number(id);
+
+    });
 
 
-  if (!t) {
+  if(!t){
 
-    alert(
-      "رسید پیدا نشد."
-    );
+    alert("رسید پیدا نشد.");
 
     return;
   }
@@ -2326,38 +2166,30 @@ function printReceiptById(id) {
 
   showReceipt({
 
-    type: t.type,
+    type:t.type,
 
-    receipt: t.receipt,
+    receipt:t.receipt,
 
-    customer_name:
-      t.person,
+    customer_name:t.person,
 
-    amount:
-      t.amount,
+    amount:t.amount,
 
-    date:
-      t.date,
+    date:t.date,
 
-    time:
-      t.time,
+    time:t.time,
 
-    description:
-      t.description,
+    description:t.description,
 
-    registered_by:
-      t.registeredBy
+    registered_by:t.registeredBy
+
   });
+
 }
 
 
-/* =========================
-   شروع برنامه
-========================= */
-
 document.addEventListener(
   "DOMContentLoaded",
-  async function() {
+  async function(){
 
     await checkExistingSession();
 
