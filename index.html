@@ -322,7 +322,6 @@ textarea{
   display:none;
 }
 
-
 /* فقط بخش تاریخچه تراکنش‌ها */
 
 .history-filters{
@@ -486,7 +485,7 @@ textarea{
     <input
       id="loginPassword"
       type="password"
-      placeholder="رمز عبور را وارد کنید"
+      placeholder="رمز عبور خود را وارد کنید"
       autocomplete="current-password"
     >
 
@@ -648,9 +647,10 @@ textarea{
 
         <input
           id="receiveAmount"
-          type="number"
-          min="0"
-          placeholder="مبلغ را وارد کنید">
+          type="text"
+          inputmode="numeric"
+          placeholder="مبلغ را وارد کنید"
+          oninput="formatMoneyInput(this)">
 
         <label>بابت</label>
 
@@ -738,9 +738,10 @@ textarea{
 
         <input
           id="withdrawAmount"
-          type="number"
-          min="0"
-          placeholder="مبلغ را وارد کنید">
+          type="text"
+          inputmode="numeric"
+          placeholder="مبلغ را وارد کنید"
+          oninput="formatMoneyInput(this)">
 
         <label>بابت</label>
 
@@ -1142,6 +1143,25 @@ function formatAmount(amount){
 
 }
 
+/* فرمت سه رقم سه رقم مبلغ هنگام تایپ */
+
+function formatMoneyInput(input){
+
+  let value =
+    input.value.replace(/\D/g,"");
+
+  if(!value){
+
+    input.value = "";
+
+    return;
+  }
+
+  input.value =
+    Number(value).toLocaleString("en-US");
+
+}
+
 function escapeHtml(value){
 
   return String(value ?? "")
@@ -1303,6 +1323,8 @@ async function loadTransactions(){
 
 }
 
+/* شماره رسید جداگانه برای دریافت و برداشت */
+
 function updateReceiptNumbers(){
 
   let maxReceive = 0;
@@ -1310,34 +1332,50 @@ function updateReceiptNumbers(){
 
   transactions.forEach(function(t){
 
-    const number =
-      parseInt(t.receipt,10);
-
-    if(!number){
-      return;
-    }
+    const receipt =
+      String(t.receipt || "");
 
     if(t.type === "receive"){
 
-      maxReceive =
-        Math.max(maxReceive,number);
+      const match =
+        receipt.match(/^TPH_D(\d+)$/);
+
+      if(match){
+
+        maxReceive =
+          Math.max(
+            maxReceive,
+            Number(match[1])
+          );
+
+      }
 
     }
 
     if(t.type === "withdraw"){
 
-      maxWithdraw =
-        Math.max(maxWithdraw,number);
+      const match =
+        receipt.match(/^TPH_B(\d+)$/);
+
+      if(match){
+
+        maxWithdraw =
+          Math.max(
+            maxWithdraw,
+            Number(match[1])
+          );
+
+      }
 
     }
 
   });
 
   receiveReceiptNumber =
-    maxReceive+1;
+    maxReceive + 1;
 
   withdrawReceiptNumber =
-    maxWithdraw+1;
+    maxWithdraw + 1;
 
 }
 
@@ -1472,7 +1510,7 @@ function prepareNewTransaction(type){
     document
       .getElementById("receiveReceipt")
       .value =
-        receiveReceiptNumber;
+        "TPH_D" + receiveReceiptNumber;
 
     document
       .getElementById("receiveDate")
@@ -1494,7 +1532,7 @@ function prepareNewTransaction(type){
     document
       .getElementById("withdrawReceipt")
       .value =
-        withdrawReceiptNumber;
+        "TPH_B" + withdrawReceiptNumber;
 
     document
       .getElementById("withdrawDate")
@@ -1546,6 +1584,7 @@ async function saveTransaction(type){
         document
           .getElementById("receiveAmount")
           .value
+          .replace(/,/g,"")
       );
 
     description =
@@ -1582,6 +1621,7 @@ async function saveTransaction(type){
         document
           .getElementById("withdrawAmount")
           .value
+          .replace(/,/g,"")
       );
 
     description =
