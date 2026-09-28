@@ -377,9 +377,7 @@ textarea{
       autocomplete="current-password"
     >
 
-    <button
-      class="login-btn"
-      onclick="login()">
+    <button class="login-btn" onclick="login()">
       ورود
     </button>
 
@@ -391,7 +389,6 @@ textarea{
 <div id="appContainer" class="container" style="display:none;">
 
   <div id="errorBox" class="error-box"></div>
-
 
   <div id="homePage" class="page active">
 
@@ -407,9 +404,7 @@ textarea{
 
       <div style="text-align:center;">
 
-        <button
-          class="logout-btn"
-          onclick="logout()">
+        <button class="logout-btn" onclick="logout()">
           خروج از حساب
         </button>
 
@@ -467,9 +462,7 @@ textarea{
 
       <div class="summary-box">
 
-        <small>
-          دریافت امروز
-        </small>
+        <small>دریافت امروز</small>
 
         <strong id="todayReceive">
           0 AFN
@@ -479,9 +472,7 @@ textarea{
 
       <div class="summary-box">
 
-        <small>
-          برداشت امروز
-        </small>
+        <small>برداشت امروز</small>
 
         <strong id="todayWithdraw">
           0 AFN
@@ -494,13 +485,9 @@ textarea{
   </div>
 
 
-  <!-- دریافت -->
-
   <div id="receivePage" class="page">
 
-    <button
-      class="back-btn"
-      onclick="goHome()">
+    <button class="back-btn" onclick="goHome()">
       ← برگشت
     </button>
 
@@ -531,38 +518,25 @@ textarea{
 
         <label>شماره رسید</label>
 
-        <input
-          id="receiveReceipt"
-          readonly
-        >
+        <input id="receiveReceipt" readonly>
 
         <label>تاریخ</label>
 
-        <input
-          id="receiveDate"
-          readonly
-        >
+        <input id="receiveDate" readonly>
 
         <label>ساعت</label>
 
-        <input
-          id="receiveTime"
-          readonly
-        >
+        <input id="receiveTime" readonly>
 
         <label>ثبت کننده</label>
 
-        <input
-          id="receiveRegisteredBy"
-          readonly
-        >
+        <input id="receiveRegisteredBy" readonly>
 
         <label>نام شخص / مشتری</label>
 
         <input
           id="receivePerson"
-          placeholder="نام شخص را وارد کنید"
-        >
+          placeholder="نام شخص را وارد کنید">
 
         <label>مبلغ (AFN)</label>
 
@@ -570,8 +544,7 @@ textarea{
           id="receiveAmount"
           type="number"
           min="0"
-          placeholder="مبلغ را وارد کنید"
-        >
+          placeholder="مبلغ را وارد کنید">
 
         <label>بابت</label>
 
@@ -588,16 +561,13 @@ textarea{
       </div>
 
 
-      <div
-        id="receiveHistory"
-        style="display:none;">
+      <div id="receiveHistory" style="display:none;">
 
         <input
           id="receiveSearch"
           class="search"
           placeholder="جستجو بر اساس شماره رسید یا نام"
-          oninput="renderTransactions('receive')"
-        >
+          oninput="renderTransactions('receive')">
 
         <div id="receiveList"></div>
 
@@ -608,13 +578,9 @@ textarea{
   </div>
 
 
-  <!-- برداشت -->
-
   <div id="withdrawPage" class="page">
 
-    <button
-      class="back-btn"
-      onclick="goHome()">
+    <button class="back-btn" onclick="goHome()">
       ← برگشت
     </button>
 
@@ -645,38 +611,25 @@ textarea{
 
         <label>شماره رسید</label>
 
-        <input
-          id="withdrawReceipt"
-          readonly
-        >
+        <input id="withdrawReceipt" readonly>
 
         <label>تاریخ</label>
 
-        <input
-          id="withdrawDate"
-          readonly
-        >
+        <input id="withdrawDate" readonly>
 
         <label>ساعت</label>
 
-        <input
-          id="withdrawTime"
-          readonly
-        >
+        <input id="withdrawTime" readonly>
 
         <label>ثبت کننده</label>
 
-        <input
-          id="withdrawRegisteredBy"
-          readonly
-        >
+        <input id="withdrawRegisteredBy" readonly>
 
         <label>نام شخص</label>
 
         <input
           id="withdrawPerson"
-          placeholder="نام شخص را وارد کنید"
-        >
+          placeholder="نام شخص را وارد کنید">
 
         <label>مبلغ (AFN)</label>
 
@@ -684,8 +637,7 @@ textarea{
           id="withdrawAmount"
           type="number"
           min="0"
-          placeholder="مبلغ را وارد کنید"
-        >
+          placeholder="مبلغ را وارد کنید">
 
         <label>بابت</label>
 
@@ -702,16 +654,13 @@ textarea{
       </div>
 
 
-      <div
-        id="withdrawHistory"
-        style="display:none;">
+      <div id="withdrawHistory" style="display:none;">
 
         <input
           id="withdrawSearch"
           class="search"
           placeholder="جستجو بر اساس شماره رسید یا نام"
-          oninput="renderTransactions('withdraw')"
-        >
+          oninput="renderTransactions('withdraw')">
 
         <div id="withdrawList"></div>
 
@@ -722,13 +671,9 @@ textarea{
   </div>
 
 
-  <!-- تاریخچه -->
-
   <div id="allHistoryPage" class="page">
 
-    <button
-      class="back-btn"
-      onclick="goHome()">
+    <button class="back-btn" onclick="goHome()">
       ← برگشت
     </button>
 
@@ -740,8 +685,7 @@ textarea{
         id="allSearch"
         class="search"
         placeholder="جستجو بر اساس شماره رسید یا نام"
-        oninput="renderAllHistory()"
-      >
+        oninput="renderAllHistory()">
 
       <div id="allHistoryList"></div>
 
@@ -758,7 +702,6 @@ textarea{
 <script>
 "use strict";
 
-
 const SUPABASE_URL =
   "https://pxlvwdwznlklqdofbspv.supabase.co";
 
@@ -768,17 +711,11 @@ const SUPABASE_KEY =
 const TABLE_NAME = "transaction";
 
 let supabaseClient = null;
-
 let currentUser = null;
-
 let currentProfile = null;
-
 let transactions = [];
-
 let receiveReceiptNumber = 1;
-
 let withdrawReceiptNumber = 1;
-
 
 try {
 
@@ -801,8 +738,8 @@ function showError(message){
     document.getElementById("errorBox");
 
   box.style.display = "block";
-
   box.innerText = message;
+
 }
 
 
@@ -812,6 +749,7 @@ function hideError(){
     document.getElementById("errorBox");
 
   box.style.display = "none";
+
 }
 
 
@@ -821,8 +759,8 @@ function showLoginError(message){
     document.getElementById("loginError");
 
   box.style.display = "block";
-
   box.innerText = message;
+
 }
 
 
@@ -863,7 +801,6 @@ async function login(){
       await supabaseClient.auth.signInWithPassword({
 
         email:email,
-
         password:password
 
       });
@@ -946,7 +883,6 @@ async function enterApp(){
   updateTodayDate();
 
   prepareNewTransaction("receive");
-
   prepareNewTransaction("withdraw");
 
   await loadTransactions();
@@ -959,9 +895,7 @@ async function logout(){
   await supabaseClient.auth.signOut();
 
   currentUser = null;
-
   currentProfile = null;
-
   transactions = [];
 
   document
@@ -1029,9 +963,7 @@ function getDateInfo(){
   const now = new Date();
 
   const gy = now.getFullYear();
-
   const gm = now.getMonth()+1;
-
   const gd = now.getDate();
 
   const jalali =
@@ -1217,7 +1149,7 @@ async function loadTransactions(){
 
           amount:Number(t.amount) || 0,
 
-          description:t.description || "",
+          description:t.dascription || "",
 
           person:t.customer_name || "",
 
@@ -1240,15 +1172,11 @@ async function loadTransactions(){
       });
 
     updateReceiptNumbers();
-
     updateBalance();
-
     updateTodaySummary();
 
     renderTransactions("receive");
-
     renderTransactions("withdraw");
-
     renderAllHistory();
 
   }catch(error){
@@ -1266,7 +1194,6 @@ async function loadTransactions(){
 function updateReceiptNumbers(){
 
   let maxReceive = 0;
-
   let maxWithdraw = 0;
 
   transactions.forEach(function(t){
@@ -1325,7 +1252,6 @@ function goHome(){
     .classList.add("active");
 
   updateBalance();
-
   updateTodaySummary();
 
 }
@@ -1496,15 +1422,10 @@ async function saveTransaction(type){
   }
 
   let person = "";
-
   let amount = 0;
-
   let description = "";
-
   let receipt = "";
-
   let date = "";
-
   let time = "";
 
 
@@ -1613,37 +1534,6 @@ async function saveTransaction(type){
   }
 
 
-  if(type === "withdraw"){
-
-    let balance = 0;
-
-    transactions.forEach(function(t){
-
-      if(t.type === "receive"){
-        balance += Number(t.amount);
-      }
-
-      if(t.type === "withdraw"){
-        balance -= Number(t.amount);
-      }
-
-    });
-
-    if(amount > balance){
-
-      alert(
-        "موجودی کافی نیست.\n\n" +
-        "موجودی فعلی: " +
-        formatAmount(balance) +
-        " AFN"
-      );
-
-      return;
-    }
-
-  }
-
-
   const row = {
 
     type:type,
@@ -1652,7 +1542,7 @@ async function saveTransaction(type){
 
     amount:amount,
 
-    description:description,
+    dascription:description,
 
     customer_name:person,
 
@@ -1703,7 +1593,7 @@ async function saveTransaction(type){
 
       amount:Number(t.amount) || 0,
 
-      description:t.description || "",
+      description:t.dascription || "",
 
       person:t.customer_name || "",
 
@@ -1743,13 +1633,10 @@ async function saveTransaction(type){
 
 
     updateBalance();
-
     updateTodaySummary();
 
     renderTransactions("receive");
-
     renderTransactions("withdraw");
-
     renderAllHistory();
 
     showReceipt(t);
@@ -1838,7 +1725,6 @@ function updateTodaySummary(){
     getDateInfo().key;
 
   let receive = 0;
-
   let withdraw = 0;
 
   transactions.forEach(function(t){
@@ -2122,7 +2008,7 @@ function showReceipt(t){
 
       <p>
         بابت:
-        ${escapeHtml(t.description)}
+        ${escapeHtml(t.dascription || "")}
       </p>
 
       <p>
@@ -2178,7 +2064,7 @@ function printReceiptById(id){
 
     time:t.time,
 
-    description:t.description,
+    dascription:t.description,
 
     registered_by:t.registeredBy
 
