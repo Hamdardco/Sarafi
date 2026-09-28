@@ -239,61 +239,34 @@ textarea{
   margin-bottom:15px;
 }
 
-/* تاریخچه خطی و فشرده */
 .transaction{
-  display:grid;
-  grid-template-columns:110px 90px 1fr 120px 95px 75px 1fr 80px;
-  align-items:center;
-  gap:8px;
-  border-bottom:1px solid #eee;
-  padding:10px 4px;
-  margin:0;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:10px;
   background:#fff;
-  min-width:760px;
 }
 
 .transaction-head{
-  display:contents;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
   font-weight:bold;
-}
-
-.transaction-row{
-  color:#666;
-  font-size:12px;
-  margin:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.transaction-row strong{
-  color:#222;
 }
 
 .receive-text{
   color:#168a52;
-  font-weight:bold;
 }
 
 .withdraw-text{
   color:#d93636;
-  font-weight:bold;
 }
 
-.print-receipt{
-  background:#222;
-  color:white;
-  width:auto;
-  margin:0;
-  padding:7px 10px;
-  border-radius:8px;
-  font-size:11px;
-}
-
-#receiveList,
-#withdrawList,
-#allHistoryList{
-  overflow-x:auto;
+.transaction-row{
+  color:#666;
+  font-size:13px;
+  margin-top:5px;
 }
 
 .empty{
@@ -336,6 +309,13 @@ textarea{
 
 .summary-box strong{
   font-size:19px;
+}
+
+.print-receipt{
+  background:#222;
+  color:white;
+  width:100%;
+  margin-top:10px;
 }
 
 #printArea{
@@ -555,10 +535,9 @@ textarea{
 
         <input
           id="receiveAmount"
-          type="text"
-          inputmode="numeric"
-          placeholder="مبلغ را وارد کنید"
-          oninput="formatInputAmount(this)">
+          type="number"
+          min="0"
+          placeholder="مبلغ را وارد کنید">
 
         <label>بابت</label>
 
@@ -646,10 +625,9 @@ textarea{
 
         <input
           id="withdrawAmount"
-          type="text"
-          inputmode="numeric"
-          placeholder="مبلغ را وارد کنید"
-          oninput="formatInputAmount(this)">
+          type="number"
+          min="0"
+          placeholder="مبلغ را وارد کنید">
 
         <label>بابت</label>
 
@@ -1021,27 +999,6 @@ function formatAmount(amount){
 
 }
 
-function formatInputAmount(input){
-
-  let value =
-    input.value
-      .replace(/,/g,"")
-      .replace(/[^\d]/g,"");
-
-  if(!value){
-
-    input.value = "";
-
-    return;
-
-  }
-
-  input.value =
-    Number(value)
-      .toLocaleString("en-US");
-
-}
-
 function escapeHtml(value){
 
   return String(value ?? "")
@@ -1210,52 +1167,34 @@ function updateReceiptNumbers(){
 
   transactions.forEach(function(t){
 
-    const receipt =
-      String(t.receipt || "").trim();
+    const number =
+      parseInt(t.receipt,10);
 
-    let match;
+    if(!number){
+      return;
+    }
 
     if(t.type === "receive"){
 
-      match =
-        receipt.match(/^TPH_D(\d+)$/);
-
-      if(match){
-
-        maxReceive =
-          Math.max(
-            maxReceive,
-            Number(match[1])
-          );
-
-      }
+      maxReceive =
+        Math.max(maxReceive,number);
 
     }
 
     if(t.type === "withdraw"){
 
-      match =
-        receipt.match(/^TPH_B(\d+)$/);
-
-      if(match){
-
-        maxWithdraw =
-          Math.max(
-            maxWithdraw,
-            Number(match[1])
-          );
-
-      }
+      maxWithdraw =
+        Math.max(maxWithdraw,number);
 
     }
 
   });
 
   receiveReceiptNumber =
-    maxReceive + 1;
+    maxReceive+1;
 
   withdrawReceiptNumber =
-    maxWithdraw + 1;
+    maxWithdraw+1;
 
 }
 
@@ -1390,7 +1329,7 @@ function prepareNewTransaction(type){
     document
       .getElementById("receiveReceipt")
       .value =
-        "TPH_D" + receiveReceiptNumber;
+        receiveReceiptNumber;
 
     document
       .getElementById("receiveDate")
@@ -1412,7 +1351,7 @@ function prepareNewTransaction(type){
     document
       .getElementById("withdrawReceipt")
       .value =
-        "TPH_B" + withdrawReceiptNumber;
+        withdrawReceiptNumber;
 
     document
       .getElementById("withdrawDate")
@@ -1464,7 +1403,6 @@ async function saveTransaction(type){
         document
           .getElementById("receiveAmount")
           .value
-          .replace(/,/g,"")
       );
 
     description =
@@ -1501,7 +1439,6 @@ async function saveTransaction(type){
         document
           .getElementById("withdrawAmount")
           .value
-          .replace(/,/g,"")
       );
 
     description =
@@ -1906,35 +1843,41 @@ function createTransactionElement(t){
       </div>
 
       <div class="transaction-row">
+        نام:
         ${escapeHtml(t.person)}
       </div>
 
       <div class="transaction-row">
+        مبلغ:
         <strong>
           ${formatAmount(t.amount)} AFN
         </strong>
       </div>
 
       <div class="transaction-row">
+        تاریخ:
         ${escapeHtml(t.date)}
       </div>
 
       <div class="transaction-row">
+        ساعت:
         ${escapeHtml(t.time)}
       </div>
 
       <div class="transaction-row">
+        بابت:
         ${escapeHtml(t.description)}
       </div>
 
       <div class="transaction-row">
+        ثبت کننده:
         ${escapeHtml(t.registeredBy)}
       </div>
 
       <button
         class="print-receipt"
         onclick="printReceiptById(${Number(t.id)})">
-        چاپ
+        چاپ رسید
       </button>
 
     </div>
