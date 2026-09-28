@@ -322,7 +322,100 @@ textarea{
   display:none;
 }
 
+
+/* فقط بخش تاریخچه تراکنش‌ها */
+
+.history-filters{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.history-table-wrap{
+  width:100%;
+  overflow-x:auto;
+  border:1px solid #eee;
+  border-radius:12px;
+  background:white;
+}
+
+.history-table{
+  width:100%;
+  min-width:850px;
+  border-collapse:collapse;
+  direction:rtl;
+  font-size:13px;
+}
+
+.history-table th{
+  background:#f3f4f5;
+  color:#444;
+  padding:11px 8px;
+  border-bottom:1px solid #ddd;
+  white-space:nowrap;
+}
+
+.history-table td{
+  padding:10px 8px;
+  border-bottom:1px solid #eee;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.history-table tr:last-child td{
+  border-bottom:none;
+}
+
+.history-table .receive-row td{
+  color:#168a52;
+}
+
+.history-table .withdraw-row td{
+  color:#d93636;
+}
+
+.history-table .normal-text{
+  color:#333;
+}
+
+.history-print-btn{
+  width:100%;
+  background:#222;
+  color:white;
+  margin-top:12px;
+  margin-bottom:15px;
+}
+
+.history-print-title{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.history-print-table{
+  width:100%;
+  border-collapse:collapse;
+  direction:rtl;
+  font-size:11px;
+}
+
+.history-print-table th,
+.history-print-table td{
+  border:1px solid #333;
+  padding:6px 5px;
+  text-align:center;
+}
+
+.history-print-table th{
+  font-weight:bold;
+}
+
+#historyPrintArea{
+  display:none;
+}
+
 @media print{
+
   body *{
     visibility:hidden;
   }
@@ -341,6 +434,26 @@ textarea{
     padding:30px;
     direction:rtl;
   }
+
+  body.history-print-mode *{
+    visibility:hidden;
+  }
+
+  body.history-print-mode #historyPrintArea,
+  body.history-print-mode #historyPrintArea *{
+    visibility:visible;
+  }
+
+  body.history-print-mode #historyPrintArea{
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    padding:15px;
+    direction:rtl;
+  }
+
 }
 </style>
 </head>
@@ -675,6 +788,34 @@ textarea{
         placeholder="جستجو بر اساس شماره رسید یا نام"
         oninput="renderAllHistory()">
 
+      <div class="history-filters">
+
+        <div>
+          <label>از تاریخ</label>
+
+          <input
+            id="historyFromDate"
+            type="date"
+            onchange="renderAllHistory()">
+        </div>
+
+        <div>
+          <label>تا تاریخ</label>
+
+          <input
+            id="historyToDate"
+            type="date"
+            onchange="renderAllHistory()">
+        </div>
+
+      </div>
+
+      <button
+        class="history-print-btn"
+        onclick="printHistory()">
+        چاپ حساب
+      </button>
+
       <div id="allHistoryList"></div>
 
     </div>
@@ -684,6 +825,8 @@ textarea{
 </div>
 
 <div id="printArea"></div>
+
+<div id="historyPrintArea"></div>
 
 <script>
 "use strict";
@@ -1777,22 +1920,61 @@ function renderAllHistory(){
       .trim()
       .toLowerCase();
 
+  const fromDate =
+    document
+      .getElementById("historyFromDate")
+      .value;
+
+  const toDate =
+    document
+      .getElementById("historyToDate")
+      .value;
+
   const filtered =
     transactions.filter(function(t){
 
-      if(!search){
-        return true;
+      if(search){
+
+        const matchSearch =
+          String(t.receipt)
+            .toLowerCase()
+            .includes(search)
+          ||
+          String(t.person)
+            .toLowerCase()
+            .includes(search);
+
+        if(!matchSearch){
+          return false;
+        }
+
       }
 
-      return (
-        String(t.receipt)
-          .toLowerCase()
-          .includes(search)
-        ||
-        String(t.person)
-          .toLowerCase()
-          .includes(search)
-      );
+      if(fromDate){
+
+        if(!t.dateKey){
+          return false;
+        }
+
+        if(t.dateKey < fromDate){
+          return false;
+        }
+
+      }
+
+      if(toDate){
+
+        if(!t.dateKey){
+          return false;
+        }
+
+        if(t.dateKey > toDate){
+          return false;
+        }
+
+      }
+
+      return true;
 
     });
 
@@ -1804,10 +1986,110 @@ function renderAllHistory(){
     return;
   }
 
-  list.innerHTML =
-    filtered
-      .map(createTransactionElement)
-      .join("");
+  let html = `
+
+    <div class="history-table-wrap">
+
+      <table class="history-table">
+
+        <thead>
+
+          <tr>
+            <th>رسید</th>
+            <th>نوع</th>
+            <th>نام</th>
+            <th>مبلغ</th>
+            <th>تاریخ</th>
+            <th>ساعت</th>
+            <th>بابت</th>
+            <th>ثبت کننده</th>
+            <th>رسید</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+  `;
+
+  filtered.forEach(function(t){
+
+    const isReceive =
+      t.type === "receive";
+
+    html += `
+
+      <tr class="${
+        isReceive
+          ? "receive-row"
+          : "withdraw-row"
+      }">
+
+        <td>
+          ${escapeHtml(t.receipt)}
+        </td>
+
+        <td>
+          ${
+            isReceive
+              ? "دریافت"
+              : "برداشت"
+          }
+        </td>
+
+        <td class="normal-text">
+          ${escapeHtml(t.person)}
+        </td>
+
+        <td>
+          <strong>
+            ${formatAmount(t.amount)} AFN
+          </strong>
+        </td>
+
+        <td class="normal-text">
+          ${escapeHtml(t.date)}
+        </td>
+
+        <td class="normal-text">
+          ${escapeHtml(t.time)}
+        </td>
+
+        <td class="normal-text">
+          ${escapeHtml(t.description)}
+        </td>
+
+        <td class="normal-text">
+          ${escapeHtml(t.registeredBy)}
+        </td>
+
+        <td>
+
+          <button
+            class="print-receipt"
+            style="padding:7px 10px;font-size:12px;"
+            onclick="printReceiptById(${Number(t.id)})">
+            چاپ رسید
+          </button>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+  html += `
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+  list.innerHTML = html;
 
 }
 
@@ -1883,6 +2165,206 @@ function createTransactionElement(t){
     </div>
 
   `;
+
+}
+
+function printHistory(){
+
+  const search =
+    document
+      .getElementById("allSearch")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const fromDate =
+    document
+      .getElementById("historyFromDate")
+      .value;
+
+  const toDate =
+    document
+      .getElementById("historyToDate")
+      .value;
+
+  const filtered =
+    transactions.filter(function(t){
+
+      if(search){
+
+        const matchSearch =
+          String(t.receipt)
+            .toLowerCase()
+            .includes(search)
+          ||
+          String(t.person)
+            .toLowerCase()
+            .includes(search);
+
+        if(!matchSearch){
+          return false;
+        }
+
+      }
+
+      if(fromDate){
+
+        if(!t.dateKey || t.dateKey < fromDate){
+          return false;
+        }
+
+      }
+
+      if(toDate){
+
+        if(!t.dateKey || t.dateKey > toDate){
+          return false;
+        }
+
+      }
+
+      return true;
+
+    });
+
+  if(!filtered.length){
+
+    alert(
+      "برای این بازه تراکنشی وجود ندارد."
+    );
+
+    return;
+  }
+
+  let dateText =
+    "همه تراکنش‌ها";
+
+  if(fromDate || toDate){
+
+    dateText =
+      (fromDate || "ابتدا") +
+      " تا " +
+      (toDate || "امروز");
+
+  }
+
+  let html = `
+
+    <div class="history-print-title">
+
+      <h2>
+        سیستم حسابداری شرکت همدرد
+      </h2>
+
+      <h3>
+        گزارش تاریخچه تراکنش‌ها
+      </h3>
+
+      <div>
+        بازه:
+        ${escapeHtml(dateText)}
+      </div>
+
+    </div>
+
+    <table class="history-print-table">
+
+      <thead>
+
+        <tr>
+          <th>رسید</th>
+          <th>نوع</th>
+          <th>نام</th>
+          <th>مبلغ</th>
+          <th>تاریخ</th>
+          <th>ساعت</th>
+          <th>بابت</th>
+          <th>ثبت کننده</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+  `;
+
+  filtered.forEach(function(t){
+
+    html += `
+
+      <tr>
+
+        <td>
+          ${escapeHtml(t.receipt)}
+        </td>
+
+        <td>
+          ${
+            t.type === "receive"
+              ? "دریافت"
+              : "برداشت"
+          }
+        </td>
+
+        <td>
+          ${escapeHtml(t.person)}
+        </td>
+
+        <td>
+          ${formatAmount(t.amount)} AFN
+        </td>
+
+        <td>
+          ${escapeHtml(t.date)}
+        </td>
+
+        <td>
+          ${escapeHtml(t.time)}
+        </td>
+
+        <td>
+          ${escapeHtml(t.description)}
+        </td>
+
+        <td>
+          ${escapeHtml(t.registeredBy)}
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+  html += `
+
+      </tbody>
+
+    </table>
+
+  `;
+
+  const printArea =
+    document.getElementById(
+      "historyPrintArea"
+    );
+
+  printArea.innerHTML = html;
+
+  document.body.classList.add(
+    "history-print-mode"
+  );
+
+  window.print();
+
+  setTimeout(function(){
+
+    document.body.classList.remove(
+      "history-print-mode"
+    );
+
+    printArea.innerHTML = "";
+
+  },500);
 
 }
 
