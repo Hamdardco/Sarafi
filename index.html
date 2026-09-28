@@ -1,10 +1,521 @@
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سیستم حسابداری شرکت همدرد</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f7f9;
+      color: #222;
+    }
+
+    .container {
+      width: 94%;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px 0 40px;
+    }
+
+    .header {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.06);
+    }
+
+    .header h1 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .date {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .balance-box {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 18px;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(0,0,0,.06);
+    }
+
+    .balance-title {
+      color: #777;
+      margin-bottom: 8px;
+    }
+
+    .balance {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .currency {
+      font-size: 16px;
+      color: #777;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .receive-btn {
+      background: #168a52;
+      color: white;
+    }
+
+    .withdraw-btn {
+      background: #d93636;
+      color: white;
+    }
+
+    .history-btn {
+      width: 100%;
+      background: #222;
+      color: white;
+      margin-bottom: 18px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.06);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 19px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .tab {
+      flex: 1;
+      background: #eee;
+      color: #333;
+    }
+
+    .tab.active {
+      background: #222;
+      color: white;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .save-receive {
+      width: 100%;
+      background: #168a52;
+      color: white;
+      margin-top: 16px;
+    }
+
+    .save-withdraw {
+      width: 100%;
+      background: #d93636;
+      color: white;
+      margin-top: 16px;
+    }
+
+    .back-btn {
+      background: #eee;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .search {
+      margin-bottom: 15px;
+    }
+
+    .transaction {
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+
+    .transaction-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .receive-text {
+      color: #168a52;
+    }
+
+    .withdraw-text {
+      color: #d93636;
+    }
+
+    .transaction-row {
+      color: #666;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #888;
+      padding: 30px 10px;
+    }
+
+    .error-box {
+      display: none;
+      background: #fff0f0;
+      color: #a40000;
+      border: 1px solid #ffbcbc;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      direction: ltr;
+      text-align: left;
+      word-break: break-word;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .summary-box {
+      background: white;
+      border-radius: 14px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .summary-box small {
+      display: block;
+      color: #777;
+      margin-bottom: 6px;
+    }
+
+    .summary-box strong {
+      font-size: 19px;
+    }
+
+    .print-receipt {
+      background: #222;
+      color: white;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    #printArea {
+      display: none;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #printArea,
+      #printArea * {
+        visibility: visible;
+      }
+
+      #printArea {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 30px;
+        direction: rtl;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div id="errorBox" class="error-box"></div>
+
+  <!-- صفحه اصلی -->
+  <div id="homePage" class="page active">
+
+    <div class="header">
+      <h1>سیستم حسابداری شرکت همدرد</h1>
+      <div id="todayDate" class="date">در حال بارگذاری تاریخ...</div>
+    </div>
+
+    <div class="balance-box">
+      <div class="balance-title">موجودی فعلی</div>
+      <div>
+        <span id="balance" class="balance">0</span>
+        <span class="currency">AFN</span>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="receive-btn" onclick="openTransactionPage('receive')">
+        ثبت دریافت
+      </button>
+
+      <button class="withdraw-btn" onclick="openTransactionPage('withdraw')">
+        ثبت برداشت
+      </button>
+    </div>
+
+    <button class="history-btn" onclick="openAllHistory()">
+      تاریخچه تراکنش‌ها
+    </button>
+
+    <div class="summary">
+      <div class="summary-box">
+        <small>دریافت امروز</small>
+        <strong id="todayReceive">0 AFN</strong>
+      </div>
+
+      <div class="summary-box">
+        <small>برداشت امروز</small>
+        <strong id="todayWithdraw">0 AFN</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- صفحه دریافت -->
+  <div id="receivePage" class="page">
+
+    <button class="back-btn" onclick="goHome()">← برگشت</button>
+
+    <div class="card">
+
+      <h2>ثبت دریافت</h2>
+
+      <div class="tabs">
+        <button id="receiveNewTab" class="tab active"
+                onclick="showTab('receive','new')">
+          ثبت جدید
+        </button>
+
+        <button id="receiveHistoryTab" class="tab"
+                onclick="showTab('receive','history')">
+          دریافت‌ها
+        </button>
+      </div>
+
+      <div id="receiveNew">
+
+        <label>شماره رسید</label>
+        <input id="receiveReceipt" readonly>
+
+        <label>تاریخ</label>
+        <input id="receiveDate" readonly>
+
+        <label>ساعت</label>
+        <input id="receiveTime" readonly>
+
+        <label>ثبت کننده</label>
+        <input id="receiveRegisteredBy" value="مدیر" readonly>
+
+        <label>نام شخص / مشتری</label>
+        <input id="receivePerson" placeholder="نام شخص را وارد کنید">
+
+        <label>مبلغ (AFN)</label>
+        <input id="receiveAmount"
+               type="number"
+               min="0"
+               placeholder="مثلاً 10000">
+
+        <label>بابت</label>
+        <textarea id="receiveDescription"
+                  placeholder="توضیحات دریافت"></textarea>
+
+        <button class="save-receive" onclick="saveTransaction('receive')">
+          ثبت دریافت
+        </button>
+
+      </div>
+
+      <div id="receiveHistory" style="display:none;">
+
+        <input id="receiveSearch"
+               class="search"
+               placeholder="جستجو بر اساس شماره رسید یا نام"
+               oninput="renderTransactions('receive')">
+
+        <div id="receiveList"></div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- صفحه برداشت -->
+  <div id="withdrawPage" class="page">
+
+    <button class="back-btn" onclick="goHome()">← برگشت</button>
+
+    <div class="card">
+
+      <h2>ثبت برداشت</h2>
+
+      <div class="tabs">
+        <button id="withdrawNewTab" class="tab active"
+                onclick="showTab('withdraw','new')">
+          ثبت جدید
+        </button>
+
+        <button id="withdrawHistoryTab" class="tab"
+                onclick="showTab('withdraw','history')">
+          برداشت‌ها
+        </button>
+      </div>
+
+      <div id="withdrawNew">
+
+        <label>شماره رسید</label>
+        <input id="withdrawReceipt" readonly>
+
+        <label>تاریخ</label>
+        <input id="withdrawDate" readonly>
+
+        <label>ساعت</label>
+        <input id="withdrawTime" readonly>
+
+        <label>ثبت کننده</label>
+        <input id="withdrawRegisteredBy" value="مدیر" readonly>
+
+        <label>نام شخص</label>
+        <input id="withdrawPerson" placeholder="نام شخص را وارد کنید">
+
+        <label>مبلغ (AFN)</label>
+        <input id="withdrawAmount"
+               type="number"
+               min="0"
+               placeholder="مثلاً 10000">
+
+        <label>بابت</label>
+        <textarea id="withdrawDescription"
+                  placeholder="توضیحات برداشت"></textarea>
+
+        <button class="save-withdraw" onclick="saveTransaction('withdraw')">
+          ثبت برداشت
+        </button>
+
+      </div>
+
+      <div id="withdrawHistory" style="display:none;">
+
+        <input id="withdrawSearch"
+               class="search"
+               placeholder="جستجو بر اساس شماره رسید یا نام"
+               oninput="renderTransactions('withdraw')">
+
+        <div id="withdrawList"></div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- تاریخچه کامل -->
+  <div id="allHistoryPage" class="page">
+
+    <button class="back-btn" onclick="goHome()">← برگشت</button>
+
+    <div class="card">
+
+      <h2>تاریخچه تراکنش‌ها</h2>
+
+      <input id="allSearch"
+             class="search"
+             placeholder="جستجو بر اساس شماره رسید یا نام"
+             oninput="renderAllHistory()">
+
+      <div id="allHistoryList"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- چاپ رسید -->
+<div id="printArea"></div>
+
 
 <script>
+"use strict";
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+/* =========================
+   اتصال به Supabase
+========================= */
 
 const SUPABASE_URL =
   "https://pxlvwdwznlklqdofbspv.supabase.co";
@@ -12,18 +523,29 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_5J-p7w5eYZTMsSGPYLtd9g_QiitckBc";
 
-const supabaseClient =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+let supabaseClient = null;
+
+try {
+  if (!window.supabase) {
+    throw new Error("Supabase library loaded نشده است.");
+  }
+
+  supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+} catch (error) {
+  showError("خطا در اتصال Supabase: " + error.message);
+}
+
+
+/* =========================
+   متغیرها
+========================= */
 
 const TABLE_NAME = "transaction";
-
-
-/* =====================================================
-   اطلاعات برنامه
-===================================================== */
 
 let transactions = [];
 
@@ -31,288 +553,256 @@ let receiveReceiptNumber = 1;
 let withdrawReceiptNumber = 1;
 
 
-/* =====================================================
-   تبدیل میلادی به شمسی
-===================================================== */
+/* =========================
+   ابزارهای عمومی
+========================= */
 
-function gregorianToJalali(gy, gm, gd){
+function showError(message) {
+  const box = document.getElementById("errorBox");
+
+  if (!box) {
+    return;
+  }
+
+  box.style.display = "block";
+  box.innerText = message;
+}
+
+
+function hideError() {
+  const box = document.getElementById("errorBox");
+
+  if (box) {
+    box.style.display = "none";
+  }
+}
+
+
+function pad2(number) {
+  return String(number).padStart(2, "0");
+}
+
+
+function getTime() {
+  const now = new Date();
+
+  return (
+    pad2(now.getHours()) +
+    ":" +
+    pad2(now.getMinutes())
+  );
+}
+
+
+function getDateInfo() {
+
+  const now = new Date();
+
+  const gy = now.getFullYear();
+  const gm = now.getMonth() + 1;
+  const gd = now.getDate();
+
+  const jalali = gregorianToJalali(
+    gy,
+    gm,
+    gd
+  );
+
+  return {
+    gregorian:
+      gy +
+      "/" +
+      pad2(gm) +
+      "/" +
+      pad2(gd),
+
+    jalali:
+      jalali[0] +
+      "/" +
+      pad2(jalali[1]) +
+      "/" +
+      pad2(jalali[2]),
+
+    combined:
+      gy +
+      "/" +
+      pad2(gm) +
+      "/" +
+      pad2(gd) +
+      " | " +
+      jalali[0] +
+      "/" +
+      pad2(jalali[1]) +
+      "/" +
+      pad2(jalali[2]),
+
+    key:
+      gy +
+      "-" +
+      pad2(gm) +
+      "-" +
+      pad2(gd)
+  };
+}
+
+
+function updateTodayDate() {
+
+  const info = getDateInfo();
+
+  const element =
+    document.getElementById("todayDate");
+
+  if (element) {
+
+    element.innerText =
+      "امروز: " +
+      info.combined;
+  }
+}
+
+
+function formatAmount(amount) {
+
+  const number =
+    Number(amount) || 0;
+
+  return number.toLocaleString("en-US");
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+/* =========================
+   تبدیل میلادی به شمسی
+========================= */
+
+function gregorianToJalali(gy, gm, gd) {
 
   const gdm = [
     0,31,59,90,120,151,
     181,212,243,273,304,334
   ];
 
-  let jy =
-    (gy <= 1600)
-    ? 0
-    : 979;
-
-  gy -=
-    (gy <= 1600)
-    ? 621
-    : 1600;
-
   const gy2 =
-    (gm > 2)
-    ? gy + 1
-    : gy;
+    gm > 2 ? gy + 1 : gy;
 
   let days =
-    (365 * gy) +
+    355666 +
+    365 * gy +
     Math.floor((gy2 + 3) / 4) -
     Math.floor((gy2 + 99) / 100) +
-    Math.floor((gy2 + 399) / 400) -
-    80 +
+    Math.floor((gy2 + 399) / 400) +
     gd +
     gdm[gm - 1];
 
-  jy +=
-    33 * Math.floor(days / 12053);
+  let jy =
+    -1595 +
+    33 *
+    Math.floor(days / 12053);
 
   days %= 12053;
 
   jy +=
-    4 * Math.floor(days / 1461);
+    4 *
+    Math.floor(days / 1461);
 
   days %= 1461;
 
-  if(days > 365){
+  if (days > 365) {
 
     jy +=
       Math.floor((days - 1) / 365);
 
     days =
       (days - 1) % 365;
-
   }
 
-  const jm =
-    days < 186
-    ? 1 + Math.floor(days / 31)
-    : 7 + Math.floor((days - 186) / 30);
+  let jm;
+
+  if (days < 186) {
+
+    jm =
+      1 +
+      Math.floor(days / 31);
+
+  } else {
+
+    jm =
+      7 +
+      Math.floor((days - 186) / 30);
+  }
 
   const jd =
     1 +
     (
       days < 186
-      ? days % 31
-      : (days - 186) % 30
+        ? days % 31
+        : (days - 186) % 30
     );
 
   return [jy, jm, jd];
-
 }
 
 
-/* =====================================================
-   تاریخ و ساعت
-===================================================== */
+/* =========================
+   خواندن اطلاعات از دیتابیس
+========================= */
 
-function pad2(number){
+async function loadTransactions() {
 
-  return String(number).padStart(2, "0");
+  hideError();
 
-}
-
-
-function getDateInfo(date){
-
-  const gy =
-    date.getFullYear();
-
-  const gm =
-    date.getMonth() + 1;
-
-  const gd =
-    date.getDate();
-
-  const jalali =
-    gregorianToJalali(
-      gy,
-      gm,
-      gd
-    );
-
-  const jy = jalali[0];
-  const jm = jalali[1];
-  const jd = jalali[2];
-
-  return {
-
-    gregorian:
-      gy + "/" +
-      pad2(gm) + "/" +
-      pad2(gd),
-
-    jalali:
-      jy + "/" +
-      pad2(jm) + "/" +
-      pad2(jd),
-
-    combined:
-      gy + "/" +
-      pad2(gm) + "/" +
-      pad2(gd) +
-      " | " +
-      jy + "/" +
-      pad2(jm) + "/" +
-      pad2(jd),
-
-    key:
-      gy + "-" +
-      pad2(gm) + "-" +
-      pad2(gd)
-
-  };
-
-}
-
-
-function getTime(date){
-
-  return (
-    pad2(date.getHours()) +
-    ":" +
-    pad2(date.getMinutes())
-  );
-
-}
-
-
-/* =====================================================
-   فرمت مبلغ
-===================================================== */
-
-function formatAmount(amount){
-
-  const number =
-    Number(amount);
-
-  if(!Number.isFinite(number)){
-
-    return "0";
-
-  }
-
-  return number.toLocaleString(
-    "en-US",
-    {
-      maximumFractionDigits: 0
-    }
-  );
-
-}
-
-
-function formatAmountField(input){
-
-  let value =
-    input.value.replace(
-      /[^0-9]/g,
-      ""
-    );
-
-  if(!value){
-
-    input.value = "";
-
+  if (!supabaseClient) {
     return;
-
   }
 
-  input.value =
-    Number(value).toLocaleString(
-      "en-US"
-    );
+  try {
 
-}
-
-
-/* =====================================================
-   تاریخ امروز
-===================================================== */
-
-function updateTodayDate(){
-
-  const element =
-    document.getElementById(
-      "todayDate"
-    );
-
-  if(!element){
-
-    return;
-
-  }
-
-  element.innerText =
-    getDateInfo(
-      new Date()
-    ).combined;
-
-}
-
-
-/* =====================================================
-   دریافت تراکنش‌ها از Supabase
-===================================================== */
-
-async function loadTransactions(){
-
-  const { data, error } =
-    await supabaseClient
-      .from(TABLE_NAME)
-      .select("*")
-      .order(
-        "id",
-        {
+    const result =
+      await supabaseClient
+        .from(TABLE_NAME)
+        .select("*")
+        .order("id", {
           ascending: false
-        }
-      );
+        });
 
-  if(error){
+    if (result.error) {
+      throw result.error;
+    }
 
-    console.error(
-      "Supabase error:",
-      error
-    );
+    const rows =
+      result.data || [];
 
-    alert(
-      "خطا در اتصال به پایگاه داده:\n\n" +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  transactions =
-    (data || []).map(
-      function(t){
+    transactions =
+      rows.map(function(t) {
 
         let dateKey = "";
 
-        if(t.date){
+        if (t.date) {
 
           dateKey =
             String(t.date)
-              .substring(0,10)
-              .replace(/\//g,"-");
-
+              .substring(0, 10)
+              .replace(/\//g, "-");
         }
 
-
         return {
+          id: t.id,
 
-          id:
-            t.id,
+          type: t.type,
 
-          type:
-            t.type,
-
-          person:
-            t.customer_name || "",
+          currency:
+            t.currency || "AFN",
 
           amount:
             Number(t.amount) || 0,
@@ -320,121 +810,107 @@ async function loadTransactions(){
           description:
             t.description || "",
 
+          person:
+            t.customer_name || "",
+
+          createdAt:
+            t.created_at || "",
+
+          rate:
+            t.rate || 1,
+
           receipt:
             t.receipt || "",
 
           date:
             t.date || "",
 
-          dateKey:
-            dateKey,
-
           time:
             t.time || "",
 
           registeredBy:
-            t.registered_by || "مدیر"
+            t.registered_by || "مدیر",
 
+          dateKey: dateKey
         };
+      });
 
-      }
+    updateReceiptNumbers();
+    updateBalance();
+    updateTodaySummary();
+
+    renderTransactions("receive");
+    renderTransactions("withdraw");
+    renderAllHistory();
+
+  } catch (error) {
+
+    console.error(error);
+
+    showError(
+      "خطا در خواندن اطلاعات از Supabase: " +
+      (error.message || error)
     );
-
-
-  updateReceiptNumbers();
-
-  updateBalance();
-
-  updateTodaySummary();
-
-  updateTodayDate();
-
+  }
 }
 
 
-/* =====================================================
-   پیدا کردن شماره رسید بعدی
-===================================================== */
+/* =========================
+   شماره رسید بعدی
+========================= */
 
-function updateReceiptNumbers(){
+function updateReceiptNumbers() {
 
-  let receiveMax = 0;
-  let withdrawMax = 0;
+  let maxReceive = 0;
+  let maxWithdraw = 0;
 
+  transactions.forEach(function(t) {
 
-  transactions.forEach(
-    function(t){
+    const number =
+      parseInt(t.receipt, 10);
 
-      if(!t.receipt){
-
-        return;
-
-      }
-
-
-      const number =
-        parseInt(
-          String(t.receipt)
-            .replace(/\D/g,"")
-        ) || 0;
-
-
-      if(t.type === "receive"){
-
-        receiveMax =
-          Math.max(
-            receiveMax,
-            number
-          );
-
-      }
-
-
-      if(t.type === "withdraw"){
-
-        withdrawMax =
-          Math.max(
-            withdrawMax,
-            number
-          );
-
-      }
-
+    if (!number) {
+      return;
     }
-  );
 
+    if (t.type === "receive") {
+
+      if (number > maxReceive) {
+        maxReceive = number;
+      }
+
+    } else if (t.type === "withdraw") {
+
+      if (number > maxWithdraw) {
+        maxWithdraw = number;
+      }
+    }
+  });
 
   receiveReceiptNumber =
-    receiveMax + 1;
+    maxReceive + 1;
 
   withdrawReceiptNumber =
-    withdrawMax + 1;
-
+    maxWithdraw + 1;
 }
 
 
-/* =====================================================
-   صفحات
-===================================================== */
+/* =========================
+   صفحه‌ها
+========================= */
 
-function hideAllPages(){
+function hideAllPages() {
 
   document
     .querySelectorAll(".page")
-    .forEach(
-      function(page){
+    .forEach(function(page) {
 
-        page.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
+      page.classList.remove("active");
+    });
 }
 
 
-function goHome(){
+function goHome() {
 
   hideAllPages();
 
@@ -443,45 +919,30 @@ function goHome(){
     .classList.add("active");
 
   updateBalance();
-
   updateTodaySummary();
-
-  updateTodayDate();
-
 }
 
 
-function openTransactionPage(type){
+function openTransactionPage(type) {
 
   hideAllPages();
 
-
-  if(type === "receive"){
-
-    document
-      .getElementById("receivePage")
-      .classList.add("active");
-
-    prepareNewTransaction(
-      "receive"
+  const page =
+    document.getElementById(
+      type === "receive"
+        ? "receivePage"
+        : "withdrawPage"
     );
 
-  }else{
+  page.classList.add("active");
 
-    document
-      .getElementById("withdrawPage")
-      .classList.add("active");
+  prepareNewTransaction(type);
 
-    prepareNewTransaction(
-      "withdraw"
-    );
-
-  }
-
+  showTab(type, "new");
 }
 
 
-function openAllHistory(){
+function openAllHistory() {
 
   hideAllPages();
 
@@ -490,1232 +951,724 @@ function openAllHistory(){
     .classList.add("active");
 
   renderAllHistory();
-
 }
 
 
-/* =====================================================
+/* =========================
    تب‌ها
-===================================================== */
+========================= */
 
-function showTab(type, tab){
+function showTab(type, tab) {
 
-  if(type === "receive"){
+  if (type === "receive") {
 
-    document
-      .getElementById("receiveNew")
-      .classList.toggle(
-        "active",
-        tab === "new"
-      );
+    document.getElementById("receiveNew").style.display =
+      tab === "new" ? "block" : "none";
 
-    document
-      .getElementById("receiveHistory")
-      .classList.toggle(
-        "active",
-        tab === "history"
-      );
+    document.getElementById("receiveHistory").style.display =
+      tab === "history" ? "block" : "none";
 
-    document
-      .getElementById("receiveNewTab")
-      .classList.toggle(
-        "active",
-        tab === "new"
-      );
+    document.getElementById("receiveNewTab")
+      .classList.toggle("active", tab === "new");
 
-    document
-      .getElementById("receiveHistoryTab")
-      .classList.toggle(
-        "active",
-        tab === "history"
-      );
+    document.getElementById("receiveHistoryTab")
+      .classList.toggle("active", tab === "history");
 
+  } else {
 
-    if(tab === "history"){
+    document.getElementById("withdrawNew").style.display =
+      tab === "new" ? "block" : "none";
 
-      renderTransactions(
-        "receive"
-      );
+    document.getElementById("withdrawHistory").style.display =
+      tab === "history" ? "block" : "none";
 
-    }
+    document.getElementById("withdrawNewTab")
+      .classList.toggle("active", tab === "new");
 
-
-  }else{
-
-    document
-      .getElementById("withdrawNew")
-      .classList.toggle(
-        "active",
-        tab === "new"
-      );
-
-    document
-      .getElementById("withdrawHistory")
-      .classList.toggle(
-        "active",
-        tab === "history"
-      );
-
-    document
-      .getElementById("withdrawNewTab")
-      .classList.toggle(
-        "active",
-        tab === "new"
-      );
-
-    document
-      .getElementById("withdrawHistoryTab")
-      .classList.toggle(
-        "active",
-        tab === "history"
-      );
-
-
-    if(tab === "history"){
-
-      renderTransactions(
-        "withdraw"
-      );
-
-    }
-
+    document.getElementById("withdrawHistoryTab")
+      .classList.toggle("active", tab === "history");
   }
-
 }
 
 
-/* =====================================================
-   آماده کردن تراکنش جدید
-===================================================== */
+/* =========================
+   آماده‌سازی فرم
+========================= */
 
-function prepareNewTransaction(type){
+function prepareNewTransaction(type) {
 
-  const now =
-    new Date();
+  const info = getDateInfo();
+  const time = getTime();
 
-  const date =
-    getDateInfo(now);
+  if (type === "receive") {
 
-  const time =
-    getTime(now);
+    document.getElementById("receiveReceipt").value =
+      receiveReceiptNumber;
 
+    document.getElementById("receiveDate").value =
+      info.combined;
 
-  if(type === "receive"){
-
-    document.getElementById(
-      "receiveReceipt"
-    ).value =
-      "REC-" +
-      String(
-        receiveReceiptNumber
-      ).padStart(6,"0");
-
-
-    document.getElementById(
-      "receiveDate"
-    ).value =
-      date.combined;
-
-
-    document.getElementById(
-      "receiveTime"
-    ).value =
+    document.getElementById("receiveTime").value =
       time;
 
+    document.getElementById("receiveRegisteredBy").value =
+      "مدیر";
 
-  }else{
+  } else {
 
-    document.getElementById(
-      "withdrawReceipt"
-    ).value =
-      "PAY-" +
-      String(
-        withdrawReceiptNumber
-      ).padStart(6,"0");
+    document.getElementById("withdrawReceipt").value =
+      withdrawReceiptNumber;
 
+    document.getElementById("withdrawDate").value =
+      info.combined;
 
-    document.getElementById(
-      "withdrawDate"
-    ).value =
-      date.combined;
-
-
-    document.getElementById(
-      "withdrawTime"
-    ).value =
+    document.getElementById("withdrawTime").value =
       time;
 
+    document.getElementById("withdrawRegisteredBy").value =
+      "مدیر";
   }
-
 }
 
 
-/* =====================================================
-   ثبت تراکنش در Supabase
-===================================================== */
+/* =========================
+   ذخیره تراکنش
+========================= */
 
-async function saveTransaction(type){
+async function saveTransaction(type) {
+
+  hideError();
+
+  if (!supabaseClient) {
+    showError("اتصال به Supabase برقرار نشده است.");
+    return;
+  }
 
   let person;
   let amount;
   let description;
+  let receipt;
+  let date;
+  let time;
 
-
-  if(type === "receive"){
+  if (type === "receive") {
 
     person =
-      document
-        .getElementById(
-          "receivePerson"
-        )
-        .value
-        .trim();
-
+      document.getElementById("receivePerson").value.trim();
 
     amount =
       Number(
-        document
-          .getElementById(
-            "receiveAmount"
-          )
-          .value
-          .replace(/,/g,"")
+        document.getElementById("receiveAmount").value
       );
 
-
     description =
-      document
-        .getElementById(
-          "receiveDescription"
-        )
-        .value
-        .trim();
+      document.getElementById("receiveDescription").value.trim();
 
+    receipt =
+      document.getElementById("receiveReceipt").value;
 
-  }else{
+    date =
+      document.getElementById("receiveDate").value;
+
+    time =
+      document.getElementById("receiveTime").value;
+
+  } else {
 
     person =
-      document
-        .getElementById(
-          "withdrawPerson"
-        )
-        .value
-        .trim();
-
+      document.getElementById("withdrawPerson").value.trim();
 
     amount =
       Number(
-        document
-          .getElementById(
-            "withdrawAmount"
-          )
-          .value
-          .replace(/,/g,"")
+        document.getElementById("withdrawAmount").value
       );
 
-
     description =
-      document
-        .getElementById(
-          "withdrawDescription"
-        )
-        .value
-        .trim();
+      document.getElementById("withdrawDescription").value.trim();
 
+    receipt =
+      document.getElementById("withdrawReceipt").value;
+
+    date =
+      document.getElementById("withdrawDate").value;
+
+    time =
+      document.getElementById("withdrawTime").value;
   }
 
 
-  if(!person){
+  if (!person) {
 
-    alert(
-      "نام شخص را وارد کنید."
-    );
-
+    alert("لطفاً نام شخص را وارد کنید.");
     return;
-
   }
 
 
-  if(!amount || amount <= 0){
+  if (!amount || amount <= 0) {
 
-    alert(
-      "مبلغ را وارد کنید."
-    );
-
+    alert("لطفاً مبلغ معتبر وارد کنید.");
     return;
-
   }
 
 
-  if(!description){
+  if (!description) {
 
-    alert(
-      "قسمت «بابت / توضیحات» اجباری است."
-    );
-
+    alert("لطفاً قسمت بابت را وارد کنید.");
     return;
+  }
 
+
+  /* جلوگیری از برداشت بیشتر از موجودی */
+
+  if (type === "withdraw") {
+
+    let balance = 0;
+
+    transactions.forEach(function(t) {
+
+      if (t.type === "receive") {
+        balance += Number(t.amount);
+      }
+
+      if (t.type === "withdraw") {
+        balance -= Number(t.amount);
+      }
+    });
+
+    if (amount > balance) {
+
+      alert(
+        "موجودی کافی نیست.\n\n" +
+        "موجودی فعلی: " +
+        formatAmount(balance) +
+        " AFN"
+      );
+
+      return;
+    }
   }
 
 
   const now =
-    new Date();
-
-  const date =
-    getDateInfo(now);
-
-  const time =
-    getTime(now);
+    new Date().toISOString();
 
 
-  const receipt =
-    type === "receive"
+  const row = {
 
-    ? "REC-" +
-      String(
-        receiveReceiptNumber
-      ).padStart(6,"0")
+    type: type,
 
-    : "PAY-" +
-      String(
-        withdrawReceiptNumber
-      ).padStart(6,"0");
+    currency: "AFN",
 
+    amount: amount,
 
-  const dbTransaction = {
+    description: description,
 
-    type:
-      type,
+    customer_name: person,
 
-    currency:
-      "AFN",
+    rate: 1,
 
-    amount:
-      amount,
+    receipt: String(receipt),
 
-    description:
-      description,
+    date: date,
 
-    customer_name:
-      person,
+    time: time,
 
-    rate:
-      1,
+    registered_by: "مدیر",
 
-    receipt:
-      receipt,
-
-    date:
-      date.combined,
-
-    time:
-      time,
-
-    registered_by:
-      "مدیر"
-
+    created_at: now
   };
 
 
-  const { data, error } =
-    await supabaseClient
-      .from(TABLE_NAME)
-      .insert([
-        dbTransaction
-      ])
-      .select()
-      .single();
+  try {
+
+    const result =
+      await supabaseClient
+        .from(TABLE_NAME)
+        .insert(row)
+        .select()
+        .single();
 
 
-  if(error){
+    if (result.error) {
+      throw result.error;
+    }
 
-    console.error(
-      "Insert error:",
-      error
+
+    const t =
+      result.data;
+
+
+    transactions.unshift({
+
+      id: t.id,
+
+      type: t.type,
+
+      currency: t.currency,
+
+      amount: Number(t.amount),
+
+      description: t.description,
+
+      person: t.customer_name,
+
+      createdAt: t.created_at,
+
+      rate: t.rate,
+
+      receipt: t.receipt,
+
+      date: t.date,
+
+      time: t.time,
+
+      registeredBy: t.registered_by,
+
+      dateKey:
+        String(t.date)
+          .substring(0, 10)
+          .replace(/\//g, "-")
+    });
+
+
+    if (type === "receive") {
+
+      receiveReceiptNumber++;
+
+      clearForm("receive");
+
+    } else {
+
+      withdrawReceiptNumber++;
+
+      clearForm("withdraw");
+    }
+
+
+    updateBalance();
+    updateTodaySummary();
+
+    renderTransactions("receive");
+    renderTransactions("withdraw");
+    renderAllHistory();
+
+
+    showReceipt(t);
+
+  } catch (error) {
+
+    console.error(error);
+
+    showError(
+      "ثبت تراکنش انجام نشد:\n" +
+      (error.message || error)
     );
-
-    alert(
-      "تراکنش ثبت نشد:\n\n" +
-      error.message
-    );
-
-    return;
-
   }
-
-
-  const transaction = {
-
-    id:
-      data.id,
-
-    type:
-      data.type,
-
-    person:
-      data.customer_name,
-
-    amount:
-      Number(data.amount) || 0,
-
-    description:
-      data.description || "",
-
-    receipt:
-      data.receipt,
-
-    date:
-      data.date,
-
-    dateKey:
-      date.key,
-
-    time:
-      data.time,
-
-    registeredBy:
-      data.registered_by || "مدیر"
-
-  };
-
-
-  transactions.unshift(
-    transaction
-  );
-
-
-  if(type === "receive"){
-
-    receiveReceiptNumber++;
-
-  }else{
-
-    withdrawReceiptNumber++;
-
-  }
-
-
-  updateBalance();
-
-  updateTodaySummary();
-
-  clearForm(type);
-
-  alert(
-    "تراکنش با موفقیت ثبت شد."
-  );
-
-  showReceipt(
-    transaction
-  );
-
 }
 
 
-/* =====================================================
+/* =========================
    پاک کردن فرم
-===================================================== */
+========================= */
 
-function clearForm(type){
+function clearForm(type) {
 
-  if(type === "receive"){
+  if (type === "receive") {
 
-    document.getElementById(
-      "receivePerson"
-    ).value = "";
+    document.getElementById("receivePerson").value = "";
+    document.getElementById("receiveAmount").value = "";
+    document.getElementById("receiveDescription").value = "";
 
-    document.getElementById(
-      "receiveAmount"
-    ).value = "";
+    prepareNewTransaction("receive");
 
-    document.getElementById(
-      "receiveDescription"
-    ).value = "";
+  } else {
 
-    prepareNewTransaction(
-      "receive"
-    );
+    document.getElementById("withdrawPerson").value = "";
+    document.getElementById("withdrawAmount").value = "";
+    document.getElementById("withdrawDescription").value = "";
 
-
-  }else{
-
-    document.getElementById(
-      "withdrawPerson"
-    ).value = "";
-
-    document.getElementById(
-      "withdrawAmount"
-    ).value = "";
-
-    document.getElementById(
-      "withdrawDescription"
-    ).value = "";
-
-    prepareNewTransaction(
-      "withdraw"
-    );
-
+    prepareNewTransaction("withdraw");
   }
-
 }
 
 
-/* =====================================================
+/* =========================
    موجودی
-===================================================== */
+========================= */
 
-function updateBalance(){
+function updateBalance() {
 
   let balance = 0;
 
+  transactions.forEach(function(t) {
 
-  transactions.forEach(
-    function(t){
-
-      const amount =
-        Number(t.amount) || 0;
-
-
-      if(t.type === "receive"){
-
-        balance += amount;
-
-      }else{
-
-        balance -= amount;
-
-      }
-
+    if (t.type === "receive") {
+      balance += Number(t.amount);
     }
-  );
+
+    if (t.type === "withdraw") {
+      balance -= Number(t.amount);
+    }
+  });
 
 
-  const element =
-    document.getElementById(
-      "balance"
-    );
-
-
-  if(element){
-
-    element.innerText =
-      formatAmount(
-        balance
-      );
-
-  }
-
+  document.getElementById("balance").innerText =
+    formatAmount(balance);
 }
 
 
-/* =====================================================
+/* =========================
    خلاصه امروز
-===================================================== */
+========================= */
 
-function updateTodaySummary(){
+function updateTodaySummary() {
+
+  const today =
+    getDateInfo().key;
 
   let receive = 0;
   let withdraw = 0;
 
 
-  const today =
-    getDateInfo(
-      new Date()
-    ).key;
+  transactions.forEach(function(t) {
 
-
-  transactions.forEach(
-    function(t){
-
-      if(t.dateKey !== today){
-
-        return;
-
-      }
-
-
-      const amount =
-        Number(t.amount) || 0;
-
-
-      if(t.type === "receive"){
-
-        receive += amount;
-
-      }else{
-
-        withdraw += amount;
-
-      }
-
+    if (t.dateKey !== today) {
+      return;
     }
-  );
+
+    if (t.type === "receive") {
+      receive += Number(t.amount);
+    }
+
+    if (t.type === "withdraw") {
+      withdraw += Number(t.amount);
+    }
+  });
 
 
-  const receiveElement =
-    document.getElementById(
-      "todayReceive"
-    );
+  document.getElementById("todayReceive").innerText =
+    formatAmount(receive) + " AFN";
 
-
-  const withdrawElement =
-    document.getElementById(
-      "todayWithdraw"
-    );
-
-
-  if(receiveElement){
-
-    receiveElement.innerText =
-      formatAmount(receive) +
-      " AFN";
-
-  }
-
-
-  if(withdrawElement){
-
-    withdrawElement.innerText =
-      formatAmount(withdraw) +
-      " AFN";
-
-  }
-
+  document.getElementById("todayWithdraw").innerText =
+    formatAmount(withdraw) + " AFN";
 }
 
 
-/* =====================================================
-   تاریخچه دریافت و برداشت
-===================================================== */
+/* =========================
+   نمایش لیست تراکنش‌ها
+========================= */
 
-function renderTransactions(type){
-
-  const searchInput =
-    type === "receive"
-
-    ? document.getElementById(
-        "receiveSearch"
-      )
-
-    : document.getElementById(
-        "withdrawSearch"
-      );
-
-
-  const search =
-    searchInput
-
-    ? searchInput.value
-        .trim()
-        .toLowerCase()
-
-    : "";
-
+function renderTransactions(type) {
 
   const list =
-    type === "receive"
-
-    ? document.getElementById(
-        "receiveList"
-      )
-
-    : document.getElementById(
-        "withdrawList"
-      );
-
-
-  const filtered =
-    transactions
-      .filter(
-        function(t){
-
-          return t.type === type;
-
-        }
-      )
-      .filter(
-        function(t){
-
-          if(!search){
-
-            return true;
-
-          }
-
-
-          return (
-
-            String(t.person)
-              .toLowerCase()
-              .includes(search)
-
-            ||
-
-            String(t.receipt)
-              .toLowerCase()
-              .includes(search)
-
-          );
-
-        }
-      );
-
-
-  if(filtered.length === 0){
-
-    list.innerHTML =
-      '<div class="empty">تراکنشی پیدا نشد.</div>';
-
-    return;
-
-  }
-
-
-  list.innerHTML = "";
-
-
-  filtered.forEach(
-    function(t){
-
-      list.appendChild(
-        createTransactionElement(t)
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   تاریخچه کلی
-===================================================== */
-
-function renderAllHistory(){
+    document.getElementById(
+      type === "receive"
+        ? "receiveList"
+        : "withdrawList"
+    );
 
   const search =
-    document
-      .getElementById(
-        "allSearch"
-      )
-      .value
+    document.getElementById(
+      type === "receive"
+        ? "receiveSearch"
+        : "withdrawSearch"
+    ).value
       .trim()
       .toLowerCase();
 
 
-  const list =
-    document.getElementById(
-      "allHistoryList"
-    );
-
-
   const filtered =
-    transactions.filter(
-      function(t){
+    transactions.filter(function(t) {
 
-        if(!search){
-
-          return true;
-
-        }
-
-
-        return (
-
-          String(t.person)
-            .toLowerCase()
-            .includes(search)
-
-          ||
-
-          String(t.receipt)
-            .toLowerCase()
-            .includes(search)
-
-        );
-
+      if (t.type !== type) {
+        return false;
       }
-    );
+
+      if (!search) {
+        return true;
+      }
+
+      return (
+        String(t.receipt)
+          .toLowerCase()
+          .includes(search)
+        ||
+        String(t.person)
+          .toLowerCase()
+          .includes(search)
+      );
+    });
 
 
-  if(filtered.length === 0){
+  if (!filtered.length) {
 
     list.innerHTML =
-      '<div class="empty">تراکنشی پیدا نشد.</div>';
+      '<div class="empty">تراکنشی وجود ندارد.</div>';
 
     return;
-
   }
-
-
-  let html = `
-
-    <div class="history-table-wrapper">
-
-      <div class="history-table">
-
-        <div class="history-row history-header">
-
-          <div>شماره رسید</div>
-          <div>نام</div>
-          <div>ساعت</div>
-          <div>تاریخ</div>
-          <div>مبلغ</div>
-          <div>نوع تراکنش</div>
-          <div>توضیحات</div>
-          <div>چاپ</div>
-
-        </div>
-
-  `;
-
-
-  filtered.forEach(
-    function(t){
-
-      const typeText =
-        t.type === "receive"
-        ? "دریافت"
-        : "برداشت";
-
-
-      const typeClass =
-        t.type === "receive"
-        ? "green-text"
-        : "red-text";
-
-
-      html += `
-
-        <div class="history-row">
-
-          <div>
-            ${escapeHtml(t.receipt)}
-          </div>
-
-          <div>
-            ${escapeHtml(t.person)}
-          </div>
-
-          <div>
-            ${escapeHtml(t.time)}
-          </div>
-
-          <div>
-            ${escapeHtml(t.date)}
-          </div>
-
-          <div>
-            ${formatAmount(t.amount)} AFN
-          </div>
-
-          <div class="${typeClass}">
-            ${typeText}
-          </div>
-
-          <div>
-            ${escapeHtml(t.description)}
-          </div>
-
-          <div>
-
-            <button
-              class="print-button"
-              onclick="printReceiptById('${String(t.id)}')">
-              چاپ
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }
-  );
-
-
-  html += `
-
-      </div>
-
-    </div>
-
-  `;
 
 
   list.innerHTML =
-    html;
-
+    filtered
+      .map(createTransactionElement)
+      .join("");
 }
 
 
-/* =====================================================
-   کارت تراکنش
-===================================================== */
+/* =========================
+   تاریخچه کامل
+========================= */
 
-function createTransactionElement(t){
+function renderAllHistory() {
 
-  const div =
-    document.createElement(
-      "div"
-    );
+  const list =
+    document.getElementById("allHistoryList");
 
+  const search =
+    document.getElementById("allSearch").value
+      .trim()
+      .toLowerCase();
 
-  div.className =
-    "transaction";
 
+  const filtered =
+    transactions.filter(function(t) {
 
-  const typeText =
-    t.type === "receive"
-    ? "دریافت"
-    : "برداشت";
-
-
-  const typeClass =
-    t.type === "receive"
-    ? "green-text"
-    : "red-text";
-
-
-  div.innerHTML = `
-
-    <div class="transaction-head">
-
-      <span class="receipt-number">
-        شماره رسید:
-        ${escapeHtml(t.receipt)}
-      </span>
-
-      <span class="amount ${typeClass}">
-        ${formatAmount(t.amount)} AFN
-      </span>
-
-    </div>
-
-
-    <div class="transaction-line">
-
-      <strong>نام:</strong>
-      ${escapeHtml(t.person)}
-
-    </div>
-
-
-    <div class="transaction-line">
-
-      <strong>نوع:</strong>
-
-      <span class="${typeClass}">
-        ${typeText}
-      </span>
-
-    </div>
-
-
-    <div class="transaction-line">
-
-      <strong>بابت:</strong>
-      ${escapeHtml(t.description)}
-
-    </div>
-
-
-    <div class="transaction-date">
-
-      تاریخ:
-      ${escapeHtml(t.date)}
-
-      &nbsp; | &nbsp;
-
-      ساعت:
-      ${escapeHtml(t.time)}
-
-      &nbsp; | &nbsp;
-
-      ثبت توسط:
-      ${escapeHtml(t.registeredBy)}
-
-    </div>
-
-
-    <button
-      class="print-button"
-      onclick="printReceiptById('${String(t.id)}')">
-      چاپ رسید
-    </button>
-
-  `;
-
-
-  return div;
-
-}
-
-
-/* =====================================================
-   جلوگیری از HTML
-===================================================== */
-
-function escapeHtml(text){
-
-  return String(text)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =====================================================
-   نمایش رسید
-===================================================== */
-
-function showReceipt(transaction){
-
-  const typeText =
-    transaction.type === "receive"
-
-    ? "رسید دریافت"
-
-    : "رسید برداشت";
-
-
-  document.getElementById(
-    "printArea"
-  ).innerHTML = `
-
-    <div class="print-page">
-
-      <div class="print-toolbar">
-
-        <button
-          class="real-print-button"
-          onclick="window.print()">
-          چاپ رسید
-        </button>
-
-
-        <button
-          class="close-print-button"
-          onclick="closePrintPage()">
-          بستن
-        </button>
-
-      </div>
-
-
-      <div class="receipt">
-
-        <div class="receipt-title">
-          شرکت همدرد
-        </div>
-
-
-        <div class="receipt-type">
-          ${typeText}
-        </div>
-
-
-        <div class="receipt-row">
-
-          <strong>
-            شماره رسید
-          </strong>
-
-          <span>
-            ${escapeHtml(transaction.receipt)}
-          </span>
-
-        </div>
-
-
-        <div class="receipt-row">
-
-          <strong>
-            نام شخص
-          </strong>
-
-          <span>
-            ${escapeHtml(transaction.person)}
-          </span>
-
-        </div>
-
-
-        <div class="receipt-row">
-
-          <strong>
-            مبلغ
-          </strong>
-
-          <span>
-            ${formatAmount(transaction.amount)} AFN
-          </span>
-
-        </div>
-
-
-        <div class="receipt-row">
-
-          <strong>
-            بابت
-          </strong>
-
-          <span>
-            ${escapeHtml(transaction.description)}
-          </span>
-
-        </div>
-
-
-        <div class="receipt-row">
-
-          <strong>
-            تاریخ
-          </strong>
-
-          <span>
-            ${escapeHtml(transaction.date)}
-          </span>
-
-        </div>
-
-
-        <div class="receipt-row">
-
-          <strong>
-            ساعت
-          </strong>
-
-          <span>
-            ${escapeHtml(transaction.time)}
-          </span>
-
-        </div>
-
-
-        <div class="receipt-row">
-
-          <strong>
-            ثبت توسط
-          </strong>
-
-          <span>
-            ${escapeHtml(transaction.registeredBy)}
-          </span>
-
-        </div>
-
-
-        <div class="receipt-footer">
-
-          <div>
-            مهر شرکت:
-            ______________
-          </div>
-
-          <div>
-            امضا:
-            ______________
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  document.getElementById(
-    "printArea"
-  ).style.display =
-    "block";
-
-}
-
-
-/* =====================================================
-   بستن رسید
-===================================================== */
-
-function closePrintPage(){
-
-  document.getElementById(
-    "printArea"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "printArea"
-  ).innerHTML =
-    "";
-
-}
-
-
-/* =====================================================
-   چاپ رسید از تاریخچه
-===================================================== */
-
-function printReceiptById(id){
-
-  const transaction =
-    transactions.find(
-      function(t){
-
-        return (
-          String(t.id) ===
-          String(id)
-        );
-
+      if (!search) {
+        return true;
       }
-    );
+
+      return (
+        String(t.receipt)
+          .toLowerCase()
+          .includes(search)
+        ||
+        String(t.person)
+          .toLowerCase()
+          .includes(search)
+      );
+    });
 
 
-  if(transaction){
+  if (!filtered.length) {
 
-    showReceipt(
-      transaction
-    );
+    list.innerHTML =
+      '<div class="empty">تراکنشی وجود ندارد.</div>';
 
+    return;
   }
 
+
+  list.innerHTML =
+    filtered
+      .map(createTransactionElement)
+      .join("");
 }
 
 
-/* =====================================================
+/* =========================
+   کارت تراکنش
+========================= */
+
+function createTransactionElement(t) {
+
+  const isReceive =
+    t.type === "receive";
+
+  const typeText =
+    isReceive
+      ? "دریافت"
+      : "برداشت";
+
+  const typeClass =
+    isReceive
+      ? "receive-text"
+      : "withdraw-text";
+
+
+  return `
+    <div class="transaction">
+
+      <div class="transaction-head">
+
+        <span>
+          رسید #${escapeHtml(t.receipt)}
+        </span>
+
+        <span class="${typeClass}">
+          ${typeText}
+        </span>
+
+      </div>
+
+      <div class="transaction-row">
+        نام: ${escapeHtml(t.person)}
+      </div>
+
+      <div class="transaction-row">
+        مبلغ:
+        <strong>
+          ${formatAmount(t.amount)} AFN
+        </strong>
+      </div>
+
+      <div class="transaction-row">
+        تاریخ: ${escapeHtml(t.date)}
+      </div>
+
+      <div class="transaction-row">
+        ساعت: ${escapeHtml(t.time)}
+      </div>
+
+      <div class="transaction-row">
+        بابت: ${escapeHtml(t.description)}
+      </div>
+
+      <div class="transaction-row">
+        ثبت کننده: ${escapeHtml(t.registeredBy)}
+      </div>
+
+      <button
+        class="print-receipt"
+        onclick="printReceiptById(${Number(t.id)})">
+        چاپ رسید
+      </button>
+
+    </div>
+  `;
+}
+
+
+/* =========================
+   رسید
+========================= */
+
+function showReceipt(t) {
+
+  const printArea =
+    document.getElementById("printArea");
+
+  printArea.innerHTML = `
+
+    <div style="text-align:center;">
+
+      <h2>سیستم حسابداری شرکت همدرد</h2>
+
+      <hr>
+
+      <h3>
+        ${t.type === "receive"
+          ? "رسید دریافت"
+          : "رسید برداشت"}
+      </h3>
+
+      <p>
+        شماره رسید:
+        <strong>${escapeHtml(t.receipt)}</strong>
+      </p>
+
+      <p>
+        نام:
+        ${escapeHtml(t.customer_name)}
+      </p>
+
+      <p>
+        مبلغ:
+        <strong>
+          ${formatAmount(t.amount)} AFN
+        </strong>
+      </p>
+
+      <p>
+        تاریخ:
+        ${escapeHtml(t.date)}
+      </p>
+
+      <p>
+        ساعت:
+        ${escapeHtml(t.time)}
+      </p>
+
+      <p>
+        بابت:
+        ${escapeHtml(t.description)}
+      </p>
+
+      <p>
+        ثبت کننده:
+        ${escapeHtml(t.registered_by)}
+      </p>
+
+      <br><br>
+
+      <p>امضاء و مهر</p>
+
+    </div>
+  `;
+
+  window.print();
+}
+
+
+/* =========================
+   چاپ رسید از تاریخچه
+========================= */
+
+function printReceiptById(id) {
+
+  const t =
+    transactions.find(function(item) {
+
+      return Number(item.id) === Number(id);
+    });
+
+
+  if (!t) {
+
+    alert("رسید پیدا نشد.");
+    return;
+  }
+
+
+  showReceipt({
+
+    type: t.type,
+
+    receipt: t.receipt,
+
+    customer_name: t.person,
+
+    amount: t.amount,
+
+    date: t.date,
+
+    time: t.time,
+
+    description: t.description,
+
+    registered_by: t.registeredBy
+  });
+}
+
+
+/* =========================
    شروع برنامه
-===================================================== */
+========================= */
 
-updateTodayDate();
+document.addEventListener(
+  "DOMContentLoaded",
+  async function() {
 
-loadTransactions();
+    updateTodayDate();
+
+    prepareNewTransaction("receive");
+
+    prepareNewTransaction("withdraw");
+
+    await loadTransactions();
+
+  }
+);
 
 </script>
 
