@@ -304,6 +304,165 @@ button{
   border-radius:10px;
 }
 
+/* TYPE MENU */
+
+.type-menu{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.type-menu-btn{
+  background:white;
+  border:0;
+  border-radius:17px;
+  padding:25px 15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.07);
+  font-size:17px;
+  font-weight:bold;
+  color:#1f2f25;
+}
+
+.type-menu-btn .menu-icon{
+  display:block;
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.type-menu-btn.receive-menu{
+  border-top:4px solid #16823d;
+}
+
+.type-menu-btn.withdraw-menu{
+  border-top:4px solid #b32424;
+}
+
+/* RECEIPT CARDS */
+
+.receipts-title{
+  margin:22px 0 12px;
+  color:#1f2f25;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.receipts-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:13px;
+}
+
+.receipt-card{
+  background:white;
+  border-radius:17px;
+  padding:18px;
+  box-shadow:0 4px 15px rgba(0,0,0,.07);
+  border-right:5px solid #1f2f25;
+}
+
+.receipt-card.receive-card{
+  border-right-color:#16823d;
+}
+
+.receipt-card.withdraw-card{
+  border-right-color:#b32424;
+}
+
+.receipt-card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding-bottom:12px;
+  border-bottom:1px solid #eee;
+}
+
+.receipt-number{
+  font-weight:bold;
+  color:#1f2f25;
+}
+
+.receipt-type{
+  font-size:12px;
+  font-weight:bold;
+  padding:5px 9px;
+  border-radius:20px;
+}
+
+.receipt-type.receive{
+  background:#e6f5eb;
+  color:#16823d;
+}
+
+.receipt-type.withdraw{
+  background:#fde8e8;
+  color:#b32424;
+}
+
+.receipt-card-name{
+  font-size:17px;
+  font-weight:bold;
+  margin:13px 0 8px;
+}
+
+.receipt-card-amount{
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+.receipt-card-amount.receive{
+  color:#16823d;
+}
+
+.receipt-card-amount.withdraw{
+  color:#b32424;
+}
+
+.receipt-card-info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  font-size:13px;
+  color:#555;
+}
+
+.receipt-card-info div{
+  background:#f7f7f6;
+  padding:9px;
+  border-radius:8px;
+}
+
+.receipt-card-description{
+  margin-top:9px;
+  background:#f7f7f6;
+  padding:10px;
+  border-radius:8px;
+  font-size:13px;
+  color:#555;
+}
+
+.card-print-btn{
+  width:100%;
+  margin-top:12px;
+  padding:11px;
+  border:0;
+  border-radius:9px;
+  background:#1f2f25;
+  color:white;
+  font-weight:bold;
+}
+
+.no-receipts{
+  background:white;
+  padding:30px;
+  text-align:center;
+  border-radius:15px;
+  color:#777;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
 /* FORM */
 
 .form-card{
@@ -496,10 +655,73 @@ th{
     margin-bottom:20px;
   }
 
+  /* رسید بانکی */
+
   .receipt-box{
-    border:2px solid #1f2f25;
-    border-radius:14px;
+    border:1.5px solid #1f2f25;
+    border-radius:12px;
     padding:25px;
+    max-width:720px;
+    margin:0 auto;
+  }
+
+  .receipt-bank-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    border-bottom:2px solid #1f2f25;
+    padding-bottom:16px;
+    margin-bottom:18px;
+  }
+
+  .receipt-bank-title{
+    text-align:right;
+  }
+
+  .receipt-bank-title h2{
+    margin:0 0 7px;
+    color:#1f2f25;
+  }
+
+  .receipt-bank-title h3{
+    margin:0;
+    font-size:15px;
+    color:#555;
+  }
+
+  .receipt-bank-number{
+    border:1px solid #ccc;
+    border-radius:8px;
+    padding:8px 12px;
+    text-align:center;
+    font-weight:bold;
+  }
+
+  .receipt-date-box{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:18px;
+  }
+
+  .receipt-date{
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:9px 15px;
+    text-align:center;
+    line-height:1.8;
+    min-width:150px;
+    background:#fafafa;
+  }
+
+  .receipt-date .date-top{
+    direction:ltr;
+    font-weight:bold;
+  }
+
+  .receipt-date .date-bottom{
+    direction:ltr;
+    font-weight:bold;
   }
 
   .receipt-table{
@@ -576,6 +798,19 @@ th{
 
   .balance{
     font-size:29px;
+  }
+
+  .type-menu{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .type-menu-btn{
+    padding:20px 8px;
+    font-size:15px;
+  }
+
+  .receipt-card-info{
+    grid-template-columns:1fr;
   }
 }
 
@@ -721,8 +956,6 @@ th{
 
     <h1>سیستم حسابداری شرکت همدرد</h1>
 
-    <!-- شمسی + میلادی -->
-
     <div class="date" id="currentDate"></div>
 
   </div>
@@ -795,7 +1028,7 @@ th{
 
         <button
           class="action-btn receive-btn"
-          onclick="openTransactionPage('receive')">
+          onclick="openTypePage('receive')">
 
           ثبت دریافت
 
@@ -803,7 +1036,7 @@ th{
 
         <button
           class="action-btn withdraw-btn"
-          onclick="openTransactionPage('withdraw')">
+          onclick="openTypePage('withdraw')">
 
           ثبت برداشت
 
@@ -823,6 +1056,133 @@ th{
 
   </main>
 
+  <!-- RECEIVE SECTION -->
+
+  <main id="receiveSectionPage" class="page">
+
+    <div class="container">
+
+      <div class="page-title">
+
+        <h2>دریافت</h2>
+
+        <button
+          class="back-btn"
+          onclick="goHome()">
+
+          برگشت
+
+        </button>
+
+      </div>
+
+      <div class="type-menu">
+
+        <button
+          class="type-menu-btn receive-menu"
+          onclick="openTransactionPage('receive')">
+
+          <span class="menu-icon">＋</span>
+
+          ثبت دریافت
+
+        </button>
+
+        <button
+          class="type-menu-btn"
+          onclick="openReceiptList('receive')">
+
+          <span class="menu-icon">▤</span>
+
+          دریافت‌ها
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- WITHDRAW SECTION -->
+
+  <main id="withdrawSectionPage" class="page">
+
+    <div class="container">
+
+      <div class="page-title">
+
+        <h2>برداشت</h2>
+
+        <button
+          class="back-btn"
+          onclick="goHome()">
+
+          برگشت
+
+        </button>
+
+      </div>
+
+      <div class="type-menu">
+
+        <button
+          class="type-menu-btn withdraw-menu"
+          onclick="openTransactionPage('withdraw')">
+
+          <span class="menu-icon">−</span>
+
+          ثبت برداشت
+
+        </button>
+
+        <button
+          class="type-menu-btn"
+          onclick="openReceiptList('withdraw')">
+
+          <span class="menu-icon">▤</span>
+
+          برداشت‌ها
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- RECEIPT LIST -->
+
+  <main id="receiptListPage" class="page">
+
+    <div class="container">
+
+      <div class="page-title">
+
+        <h2 id="receiptListTitle">
+          دریافت‌ها
+        </h2>
+
+        <button
+          class="back-btn"
+          onclick="backFromReceiptList()">
+
+          برگشت
+
+        </button>
+
+      </div>
+
+      <div
+        id="receiptListBody"
+        class="receipts-list">
+      </div>
+
+    </div>
+
+  </main>
+
   <!-- TRANSACTION -->
 
   <main id="transactionPage" class="page">
@@ -837,7 +1197,7 @@ th{
 
         <button
           class="back-btn"
-          onclick="goHome()">
+          onclick="goBackFromTransaction()">
 
           برگشت
 
@@ -880,8 +1240,6 @@ th{
 
           <div class="form-group">
 
-            <!-- اصلاح شد -->
-
             <label>مبلغ را وارد کنید</label>
 
             <input
@@ -908,8 +1266,6 @@ th{
 
             <label>تاریخ</label>
 
-            <!-- فقط این قسمت تغییر کرده: text + readonly -->
-
             <input
               id="transactionDate"
               type="text"
@@ -922,8 +1278,6 @@ th{
           <div class="form-group">
 
             <label>ساعت</label>
-
-            <!-- فقط این قسمت تغییر کرده: text + readonly -->
 
             <input
               id="transactionTime"
@@ -1041,8 +1395,6 @@ th{
 
               <th>زمان</th>
 
-              <!-- فقط شمسی -->
-
               <th>تاریخ</th>
 
               <th>مبلغ</th>
@@ -1097,6 +1449,7 @@ let currentUser=null;
 let currentProfile=null;
 let transactions=[];
 let currentTransactionType="receive";
+let previousSection="homePage";
 
 /* DATE */
 
@@ -1519,8 +1872,6 @@ async function enterApp(){
     .textContent=
       role ? " — "+role : "";
 
-  /* تاریخ بالای صفحه */
-
   document
     .getElementById("currentDate")
     .textContent=
@@ -1666,8 +2017,6 @@ function updateDashboard(){
     .textContent=
       formatNumber(withdraw)+" AFN";
 
-  /* آپدیت تاریخ بالای صفحه */
-
   document
     .getElementById("currentDate")
     .textContent=
@@ -1717,9 +2066,218 @@ function getNextReceiptNumber(type){
   return prefix+(max+1);
 }
 
+/* OPEN TYPE SECTION */
+
+function openTypePage(type){
+
+  if(type==="receive"){
+
+    showPage("receiveSectionPage");
+
+  }else{
+
+    showPage("withdrawSectionPage");
+
+  }
+}
+
+/* OPEN RECEIPT LIST */
+
+async function openReceiptList(type){
+
+  await loadTransactions();
+
+  currentTransactionType=type;
+
+  const title=
+    document.getElementById(
+      "receiptListTitle"
+    );
+
+  title.textContent=
+    type==="receive"
+      ? "دریافت‌ها"
+      : "برداشت‌ها";
+
+  renderReceiptList(type);
+
+  showPage("receiptListPage");
+}
+
+/* RENDER RECEIPTS */
+
+function renderReceiptList(type){
+
+  const body=
+    document.getElementById(
+      "receiptListBody"
+    );
+
+  const list=
+    transactions.filter(
+      t=>t.type===type
+    );
+
+  if(!list.length){
+
+    body.innerHTML=`
+      <div class="no-receipts">
+        هنوز هیچ ${
+          type==="receive"
+            ? "دریافتی"
+            : "برداشتی"
+        } ثبت نشده است.
+      </div>
+    `;
+
+    return;
+  }
+
+  body.innerHTML=
+    list.map(t=>{
+
+      const isReceive=
+        t.type==="receive";
+
+      const date=
+        dateToISO(t.date);
+
+      const shamsi=
+        jalaliFromISO(date);
+
+      const miladi=
+        gregorianDisplay(date);
+
+      return`
+
+        <div class="
+          receipt-card
+          ${
+            isReceive
+              ? "receive-card"
+              : "withdraw-card"
+          }
+        ">
+
+          <div class="receipt-card-top">
+
+            <div class="receipt-number">
+              ${escapeHTML(
+                t.receipt||"-"
+              )}
+            </div>
+
+            <div class="
+              receipt-type
+              ${
+                isReceive
+                  ? "receive"
+                  : "withdraw"
+              }
+            ">
+
+              ${
+                isReceive
+                  ? "دریافت"
+                  : "برداشت"
+              }
+
+            </div>
+
+          </div>
+
+          <div class="receipt-card-name">
+
+            ${escapeHTML(
+              t.customer_name||"-"
+            )}
+
+          </div>
+
+          <div class="
+            receipt-card-amount
+            ${
+              isReceive
+                ? "receive"
+                : "withdraw"
+            }
+          " dir="ltr">
+
+            ${formatNumber(t.amount)}
+            AFN
+
+          </div>
+
+          <div class="receipt-card-info">
+
+            <div>
+              تاریخ: ${escapeHTML(shamsi)}
+            </div>
+
+            <div dir="ltr">
+              ${escapeHTML(miladi)}
+            </div>
+
+            <div dir="ltr">
+              ساعت: ${escapeHTML(t.time||"-")}
+            </div>
+
+            <div>
+              ثبت‌کننده:
+              ${escapeHTML(
+                t.registered_by||"-"
+              )}
+            </div>
+
+          </div>
+
+          <div class="receipt-card-description">
+
+            <strong>توضیحات:</strong>
+            ${escapeHTML(
+              t.dascription||"-"
+            )}
+
+          </div>
+
+          <button
+            class="card-print-btn"
+            onclick="printReceiptById('${t.id}')">
+
+            چاپ رسید
+
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+}
+
+/* BACK FROM LIST */
+
+function backFromReceiptList(){
+
+  if(currentTransactionType==="receive"){
+
+    showPage("receiveSectionPage");
+
+  }else{
+
+    showPage("withdrawSectionPage");
+
+  }
+}
+
 /* OPEN TRANSACTION */
 
 function openTransactionPage(type){
+
+  previousSection=
+    type==="receive"
+      ? "receiveSectionPage"
+      : "withdrawSectionPage";
 
   currentTransactionType=type;
 
@@ -1760,8 +2318,6 @@ function openTransactionPage(type){
       "save-btn save-withdraw";
   }
 
-  /* تاریخ و ساعت همین لحظه */
-
   document
     .getElementById("transactionDate")
     .value=
@@ -1786,6 +2342,13 @@ function openTransactionPage(type){
       getNextReceiptNumber(type);
 
   showPage("transactionPage");
+}
+
+/* BACK FROM TRANSACTION */
+
+function goBackFromTransaction(){
+
+  showPage(previousSection);
 }
 
 /* SAVE */
@@ -1922,8 +2485,6 @@ async function saveTransaction(event){
         getNextReceiptNumber(
           currentTransactionType
         );
-
-    /* فرم بعد از ثبت دوباره تاریخ و ساعت فعلی را می‌گیرد */
 
     document
       .getElementById("transactionDate")
@@ -2181,30 +2742,55 @@ function showReceipt(t){
 
     <div class="receipt-box">
 
-      <div class="print-header">
+      <div class="receipt-bank-head">
 
-        <h2>
-          سیستم حسابداری شرکت همدرد
-        </h2>
+        <div class="receipt-bank-title">
 
-        <h3>
-          ${
-            isReceive
-              ? "رسید دریافت"
-              : "رسید برداشت"
-          }
-        </h3>
+          <h2>
+            سیستم حسابداری شرکت همدرد
+          </h2>
+
+          <h3>
+            ${
+              isReceive
+                ? "رسید دریافت"
+                : "رسید برداشت"
+            }
+          </h3>
+
+        </div>
+
+        <div class="receipt-bank-number">
+
+          <div>شماره رسید</div>
+
+          <div dir="ltr">
+            ${escapeHTML(
+              t.receipt||"-"
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="receipt-date-box">
+
+        <div class="receipt-date">
+
+          <div class="date-top">
+            ${miladi}
+          </div>
+
+          <div class="date-bottom">
+            ${shamsi}
+          </div>
+
+        </div>
 
       </div>
 
       <table class="receipt-table">
-
-        <tr>
-          <td>شماره رسید</td>
-          <td dir="ltr">
-            ${escapeHTML(t.receipt||"-")}
-          </td>
-        </tr>
 
         <tr>
           <td>نام شخص / مشتری</td>
@@ -2229,20 +2815,6 @@ function showReceipt(t){
             ${escapeHTML(
               t.dascription||"-"
             )}
-          </td>
-        </tr>
-
-        <tr>
-          <td>تاریخ شمسی</td>
-          <td dir="ltr">
-            ${shamsi}
-          </td>
-        </tr>
-
-        <tr>
-          <td>تاریخ میلادی</td>
-          <td dir="ltr">
-            ${miladi}
           </td>
         </tr>
 
