@@ -2,14 +2,13 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>سیستم حسابداری شرکت همدرد</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 *{
   box-sizing:border-box;
   font-family:Tahoma,Arial,sans-serif;
@@ -29,7 +28,7 @@ button{
   cursor:pointer;
 }
 
-/* ================= LOGIN ================= */
+/* LOGIN */
 
 #loginPage{
   min-height:100vh;
@@ -88,10 +87,6 @@ button{
   font-size:15px;
 }
 
-.input-group input:focus{
-  border-color:#1f2f25;
-}
-
 .login-btn{
   width:100%;
   padding:14px;
@@ -117,7 +112,7 @@ button{
   font-size:13px;
 }
 
-/* ================= APP ================= */
+/* APP */
 
 #appContainer{
   display:none;
@@ -179,7 +174,7 @@ button{
   padding:12px 18px;
 }
 
-/* ================= DASHBOARD ================= */
+/* HOME */
 
 .container{
   width:100%;
@@ -206,7 +201,6 @@ button{
   font-size:34px;
   font-weight:bold;
   margin-top:8px;
-  direction:ltr;
 }
 
 .currency{
@@ -241,7 +235,6 @@ button{
   display:block;
   font-size:20px;
   margin-top:6px;
-  direction:ltr;
 }
 
 .action-buttons{
@@ -280,7 +273,7 @@ button{
   box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
-/* ================= PAGES ================= */
+/* PAGES */
 
 .page{
   display:none;
@@ -311,7 +304,7 @@ button{
   border-radius:10px;
 }
 
-/* ================= FORM ================= */
+/* FORM */
 
 .form-card{
   background:white;
@@ -346,11 +339,6 @@ button{
   resize:vertical;
 }
 
-.form-group input:focus,
-.form-group textarea:focus{
-  border-color:#1f2f25;
-}
-
 .form-group input[readonly]{
   background:#f5f5f5;
   color:#555;
@@ -374,7 +362,7 @@ button{
   background:#b32424;
 }
 
-/* ================= HISTORY ================= */
+/* HISTORY */
 
 .history-tools{
   background:white;
@@ -433,7 +421,7 @@ button{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:950px;
+  min-width:850px;
 }
 
 th,td{
@@ -473,7 +461,7 @@ th{
   color:#777;
 }
 
-/* ================= PRINT ================= */
+/* PRINT */
 
 #printArea,
 #historyPrintArea{
@@ -488,10 +476,6 @@ th{
 
   body.receipt-print-mode #printArea{
     display:block !important;
-    position:static !important;
-    width:100% !important;
-    background:white !important;
-    color:#000 !important;
   }
 
   body.history-print-mode > *{
@@ -500,10 +484,6 @@ th{
 
   body.history-print-mode #historyPrintArea{
     display:block !important;
-    position:static !important;
-    width:100% !important;
-    background:white !important;
-    color:#000 !important;
   }
 
   @page{
@@ -516,32 +496,10 @@ th{
     margin-bottom:20px;
   }
 
-  .print-header h2{
-    margin:5px 0 8px;
-  }
-
-  .print-header h3{
-    margin:5px 0;
-  }
-
-  .receipt-logo{
-    width:80px;
-    height:80px;
-    margin:0 auto 8px;
-  }
-
   .receipt-box{
     border:2px solid #1f2f25;
     border-radius:14px;
     padding:25px;
-    margin-top:20px;
-  }
-
-  .receipt-type{
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:20px;
   }
 
   .receipt-table{
@@ -552,7 +510,6 @@ th{
   .receipt-table td{
     border:1px solid #999;
     padding:11px;
-    text-align:right;
   }
 
   .receipt-table td:first-child{
@@ -590,16 +547,7 @@ th{
     background:#eee !important;
     color:#000 !important;
   }
-
-  .history-print-footer{
-    margin-top:35px;
-    display:flex;
-    justify-content:space-between;
-  }
-
 }
-
-/* ================= MOBILE ================= */
 
 @media(max-width:600px){
 
@@ -629,7 +577,6 @@ th{
   .balance{
     font-size:29px;
   }
-
 }
 
 </style>
@@ -637,13 +584,15 @@ th{
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+
+<!-- LOGIN -->
 
 <div id="loginPage">
 
   <div class="login-box">
 
-    <!-- لوگوی فعلی عمداً بدون تغییر نگه داشته شده -->
+    <!-- لوگو بدون تغییر -->
+
     <svg class="login-logo"
          viewBox="0 0 300 300"
          xmlns="http://www.w3.org/2000/svg">
@@ -682,31 +631,38 @@ th{
     </svg>
 
     <h1>سیستم حسابداری شرکت همدرد</h1>
+
     <p>ورود به سیستم</p>
 
     <div class="input-group">
+
       <label>ایمیل</label>
+
       <input
         id="loginEmail"
         type="email"
-        autocomplete="username"
         placeholder="ایمیل خود را وارد کنید">
+
     </div>
 
     <div class="input-group">
+
       <label>رمز عبور</label>
+
       <input
         id="loginPassword"
         type="password"
-        autocomplete="current-password"
         placeholder="رمز عبور">
+
     </div>
 
     <button
       id="loginButton"
       class="login-btn"
       onclick="login()">
+
       ورود
+
     </button>
 
     <div id="loginError" class="error"></div>
@@ -716,7 +672,7 @@ th{
 </div>
 
 
-<!-- ================= APP ================= -->
+<!-- APP -->
 
 <div id="appContainer">
 
@@ -724,7 +680,8 @@ th{
 
     <div class="logo-box">
 
-      <!-- لوگوی فعلی عمداً بدون تغییر نگه داشته شده -->
+      <!-- لوگو بدون تغییر -->
+
       <svg class="main-logo"
            viewBox="0 0 300 300"
            xmlns="http://www.w3.org/2000/svg">
@@ -766,29 +723,35 @@ th{
 
     <h1>سیستم حسابداری شرکت همدرد</h1>
 
+    <!-- شمسی + میلادی -->
+
     <div class="date" id="currentDate"></div>
 
   </div>
 
 
-  <!-- خروج فقط اینجا، صفحه اصلی -->
   <div class="user-bar" id="homeUserBar">
 
     <div class="user-info">
+
       <strong id="userName">---</strong>
+
       <span id="userRole"></span>
+
     </div>
 
     <button
       class="logout-btn"
       onclick="logout()">
+
       خروج
+
     </button>
 
   </div>
 
 
-  <!-- ================= HOME ================= -->
+  <!-- HOME -->
 
   <main id="homePage" class="page active">
 
@@ -812,13 +775,23 @@ th{
       <div class="summary">
 
         <div class="summary-box receive">
+
           <span>دریافت امروز</span>
-          <strong id="todayReceive">0 AFN</strong>
+
+          <strong id="todayReceive">
+            0 AFN
+          </strong>
+
         </div>
 
         <div class="summary-box withdraw">
+
           <span>برداشت امروز</span>
-          <strong id="todayWithdraw">0 AFN</strong>
+
+          <strong id="todayWithdraw">
+            0 AFN
+          </strong>
+
         </div>
 
       </div>
@@ -829,13 +802,17 @@ th{
         <button
           class="action-btn receive-btn"
           onclick="openTransactionPage('receive')">
+
           ثبت دریافت
+
         </button>
 
         <button
           class="action-btn withdraw-btn"
           onclick="openTransactionPage('withdraw')">
+
           ثبت برداشت
+
         </button>
 
       </div>
@@ -844,7 +821,9 @@ th{
       <button
         class="history-btn"
         onclick="openHistory()">
+
         تاریخچه تراکنش‌ها
+
       </button>
 
     </div>
@@ -852,7 +831,7 @@ th{
   </main>
 
 
-  <!-- ================= TRANSACTION ================= -->
+  <!-- TRANSACTION -->
 
   <main id="transactionPage" class="page">
 
@@ -867,7 +846,9 @@ th{
         <button
           class="back-btn"
           onclick="goHome()">
+
           برگشت
+
         </button>
 
       </div>
@@ -875,8 +856,9 @@ th{
 
       <div class="form-card">
 
-        <form id="transactionForm"
-              onsubmit="saveTransaction(event)">
+        <form
+          id="transactionForm"
+          onsubmit="saveTransaction(event)">
 
           <input
             type="hidden"
@@ -903,7 +885,6 @@ th{
               id="customerName"
               type="text"
               required
-              autocomplete="off"
               placeholder="نام شخص را وارد کنید">
 
           </div>
@@ -911,7 +892,9 @@ th{
 
           <div class="form-group">
 
-            <label>مبلغ (افغانی)</label>
+            <!-- اصلاح شد -->
+
+            <label>مبلغ را وارد کنید</label>
 
             <input
               id="amount"
@@ -939,10 +922,12 @@ th{
 
             <label>تاریخ</label>
 
-            <!-- دستی -->
+            <!-- خودکار و غیرقابل تغییر -->
+
             <input
               id="transactionDate"
               type="date"
+              readonly
               required>
 
           </div>
@@ -952,10 +937,12 @@ th{
 
             <label>ساعت</label>
 
-            <!-- دستی -->
+            <!-- خودکار و غیرقابل تغییر -->
+
             <input
               id="transactionTime"
               type="time"
+              readonly
               required>
 
           </div>
@@ -977,7 +964,9 @@ th{
             id="saveButton"
             class="save-btn save-receive"
             type="submit">
+
             ثبت دریافت
+
           </button>
 
         </form>
@@ -989,7 +978,7 @@ th{
   </main>
 
 
-  <!-- ================= HISTORY ================= -->
+  <!-- HISTORY -->
 
   <main id="historyPage" class="page">
 
@@ -1002,7 +991,9 @@ th{
         <button
           class="back-btn"
           onclick="goHome()">
+
           برگشت
+
         </button>
 
       </div>
@@ -1021,21 +1012,25 @@ th{
         <div class="date-filters">
 
           <div>
+
             <label>از تاریخ</label>
 
             <input
               id="historyFrom"
               type="date"
               onchange="renderHistory()">
+
           </div>
 
           <div>
+
             <label>تا تاریخ</label>
 
             <input
               id="historyTo"
               type="date"
               onchange="renderHistory()">
+
           </div>
 
         </div>
@@ -1044,7 +1039,9 @@ th{
         <button
           class="print-history-btn"
           onclick="printHistory()">
+
           چاپ گزارش این بازه
+
         </button>
 
       </div>
@@ -1057,16 +1054,27 @@ th{
           <thead>
 
             <tr>
+
               <th>رسید</th>
+
               <th>نام</th>
+
               <th>زمان</th>
-              <th>تاریخ شمسی</th>
-              <th>تاریخ میلادی</th>
+
+              <!-- فقط شمسی -->
+
+              <th>تاریخ</th>
+
               <th>مبلغ</th>
+
               <th>نوع</th>
+
               <th>توضیحات</th>
+
               <th>ثبت‌کننده</th>
+
               <th>چاپ</th>
+
             </tr>
 
           </thead>
@@ -1085,77 +1093,70 @@ th{
 
 
 <div id="printArea"></div>
+
 <div id="historyPrintArea"></div>
 
 
 <script>
 
-/* ============================================================
-   SUPABASE
-============================================================ */
+/* SUPABASE */
 
 const SUPABASE_URL =
-  "https://pxlvwdwznlklqdofbspv.supabase.co";
+"https://pxlvwdwznlklqdofbspv.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_5J-p7w5eYZTMsSGPYLtd9g_QiitckBc";
+"sb_publishable_5J-p7w5eYZTMsSGPYLtd9g_QiitckBc";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-/* ============================================================
-   GLOBAL
-============================================================ */
+/* GLOBAL */
 
-let currentUser = null;
-let currentProfile = null;
-let transactions = [];
-let currentTransactionType = "receive";
+let currentUser=null;
+let currentProfile=null;
+let transactions=[];
+let currentTransactionType="receive";
 
 
-/* ============================================================
-   BASIC HELPERS
-============================================================ */
+/* DATE */
 
 function todayISO(){
 
-  const d = new Date();
+  const d=new Date();
 
   return (
-    d.getFullYear() +
-    "-" +
-    String(d.getMonth()+1).padStart(2,"0") +
-    "-" +
+    d.getFullYear()+"-"+
+    String(d.getMonth()+1).padStart(2,"0")+"-"+
     String(d.getDate()).padStart(2,"0")
   );
 }
 
 
+/* TIME */
+
 function currentTime(){
 
-  const d = new Date();
+  const d=new Date();
 
   return (
-    String(d.getHours()).padStart(2,"0") +
-    ":" +
+    String(d.getHours()).padStart(2,"0")+":"+
     String(d.getMinutes()).padStart(2,"0")
   );
 }
 
 
+/* NUMBER */
+
 function formatNumber(value){
 
-  return Number(value || 0).toLocaleString(
-    "en-US",
-    {
-      useGrouping:true,
+  return Number(value||0)
+    .toLocaleString("en-US",{
       maximumFractionDigits:0
-    }
-  );
+    });
 }
 
 
@@ -1171,12 +1172,12 @@ function parseAmount(value){
 
 function formatAmountInput(){
 
-  const input =
+  const input=
     document.getElementById("amount");
 
-  if(!input) return;
+  if(!input)return;
 
-  const raw =
+  const raw=
     input.value.replace(/[^\d]/g,"");
 
   if(!raw){
@@ -1185,75 +1186,49 @@ function formatAmountInput(){
     return;
   }
 
-  input.value =
+  input.value=
     Number(raw).toLocaleString("en-US");
 }
 
 
+/* DATE DATABASE */
+
 function dateToDB(dateValue){
 
-  if(!dateValue) return "";
+  if(!dateValue)return "";
 
-  const parts =
-    dateValue.split("-");
+  const p=dateValue.split("-");
 
-  if(parts.length !== 3){
-    return dateValue;
-  }
+  if(p.length!==3)return dateValue;
 
-  return (
-    parts[0] +
-    "/" +
-    parts[1] +
-    "/" +
-    parts[2]
-  );
+  return p[0]+"/"+p[1]+"/"+p[2];
 }
 
 
 function dateToISO(dateValue){
 
-  if(!dateValue) return "";
+  if(!dateValue)return "";
 
-  const s =
+  const s=
     String(dateValue).substring(0,10);
 
   if(s.includes("-")){
     return s;
   }
 
-  const parts =
-    s.split("/");
+  const p=s.split("/");
 
-  if(parts.length === 3){
+  if(p.length===3){
 
-    return (
-      parts[0] +
-      "-" +
-      parts[1] +
-      "-" +
-      parts[2]
-    );
+    return p[0]+"-"+p[1]+"-"+p[2];
+
   }
 
   return s;
 }
 
 
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-
-/* ============================================================
-   JALALI DATE CONVERTER
-============================================================ */
+/* JALALI */
 
 function gregorianToJalali(gy,gm,gd){
 
@@ -1264,116 +1239,100 @@ function gregorianToJalali(gy,gm,gd){
 
   let jy;
 
-  if(gy > 1600){
+  if(gy>1600){
+
     jy=979;
     gy-=1600;
+
   }else{
+
     jy=0;
     gy-=621;
   }
 
-  const gy2 =
-    gm > 2
-      ? gy + 1
-      : gy;
+  const gy2=
+    gm>2 ? gy+1 : gy;
 
-  let days =
-    (365 * gy) +
-    Math.floor((gy2 + 3) / 4) -
-    Math.floor((gy2 + 99) / 100) +
-    Math.floor((gy2 + 399) / 400) -
-    80 +
-    gd +
+  let days=
+    365*gy+
+    Math.floor((gy2+3)/4)-
+    Math.floor((gy2+99)/100)+
+    Math.floor((gy2+399)/400)-
+    80+
+    gd+
     gdm[gm-1];
 
-  jy +=
-    33 * Math.floor(days / 12053);
+  jy+=
+    33*Math.floor(days/12053);
 
-  days %= 12053;
+  days%=12053;
 
-  jy +=
-    4 * Math.floor(days / 1461);
+  jy+=
+    4*Math.floor(days/1461);
 
-  days %= 1461;
+  days%=1461;
 
-  if(days > 365){
+  if(days>365){
 
-    jy +=
-      Math.floor((days-1) / 365);
+    jy+=
+      Math.floor((days-1)/365);
 
-    days =
-      (days-1) % 365;
+    days=
+      (days-1)%365;
   }
 
   let jm;
 
-  if(days < 186){
+  if(days<186){
 
-    jm =
-      1 +
-      Math.floor(days / 31);
+    jm=
+      1+
+      Math.floor(days/31);
 
   }else{
 
-    jm =
-      7 +
-      Math.floor((days-186) / 30);
+    jm=
+      7+
+      Math.floor((days-186)/30);
   }
 
-  const jd =
-    1 +
+  const jd=
+    1+
     (
-      days < 186
-        ? days % 31
-        : (days-186) % 30
+      days<186
+        ? days%31
+        : (days-186)%30
     );
 
-  return [
-    jy,
-    jm,
-    jd
-  ];
+  return[jy,jm,jd];
 }
 
 
 function jalaliFromISO(iso){
 
-  const parts =
+  const p=
     dateToISO(iso).split("-");
 
-  if(parts.length !== 3){
+  if(p.length!==3){
     return "-";
   }
 
-  const gy =
-    Number(parts[0]);
+  const gy=Number(p[0]);
+  const gm=Number(p[1]);
+  const gd=Number(p[2]);
 
-  const gm =
-    Number(parts[1]);
-
-  const gd =
-    Number(parts[2]);
-
-  if(
-    !gy ||
-    !gm ||
-    !gd
-  ){
+  if(!gy||!gm||!gd){
     return "-";
   }
 
-  const j =
+  const j=
     gregorianToJalali(
-      gy,
-      gm,
-      gd
+      gy,gm,gd
     );
 
-  return (
-    j[0] +
-    "/" +
-    String(j[1]).padStart(2,"0") +
-    "/" +
+  return(
+    j[0]+"/"+
+    String(j[1]).padStart(2,"0")+"/"+
     String(j[2]).padStart(2,"0")
   );
 }
@@ -1381,31 +1340,51 @@ function jalaliFromISO(iso){
 
 function gregorianDisplay(iso){
 
-  const s =
-    dateToISO(iso);
+  const p=
+    dateToISO(iso).split("-");
 
-  if(!s) return "-";
-
-  const p =
-    s.split("-");
-
-  if(p.length !== 3){
-    return s;
+  if(p.length!==3){
+    return "-";
   }
 
-  return (
-    p[0] +
-    "/" +
-    p[1] +
-    "/" +
-    p[2]
+  return p[0]+"/"+p[1]+"/"+p[2];
+}
+
+
+/* BOTH DATES FOR HOME */
+
+function homeDate(){
+
+  const iso=todayISO();
+
+  const shamsi=
+    jalaliFromISO(iso);
+
+  const miladi=
+    gregorianDisplay(iso);
+
+  return(
+    shamsi+
+    " | "+
+    miladi
   );
 }
 
 
-/* ============================================================
-   PAGE CONTROL
-============================================================ */
+/* ESCAPE */
+
+function escapeHTML(value){
+
+  return String(value??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* PAGE */
 
 function showPage(id){
 
@@ -1419,39 +1398,34 @@ function showPage(id){
     .getElementById(id)
     .classList.add("active");
 
-  const userBar =
+
+  const bar=
     document.getElementById(
       "homeUserBar"
     );
 
-  if(id === "homePage"){
 
-    userBar.style.display="flex";
+  if(id==="homePage"){
+
+    bar.style.display="flex";
 
   }else{
 
-    userBar.style.display="none";
+    bar.style.display="none";
   }
-
-  window.scrollTo({
-    top:0,
-    behavior:"instant"
-  });
 }
 
 
-/* ============================================================
-   LOGIN
-============================================================ */
+/* LOGIN */
 
 function showError(message){
 
-  const box =
-    document.getElementById("loginError");
+  const box=
+    document.getElementById(
+      "loginError"
+    );
 
-  box.textContent =
-    message || "خطایی رخ داد.";
-
+  box.textContent=message;
   box.style.display="block";
 }
 
@@ -1468,24 +1442,23 @@ async function login(){
 
   hideLoginError();
 
-  const email =
+  const email=
     document
       .getElementById("loginEmail")
-      .value
-      .trim();
+      .value.trim();
 
-  const password =
+  const password=
     document
       .getElementById("loginPassword")
       .value;
 
-  const button =
+  const button=
     document.getElementById(
       "loginButton"
     );
 
 
-  if(!email || !password){
+  if(!email||!password){
 
     showError(
       "ایمیل و رمز عبور را وارد کنید."
@@ -1501,11 +1474,12 @@ async function login(){
 
   try{
 
-    const result =
-      await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
+    const result=
+      await supabaseClient.auth
+        .signInWithPassword({
+          email,
+          password
+        });
 
 
     if(result.error){
@@ -1513,7 +1487,7 @@ async function login(){
     }
 
 
-    currentUser =
+    currentUser=
       result.data.user;
 
 
@@ -1524,13 +1498,10 @@ async function login(){
 
   }catch(error){
 
-    console.error(
-      "LOGIN ERROR:",
-      error
-    );
+    console.error(error);
 
     showError(
-      error.message ||
+      error.message||
       "ورود انجام نشد."
     );
 
@@ -1542,21 +1513,11 @@ async function login(){
 }
 
 
-/* ============================================================
-   PROFILE
-============================================================ */
+/* PROFILE */
 
 async function loadProfile(){
 
-  if(!currentUser){
-
-    throw new Error(
-      "کاربر وارد نشده است."
-    );
-  }
-
-
-  const result =
+  const result=
     await supabaseClient
       .from("profiles")
       .select("*")
@@ -1572,19 +1533,17 @@ async function loadProfile(){
   if(!result.data){
 
     throw new Error(
-      "پروفایل این حساب در جدول profiles پیدا نشد."
+      "پروفایل این حساب پیدا نشد."
     );
   }
 
 
-  currentProfile =
+  currentProfile=
     result.data;
 }
 
 
-/* ============================================================
-   ENTER APP
-============================================================ */
+/* ENTER */
 
 async function enterApp(){
 
@@ -1597,40 +1556,33 @@ async function enterApp(){
     .style.display="block";
 
 
-  const fullName =
-    currentProfile.full_name ||
-    currentProfile.name ||
+  const fullName=
+    currentProfile.full_name||
+    currentProfile.name||
     currentUser.email;
 
 
-  const role =
-    currentProfile.role || "";
+  const role=
+    currentProfile.role||"";
 
 
   document
     .getElementById("userName")
-    .textContent =
-      fullName;
+    .textContent=fullName;
 
 
   document
     .getElementById("userRole")
-    .textContent =
-      role
-        ? " — " + role
-        : "";
+    .textContent=
+      role ? " — "+role : "";
 
+
+  /* تاریخ بالای صفحه */
 
   document
     .getElementById("currentDate")
-    .textContent =
-      todayISO();
-
-
-  document
-    .getElementById("registeredBy")
-    .value =
-      fullName;
+    .textContent=
+      homeDate();
 
 
   await loadTransactions();
@@ -1641,59 +1593,41 @@ async function enterApp(){
 }
 
 
-/* ============================================================
-   SESSION
-============================================================ */
+/* SESSION */
 
 async function checkExistingSession(){
 
   try{
 
-    const result =
-      await supabaseClient.auth.getSession();
+    const result=
+      await supabaseClient.auth
+        .getSession();
 
+    if(result.error)return;
 
-    if(result.error){
-      return;
-    }
-
-
-    const session =
+    const session=
       result.data.session;
 
+    if(!session)return;
 
-    if(!session){
-      return;
-    }
-
-
-    currentUser =
+    currentUser=
       session.user;
-
 
     await loadProfile();
 
     await enterApp();
 
-
   }catch(error){
 
-    console.error(
-      "SESSION ERROR:",
-      error
-    );
+    console.error(error);
 
     await supabaseClient.auth.signOut();
 
-    currentUser=null;
-    currentProfile=null;
   }
 }
 
 
-/* ============================================================
-   LOGOUT
-============================================================ */
+/* LOGOUT */
 
 async function logout(){
 
@@ -1723,13 +1657,11 @@ async function logout(){
 }
 
 
-/* ============================================================
-   LOAD TRANSACTIONS
-============================================================ */
+/* LOAD */
 
 async function loadTransactions(){
 
-  const result =
+  const result=
     await supabaseClient
       .from("transaction")
       .select("*")
@@ -1739,65 +1671,52 @@ async function loadTransactions(){
 
 
   if(result.error){
-
-    console.error(
-      "TRANSACTIONS ERROR:",
-      result.error
-    );
-
     throw result.error;
   }
 
 
-  transactions =
-    result.data || [];
-
+  transactions=
+    result.data||[];
 
   updateDashboard();
 }
 
 
-/* ============================================================
-   DASHBOARD
-============================================================ */
+/* DASHBOARD */
 
 function updateDashboard(){
 
   let balance=0;
-  let todayReceive=0;
-  let todayWithdraw=0;
+  let receive=0;
+  let withdraw=0;
 
-  const today =
+  const today=
     todayISO();
 
 
   transactions.forEach(t=>{
 
-    const amount =
-      Number(t.amount || 0);
+    const amount=
+      Number(t.amount||0);
 
 
-    if(t.type === "receive"){
+    if(t.type==="receive"){
 
-      balance += amount;
+      balance+=amount;
 
-      if(
-        dateToISO(t.date) === today
-      ){
-        todayReceive += amount;
+      if(dateToISO(t.date)===today){
+        receive+=amount;
       }
 
     }
 
 
-    if(t.type === "withdraw"){
+    if(t.type==="withdraw"){
 
-      balance -= amount;
+      balance-=amount;
 
-      if(
-        dateToISO(t.date) === today
-      ){
-        todayWithdraw += amount;
+      if(dateToISO(t.date)===today){
+        withdraw+=amount;
       }
 
     }
@@ -1807,104 +1726,87 @@ function updateDashboard(){
 
   document
     .getElementById("balance")
-    .textContent =
+    .textContent=
       formatNumber(balance);
 
 
   document
     .getElementById("todayReceive")
-    .textContent =
-      formatNumber(todayReceive) +
-      " AFN";
+    .textContent=
+      formatNumber(receive)+" AFN";
 
 
   document
     .getElementById("todayWithdraw")
-    .textContent =
-      formatNumber(todayWithdraw) +
-      " AFN";
+    .textContent=
+      formatNumber(withdraw)+" AFN";
+
+
+  /* آپدیت تاریخ بالای صفحه */
+
+  document
+    .getElementById("currentDate")
+    .textContent=
+      homeDate();
 }
 
 
-/* ============================================================
-   RECEIPT NUMBER
-============================================================ */
+/* RECEIPT NUMBER */
 
 function getNextReceiptNumber(type){
 
-  const prefix =
-    type === "receive"
+  const prefix=
+    type==="receive"
       ? "TPH-D"
       : "TPH-B";
 
 
-  let maxNumber=0;
+  let max=0;
 
 
   transactions.forEach(t=>{
 
-    if(t.type !== type){
-      return;
-    }
+    if(t.type!==type)return;
 
 
-    const receipt =
-      String(t.receipt || "")
-        .trim();
+    const receipt=
+      String(t.receipt||"").trim();
 
 
-    const regex =
+    const regex=
       new RegExp(
-        "^" +
-        prefix.replace("-","\\-") +
+        "^"+
+        prefix.replace("-","\\-")+
         "(\\d+)$",
         "i"
       );
 
 
-    const match =
+    const match=
       receipt.match(regex);
 
 
     if(match){
 
-      const n =
-        Number(match[1]);
-
-      if(n > maxNumber){
-        maxNumber=n;
-      }
+      max=
+        Math.max(
+          max,
+          Number(match[1])
+        );
     }
 
   });
 
 
-  return (
-    prefix +
-    String(maxNumber + 1)
-  );
+  return prefix+(max+1);
 }
 
 
-/* ============================================================
-   OPEN TRANSACTION
-============================================================ */
+/* OPEN TRANSACTION */
 
 function openTransactionPage(type){
 
-  currentTransactionType =
-    type;
-
-
-  const title =
-    document.getElementById(
-      "transactionTitle"
-    );
-
-  const saveButton =
-    document.getElementById(
-      "saveButton"
-    );
+  currentTransactionType=type;
 
 
   document
@@ -1914,57 +1816,67 @@ function openTransactionPage(type){
 
   document
     .getElementById("transactionType")
-    .value =
-      type;
+    .value=type;
 
 
-  if(type === "receive"){
+  const title=
+    document.getElementById(
+      "transactionTitle"
+    );
 
-    title.textContent =
-      "ثبت دریافت";
 
-    saveButton.textContent =
-      "ثبت دریافت";
+  const save=
+    document.getElementById(
+      "saveButton"
+    );
 
-    saveButton.className =
+
+  if(type==="receive"){
+
+    title.textContent="ثبت دریافت";
+
+    save.textContent="ثبت دریافت";
+
+    save.className=
       "save-btn save-receive";
 
   }else{
 
-    title.textContent =
-      "ثبت برداشت";
+    title.textContent="ثبت برداشت";
 
-    saveButton.textContent =
-      "ثبت برداشت";
+    save.textContent="ثبت برداشت";
 
-    saveButton.className =
+    save.className=
       "save-btn save-withdraw";
   }
 
 
-  /* تاریخ و ساعت عمداً خالی هستند */
+  /* تاریخ و ساعت همین لحظه */
+
   document
     .getElementById("transactionDate")
-    .value="";
+    .value=
+      todayISO();
 
 
   document
     .getElementById("transactionTime")
-    .value="";
+    .value=
+      currentTime();
 
 
   document
     .getElementById("registeredBy")
-    .value =
-      currentProfile?.full_name ||
-      currentProfile?.name ||
-      currentUser?.email ||
+    .value=
+      currentProfile?.full_name||
+      currentProfile?.name||
+      currentUser?.email||
       "";
 
 
   document
     .getElementById("receipt")
-    .value =
+    .value=
       getNextReceiptNumber(type);
 
 
@@ -1972,29 +1884,26 @@ function openTransactionPage(type){
 }
 
 
-/* ============================================================
-   SAVE TRANSACTION
-============================================================ */
+/* SAVE */
 
 async function saveTransaction(event){
 
   event.preventDefault();
 
 
-  const type =
+  const type=
     document
       .getElementById("transactionType")
       .value;
 
 
-  const customerName =
+  const customerName=
     document
       .getElementById("customerName")
-      .value
-      .trim();
+      .value.trim();
 
 
-  const amount =
+  const amount=
     parseAmount(
       document
         .getElementById("amount")
@@ -2002,44 +1911,40 @@ async function saveTransaction(event){
     );
 
 
-  const description =
+  const description=
     document
       .getElementById("description")
-      .value
-      .trim();
+      .value.trim();
 
 
-  const dateInput =
+  const dateInput=
     document
       .getElementById("transactionDate")
       .value;
 
 
-  const time =
+  const time=
     document
       .getElementById("transactionTime")
       .value;
 
 
-  const registeredBy =
+  const registeredBy=
     document
       .getElementById("registeredBy")
-      .value
-      .trim();
+      .value.trim();
 
 
   if(!customerName){
 
     alert("نام شخص را وارد کنید.");
-
     return;
   }
 
 
-  if(!amount || amount <= 0){
+  if(!amount||amount<=0){
 
     alert("مبلغ معتبر وارد کنید.");
-
     return;
   }
 
@@ -2047,83 +1952,27 @@ async function saveTransaction(event){
   if(!description){
 
     alert("توضیحات را وارد کنید.");
-
     return;
   }
 
 
-  if(!dateInput){
-
-    alert("تاریخ را وارد کنید.");
-
-    return;
-  }
-
-
-  if(!time){
-
-    alert("ساعت را وارد کنید.");
-
-    return;
-  }
-
-
-  /* جلوگیری از برداشت بیشتر از موجودی */
-
-  if(type === "withdraw"){
-
-    let balance=0;
-
-    transactions.forEach(t=>{
-
-      const a =
-        Number(t.amount || 0);
-
-      if(t.type === "receive"){
-        balance += a;
-      }
-
-      if(t.type === "withdraw"){
-        balance -= a;
-      }
-
-    });
-
-
-    if(amount > balance){
-
-      alert(
-        "مبلغ برداشت بیشتر از موجودی فعلی است."
-      );
-
-      return;
-    }
-  }
-
-
-  const receipt =
+  const receipt=
     getNextReceiptNumber(type);
 
 
-  document
-    .getElementById("receipt")
-    .value =
-      receipt;
-
-
-  const saveButton =
+  const save=
     document.getElementById(
       "saveButton"
     );
 
 
-  saveButton.disabled=true;
-  saveButton.textContent="در حال ثبت...";
+  save.disabled=true;
+  save.textContent="در حال ثبت...";
 
 
   try{
 
-    const data = {
+    const data={
 
       type:type,
 
@@ -2148,7 +1997,7 @@ async function saveTransaction(event){
     };
 
 
-    const result =
+    const result=
       await supabaseClient
         .from("transaction")
         .insert([data])
@@ -2161,26 +2010,18 @@ async function saveTransaction(event){
     }
 
 
-    const savedTransaction =
-      result.data;
-
-
     await loadTransactions();
 
 
     alert(
-      type === "receive"
+      type==="receive"
         ? "دریافت با موفقیت ثبت شد."
         : "برداشت با موفقیت ثبت شد."
     );
 
 
-    showReceipt(
-      savedTransaction
-    );
+    showReceipt(result.data);
 
-
-    /* بعد از ثبت، فرم دوباره خالی می‌شود */
 
     document
       .getElementById("transactionForm")
@@ -2189,65 +2030,63 @@ async function saveTransaction(event){
 
     document
       .getElementById("transactionType")
-      .value =
+      .value=
         currentTransactionType;
 
 
     document
-      .getElementById("transactionDate")
-      .value="";
-
-
-    document
-      .getElementById("transactionTime")
-      .value="";
-
-
-    document
-      .getElementById("registeredBy")
-      .value =
-        currentProfile?.full_name ||
-        currentProfile?.name ||
-        currentUser?.email ||
-        "";
-
-
-    document
       .getElementById("receipt")
-      .value =
+      .value=
         getNextReceiptNumber(
           currentTransactionType
         );
 
 
+    /* فرم بعد از ثبت دوباره تاریخ و ساعت فعلی را می‌گیرد */
+
+    document
+      .getElementById("transactionDate")
+      .value=
+        todayISO();
+
+
+    document
+      .getElementById("transactionTime")
+      .value=
+        currentTime();
+
+
+    document
+      .getElementById("registeredBy")
+      .value=
+        currentProfile?.full_name||
+        currentProfile?.name||
+        currentUser?.email||
+        "";
+
+
   }catch(error){
 
-    console.error(
-      "SAVE ERROR:",
-      error
-    );
-
+    console.error(error);
 
     alert(
-      error.message ||
-      "ثبت تراکنش انجام نشد."
+      error.message||
+      "ثبت انجام نشد."
     );
 
   }finally{
 
-    saveButton.disabled=false;
+    save.disabled=false;
 
-    saveButton.textContent =
-      type === "receive"
+    save.textContent=
+      type==="receive"
         ? "ثبت دریافت"
         : "ثبت برداشت";
   }
 }
 
 
-/* ============================================================
-   HOME
-============================================================ */
+/* HOME */
 
 function goHome(){
 
@@ -2257,29 +2096,23 @@ function goHome(){
 }
 
 
-/* ============================================================
-   HISTORY
-============================================================ */
+/* HISTORY */
 
 async function openHistory(){
 
   await loadTransactions();
 
-
   document
     .getElementById("historySearch")
     .value="";
-
 
   document
     .getElementById("historyFrom")
     .value="";
 
-
   document
     .getElementById("historyTo")
     .value="";
-
 
   renderHistory();
 
@@ -2287,13 +2120,11 @@ async function openHistory(){
 }
 
 
-/* ============================================================
-   FILTER HISTORY
-============================================================ */
+/* FILTER */
 
 function getFilteredHistory(){
 
-  const search =
+  const search=
     document
       .getElementById("historySearch")
       .value
@@ -2301,13 +2132,13 @@ function getFilteredHistory(){
       .toLowerCase();
 
 
-  const from =
+  const from=
     document
       .getElementById("historyFrom")
       .value;
 
 
-  const to =
+  const to=
     document
       .getElementById("historyTo")
       .value;
@@ -2315,59 +2146,42 @@ function getFilteredHistory(){
 
   return transactions.filter(t=>{
 
-    const receipt =
-      String(t.receipt || "")
+    const receipt=
+      String(t.receipt||"")
         .toLowerCase();
 
-
-    const name =
-      String(t.customer_name || "")
+    const name=
+      String(t.customer_name||"")
         .toLowerCase();
 
-
-    const date =
+    const date=
       dateToISO(t.date);
 
 
-    const searchOK =
-      !search ||
-      receipt.includes(search) ||
-      name.includes(search);
-
-
-    const fromOK =
-      !from ||
-      date >= from;
-
-
-    const toOK =
-      !to ||
-      date <= to;
-
-
-    return (
-      searchOK &&
-      fromOK &&
-      toOK
+    return(
+      (!search||
+        receipt.includes(search)||
+        name.includes(search)
+      )&&
+      (!from||date>=from)&&
+      (!to||date<=to)
     );
 
   });
 }
 
 
-/* ============================================================
-   RENDER HISTORY
-============================================================ */
+/* RENDER HISTORY */
 
 function renderHistory(){
 
-  const body =
+  const body=
     document.getElementById(
       "historyBody"
     );
 
 
-  const list =
+  const list=
     getFilteredHistory();
 
 
@@ -2375,7 +2189,7 @@ function renderHistory(){
 
     body.innerHTML=`
       <tr>
-        <td colspan="10" class="empty">
+        <td colspan="9" class="empty">
           تراکنشی پیدا نشد.
         </td>
       </tr>
@@ -2385,53 +2199,45 @@ function renderHistory(){
   }
 
 
-  body.innerHTML =
+  body.innerHTML=
     list.map(t=>{
 
-      const isReceive =
-        t.type === "receive";
+      const isReceive=
+        t.type==="receive";
 
 
-      const iso =
+      const date=
         dateToISO(t.date);
 
 
-      const jalali =
-        jalaliFromISO(iso);
+      const shamsi=
+        jalaliFromISO(date);
 
 
-      const gregorian =
-        gregorianDisplay(iso);
-
-
-      return `
+      return`
 
         <tr>
 
           <td>
             ${escapeHTML(
-              t.receipt || "-"
+              t.receipt||"-"
             )}
           </td>
 
           <td>
             ${escapeHTML(
-              t.customer_name || "-"
+              t.customer_name||"-"
             )}
           </td>
 
           <td dir="ltr">
             ${escapeHTML(
-              t.time || "-"
+              t.time||"-"
             )}
           </td>
 
           <td dir="ltr">
-            ${escapeHTML(jalali)}
-          </td>
-
-          <td dir="ltr">
-            ${escapeHTML(gregorian)}
+            ${escapeHTML(shamsi)}
           </td>
 
           <td dir="ltr">
@@ -2455,15 +2261,14 @@ function renderHistory(){
 
           <td>
             ${escapeHTML(
-              t.dascription ||
-              t.description ||
+              t.dascription||
               "-"
             )}
           </td>
 
           <td>
             ${escapeHTML(
-              t.registered_by ||
+              t.registered_by||
               "-"
             )}
           </td>
@@ -2472,7 +2277,7 @@ function renderHistory(){
 
             <button
               class="receipt-btn"
-              onclick="printReceiptById('${escapeHTML(t.id)}')">
+              onclick="printReceiptById('${t.id}')">
 
               چاپ رسید
 
@@ -2488,38 +2293,30 @@ function renderHistory(){
 }
 
 
-/* ============================================================
-   RECEIPT PRINT
-============================================================ */
+/* RECEIPT */
 
 function showReceipt(t){
 
-  const printArea =
+  const printArea=
     document.getElementById(
       "printArea"
     );
 
 
-  const isReceive =
-    t.type === "receive";
+  const isReceive=
+    t.type==="receive";
 
 
-  const iso =
+  const date=
     dateToISO(t.date);
 
 
-  const jalali =
-    jalaliFromISO(iso);
+  const shamsi=
+    jalaliFromISO(date);
 
 
-  const gregorian =
-    gregorianDisplay(iso);
-
-
-  const description =
-    t.dascription ||
-    t.description ||
-    "-";
+  const miladi=
+    gregorianDisplay(date);
 
 
   printArea.innerHTML=`
@@ -2543,25 +2340,12 @@ function showReceipt(t){
       </div>
 
 
-      <div class="receipt-type">
-
-        ${
-          isReceive
-            ? "دریافت"
-            : "برداشت"
-        }
-
-      </div>
-
-
       <table class="receipt-table">
 
         <tr>
           <td>شماره رسید</td>
           <td dir="ltr">
-            ${escapeHTML(
-              t.receipt || "-"
-            )}
+            ${escapeHTML(t.receipt||"-")}
           </td>
         </tr>
 
@@ -2569,7 +2353,7 @@ function showReceipt(t){
           <td>نام شخص / مشتری</td>
           <td>
             ${escapeHTML(
-              t.customer_name || "-"
+              t.customer_name||"-"
             )}
           </td>
         </tr>
@@ -2585,28 +2369,30 @@ function showReceipt(t){
         <tr>
           <td>توضیحات</td>
           <td>
-            ${escapeHTML(description)}
+            ${escapeHTML(
+              t.dascription||"-"
+            )}
           </td>
         </tr>
 
         <tr>
           <td>تاریخ شمسی</td>
           <td dir="ltr">
-            ${escapeHTML(jalali)}
+            ${shamsi}
           </td>
         </tr>
 
         <tr>
           <td>تاریخ میلادی</td>
           <td dir="ltr">
-            ${escapeHTML(gregorian)}
+            ${miladi}
           </td>
         </tr>
 
         <tr>
           <td>ساعت</td>
           <td dir="ltr">
-            ${escapeHTML(t.time || "-")}
+            ${escapeHTML(t.time||"-")}
           </td>
         </tr>
 
@@ -2614,7 +2400,7 @@ function showReceipt(t){
           <td>ثبت‌کننده</td>
           <td>
             ${escapeHTML(
-              t.registered_by || "-"
+              t.registered_by||"-"
             )}
           </td>
         </tr>
@@ -2626,12 +2412,12 @@ function showReceipt(t){
 
         <div>
           امضاء مشتری:
-          ........................
+          ......................
         </div>
 
         <div>
           مهر و امضاء:
-          ........................
+          ......................
         </div>
 
       </div>
@@ -2652,24 +2438,19 @@ function showReceipt(t){
 }
 
 
-/* ============================================================
-   PRINT RECEIPT BY ID
-============================================================ */
+/* PRINT RECEIPT */
 
 function printReceiptById(id){
 
-  const transaction =
+  const transaction=
     transactions.find(
-      t =>
-        String(t.id) ===
-        String(id)
+      t=>String(t.id)===String(id)
     );
 
 
   if(!transaction){
 
     alert("رسید پیدا نشد.");
-
     return;
   }
 
@@ -2678,35 +2459,11 @@ function printReceiptById(id){
 }
 
 
-/* ============================================================
-   PRINT HISTORY
-============================================================ */
+/* PRINT HISTORY */
 
 function printHistory(){
 
-  const from =
-    document
-      .getElementById("historyFrom")
-      .value;
-
-
-  const to =
-    document
-      .getElementById("historyTo")
-      .value;
-
-
-  if(from && to && from > to){
-
-    alert(
-      "تاریخ شروع نمی‌تواند بعد از تاریخ پایان باشد."
-    );
-
-    return;
-  }
-
-
-  const list =
+  const list=
     getFilteredHistory();
 
 
@@ -2720,38 +2477,10 @@ function printHistory(){
   }
 
 
-  const sorted =
-    [...list].sort((a,b)=>{
-
-      const da =
-        dateToISO(a.date) +
-        " " +
-        (a.time || "");
-
-      const db =
-        dateToISO(b.date) +
-        " " +
-        (b.time || "");
-
-      return da.localeCompare(db);
-
-    });
-
-
-  const printArea =
+  const printArea=
     document.getElementById(
       "historyPrintArea"
     );
-
-
-  const rangeText =
-    from || to
-      ? (
-          (from || "ابتدا") +
-          " تا " +
-          (to || "امروز")
-        )
-      : "تمام تراکنش‌ها";
 
 
   printArea.innerHTML=`
@@ -2768,13 +2497,6 @@ function printHistory(){
           گزارش تاریخچه تراکنش‌ها
         </h3>
 
-        <div>
-          بازه:
-          <span dir="ltr">
-            ${escapeHTML(rangeText)}
-          </span>
-        </div>
-
       </div>
 
 
@@ -2783,66 +2505,67 @@ function printHistory(){
         <thead>
 
           <tr>
+
             <th>ردیف</th>
+
             <th>رسید</th>
+
             <th>نام</th>
-            <th>تاریخ شمسی</th>
-            <th>تاریخ میلادی</th>
+
+            <th>تاریخ</th>
+
             <th>ساعت</th>
+
             <th>مبلغ</th>
+
             <th>نوع</th>
+
             <th>توضیحات</th>
+
             <th>ثبت‌کننده</th>
+
           </tr>
 
         </thead>
 
-
         <tbody>
 
           ${
-            sorted.map((t,index)=>{
+            list.map((t,index)=>{
 
-              const iso =
+              const date=
                 dateToISO(t.date);
 
-              const jalali =
-                jalaliFromISO(iso);
+              const shamsi=
+                jalaliFromISO(date);
 
-              const gregorian =
-                gregorianDisplay(iso);
-
-              return `
+              return`
 
                 <tr>
 
                   <td>
-                    ${index + 1}
+                    ${index+1}
                   </td>
 
                   <td dir="ltr">
                     ${escapeHTML(
-                      t.receipt || "-"
+                      t.receipt||"-"
                     )}
                   </td>
 
                   <td>
                     ${escapeHTML(
-                      t.customer_name || "-"
+                      t.customer_name||"-"
                     )}
                   </td>
 
                   <td dir="ltr">
-                    ${escapeHTML(jalali)}
-                  </td>
-
-                  <td dir="ltr">
-                    ${escapeHTML(gregorian)}
+                    ${shamsi}
                   </td>
 
                   <td dir="ltr">
                     ${escapeHTML(
-                      t.time || "-"
+                      t.time||"-"
                     )}
                   </td>
 
@@ -2853,7 +2576,7 @@ function printHistory(){
 
                   <td>
                     ${
-                      t.type === "receive"
+                      t.type==="receive"
                         ? "دریافت"
                         : "برداشت"
                     }
@@ -2861,16 +2584,13 @@ function printHistory(){
 
                   <td>
                     ${escapeHTML(
-                      t.dascription ||
-                      t.description ||
-                      "-"
+                      t.dascription||"-"
                     )}
                   </td>
 
                   <td>
                     ${escapeHTML(
-                      t.registered_by ||
-                      "-"
+                      t.registered_by||"-"
                     )}
                   </td>
 
@@ -2884,21 +2604,6 @@ function printHistory(){
         </tbody>
 
       </table>
-
-
-      <div class="history-print-footer">
-
-        <div>
-          امضاء مسئول:
-          ........................
-        </div>
-
-        <div>
-          مهر شرکت:
-          ........................
-        </div>
-
-      </div>
 
     </div>
 
@@ -2916,50 +2621,43 @@ function printHistory(){
 }
 
 
-/* ============================================================
-   AMOUNT INPUT
-============================================================ */
+/* AMOUNT */
 
 document.addEventListener(
   "input",
   function(event){
 
-    if(
-      event.target.id ===
-      "amount"
-    ){
+    if(event.target.id==="amount"){
 
       formatAmountInput();
+
     }
 
   }
 );
 
 
-/* ============================================================
-   LOGIN ENTER
-============================================================ */
+/* ENTER */
 
 document.addEventListener(
   "keydown",
   function(event){
 
     if(
-      event.key === "Enter" &&
-      document.activeElement?.id ===
+      event.key==="Enter" &&
+      document.activeElement?.id===
       "loginPassword"
     ){
 
       login();
+
     }
 
   }
 );
 
 
-/* ============================================================
-   AFTER PRINT
-============================================================ */
+/* AFTER PRINT */
 
 window.addEventListener(
   "afterprint",
@@ -2985,9 +2683,7 @@ window.addEventListener(
 );
 
 
-/* ============================================================
-   START
-============================================================ */
+/* START */
 
 document.addEventListener(
   "DOMContentLoaded",
