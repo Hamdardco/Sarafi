@@ -20,7 +20,7 @@ body{
   color:#222;
 }
 
-button,input{
+button,input,textarea{
   font-family:inherit;
 }
 
@@ -28,6 +28,7 @@ button,input{
   display:none!important;
 }
 
+/* LOGO */
 .logo-box{
   width:75px;
   height:75px;
@@ -46,6 +47,7 @@ button,input{
   height:62px;
 }
 
+/* LOGIN */
 .login-page{
   min-height:100vh;
   display:flex;
@@ -103,6 +105,7 @@ button,input{
   border-color:#555;
 }
 
+/* TOP */
 .main{
   min-height:100vh;
 }
@@ -153,13 +156,23 @@ button,input{
 .user-name{
   font-size:12px;
   color:#777;
-  text-align:left;
 }
 
+/* HOME */
 .container{
   max-width:1000px;
   margin:auto;
   padding:20px 15px 40px;
+}
+
+.home-user-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:15px;
+  background:#fff;
+  padding:12px 14px;
+  border-radius:15px;
 }
 
 .balance-card{
@@ -186,7 +199,6 @@ button,input{
 .balance-unit{
   font-size:14px;
   color:#777;
-  margin-right:5px;
 }
 
 .action-grid{
@@ -252,6 +264,7 @@ button,input{
   direction:ltr;
 }
 
+/* PAGE */
 .page{
   max-width:1000px;
   margin:auto;
@@ -280,6 +293,7 @@ button,input{
   font-weight:bold;
 }
 
+/* FORM */
 .form-card{
   background:#fff;
   border-radius:22px;
@@ -299,8 +313,7 @@ button,input{
 }
 
 .form-group input,
-.form-group textarea,
-.form-group select{
+.form-group textarea{
   width:100%;
   border:1px solid #ddd;
   border-radius:12px;
@@ -323,6 +336,8 @@ button,input{
   background:#f0f1f3;
   color:#555;
   cursor:not-allowed;
+  -webkit-user-select:none;
+  user-select:none;
 }
 
 .save-btn{
@@ -345,11 +360,25 @@ button,input{
   background:#c93636;
 }
 
+/* HISTORY */
 .history-card{
   background:#fff;
   border-radius:20px;
   padding:15px;
   box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.search-box{
+  margin-bottom:12px;
+}
+
+.search-box input{
+  width:100%;
+  height:45px;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:0 12px;
+  outline:none;
 }
 
 .filters{
@@ -365,20 +394,6 @@ button,input{
   border:1px solid #ddd;
   border-radius:11px;
   padding:0 10px;
-  outline:none;
-  font-size:13px;
-}
-
-.search-box{
-  margin-bottom:12px;
-}
-
-.search-box input{
-  width:100%;
-  height:45px;
-  border:1px solid #ddd;
-  border-radius:11px;
-  padding:0 12px;
   outline:none;
 }
 
@@ -457,16 +472,6 @@ td{
   color:#16834b;
 }
 
-.home-user-bar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-  background:#fff;
-  padding:12px 14px;
-  border-radius:15px;
-}
-
 @media(max-width:600px){
 
   .topbar{
@@ -479,10 +484,6 @@ td{
 
   .top-date{
     font-size:9px;
-  }
-
-  .user-name{
-    display:none;
   }
 
   .container,
@@ -503,22 +504,6 @@ td{
     grid-template-columns:1fr;
   }
 }
-
-/* چاپ */
-@media print{
-
-  body{
-    background:#fff;
-  }
-
-  .no-print{
-    display:none!important;
-  }
-
-  .print-area{
-    display:block!important;
-  }
-}
 </style>
 </head>
 
@@ -531,15 +516,23 @@ td{
 
     <div class="logo-box">
 
-      <!-- لوگو -->
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 100 100"
+           xmlns="http://www.w3.org/2000/svg">
+
         <circle cx="50" cy="50" r="46" fill="#fff"/>
-        <circle cx="50" cy="50" r="40" fill="none" stroke="#222" stroke-width="3"/>
-        <text x="50" y="57"
+
+        <circle cx="50" cy="50" r="40"
+                fill="none"
+                stroke="#222"
+                stroke-width="3"/>
+
+        <text x="50"
+              y="57"
               text-anchor="middle"
               font-size="28"
               font-weight="bold"
               fill="#222">TPH</text>
+
       </svg>
 
     </div>
@@ -553,60 +546,80 @@ td{
     </div>
 
     <div class="input-box">
-      <label>نام کاربری</label>
-      <input id="loginUsername" type="text" autocomplete="username">
+      <label>ایمیل</label>
+
+      <input id="loginEmail"
+             type="email"
+             autocomplete="username">
     </div>
 
     <div class="input-box">
       <label>رمز عبور</label>
-      <input id="loginPassword" type="password" autocomplete="current-password">
+
+      <input id="loginPassword"
+             type="password"
+             autocomplete="current-password">
     </div>
 
-    <button class="save-btn save-receive" onclick="login()">
+    <button class="save-btn save-receive"
+            onclick="login()">
       ورود
     </button>
 
-    <div id="loginMessage" class="message"></div>
+    <div id="loginMessage"
+         class="message"></div>
 
   </div>
 
 </div>
 
 
-<!-- MAIN APP -->
+<!-- APP -->
 <div id="app" class="main hidden">
 
-  <!-- TOP BAR -->
   <div class="topbar no-print">
 
     <div class="topbar-right">
 
       <div class="top-logo">
 
-        <!-- لوگو -->
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 100 100"
+             xmlns="http://www.w3.org/2000/svg">
+
           <circle cx="50" cy="50" r="46" fill="#fff"/>
-          <circle cx="50" cy="50" r="40" fill="none" stroke="#222" stroke-width="3"/>
-          <text x="50" y="57"
+
+          <circle cx="50" cy="50" r="40"
+                  fill="none"
+                  stroke="#222"
+                  stroke-width="3"/>
+
+          <text x="50"
+                y="57"
                 text-anchor="middle"
                 font-size="28"
                 font-weight="bold"
                 fill="#222">TPH</text>
+
         </svg>
 
       </div>
 
       <div>
+
         <div class="company-name">
           سیستم حسابداری شرکت همدرد
         </div>
 
-        <div id="homeDate" class="top-date"></div>
+        <div id="homeDate"
+             class="top-date"></div>
+
       </div>
 
     </div>
 
-    <button id="logoutButton" class="logout" onclick="logout()">
+    <button id="logoutButton"
+            class="logout"
+            onclick="logout()">
       خروج
     </button>
 
@@ -614,14 +627,22 @@ td{
 
 
   <!-- HOME -->
-  <section id="homePage" class="container">
+  <section id="homePage"
+           class="container">
 
-    <div id="homeUserBar" class="home-user-bar no-print">
+    <div id="homeUserBar"
+         class="home-user-bar no-print">
 
       <div>
-        <strong id="welcomeName">کاربر</strong>
-        <div style="font-size:11px;color:#888;margin-top:4px"
-             id="welcomeRole"></div>
+
+        <strong id="welcomeName">
+          کاربر
+        </strong>
+
+        <div id="welcomeRole"
+             style="font-size:11px;color:#888;margin-top:4px">
+        </div>
+
       </div>
 
     </div>
@@ -634,8 +655,15 @@ td{
       </div>
 
       <div class="balance">
-        <span id="balance">0</span>
-        <span class="balance-unit">AFN</span>
+
+        <span id="balance">
+          0
+        </span>
+
+        <span class="balance-unit">
+          AFN
+        </span>
+
       </div>
 
     </div>
@@ -670,8 +698,8 @@ td{
           مجموع دریافت امروز
         </div>
 
-        <div class="stat-number"
-             id="todayReceive">
+        <div id="todayReceive"
+             class="stat-number">
           0
         </div>
 
@@ -688,8 +716,8 @@ td{
           مجموع برداشت امروز
         </div>
 
-        <div class="stat-number"
-             id="todayWithdraw">
+        <div id="todayWithdraw"
+             class="stat-number">
           0
         </div>
 
@@ -704,8 +732,9 @@ td{
   </section>
 
 
-  <!-- TRANSACTION PAGE -->
-  <section id="transactionPage" class="page hidden">
+  <!-- TRANSACTION -->
+  <section id="transactionPage"
+           class="page hidden">
 
     <div class="page-head no-print">
 
@@ -714,8 +743,8 @@ td{
         ‹
       </button>
 
-      <div class="page-title"
-           id="transactionTitle">
+      <div id="transactionTitle"
+           class="page-title">
         ثبت دریافت
       </div>
 
@@ -726,7 +755,9 @@ td{
 
       <div class="form-group">
 
-        <label>شماره رسید</label>
+        <label>
+          شماره رسید
+        </label>
 
         <input id="receiptNumber"
                type="text"
@@ -738,19 +769,23 @@ td{
 
       <div class="form-group">
 
-        <label>نام</label>
+        <label>
+          نام
+        </label>
 
         <input id="customerName"
                type="text"
-               required
-               autocomplete="off">
+               autocomplete="off"
+               required>
 
       </div>
 
 
       <div class="form-group">
 
-        <label>مبلغ را وارد کنید</label>
+        <label>
+          مبلغ را وارد کنید
+        </label>
 
         <input id="amount"
                type="number"
@@ -763,10 +798,12 @@ td{
       </div>
 
 
-      <!-- کاملاً غیرقابل تغییر -->
+      <!-- تاریخ کاملاً قفل -->
       <div class="form-group">
 
-        <label>تاریخ</label>
+        <label>
+          تاریخ
+        </label>
 
         <input id="transactionDate"
                type="text"
@@ -777,10 +814,12 @@ td{
       </div>
 
 
-      <!-- کاملاً غیرقابل تغییر -->
+      <!-- ساعت کاملاً قفل -->
       <div class="form-group">
 
-        <label>ساعت</label>
+        <label>
+          ساعت
+        </label>
 
         <input id="transactionTime"
                type="text"
@@ -793,7 +832,9 @@ td{
 
       <div class="form-group">
 
-        <label>توضیحات</label>
+        <label>
+          توضیحات
+        </label>
 
         <textarea id="description"
                   placeholder="توضیحات"></textarea>
@@ -802,7 +843,7 @@ td{
 
 
       <button id="saveTransactionButton"
-              class="save-btn"
+              class="save-btn save-receive"
               onclick="saveTransaction()">
         ثبت دریافت
       </button>
@@ -817,7 +858,8 @@ td{
 
 
   <!-- HISTORY -->
-  <section id="historyPage" class="page hidden">
+  <section id="historyPage"
+           class="page hidden">
 
     <div class="page-head no-print">
 
@@ -861,15 +903,13 @@ td{
       <div class="no-print"
            style="display:flex;gap:8px;margin-bottom:15px">
 
-        <button
-          onclick="printHistory()"
-          style="flex:1;height:44px;border:0;border-radius:11px;background:#222;color:#fff">
+        <button onclick="printHistory()"
+                style="flex:1;height:44px;border:0;border-radius:11px;background:#222;color:#fff">
           چاپ تاریخچه
         </button>
 
-        <button
-          onclick="clearFilters()"
-          style="flex:1;height:44px;border:1px solid #ddd;border-radius:11px;background:#fff">
+        <button onclick="clearFilters()"
+                style="flex:1;height:44px;border:1px solid #ddd;border-radius:11px;background:#fff">
           پاک کردن فیلتر
         </button>
 
@@ -916,16 +956,16 @@ td{
 ========================= */
 
 const SUPABASE_URL =
-  "https://pxlvwdwznlklqdofbspv.supabase.co";
+"https://pxlvwdwznlklqdofbspv.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_5J-p7w5eYZTMsSGPYLtd9g_QiitckBc";
+"sb_publishable_5J-p7w5eYZTMsSGPYLtd9g_QiitckBc";
 
 const supabaseClient =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
 /* =========================
@@ -938,19 +978,19 @@ let transactions = [];
 
 
 /* =========================
-   ENGLISH DIGITS
+   DIGITS
 ========================= */
 
 function englishDigits(value){
 
-  if(value === null || value === undefined)
+  if(value===null || value===undefined)
     return "";
 
   return String(value)
-    .replace(/[۰-۹]/g, d =>
+    .replace(/[۰-۹]/g,d =>
       "۰۱۲۳۴۵۶۷۸۹".indexOf(d)
     )
-    .replace(/[٠-٩]/g, d =>
+    .replace(/[٠-٩]/g,d =>
       "٠١٢٣٤٥٦٧٨٩".indexOf(d)
     );
 }
@@ -967,28 +1007,28 @@ function pad(n){
 
 function todayISO(){
 
-  const now = new Date();
+  const now=new Date();
 
-  return now.getFullYear() +
-    "-" +
-    pad(now.getMonth()+1) +
-    "-" +
+  return now.getFullYear()+
+    "-"+
+    pad(now.getMonth()+1)+
+    "-"+
     pad(now.getDate());
 }
 
 
 function currentTime(){
 
-  const now = new Date();
+  const now=new Date();
 
-  return pad(now.getHours()) +
-    ":" +
+  return pad(now.getHours())+
+    ":"+
     pad(now.getMinutes());
 }
 
 
 /* =========================
-   GREGORIAN -> JALALI
+   JALALI
 ========================= */
 
 function gregorianToJalali(gy,gm,gd){
@@ -1000,18 +1040,22 @@ function gregorianToJalali(gy,gm,gd){
 
   let jy;
 
-  if(gy > 1600){
+  if(gy>1600){
+
     jy=979;
     gy-=1600;
+
   }else{
+
     jy=0;
     gy-=621;
+
   }
 
-  let gy2=(gm>2)?(gy+1):gy;
+  let gy2=(gm>2)?gy+1:gy;
 
   let days=
-    (365*gy)+
+    365*gy+
     Math.floor((gy2+3)/4)-
     Math.floor((gy2+99)/100)+
     Math.floor((gy2+399)/400)-
@@ -1019,33 +1063,38 @@ function gregorianToJalali(gy,gm,gd){
     gd+
     g_d_m[gm-1];
 
-  jy += 33*Math.floor(days/12053);
-  days %= 12053;
+  jy+=33*Math.floor(days/12053);
 
-  jy += 4*Math.floor(days/1461);
-  days %= 1461;
+  days%=12053;
+
+  jy+=4*Math.floor(days/1461);
+
+  days%=1461;
 
   if(days>365){
-    jy += Math.floor((days-1)/365);
+
+    jy+=Math.floor((days-1)/365);
+
     days=(days-1)%365;
+
   }
 
   let jm;
   let jd;
 
   if(days<186){
+
     jm=1+Math.floor(days/31);
-    jd=1+(days%31);
+    jd=1+days%31;
+
   }else{
+
     jm=7+Math.floor((days-186)/30);
-    jd=1+((days-186)%30);
+    jd=1+(days-186)%30;
+
   }
 
-  return [
-    jy,
-    jm,
-    jd
-  ];
+  return [jy,jm,jd];
 }
 
 
@@ -1054,26 +1103,24 @@ function jalaliFromISO(iso){
   if(!iso)
     return "";
 
-  const clean=String(iso).substring(0,10);
+  const p=
+    String(iso)
+      .substring(0,10)
+      .split("-");
 
-  const parts=clean.split("-");
-
-  if(parts.length!==3)
+  if(p.length!==3)
     return "";
 
-  const gy=Number(parts[0]);
-  const gm=Number(parts[1]);
-  const gd=Number(parts[2]);
-
-  const j=gregorianToJalali(
-    gy,
-    gm,
-    gd
-  );
+  const j=
+    gregorianToJalali(
+      Number(p[0]),
+      Number(p[1]),
+      Number(p[2])
+    );
 
   return englishDigits(
-    j[0] + "/" +
-    pad(j[1]) + "/" +
+    j[0]+"/"+
+    pad(j[1])+"/"+
     pad(j[2])
   );
 }
@@ -1084,16 +1131,14 @@ function gregorianDisplay(iso){
   if(!iso)
     return "";
 
-  const p=String(iso)
-    .substring(0,10)
-    .split("-");
-
-  if(p.length!==3)
-    return "";
+  const p=
+    String(iso)
+      .substring(0,10)
+      .split("-");
 
   return englishDigits(
-    p[0] + "/" +
-    p[1] + "/" +
+    p[0]+"/"+
+    p[1]+"/"+
     p[2]
   );
 }
@@ -1103,25 +1148,21 @@ function homeDate(){
 
   const iso=todayISO();
 
-  const shamsi=jalaliFromISO(iso);
-  const miladi=gregorianDisplay(iso);
-
-  return shamsi +
-    " | " +
-    miladi;
+  return jalaliFromISO(iso)+
+    " | "+
+    gregorianDisplay(iso);
 }
 
 
 /* =========================
-   DATABASE DATE
+   DB DATE
 ========================= */
 
 function dateToDB(date){
 
-  if(!date)
-    return "";
-
-  return date.replaceAll("-","/");
+  return date
+    ? date.replaceAll("-","/")
+    : "";
 }
 
 
@@ -1130,16 +1171,235 @@ function dbDateToISO(date){
   if(!date)
     return "";
 
-  const s=String(date)
+  return String(date)
     .substring(0,10)
     .replaceAll("/","-");
-
-  return s;
 }
 
 
 /* =========================
-   LOAD TRANSACTIONS
+   LOGIN
+========================= */
+
+async function login(){
+
+  const email=
+    document.getElementById("loginEmail")
+      .value
+      .trim();
+
+  const password=
+    document.getElementById("loginPassword")
+      .value;
+
+  const msg=
+    document.getElementById("loginMessage");
+
+  msg.className="message";
+  msg.textContent="";
+
+
+  if(!email || !password){
+
+    msg.textContent=
+      "ایمیل و رمز عبور را وارد کنید.";
+
+    msg.classList.add("error");
+
+    return;
+  }
+
+
+  try{
+
+    const {
+      data,
+      error
+    }=
+      await supabaseClient.auth
+        .signInWithPassword({
+          email:email,
+          password:password
+        });
+
+
+    if(error){
+
+      console.error(error);
+
+      msg.textContent=
+        "ایمیل یا رمز عبور اشتباه است.";
+
+      msg.classList.add("error");
+
+      return;
+    }
+
+
+    if(!data?.user){
+
+      msg.textContent=
+        "کاربر پیدا نشد.";
+
+      msg.classList.add("error");
+
+      return;
+    }
+
+
+    /*
+      گرفتن اطلاعات پروفایل
+    */
+
+    let profile=null;
+
+
+    const profileResult=
+      await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("id",data.user.id)
+        .maybeSingle();
+
+
+    if(profileResult.error){
+
+      console.error(
+        profileResult.error
+      );
+
+    }else{
+
+      profile=
+        profileResult.data;
+
+    }
+
+
+    /*
+      اگر پروفایل نبود،
+      ورود همچنان انجام شود.
+    */
+
+    currentUser=
+      profile || {
+
+        id:data.user.id,
+
+        full_name:
+          data.user.email,
+
+        role:"cashier"
+
+      };
+
+
+    document
+      .getElementById("loginPage")
+      .classList.add("hidden");
+
+
+    document
+      .getElementById("app")
+      .classList.remove("hidden");
+
+
+    document
+      .getElementById("welcomeName")
+      .textContent=
+        currentUser.full_name ||
+        data.user.email;
+
+
+    document
+      .getElementById("welcomeRole")
+      .textContent=
+        currentUser.role==="manager"
+        ? "مدیر"
+        : "صندوقدار";
+
+
+    document
+      .getElementById("logoutButton")
+      .style.display="block";
+
+
+    await loadTransactions();
+
+    showPage("home");
+
+
+  }catch(error){
+
+    console.error(error);
+
+    msg.textContent=
+      "خطایی هنگام ورود رخ داد.";
+
+    msg.classList.add("error");
+
+  }
+
+}
+
+
+/* =========================
+   ENTER LOGIN
+========================= */
+
+document
+  .getElementById("loginPassword")
+  .addEventListener(
+    "keydown",
+    function(e){
+
+      if(e.key==="Enter"){
+        login();
+      }
+
+    }
+  );
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  currentUser=null;
+  transactions=[];
+
+  document
+    .getElementById("app")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginPage")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("loginEmail")
+    .value="";
+
+  document
+    .getElementById("loginPassword")
+    .value="";
+
+  document
+    .getElementById("loginMessage")
+    .textContent="";
+
+  document
+    .getElementById("logoutButton")
+    .style.display="none";
+}
+
+
+/* =========================
+   LOAD
 ========================= */
 
 async function loadTransactions(){
@@ -1147,10 +1407,14 @@ async function loadTransactions(){
   const {
     data,
     error
-  } = await supabaseClient
-    .from("transaction")
-    .select("*")
-    .order("created_at",{ascending:true});
+  }=
+    await supabaseClient
+      .from("transaction")
+      .select("*")
+      .order("created_at",{
+        ascending:true
+      });
+
 
   if(error){
 
@@ -1161,143 +1425,10 @@ async function loadTransactions(){
     return;
   }
 
-  transactions=data || [];
+
+  transactions=data||[];
 
   updateHome();
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-async function login(){
-
-  const username=
-    document.getElementById("loginUsername")
-      .value
-      .trim();
-
-  const password=
-    document.getElementById("loginPassword")
-      .value
-      .trim();
-
-  const msg=
-    document.getElementById("loginMessage");
-
-  msg.className="message";
-
-  if(!username || !password){
-
-    msg.textContent=
-      "نام کاربری و رمز عبور را وارد کنید.";
-
-    msg.classList.add("error");
-
-    return;
-  }
-
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("profiles")
-    .select("*")
-    .eq("username",username)
-    .eq("password",password)
-    .maybeSingle();
-
-
-  if(error){
-
-    console.error(error);
-
-    msg.textContent=
-      "خطا در اتصال به سیستم.";
-
-    msg.classList.add("error");
-
-    return;
-  }
-
-
-  if(!data){
-
-    msg.textContent=
-      "نام کاربری یا رمز عبور اشتباه است.";
-
-    msg.classList.add("error");
-
-    return;
-  }
-
-
-  currentUser=data;
-
-
-  document.getElementById("loginPage")
-    .classList.add("hidden");
-
-  document.getElementById("app")
-    .classList.remove("hidden");
-
-
-  document.getElementById("welcomeName")
-    .textContent=
-      data.full_name ||
-      data.username ||
-      "کاربر";
-
-
-  document.getElementById("welcomeRole")
-    .textContent=
-      data.role==="manager"
-      ? "مدیر"
-      : "صندوقدار";
-
-
-  document.getElementById("homeDate")
-    .textContent=
-      homeDate();
-
-
-  document.getElementById("logoutButton")
-    .style.display="block";
-
-
-  await loadTransactions();
-
-  showPage("home");
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-function logout(){
-
-  currentUser=null;
-  transactions=[];
-
-  document.getElementById("app")
-    .classList.add("hidden");
-
-  document.getElementById("loginPage")
-    .classList.remove("hidden");
-
-  document.getElementById("loginUsername")
-    .value="";
-
-  document.getElementById("loginPassword")
-    .value="";
-
-  document.getElementById("logoutButton")
-    .style.display="none";
-
-  showPage("home");
 }
 
 
@@ -1343,7 +1474,7 @@ function showPage(page){
   }
 
 
-  else if(page==="transaction"){
+  if(page==="transaction"){
 
     document
       .getElementById("transactionPage")
@@ -1360,7 +1491,7 @@ function showPage(page){
   }
 
 
-  else if(page==="history"){
+  if(page==="history"){
 
     document
       .getElementById("historyPage")
@@ -1375,12 +1506,14 @@ function showPage(page){
       .style.display="none";
 
     renderHistory();
+
   }
+
 }
 
 
 /* =========================
-   OPEN TRANSACTION
+   TRANSACTION PAGE
 ========================= */
 
 function openTransactionPage(type){
@@ -1389,63 +1522,76 @@ function openTransactionPage(type){
 
 
   const title=
-    document.getElementById("transactionTitle");
+    document.getElementById(
+      "transactionTitle"
+    );
 
-  const save=
-    document.getElementById("saveTransactionButton");
+
+  const button=
+    document.getElementById(
+      "saveTransactionButton"
+    );
 
 
   if(type==="receive"){
 
     title.textContent="ثبت دریافت";
 
-    save.textContent="ثبت دریافت";
+    button.textContent="ثبت دریافت";
 
-    save.className=
+    button.className=
       "save-btn save-receive";
 
   }else{
 
     title.textContent="ثبت برداشت";
 
-    save.textContent="ثبت برداشت";
+    button.textContent="ثبت برداشت";
 
-    save.className=
+    button.className=
       "save-btn save-withdraw";
+
   }
 
 
-  document.getElementById("receiptNumber")
+  document
+    .getElementById("receiptNumber")
     .value=
       getNextReceiptNumber(type);
 
 
-  document.getElementById("customerName")
+  document
+    .getElementById("customerName")
     .value="";
 
 
-  document.getElementById("amount")
+  document
+    .getElementById("amount")
     .value="";
 
 
   /*
-    تاریخ و ساعت کاملاً خودکار
-    و غیرقابل تغییر هستند.
+    این دو مقدار فقط خودکار
+    پر می‌شوند و قابل ویرایش نیستند.
   */
 
-  document.getElementById("transactionDate")
+  document
+    .getElementById("transactionDate")
     .value=todayISO();
 
 
-  document.getElementById("transactionTime")
+  document
+    .getElementById("transactionTime")
     .value=currentTime();
 
 
-  document.getElementById("description")
+  document
+    .getElementById("description")
     .value="";
 
 
-  document.getElementById("transactionMessage")
+  document
+    .getElementById("transactionMessage")
     .textContent="";
 
 
@@ -1475,14 +1621,13 @@ function getNextReceiptNumber(type){
 
 
     const receipt=
-      String(t.receipt || "")
-        .trim();
+      String(t.receipt||"");
 
 
     const regex=
       new RegExp(
-        "^" +
-        prefix.replace("-","\\-") +
+        "^"+
+        prefix.replace("-","\\-")+
         "(\\d+)$",
         "i"
       );
@@ -1499,6 +1644,7 @@ function getNextReceiptNumber(type){
           max,
           Number(match[1])
         );
+
     }
 
   });
@@ -1509,55 +1655,64 @@ function getNextReceiptNumber(type){
 
 
 /* =========================
-   SAVE TRANSACTION
+   SAVE
 ========================= */
 
 async function saveTransaction(){
 
   const name=
-    document.getElementById("customerName")
+    document
+      .getElementById("customerName")
       .value
       .trim();
 
 
   const amount=
     Number(
-      document.getElementById("amount")
+      document
+        .getElementById("amount")
         .value
     );
 
 
   const date=
-    document.getElementById("transactionDate")
+    document
+      .getElementById("transactionDate")
       .value;
 
 
   const time=
-    document.getElementById("transactionTime")
+    document
+      .getElementById("transactionTime")
       .value;
 
 
   const description=
-    document.getElementById("description")
+    document
+      .getElementById("description")
       .value
       .trim();
 
 
   const receipt=
-    document.getElementById("receiptNumber")
+    document
+      .getElementById("receiptNumber")
       .value;
 
 
   const msg=
-    document.getElementById("transactionMessage");
+    document
+      .getElementById("transactionMessage");
 
 
   msg.className="message";
+  msg.textContent="";
 
 
   if(!name){
 
-    msg.textContent="نام را وارد کنید.";
+    msg.textContent=
+      "نام را وارد کنید.";
 
     msg.classList.add("error");
 
@@ -1567,18 +1722,8 @@ async function saveTransaction(){
 
   if(!amount || amount<=0){
 
-    msg.textContent="مبلغ را وارد کنید.";
-
-    msg.classList.add("error");
-
-    return;
-  }
-
-
-  if(!date || !time){
-
     msg.textContent=
-      "تاریخ و ساعت مشخص نیست.";
+      "مبلغ را وارد کنید.";
 
     msg.classList.add("error");
 
@@ -1608,7 +1753,7 @@ async function saveTransaction(){
 
     registered_by:
       currentUser?.full_name ||
-      currentUser?.username ||
+      currentUser?.email ||
       "کاربر"
 
   };
@@ -1617,11 +1762,12 @@ async function saveTransaction(){
   const {
     data,
     error
-  } = await supabaseClient
-    .from("transaction")
-    .insert([row])
-    .select()
-    .single();
+  }=
+    await supabaseClient
+      .from("transaction")
+      .insert([row])
+      .select()
+      .single();
 
 
   if(error){
@@ -1629,7 +1775,7 @@ async function saveTransaction(){
     console.error(error);
 
     msg.textContent=
-      "ثبت انجام نشد. اتصال یا اطلاعات دیتابیس را بررسی کنید.";
+      "ثبت انجام نشد.";
 
     msg.classList.add("error");
 
@@ -1647,18 +1793,21 @@ async function saveTransaction(){
 
 
   /*
-    بعد از ذخیره هم تاریخ و ساعت
-    دوباره خودکار پر می‌شوند.
+    دوباره خودکار پر شود
   */
 
-  document.getElementById("transactionDate")
+  document
+    .getElementById("transactionDate")
     .value=todayISO();
 
-  document.getElementById("transactionTime")
+
+  document
+    .getElementById("transactionTime")
     .value=currentTime();
 
 
-  document.getElementById("receiptNumber")
+  document
+    .getElementById("receiptNumber")
     .value=
       getNextReceiptNumber(
         currentTransactionType
@@ -1669,15 +1818,13 @@ async function saveTransaction(){
 
 
   setTimeout(()=>{
-
     showReceipt(data);
-
   },300);
 }
 
 
 /* =========================
-   UPDATE HOME
+   HOME
 ========================= */
 
 function updateHome(){
@@ -1697,12 +1844,12 @@ function updateHome(){
 
     if(t.type==="receive"){
 
-      balance += amount;
+      balance+=amount;
 
       if(
         dbDateToISO(t.date)===today
       ){
-        todayReceive += amount;
+        todayReceive+=amount;
       }
 
     }
@@ -1710,12 +1857,12 @@ function updateHome(){
 
     if(t.type==="withdraw"){
 
-      balance -= amount;
+      balance-=amount;
 
       if(
         dbDateToISO(t.date)===today
       ){
-        todayWithdraw += amount;
+        todayWithdraw+=amount;
       }
 
     }
@@ -1723,30 +1870,33 @@ function updateHome(){
   });
 
 
-  document.getElementById("balance")
+  document
+    .getElementById("balance")
     .textContent=
       englishDigits(
         balance.toLocaleString("en-US")
       );
 
 
-  document.getElementById("todayReceive")
+  document
+    .getElementById("todayReceive")
     .textContent=
       englishDigits(
         todayReceive.toLocaleString("en-US")
       );
 
 
-  document.getElementById("todayWithdraw")
+  document
+    .getElementById("todayWithdraw")
     .textContent=
       englishDigits(
         todayWithdraw.toLocaleString("en-US")
       );
 
 
-  document.getElementById("homeDate")
-    .textContent=
-      homeDate();
+  document
+    .getElementById("homeDate")
+    .textContent=homeDate();
 }
 
 
@@ -1755,32 +1905,35 @@ function updateHome(){
 ========================= */
 
 function openHistory(){
-
   showPage("history");
-
 }
 
 
 function renderHistory(){
 
   const body=
-    document.getElementById("historyBody");
+    document.getElementById(
+      "historyBody"
+    );
 
 
   const search=
-    document.getElementById("historySearch")
+    document
+      .getElementById("historySearch")
       .value
       .trim()
       .toLowerCase();
 
 
   const from=
-    document.getElementById("fromDate")
+    document
+      .getElementById("fromDate")
       .value;
 
 
   const to=
-    document.getElementById("toDate")
+    document
+      .getElementById("toDate")
       .value;
 
 
@@ -1832,12 +1985,8 @@ function renderHistory(){
 
   list.sort(
     (a,b)=>
-      new Date(
-        (b.created_at||"")
-      ) -
-      new Date(
-        (a.created_at||"")
-      )
+      new Date(b.created_at||0) -
+      new Date(a.created_at||0)
   );
 
 
@@ -1915,11 +2064,13 @@ function renderHistory(){
       </td>
 
       <td class="no-print">
+
         <button
           class="print-btn"
           onclick="printReceiptById('${t.id}')">
           چاپ
         </button>
+
       </td>
 
     `;
@@ -1928,12 +2079,11 @@ function renderHistory(){
     body.appendChild(tr);
 
   });
-
 }
 
 
 /* =========================
-   ESCAPE HTML
+   ESCAPE
 ========================= */
 
 function escapeHTML(value){
@@ -1948,18 +2098,21 @@ function escapeHTML(value){
 
 
 /* =========================
-   CLEAR FILTERS
+   FILTER
 ========================= */
 
 function clearFilters(){
 
-  document.getElementById("historySearch")
+  document
+    .getElementById("historySearch")
     .value="";
 
-  document.getElementById("fromDate")
+  document
+    .getElementById("fromDate")
     .value="";
 
-  document.getElementById("toDate")
+  document
+    .getElementById("toDate")
     .value="";
 
   renderHistory();
@@ -1973,19 +2126,22 @@ function clearFilters(){
 function printHistory(){
 
   const search=
-    document.getElementById("historySearch")
+    document
+      .getElementById("historySearch")
       .value
       .trim()
       .toLowerCase();
 
 
   const from=
-    document.getElementById("fromDate")
+    document
+      .getElementById("fromDate")
       .value;
 
 
   const to=
-    document.getElementById("toDate")
+    document
+      .getElementById("toDate")
       .value;
 
 
@@ -2035,19 +2191,12 @@ function printHistory(){
   });
 
 
-  list.sort(
-    (a,b)=>
-      new Date(b.created_at||0) -
-      new Date(a.created_at||0)
-  );
-
-
   let rows="";
 
 
   list.forEach(t=>{
 
-    rows += `
+    rows+=`
 
       <tr>
 
@@ -2071,9 +2220,11 @@ function printHistory(){
         </td>
 
         <td>
-          ${t.type==="receive"
+          ${
+            t.type==="receive"
             ? "دریافت"
-            : "برداشت"}
+            : "برداشت"
+          }
         </td>
 
         <td>${escapeHTML(t.dascription||"")}</td>
@@ -2088,10 +2239,7 @@ function printHistory(){
 
 
   const win=
-    window.open(
-      "",
-      "_blank"
-    );
+    window.open("","_blank");
 
 
   win.document.write(`
@@ -2111,12 +2259,10 @@ function printHistory(){
         body{
           font-family:Tahoma,Arial,sans-serif;
           padding:25px;
-          color:#222;
         }
 
         h2{
           text-align:center;
-          margin-bottom:25px;
         }
 
         table{
@@ -2177,6 +2323,7 @@ function printHistory(){
 
   win.document.close();
 
+
   setTimeout(()=>{
     win.print();
   },500);
@@ -2228,10 +2375,7 @@ function showReceipt(t){
 
 
   const win=
-    window.open(
-      "",
-      "_blank"
-    );
+    window.open("","_blank");
 
 
   win.document.write(`
@@ -2244,7 +2388,7 @@ function showReceipt(t){
 
       <meta charset="UTF-8">
 
-      <title>رسید ${escapeHTML(t.receipt||"")}</title>
+      <title>رسید</title>
 
       <style>
 
@@ -2273,10 +2417,6 @@ function showReceipt(t){
           border-bottom:1px solid #ddd;
           padding-bottom:15px;
           margin-bottom:15px;
-        }
-
-        .logo{
-          margin-bottom:8px;
         }
 
         .title{
@@ -2368,7 +2508,7 @@ function showReceipt(t){
 
         <div class="header">
 
-          <div class="logo">
+          <div>
 
             <svg width="55"
                  height="55"
@@ -2426,17 +2566,13 @@ function showReceipt(t){
 
         <div class="row">
           <span class="label">تاریخ شمسی</span>
-          <span class="value">
-            ${shamsi}
-          </span>
+          <span class="value">${shamsi}</span>
         </div>
 
 
         <div class="row">
           <span class="label">تاریخ میلادی</span>
-          <span class="value">
-            ${miladi}
-          </span>
+          <span class="value">${miladi}</span>
         </div>
 
 
@@ -2450,9 +2586,7 @@ function showReceipt(t){
 
         <div class="row">
           <span class="label">نوع تراکنش</span>
-          <span class="value">
-            ${typeText}
-          </span>
+          <span class="value">${typeText}</span>
         </div>
 
 
@@ -2520,25 +2654,7 @@ function showReceipt(t){
 
 
 /* =========================
-   ENTER LOGIN
-========================= */
-
-document
-  .getElementById("loginPassword")
-  .addEventListener(
-    "keydown",
-    function(e){
-
-      if(e.key==="Enter"){
-        login();
-      }
-
-    }
-  );
-
-
-/* =========================
-   INITIAL
+   START
 ========================= */
 
 document
@@ -2549,6 +2665,90 @@ document
 document
   .getElementById("homeDate")
   .textContent=homeDate();
+
+
+/*
+  اگر قبلاً کاربر وارد شده باشد،
+  جلسه Supabase حفظ می‌شود.
+*/
+
+(async function(){
+
+  try{
+
+    const {
+      data
+    }=
+      await supabaseClient.auth
+        .getSession();
+
+
+    if(data?.session?.user){
+
+      const user=
+        data.session.user;
+
+
+      const {
+        data:profile
+      }=
+        await supabaseClient
+          .from("profiles")
+          .select("*")
+          .eq("id",user.id)
+          .maybeSingle();
+
+
+      currentUser=
+        profile || {
+
+          id:user.id,
+
+          full_name:user.email,
+
+          role:"cashier"
+
+        };
+
+
+      document
+        .getElementById("loginPage")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("app")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("welcomeName")
+        .textContent=
+          currentUser.full_name ||
+          user.email;
+
+
+      document
+        .getElementById("welcomeRole")
+        .textContent=
+          currentUser.role==="manager"
+          ? "مدیر"
+          : "صندوقدار";
+
+
+      await loadTransactions();
+
+      showPage("home");
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+})();
 
 </script>
 
