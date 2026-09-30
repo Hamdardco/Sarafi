@@ -2878,7 +2878,399 @@ function printReceiptById(id){
     return;
   }
 
-  showReceipt(transaction);
+  /*
+    فقط این بخش برای چاپ رسید تغییر کرده.
+    رسید در پنجره مستقل چاپ می‌شود تا
+    تغییر اندازه، کاغذ، Scale و Orientation
+    باعث ناپدید شدن آن نشود.
+  */
+
+  const isReceive=
+    transaction.type==="receive";
+
+  const date=
+    dateToISO(transaction.date);
+
+  const shamsi=
+    jalaliFromISO(date);
+
+  const miladi=
+    gregorianDisplay(date);
+
+  const receiptHTML=`
+
+    <div class="receipt-box">
+
+      <div class="receipt-bank-head">
+
+        <div class="receipt-bank-title">
+
+          <h2>
+            سیستم حسابداری شرکت همدرد
+          </h2>
+
+          <h3>
+            ${
+              isReceive
+                ? "رسید دریافت"
+                : "رسید برداشت"
+            }
+          </h3>
+
+        </div>
+
+        <div class="receipt-bank-number">
+
+          <div>شماره رسید</div>
+
+          <div dir="ltr">
+            ${escapeHTML(
+              transaction.receipt||"-"
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="receipt-date-box">
+
+        <div class="receipt-date">
+
+          <div class="date-top">
+            ${miladi}
+          </div>
+
+          <div class="date-bottom">
+            ${shamsi}
+          </div>
+
+        </div>
+
+      </div>
+
+      <table class="receipt-table">
+
+        <tr>
+          <td>نام شخص / مشتری</td>
+          <td>
+            ${escapeHTML(
+              transaction.customer_name||"-"
+            )}
+          </td>
+        </tr>
+
+        <tr>
+          <td>مبلغ</td>
+          <td dir="ltr">
+            ${formatNumber(transaction.amount)}
+            AFN
+          </td>
+        </tr>
+
+        <tr>
+          <td>توضیحات</td>
+          <td>
+            ${escapeHTML(
+              transaction.dascription||"-"
+            )}
+          </td>
+        </tr>
+
+        <tr>
+          <td>ساعت</td>
+          <td dir="ltr">
+            ${escapeHTML(
+              transaction.time||"-"
+            )}
+          </td>
+        </tr>
+
+        <tr>
+          <td>ثبت‌کننده</td>
+          <td>
+            ${escapeHTML(
+              transaction.registered_by||"-"
+            )}
+          </td>
+        </tr>
+
+      </table>
+
+      <div class="receipt-footer">
+
+        <div>
+          امضاء مشتری:
+          ......................
+        </div>
+
+        <div>
+          مهر و امضاء:
+          ......................
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+  const printWindow=
+    window.open(
+      "",
+      "_blank",
+      "width=850,height=1000"
+    );
+
+  if(!printWindow){
+
+    alert(
+      "صفحه چاپ باز نشد. لطفاً اجازه باز شدن پنجره جدید را فعال کنید."
+    );
+
+    return;
+  }
+
+  printWindow.document.open();
+
+  printWindow.document.write(`
+
+    <!DOCTYPE html>
+
+    <html
+      lang="fa"
+      dir="rtl">
+
+    <head>
+
+      <meta charset="UTF-8">
+
+      <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0">
+
+      <title>
+        رسید ${escapeHTML(
+          transaction.receipt||""
+        )}
+      </title>
+
+      <style>
+
+        *{
+          box-sizing:border-box;
+          font-family:Tahoma,Arial,sans-serif;
+        }
+
+        html,
+        body{
+          margin:0;
+          padding:0;
+          background:white;
+          color:#222;
+        }
+
+        body{
+          padding:20px;
+        }
+
+        .receipt-box{
+          border:1.5px solid #1f2f25;
+          border-radius:12px;
+          padding:25px;
+          max-width:720px;
+          margin:0 auto;
+        }
+
+        .receipt-bank-head{
+          display:flex;
+          justify-content:space-between;
+          align-items:flex-start;
+          gap:15px;
+          border-bottom:2px solid #1f2f25;
+          padding-bottom:16px;
+          margin-bottom:18px;
+        }
+
+        .receipt-bank-title{
+          text-align:right;
+        }
+
+        .receipt-bank-title h2{
+          margin:0 0 7px;
+          color:#1f2f25;
+        }
+
+        .receipt-bank-title h3{
+          margin:0;
+          font-size:15px;
+          color:#555;
+        }
+
+        .receipt-bank-number{
+          border:1px solid #ccc;
+          border-radius:8px;
+          padding:8px 12px;
+          text-align:center;
+          font-weight:bold;
+          white-space:nowrap;
+        }
+
+        .receipt-date-box{
+          display:flex;
+          justify-content:flex-end;
+          margin-bottom:18px;
+        }
+
+        .receipt-date{
+          border:1px solid #ddd;
+          border-radius:8px;
+          padding:9px 15px;
+          text-align:center;
+          line-height:1.8;
+          min-width:150px;
+          background:#fafafa;
+        }
+
+        .receipt-date .date-top,
+        .receipt-date .date-bottom{
+          direction:ltr;
+          font-weight:bold;
+        }
+
+        .receipt-table{
+          width:100%;
+          border-collapse:collapse;
+        }
+
+        .receipt-table td{
+          border:1px solid #999;
+          padding:11px;
+          text-align:right;
+        }
+
+        .receipt-table td:first-child{
+          width:30%;
+          font-weight:bold;
+          background:#f5f5f5;
+        }
+
+        .receipt-footer{
+          margin-top:55px;
+          display:flex;
+          justify-content:space-between;
+          gap:20px;
+        }
+
+        @media(max-width:600px){
+
+          body{
+            padding:10px;
+          }
+
+          .receipt-box{
+            padding:15px;
+          }
+
+          .receipt-bank-head{
+            gap:8px;
+          }
+
+          .receipt-bank-title h2{
+            font-size:18px;
+          }
+
+          .receipt-bank-title h3{
+            font-size:13px;
+          }
+
+          .receipt-bank-number{
+            font-size:12px;
+            padding:7px 8px;
+          }
+
+          .receipt-footer{
+            font-size:12px;
+          }
+
+        }
+
+        @media print{
+
+          html,
+          body{
+            width:100%;
+            background:white;
+          }
+
+          body{
+            padding:0;
+          }
+
+          .receipt-box{
+            page-break-inside:avoid;
+            break-inside:avoid;
+          }
+
+          @page{
+            size:auto;
+            margin:12mm;
+          }
+
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      ${receiptHTML}
+
+      <script>
+
+        window.addEventListener(
+          "load",
+          function(){
+
+            setTimeout(
+              function(){
+
+                window.focus();
+                window.print();
+
+              },
+              400
+            );
+
+          }
+        );
+
+        window.addEventListener(
+          "afterprint",
+          function(){
+
+            setTimeout(
+              function(){
+
+                window.close();
+
+              },
+              300
+            );
+
+          }
+        );
+
+      <\/script>
+
+    </body>
+
+    </html>
+
+  `);
+
+  printWindow.document.close();
 }
 
 /* PRINT HISTORY */
