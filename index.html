@@ -4242,5 +4242,459 @@ document.addEventListener(
 
 </script>
 
+
+<script>
+
+/* =========================================================
+
+   HAMDARD - PASSWORD RECOVERY
+
+   افزوده‌شده بدون تغییر بخش‌های حسابداری
+
+   ========================================================= */
+
+(function () {
+
+  "use strict";
+
+  const emailInput = document.getElementById("loginEmail");
+
+  const passwordInput = document.getElementById("loginPassword");
+
+  const loginButton = document.getElementById("loginButton");
+
+  const loginError = document.getElementById("loginError");
+
+  const loginBox = document.querySelector(".login-box");
+
+  if (!emailInput || !passwordInput || !loginButton || !loginBox) {
+
+    console.error("Password recovery: login elements not found.");
+
+    return;
+
+  }
+
+  const emailGroup = emailInput.closest(".input-group");
+
+  const passwordGroup = passwordInput.closest(".input-group");
+
+  const forgotButton = document.createElement("button");
+
+  forgotButton.type = "button";
+
+  forgotButton.textContent = "رمز عبور را فراموش کرده‌اید؟";
+
+  forgotButton.style.cssText =
+
+    "display:block;width:100%;margin-top:12px;padding:10px;" +
+
+    "background:none;border:0;color:#1f2f25;font-weight:700;" +
+
+    "font-family:inherit;cursor:pointer;";
+
+  const panel = document.createElement("div");
+
+  panel.id = "passwordRecoveryPanel";
+
+  panel.style.cssText =
+
+    "display:none;text-align:right;margin-top:20px;";
+
+  panel.innerHTML = `
+
+    <h3 id="recoveryTitle"
+
+        style="color:#1f2f25;font-size:19px;margin-bottom:15px;">
+
+      بازیابی رمز عبور
+
+    </h3>
+
+    <div id="recoveryEmailGroup" class="input-group">
+
+      <label for="recoveryEmail">ایمیل حساب</label>
+
+      <input id="recoveryEmail" type="email"
+
+             autocomplete="email"
+
+             placeholder="ایمیل حساب خود را وارد کنید"
+
+             style="width:100%;padding:13px 14px;border:1px solid #ddd;
+
+                    border-radius:10px;font-size:15px;">
+
+    </div>
+
+    <button id="sendRecoveryButton" type="button" class="login-btn">
+
+      ارسال لینک بازیابی
+
+    </button>
+
+    <div id="recoveryPasswordFields" style="display:none;margin-top:15px;">
+
+      <div class="input-group">
+
+        <label for="newRecoveryPassword">رمز عبور جدید</label>
+
+        <input id="newRecoveryPassword" type="password"
+
+               autocomplete="new-password"
+
+               placeholder="حداقل ۸ کاراکتر"
+
+               style="width:100%;padding:13px 14px;border:1px solid #ddd;
+
+                      border-radius:10px;font-size:15px;">
+
+      </div>
+
+      <div class="input-group">
+
+        <label for="confirmRecoveryPassword">تکرار رمز عبور جدید</label>
+
+        <input id="confirmRecoveryPassword" type="password"
+
+               autocomplete="new-password"
+
+               placeholder="رمز را دوباره وارد کنید"
+
+               style="width:100%;padding:13px 14px;border:1px solid #ddd;
+
+                      border-radius:10px;font-size:15px;">
+
+      </div>
+
+      <button id="saveRecoveryPasswordButton" type="button" class="login-btn">
+
+        ذخیره رمز جدید
+
+      </button>
+
+    </div>
+
+    <div id="recoveryMessage"
+
+         role="status"
+
+         style="display:none;margin-top:15px;padding:11px;
+
+                border-radius:9px;font-size:13px;overflow-wrap:anywhere;">
+
+    </div>
+
+    <button id="backToLoginButton" type="button"
+
+            style="margin-top:12px;width:100%;padding:11px;
+
+                   background:#eee;border:0;border-radius:9px;
+
+                   font-family:inherit;font-weight:700;cursor:pointer;">
+
+      برگشت به ورود
+
+    </button>
+
+  `;
+
+  loginButton.insertAdjacentElement("afterend", forgotButton);
+
+  forgotButton.insertAdjacentElement("afterend", panel);
+
+  const recoveryEmail = panel.querySelector("#recoveryEmail");
+
+  const recoveryMessage = panel.querySelector("#recoveryMessage");
+
+  const sendButton = panel.querySelector("#sendRecoveryButton");
+
+  const passwordFields = panel.querySelector("#recoveryPasswordFields");
+
+  const saveButton = panel.querySelector("#saveRecoveryPasswordButton");
+
+  const backButton = panel.querySelector("#backToLoginButton");
+
+  const recoveryTitle = panel.querySelector("#recoveryTitle");
+
+  let resetMode = false;
+
+  function message(text, isError) {
+
+    recoveryMessage.textContent = text;
+
+    recoveryMessage.style.display = "block";
+
+    recoveryMessage.style.background = isError ? "#ffe8e8" : "#e6f5eb";
+
+    recoveryMessage.style.color = isError ? "#a00000" : "#16823d";
+
+  }
+
+  function isRecoveryLink() {
+
+    const hash = new URLSearchParams(location.hash.replace(/^#/, ""));
+
+    const query = new URLSearchParams(location.search);
+
+    return hash.get("type") === "recovery" ||
+
+           query.get("type") === "recovery" ||
+
+           query.has("code");
+
+  }
+
+  function showPanel(isReset) {
+
+    resetMode = Boolean(isReset);
+
+    emailGroup.style.display = "none";
+
+    passwordGroup.style.display = "none";
+
+    loginButton.style.display = "none";
+
+    forgotButton.style.display = "none";
+
+    loginError.style.display = "none";
+
+    panel.style.display = "block";
+
+    recoveryEmail.value = recoveryEmail.value || emailInput.value.trim();
+
+    recoveryTitle.textContent = resetMode
+
+      ? "تعیین رمز عبور جدید"
+
+      : "بازیابی رمز عبور";
+
+    panel.querySelector("#recoveryEmailGroup").style.display =
+
+      resetMode ? "none" : "block";
+
+    sendButton.style.display = resetMode ? "none" : "block";
+
+    passwordFields.style.display = resetMode ? "block" : "none";
+
+    recoveryMessage.style.display = "none";
+
+  }
+
+  function backToLogin() {
+
+    resetMode = false;
+
+    panel.style.display = "none";
+
+    emailGroup.style.display = "";
+
+    passwordGroup.style.display = "";
+
+    loginButton.style.display = "";
+
+    forgotButton.style.display = "block";
+
+    loginError.style.display = "none";
+
+    passwordInput.value = "";
+
+    panel.querySelector("#newRecoveryPassword").value = "";
+
+    panel.querySelector("#confirmRecoveryPassword").value = "";
+
+    recoveryMessage.style.display = "none";
+
+    history.replaceState({}, document.title, location.pathname + location.search);
+
+  }
+
+  forgotButton.addEventListener("click", function () {
+
+    showPanel(false);
+
+  });
+
+  backButton.addEventListener("click", backToLogin);
+
+  sendButton.addEventListener("click", async function () {
+
+    const email = recoveryEmail.value.trim();
+
+    if (!email) {
+
+      message("ایمیل حساب خود را وارد کنید.", true);
+
+      return;
+
+    }
+
+    sendButton.disabled = true;
+
+    sendButton.textContent = "در حال ارسال...";
+
+    try {
+
+      const redirectTo = location.origin + location.pathname;
+
+      const result = await supabaseClient.auth.resetPasswordForEmail(email, {
+
+        redirectTo: redirectTo
+
+      });
+
+      if (result.error) throw result.error;
+
+      message(
+
+        "درخواست بازیابی ارسال شد. صندوق ورودی و پوشه Spam ایمیل خود را بررسی کنید.",
+
+        false
+
+      );
+
+    } catch (error) {
+
+      console.error("Password recovery request failed:", error);
+
+      message(
+
+        "ارسال لینک انجام نشد. اتصال اینترنت و تنظیمات ایمیل Supabase را بررسی کنید.",
+
+        true
+
+      );
+
+    } finally {
+
+      sendButton.disabled = false;
+
+      sendButton.textContent = "ارسال لینک بازیابی";
+
+    }
+
+  });
+
+  saveButton.addEventListener("click", async function () {
+
+    const password = panel.querySelector("#newRecoveryPassword").value;
+
+    const confirmation = panel.querySelector("#confirmRecoveryPassword").value;
+
+    if (password.length < 8) {
+
+      message("رمز جدید باید حداقل ۸ کاراکتر باشد.", true);
+
+      return;
+
+    }
+
+    if (password !== confirmation) {
+
+      message("رمز عبور و تکرار آن یکسان نیستند.", true);
+
+      return;
+
+    }
+
+    saveButton.disabled = true;
+
+    saveButton.textContent = "در حال ذخیره...";
+
+    try {
+
+      const result = await supabaseClient.auth.updateUser({
+
+        password: password
+
+      });
+
+      if (result.error) throw result.error;
+
+      message("رمز عبور با موفقیت تغییر کرد. اکنون می‌توانید وارد شوید.", false);
+
+      saveButton.disabled = true;
+
+      setTimeout(async function () {
+
+        try {
+
+          await supabaseClient.auth.signOut();
+
+        } catch (error) {
+
+          console.error(error);
+
+        }
+
+        backToLogin();
+
+      }, 1500);
+
+    } catch (error) {
+
+      console.error("Password update failed:", error);
+
+      message(
+
+        "تغییر رمز انجام نشد. ممکن است لینک منقضی شده باشد؛ دوباره لینک بازیابی بگیرید.",
+
+        true
+
+      );
+
+      saveButton.disabled = false;
+
+    } finally {
+
+      saveButton.textContent = "ذخیره رمز جدید";
+
+    }
+
+  });
+
+  /*
+
+   * جلوگیری از ورود مستقیم به داشبورد با نشست بازیابی رمز
+
+   */
+
+  const originalCheckExistingSession = window.checkExistingSession;
+
+  window.checkExistingSession = async function () {
+
+    if (isRecoveryLink()) {
+
+      showPanel(true);
+
+      return;
+
+    }
+
+    if (typeof originalCheckExistingSession === "function") {
+
+      return originalCheckExistingSession.apply(this, arguments);
+
+    }
+
+  };
+
+  /*
+
+   * Supabase پس از بازشدن لینک بازیابی این رویداد را ارسال می‌کند.
+
+   */
+
+  supabaseClient.auth.onAuthStateChange(function (event) {
+
+    if (event === "PASSWORD_RECOVERY") {
+
+      showPanel(true);
+
+    }
+
+  });
+
+  /*
 </body>
 </html>
