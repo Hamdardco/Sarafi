@@ -4695,6 +4695,16 @@ document.addEventListener(
 
   });
 
-  /*
+     * Supabase پس از بازشدن لینک بازیابی این رویداد را ارسال می‌کند.
+   */
+
+  supabaseClient.auth.onAuthStateChange(function (event) {
+    if (event === "PASSWORD_RECOVERY") {
+      showPanel(true);
+    }
+  });
+
+})();
+</script>
 </body>
 </html>
