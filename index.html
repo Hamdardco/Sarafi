@@ -1,65 +1,28 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="google-site-verification" content="BgeVkg0cT_Qh_5NolEXH08rmN2Y1h4gM8o6kmc9Hkzc">
+<meta name="google-site-verification" content="BgeVkg0cT_Qh_5NolEXH08rmN2Y1h4gM8o6kmc9Hkzc" />
 
 <title>سیستم حسابداری شرکت همدرد</title>
-
-<meta name="description" content="سیستم حسابداری شرکت همدرد؛ سیستم داخلی مدیریت و ثبت دریافت، برداشت، موجودی و تاریخچه تراکنش‌ها به افغانی AFN.">
-
-<meta name="robots" content="index, follow">
-
-<meta property="og:title" content="سیستم حسابداری شرکت همدرد">
-<meta property="og:description" content="سیستم حسابداری شرکت همدرد برای مدیریت دریافت، برداشت، موجودی و تاریخچه تراکنش‌ها.">
-<meta property="og:type" content="website">
-
-<link rel="canonical" href="https://hamdardco.github.io/sarafi/">
-
-<!-- فونت حرفه‌ای فارسی -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-/* =========================================================
-   GLOBAL FONT
-   ========================================================= */
-
 *{
   box-sizing:border-box;
-  font-family:
-    "Vazirmatn",
-    Tahoma,
-    Arial,
-    sans-serif;
-}
-
-html{
-  scroll-behavior:smooth;
+  font-family:Tahoma,Arial,sans-serif;
 }
 
 body{
   margin:0;
   background:#f3f4f2;
-  color:#211f1c;
-  font-family:
-    "Vazirmatn",
-    Tahoma,
-    Arial,
-    sans-serif;
+  color:#222;
 }
 
-button,
-input,
-textarea,
-select{
+button,input,textarea{
   font-family:inherit;
 }
 
@@ -67,14 +30,7 @@ button{
   cursor:pointer;
 }
 
-input,
-textarea{
-  direction:rtl;
-}
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
+/* LOGIN */
 
 #loginPage{
   min-height:100vh;
@@ -88,8 +44,8 @@ textarea{
 .login-box{
   width:100%;
   max-width:420px;
-  background:#fff;
-  padding:32px 26px;
+  background:white;
+  padding:30px 25px;
   border-radius:20px;
   box-shadow:0 10px 35px rgba(0,0,0,.10);
   text-align:center;
@@ -105,13 +61,11 @@ textarea{
   margin:8px 0 5px;
   color:#1f2f25;
   font-size:24px;
-  font-weight:800;
 }
 
 .login-box p{
   color:#777;
   margin-bottom:25px;
-  font-size:14px;
 }
 
 .input-group{
@@ -123,22 +77,16 @@ textarea{
   display:block;
   margin-bottom:7px;
   font-size:14px;
-  font-weight:700;
+  font-weight:bold;
 }
 
 .input-group input{
   width:100%;
-  padding:13px 14px;
+  padding:13px;
   border:1px solid #ddd;
   border-radius:10px;
   outline:none;
   font-size:15px;
-  transition:.2s;
-}
-
-.input-group input:focus{
-  border-color:#1f2f25;
-  box-shadow:0 0 0 3px rgba(31,47,37,.08);
 }
 
 .login-btn{
@@ -147,9 +95,9 @@ textarea{
   border:0;
   border-radius:10px;
   background:#1f2f25;
-  color:#fff;
+  color:white;
   font-size:16px;
-  font-weight:800;
+  font-weight:bold;
 }
 
 .login-btn:disabled{
@@ -166,9 +114,7 @@ textarea{
   font-size:13px;
 }
 
-/* =========================================================
-   APP
-   ========================================================= */
+/* APP */
 
 #appContainer{
   display:none;
@@ -177,7 +123,7 @@ textarea{
 
 .header{
   background:#1f2f25;
-  color:#fff;
+  color:white;
   padding:22px 15px;
   text-align:center;
   box-shadow:0 3px 12px rgba(0,0,0,.15);
@@ -197,13 +143,11 @@ textarea{
 .header h1{
   margin:5px 0;
   font-size:24px;
-  font-weight:800;
 }
 
 .header .date{
   color:#d8c27a;
   font-size:14px;
-  font-weight:500;
 }
 
 .user-bar{
@@ -217,30 +161,22 @@ textarea{
 }
 
 .user-info{
-  background:#fff;
+  background:white;
   border-radius:12px;
   padding:12px 15px;
   box-shadow:0 3px 12px rgba(0,0,0,.06);
   flex:1;
-  font-size:14px;
-}
-
-.user-info strong{
-  font-weight:800;
 }
 
 .logout-btn{
   border:0;
   background:#8d2020;
-  color:#fff;
+  color:white;
   border-radius:10px;
   padding:12px 18px;
-  font-weight:700;
 }
 
-/* =========================================================
-   HOME
-   ========================================================= */
+/* HOME */
 
 .container{
   width:100%;
@@ -251,7 +187,7 @@ textarea{
 
 .balance-card{
   background:#1f2f25;
-  color:#fff;
+  color:white;
   border-radius:18px;
   padding:25px;
   text-align:center;
@@ -261,12 +197,11 @@ textarea{
 
 .balance-card small{
   color:#d8c27a;
-  font-weight:500;
 }
 
 .balance{
   font-size:34px;
-  font-weight:900;
+  font-weight:bold;
   margin-top:8px;
 }
 
@@ -283,12 +218,11 @@ textarea{
 }
 
 .summary-box{
-  background:#fff;
+  background:white;
   padding:18px;
   border-radius:15px;
   text-align:center;
   box-shadow:0 3px 12px rgba(0,0,0,.06);
-  font-size:14px;
 }
 
 .summary-box.receive strong{
@@ -303,7 +237,6 @@ textarea{
   display:block;
   font-size:20px;
   margin-top:6px;
-  font-weight:800;
 }
 
 .action-buttons{
@@ -317,9 +250,9 @@ textarea{
   padding:20px 10px;
   border:0;
   border-radius:15px;
-  color:#fff;
+  color:white;
   font-size:18px;
-  font-weight:800;
+  font-weight:bold;
 }
 
 .receive-btn{
@@ -338,13 +271,11 @@ textarea{
   background:#fff;
   color:#1f2f25;
   font-size:17px;
-  font-weight:800;
+  font-weight:bold;
   box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
-/* =========================================================
-   PAGES
-   ========================================================= */
+/* PAGES */
 
 .page{
   display:none;
@@ -365,22 +296,17 @@ textarea{
 .page-title h2{
   margin:0;
   color:#1f2f25;
-  font-size:22px;
-  font-weight:800;
 }
 
 .back-btn{
   border:0;
   background:#1f2f25;
-  color:#fff;
+  color:white;
   padding:10px 15px;
   border-radius:10px;
-  font-weight:700;
 }
 
-/* =========================================================
-   TYPE MENU
-   ========================================================= */
+/* TYPE MENU */
 
 .type-menu{
   display:grid;
@@ -390,13 +316,13 @@ textarea{
 }
 
 .type-menu-btn{
-  background:#fff;
+  background:white;
   border:0;
   border-radius:17px;
   padding:25px 15px;
   box-shadow:0 4px 15px rgba(0,0,0,.07);
   font-size:17px;
-  font-weight:800;
+  font-weight:bold;
   color:#1f2f25;
 }
 
@@ -414,15 +340,13 @@ textarea{
   border-top:4px solid #b32424;
 }
 
-/* =========================================================
-   RECEIPT CARDS
-   ========================================================= */
+/* RECEIPT CARDS */
 
 .receipts-title{
   margin:22px 0 12px;
   color:#1f2f25;
   font-size:18px;
-  font-weight:800;
+  font-weight:bold;
 }
 
 .receipts-list{
@@ -432,7 +356,7 @@ textarea{
 }
 
 .receipt-card{
-  background:#fff;
+  background:white;
   border-radius:17px;
   padding:18px;
   box-shadow:0 4px 15px rgba(0,0,0,.07);
@@ -457,13 +381,13 @@ textarea{
 }
 
 .receipt-number{
-  font-weight:800;
+  font-weight:bold;
   color:#1f2f25;
 }
 
 .receipt-type{
   font-size:12px;
-  font-weight:800;
+  font-weight:bold;
   padding:5px 9px;
   border-radius:20px;
 }
@@ -480,13 +404,13 @@ textarea{
 
 .receipt-card-name{
   font-size:17px;
-  font-weight:800;
+  font-weight:bold;
   margin:13px 0 8px;
 }
 
 .receipt-card-amount{
   font-size:21px;
-  font-weight:900;
+  font-weight:bold;
   margin-bottom:12px;
 }
 
@@ -528,12 +452,12 @@ textarea{
   border:0;
   border-radius:9px;
   background:#1f2f25;
-  color:#fff;
-  font-weight:800;
+  color:white;
+  font-weight:bold;
 }
 
 .no-receipts{
-  background:#fff;
+  background:white;
   padding:30px;
   text-align:center;
   border-radius:15px;
@@ -541,12 +465,10 @@ textarea{
   box-shadow:0 3px 12px rgba(0,0,0,.05);
 }
 
-/* =========================================================
-   FORM
-   ========================================================= */
+/* FORM */
 
 .form-card{
-  background:#fff;
+  background:white;
   padding:20px;
   border-radius:17px;
   box-shadow:0 4px 15px rgba(0,0,0,.06);
@@ -560,7 +482,7 @@ textarea{
   display:block;
   margin-bottom:7px;
   font-size:14px;
-  font-weight:700;
+  font-weight:bold;
 }
 
 .form-group input,
@@ -571,12 +493,6 @@ textarea{
   border-radius:10px;
   outline:none;
   font-size:15px;
-}
-
-.form-group input:focus,
-.form-group textarea:focus{
-  border-color:#1f2f25;
-  box-shadow:0 0 0 3px rgba(31,47,37,.07);
 }
 
 .form-group textarea{
@@ -594,9 +510,9 @@ textarea{
   padding:15px;
   border:0;
   border-radius:11px;
-  color:#fff;
+  color:white;
   font-size:17px;
-  font-weight:800;
+  font-weight:bold;
 }
 
 .save-receive{
@@ -607,12 +523,10 @@ textarea{
   background:#b32424;
 }
 
-/* =========================================================
-   HISTORY
-   ========================================================= */
+/* HISTORY */
 
 .history-tools{
-  background:#fff;
+  background:white;
   padding:15px;
   border-radius:15px;
   margin-bottom:15px;
@@ -654,13 +568,13 @@ textarea{
   border:0;
   border-radius:10px;
   background:#1f2f25;
-  color:#fff;
-  font-weight:800;
+  color:white;
+  font-weight:bold;
 }
 
 .table-wrap{
   overflow-x:auto;
-  background:#fff;
+  background:white;
   border-radius:15px;
   box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
@@ -671,8 +585,7 @@ table{
   min-width:850px;
 }
 
-th,
-td{
+th,td{
   padding:11px 8px;
   border-bottom:1px solid #eee;
   text-align:center;
@@ -682,18 +595,17 @@ td{
 
 th{
   background:#1f2f25;
-  color:#fff;
-  font-weight:800;
+  color:white;
 }
 
 .receive-text{
   color:#16823d;
-  font-weight:800;
+  font-weight:bold;
 }
 
 .withdraw-text{
   color:#b32424;
-  font-weight:800;
+  font-weight:bold;
 }
 
 .receipt-btn{
@@ -702,7 +614,6 @@ th{
   color:#1f2f25;
   padding:7px 10px;
   border-radius:7px;
-  font-weight:700;
 }
 
 .empty{
@@ -711,18 +622,12 @@ th{
   color:#777;
 }
 
-/* =========================================================
-   PRINT CONTAINERS
-   ========================================================= */
+/* PRINT */
 
 #printArea,
 #historyPrintArea{
   display:none;
 }
-
-/* =========================================================
-   PROFESSIONAL RECEIPT PRINT
-   ========================================================= */
 
 @media print{
 
@@ -747,57 +652,29 @@ th{
     margin:12mm;
   }
 
-  /* -------------------------
-     RECEIPT
-     ------------------------- */
+  .print-header{
+    text-align:center;
+    margin-bottom:20px;
+  }
+
+  /* رسید بانکی */
 
   .receipt-box{
-    width:100%;
+    border:1.5px solid #1f2f25;
+    border-radius:12px;
+    padding:25px;
     max-width:720px;
     margin:0 auto;
-    background:#fff;
-    color:#211f1c;
-    padding:30px 28px 35px;
-    border:1px solid #ded9cf;
-    border-radius:4px;
-    font-family:
-      "Vazirmatn",
-      Tahoma,
-      Arial,
-      sans-serif;
-    page-break-inside:avoid;
-    break-inside:avoid;
-  }
-
-  .receipt-box.receive-receipt{
-    border-top:4px solid #16823d;
-  }
-
-  .receipt-box.withdraw-receipt{
-    border-top:4px solid #b32424;
   }
 
   .receipt-bank-head{
     display:flex;
-    flex-direction:row;
     justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    padding-bottom:20px;
-    border-bottom:2px solid #211f1c;
-    margin-bottom:22px;
-  }
-
-  .receipt-brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-
-  .receipt-logo{
-    width:58px;
-    height:58px;
-    flex:none;
+    align-items:flex-start;
+    gap:15px;
+    border-bottom:2px solid #1f2f25;
+    padding-bottom:16px;
+    margin-bottom:18px;
   }
 
   .receipt-bank-title{
@@ -805,160 +682,75 @@ th{
   }
 
   .receipt-bank-title h2{
-    margin:0 0 4px;
-    color:#211f1c;
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:-.5px;
+    margin:0 0 7px;
+    color:#1f2f25;
   }
 
   .receipt-bank-title h3{
     margin:0;
-    color:#77716a;
-    font-size:14px;
-    font-weight:500;
+    font-size:15px;
+    color:#555;
   }
 
   .receipt-bank-number{
-    text-align:left;
-    min-width:115px;
-    border:0;
-    padding:0;
-  }
-
-  .receipt-bank-number div:first-child{
-    color:#77716a;
-    font-size:13px;
-    margin-bottom:4px;
-  }
-
-  .receipt-bank-number div:last-child{
-    color:#211f1c;
-    font-size:20px;
-    font-weight:900;
-    direction:ltr;
+    border:1px solid #ccc;
+    border-radius:8px;
+    padding:8px 12px;
+    text-align:center;
+    font-weight:bold;
   }
 
   .receipt-date-box{
     display:flex;
-    justify-content:flex-start;
-    margin-bottom:5px;
+    justify-content:flex-end;
+    margin-bottom:18px;
   }
 
   .receipt-date{
-    border:0;
-    padding:0;
-    min-width:0;
-    background:transparent;
-    text-align:right;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:9px 15px;
+    text-align:center;
     line-height:1.8;
+    min-width:150px;
+    background:#fafafa;
   }
 
   .receipt-date .date-top{
-    display:none;
+    direction:ltr;
+    font-weight:bold;
   }
 
   .receipt-date .date-bottom{
-    direction:rtl;
-    color:#77716a;
-    font-size:14px;
-    font-weight:500;
+    direction:ltr;
+    font-weight:bold;
   }
 
   .receipt-table{
     width:100%;
     border-collapse:collapse;
-    margin-top:5px;
-  }
-
-  .receipt-table tr{
-    border-bottom:1px solid #e6e0d6;
   }
 
   .receipt-table td{
-    border:0;
-    padding:14px 4px;
-    vertical-align:middle;
-    font-size:16px;
+    border:1px solid #999;
+    padding:11px;
   }
 
   .receipt-table td:first-child{
-    width:31%;
-    background:transparent;
-    color:#77716a;
-    font-weight:500;
-    text-align:right;
-  }
-
-  .receipt-table td:last-child{
-    color:#211f1c;
-    font-weight:700;
-    text-align:left;
-  }
-
-  /* مبلغ */
-
-  .receipt-table tr.amount-row{
-    border:0;
-  }
-
-  .receipt-table tr.amount-row td{
-    padding:22px 20px;
-    border:0;
-    background:#fff;
-  }
-
-  .receipt-table tr.amount-row td:first-child{
-    width:25%;
-    border:0;
-    color:#211f1c;
-    font-size:18px;
-    font-weight:900;
-  }
-
-  .receipt-table tr.amount-row td:last-child{
-    border:2px solid #211f1c;
-    border-radius:12px;
-    font-size:25px;
-    font-weight:900;
-    text-align:left;
-    direction:ltr;
-    padding:18px 22px;
-  }
-
-  .receipt-box.withdraw-receipt
-  .receipt-table tr.amount-row td:last-child{
-    border-color:#b32424;
+    width:30%;
+    font-weight:bold;
+    background:#f5f5f5;
   }
 
   .receipt-footer{
-    margin-top:62px;
-    padding-top:10px;
+    margin-top:55px;
     display:flex;
     justify-content:space-between;
-    gap:50px;
-    color:#211f1c;
-    font-size:14px;
   }
-
-  .receipt-footer > div{
-    width:45%;
-    text-align:center;
-    padding-top:14px;
-    border-top:1px solid #211f1c;
-  }
-
-  /* -------------------------
-     HISTORY PRINT
-     ------------------------- */
 
   .history-print-title{
     text-align:center;
     margin-bottom:15px;
-  }
-
-  .history-print-title h2{
-    font-weight:900;
   }
 
   .history-print-table{
@@ -979,12 +771,7 @@ th{
     background:#eee !important;
     color:#000 !important;
   }
-
 }
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
 
 @media(max-width:600px){
 
@@ -1027,63 +814,6 @@ th{
   .receipt-card-info{
     grid-template-columns:1fr;
   }
-
-}
-
-/* =========================================================
-   MOBILE PRINT WINDOW
-   ========================================================= */
-
-@media(max-width:600px){
-
-  .receipt-box{
-    padding:20px 16px 25px;
-  }
-
-  .receipt-bank-head{
-    gap:10px;
-  }
-
-  .receipt-logo{
-    width:50px;
-    height:50px;
-  }
-
-  .receipt-bank-title h2{
-    font-size:19px;
-  }
-
-  .receipt-bank-title h3{
-    font-size:12px;
-  }
-
-  .receipt-bank-number{
-    min-width:85px;
-  }
-
-  .receipt-bank-number div:first-child{
-    font-size:10px;
-  }
-
-  .receipt-bank-number div:last-child{
-    font-size:15px;
-  }
-
-  .receipt-table td{
-    font-size:13px;
-    padding:12px 3px;
-  }
-
-  .receipt-table tr.amount-row td:last-child{
-    font-size:20px;
-    padding:15px;
-  }
-
-  .receipt-footer{
-    font-size:11px;
-    gap:15px;
-  }
-
 }
 
 </style>
@@ -1091,24 +821,19 @@ th{
 
 <body>
 
-<!-- =========================================================
-     LOGIN
-     ========================================================= -->
+<!-- LOGIN -->
 
 <div id="loginPage">
 
   <div class="login-box">
 
-    <svg
-      class="login-logo"
-      viewBox="0 0 300 300"
-      xmlns="http://www.w3.org/2000/svg">
+    <!-- لوگو بدون تغییر -->
 
-      <rect
-        width="300"
-        height="300"
-        rx="55"
-        fill="#1f2f25"/>
+    <svg class="login-logo"
+         viewBox="0 0 300 300"
+         xmlns="http://www.w3.org/2000/svg">
+
+      <rect width="300" height="300" rx="55" fill="#1f2f25"/>
 
       <circle
         cx="150"
@@ -1141,19 +866,13 @@ th{
 
     </svg>
 
-    <h1>
-      سیستم حسابداری شرکت همدرد
-    </h1>
+    <h1>سیستم حسابداری شرکت همدرد</h1>
 
-    <p>
-      ورود به سیستم
-    </p>
+    <p>ورود به سیستم</p>
 
     <div class="input-group">
 
-      <label>
-        ایمیل
-      </label>
+      <label>ایمیل</label>
 
       <input
         id="loginEmail"
@@ -1164,9 +883,7 @@ th{
 
     <div class="input-group">
 
-      <label>
-        رمز عبور
-      </label>
+      <label>رمز عبور</label>
 
       <input
         id="loginPassword"
@@ -1184,19 +901,13 @@ th{
 
     </button>
 
-    <div
-      id="loginError"
-      class="error">
-    </div>
+    <div id="loginError" class="error"></div>
 
   </div>
 
 </div>
 
-
-<!-- =========================================================
-     APP
-     ========================================================= -->
+<!-- APP -->
 
 <div id="appContainer">
 
@@ -1204,16 +915,13 @@ th{
 
     <div class="logo-box">
 
-      <svg
-        class="main-logo"
-        viewBox="0 0 300 300"
-        xmlns="http://www.w3.org/2000/svg">
+      <!-- لوگو بدون تغییر -->
 
-        <rect
-          width="300"
-          height="300"
-          rx="55"
-          fill="#1f2f25"/>
+      <svg class="main-logo"
+           viewBox="0 0 300 300"
+           xmlns="http://www.w3.org/2000/svg">
+
+        <rect width="300" height="300" rx="55" fill="#1f2f25"/>
 
         <circle
           cx="150"
@@ -1248,30 +956,19 @@ th{
 
     </div>
 
-    <h1>
-      سیستم حسابداری شرکت همدرد
-    </h1>
+    <h1>سیستم حسابداری شرکت همدرد</h1>
 
-    <div
-      class="date"
-      id="currentDate">
-    </div>
+    <div class="date" id="currentDate"></div>
 
   </div>
 
-
-  <div
-    class="user-bar"
-    id="homeUserBar">
+  <div class="user-bar" id="homeUserBar">
 
     <div class="user-info">
 
-      <strong id="userName">
-        ---
-      </strong>
+      <strong id="userName">---</strong>
 
-      <span id="userRole">
-      </span>
+      <span id="userRole"></span>
 
     </div>
 
@@ -1285,24 +982,17 @@ th{
 
   </div>
 
-
   <!-- HOME -->
 
-  <main
-    id="homePage"
-    class="page active">
+  <main id="homePage" class="page active">
 
     <div class="container">
 
       <div class="balance-card">
 
-        <small>
-          موجودی فعلی
-        </small>
+        <small>موجودی فعلی</small>
 
-        <div
-          class="balance"
-          id="balance">
+        <div class="balance" id="balance">
           0
         </div>
 
@@ -1312,14 +1002,11 @@ th{
 
       </div>
 
-
       <div class="summary">
 
         <div class="summary-box receive">
 
-          <span>
-            دریافت امروز
-          </span>
+          <span>دریافت امروز</span>
 
           <strong id="todayReceive">
             0 AFN
@@ -1329,9 +1016,7 @@ th{
 
         <div class="summary-box withdraw">
 
-          <span>
-            برداشت امروز
-          </span>
+          <span>برداشت امروز</span>
 
           <strong id="todayWithdraw">
             0 AFN
@@ -1340,7 +1025,6 @@ th{
         </div>
 
       </div>
-
 
       <div class="action-buttons">
 
@@ -1362,7 +1046,6 @@ th{
 
       </div>
 
-
       <button
         class="history-btn"
         onclick="openHistory()">
@@ -1375,20 +1058,15 @@ th{
 
   </main>
 
-
   <!-- RECEIVE SECTION -->
 
-  <main
-    id="receiveSectionPage"
-    class="page">
+  <main id="receiveSectionPage" class="page">
 
     <div class="container">
 
       <div class="page-title">
 
-        <h2>
-          دریافت
-        </h2>
+        <h2>دریافت</h2>
 
         <button
           class="back-btn"
@@ -1400,16 +1078,13 @@ th{
 
       </div>
 
-
       <div class="type-menu">
 
         <button
           class="type-menu-btn receive-menu"
           onclick="openTransactionPage('receive')">
 
-          <span class="menu-icon">
-            ＋
-          </span>
+          <span class="menu-icon">＋</span>
 
           ثبت دریافت
 
@@ -1419,9 +1094,7 @@ th{
           class="type-menu-btn"
           onclick="openReceiptList('receive')">
 
-          <span class="menu-icon">
-            ▤
-          </span>
+          <span class="menu-icon">▤</span>
 
           دریافت‌ها
 
@@ -1433,20 +1106,15 @@ th{
 
   </main>
 
-
   <!-- WITHDRAW SECTION -->
 
-  <main
-    id="withdrawSectionPage"
-    class="page">
+  <main id="withdrawSectionPage" class="page">
 
     <div class="container">
 
       <div class="page-title">
 
-        <h2>
-          برداشت
-        </h2>
+        <h2>برداشت</h2>
 
         <button
           class="back-btn"
@@ -1458,16 +1126,13 @@ th{
 
       </div>
 
-
       <div class="type-menu">
 
         <button
           class="type-menu-btn withdraw-menu"
           onclick="openTransactionPage('withdraw')">
 
-          <span class="menu-icon">
-            −
-          </span>
+          <span class="menu-icon">−</span>
 
           ثبت برداشت
 
@@ -1477,9 +1142,7 @@ th{
           class="type-menu-btn"
           onclick="openReceiptList('withdraw')">
 
-          <span class="menu-icon">
-            ▤
-          </span>
+          <span class="menu-icon">▤</span>
 
           برداشت‌ها
 
@@ -1491,12 +1154,9 @@ th{
 
   </main>
 
-
   <!-- RECEIPT LIST -->
 
-  <main
-    id="receiptListPage"
-    class="page">
+  <main id="receiptListPage" class="page">
 
     <div class="container">
 
@@ -1516,7 +1176,6 @@ th{
 
       </div>
 
-
       <div
         id="receiptListBody"
         class="receipts-list">
@@ -1526,12 +1185,9 @@ th{
 
   </main>
 
-
   <!-- TRANSACTION -->
 
-  <main
-    id="transactionPage"
-    class="page">
+  <main id="transactionPage" class="page">
 
     <div class="container">
 
@@ -1551,7 +1207,6 @@ th{
 
       </div>
 
-
       <div class="form-card">
 
         <form
@@ -1562,12 +1217,9 @@ th{
             type="hidden"
             id="transactionType">
 
-
           <div class="form-group">
 
-            <label>
-              شماره رسید
-            </label>
+            <label>شماره رسید</label>
 
             <input
               id="receipt"
@@ -1576,12 +1228,9 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
-            <label>
-              نام شخص / مشتری
-            </label>
+            <label>نام شخص / مشتری</label>
 
             <input
               id="customerName"
@@ -1591,12 +1240,9 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
-            <label>
-              مبلغ را وارد کنید
-            </label>
+            <label>مبلغ را وارد کنید</label>
 
             <input
               id="amount"
@@ -1607,27 +1253,20 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
-            <label>
-              توضیحات
-            </label>
+            <label>توضیحات</label>
 
             <textarea
               id="description"
               required
-              placeholder="توضیحات">
-            </textarea>
+              placeholder="توضیحات"></textarea>
 
           </div>
 
-
           <div class="form-group">
 
-            <label>
-              تاریخ
-            </label>
+            <label>تاریخ</label>
 
             <input
               id="transactionDate"
@@ -1638,12 +1277,9 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
-            <label>
-              ساعت
-            </label>
+            <label>ساعت</label>
 
             <input
               id="transactionTime"
@@ -1654,12 +1290,9 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
-            <label>
-              ثبت‌کننده
-            </label>
+            <label>ثبت‌کننده</label>
 
             <input
               id="registeredBy"
@@ -1667,7 +1300,6 @@ th{
               readonly>
 
           </div>
-
 
           <button
             id="saveButton"
@@ -1686,20 +1318,15 @@ th{
 
   </main>
 
-
   <!-- HISTORY -->
 
-  <main
-    id="historyPage"
-    class="page">
+  <main id="historyPage" class="page">
 
     <div class="container">
 
       <div class="page-title">
 
-        <h2>
-          تاریخچه تراکنش‌ها
-        </h2>
+        <h2>تاریخچه تراکنش‌ها</h2>
 
         <button
           class="back-btn"
@@ -1711,7 +1338,6 @@ th{
 
       </div>
 
-
       <div class="history-tools">
 
         <input
@@ -1721,14 +1347,11 @@ th{
           placeholder="جستجو با شماره رسید یا نام شخص"
           oninput="renderHistory()">
 
-
         <div class="date-filters">
 
           <div>
 
-            <label>
-              از تاریخ
-            </label>
+            <label>از تاریخ</label>
 
             <input
               id="historyFrom"
@@ -1737,12 +1360,9 @@ th{
 
           </div>
 
-
           <div>
 
-            <label>
-              تا تاریخ
-            </label>
+            <label>تا تاریخ</label>
 
             <input
               id="historyTo"
@@ -1752,7 +1372,6 @@ th{
           </div>
 
         </div>
-
 
         <button
           class="print-history-btn"
@@ -1764,7 +1383,6 @@ th{
 
       </div>
 
-
       <div class="table-wrap">
 
         <table>
@@ -1773,48 +1391,29 @@ th{
 
             <tr>
 
-              <th>
-                رسید
-              </th>
+              <th>رسید</th>
 
-              <th>
-                نام
-              </th>
+              <th>نام</th>
 
-              <th>
-                زمان
-              </th>
+              <th>زمان</th>
 
-              <th>
-                تاریخ
-              </th>
+              <th>تاریخ</th>
 
-              <th>
-                مبلغ
-              </th>
+              <th>مبلغ</th>
 
-              <th>
-                نوع
-              </th>
+              <th>نوع</th>
 
-              <th>
-                توضیحات
-              </th>
+              <th>توضیحات</th>
 
-              <th>
-                ثبت‌کننده
-              </th>
+              <th>ثبت‌کننده</th>
 
-              <th>
-                چاپ
-              </th>
+              <th>چاپ</th>
 
             </tr>
 
           </thead>
 
-          <tbody id="historyBody">
-          </tbody>
+          <tbody id="historyBody"></tbody>
 
         </table>
 
@@ -1826,17 +1425,13 @@ th{
 
 </div>
 
-
 <div id="printArea"></div>
 
 <div id="historyPrintArea"></div>
 
-
 <script>
 
-/* =========================================================
-   SUPABASE
-   ========================================================= */
+/* SUPABASE */
 
 const SUPABASE_URL =
 "https://pxlvwdwznlklqdofbspv.supabase.co";
@@ -1850,10 +1445,7 @@ window.supabase.createClient(
   SUPABASE_KEY
 );
 
-
-/* =========================================================
-   GLOBAL
-   ========================================================= */
+/* GLOBAL */
 
 let currentUser=null;
 let currentProfile=null;
@@ -1861,41 +1453,32 @@ let transactions=[];
 let currentTransactionType="receive";
 let previousSection="homePage";
 
-
-/* =========================================================
-   DATE
-   ========================================================= */
+/* DATE */
 
 function todayISO(){
 
   const d=new Date();
 
-  return(
+  return (
     d.getFullYear()+"-"+
     String(d.getMonth()+1).padStart(2,"0")+"-"+
     String(d.getDate()).padStart(2,"0")
   );
 }
 
-
-/* =========================================================
-   TIME
-   ========================================================= */
+/* TIME */
 
 function currentTime(){
 
   const d=new Date();
 
-  return(
+  return (
     String(d.getHours()).padStart(2,"0")+":"+
     String(d.getMinutes()).padStart(2,"0")
   );
 }
 
-
-/* =========================================================
-   NUMBER
-   ========================================================= */
+/* NUMBER */
 
 function formatNumber(value){
 
@@ -1905,7 +1488,6 @@ function formatNumber(value){
     });
 }
 
-
 function parseAmount(value){
 
   return Number(
@@ -1914,7 +1496,6 @@ function parseAmount(value){
       .replace(/[^\d]/g,"")
   );
 }
-
 
 function formatAmountInput(){
 
@@ -1930,17 +1511,13 @@ function formatAmountInput(){
 
     input.value="";
     return;
-
   }
 
   input.value=
     Number(raw).toLocaleString("en-US");
 }
 
-
-/* =========================================================
-   DATE DATABASE
-   ========================================================= */
+/* DATE DATABASE */
 
 function dateToDB(dateValue){
 
@@ -1952,7 +1529,6 @@ function dateToDB(dateValue){
 
   return p[0]+"/"+p[1]+"/"+p[2];
 }
-
 
 function dateToISO(dateValue){
 
@@ -1969,21 +1545,14 @@ function dateToISO(dateValue){
 
   if(p.length===3){
 
-    return(
-      p[0]+"-"+
-      p[1]+"-"+
-      p[2]
-    );
+    return p[0]+"-"+p[1]+"-"+p[2];
 
   }
 
   return s;
 }
 
-
-/* =========================================================
-   JALALI
-   ========================================================= */
+/* JALALI */
 
 function gregorianToJalali(gy,gm,gd){
 
@@ -2003,7 +1572,6 @@ function gregorianToJalali(gy,gm,gd){
 
     jy=0;
     gy-=621;
-
   }
 
   const gy2=
@@ -2035,7 +1603,6 @@ function gregorianToJalali(gy,gm,gd){
 
     days=
       (days-1)%365;
-
   }
 
   let jm;
@@ -2051,7 +1618,6 @@ function gregorianToJalali(gy,gm,gd){
     jm=
       7+
       Math.floor((days-186)/30);
-
   }
 
   const jd=
@@ -2064,7 +1630,6 @@ function gregorianToJalali(gy,gm,gd){
 
   return[jy,jm,jd];
 }
-
 
 function jalaliFromISO(iso){
 
@@ -2085,9 +1650,7 @@ function jalaliFromISO(iso){
 
   const j=
     gregorianToJalali(
-      gy,
-      gm,
-      gd
+      gy,gm,gd
     );
 
   return(
@@ -2096,7 +1659,6 @@ function jalaliFromISO(iso){
     String(j[2]).padStart(2,"0")
   );
 }
-
 
 function gregorianDisplay(iso){
 
@@ -2107,17 +1669,10 @@ function gregorianDisplay(iso){
     return "-";
   }
 
-  return(
-    p[0]+"/"+
-    p[1]+"/"+
-    p[2]
-  );
+  return p[0]+"/"+p[1]+"/"+p[2];
 }
 
-
-/* =========================================================
-   HOME DATE
-   ========================================================= */
+/* BOTH DATES FOR HOME */
 
 function homeDate(){
 
@@ -2136,10 +1691,7 @@ function homeDate(){
   );
 }
 
-
-/* =========================================================
-   ESCAPE
-   ========================================================= */
+/* ESCAPE */
 
 function escapeHTML(value){
 
@@ -2151,10 +1703,7 @@ function escapeHTML(value){
     .replace(/'/g,"&#039;");
 }
 
-
-/* =========================================================
-   PAGE
-   ========================================================= */
+/* PAGE */
 
 function showPage(id){
 
@@ -2180,15 +1729,10 @@ function showPage(id){
   }else{
 
     bar.style.display="none";
-
   }
-
 }
 
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
+/* LOGIN */
 
 function showError(message){
 
@@ -2201,14 +1745,12 @@ function showError(message){
   box.style.display="block";
 }
 
-
 function hideLoginError(){
 
   document
     .getElementById("loginError")
     .style.display="none";
 }
-
 
 async function login(){
 
@@ -2274,15 +1816,10 @@ async function login(){
 
     button.disabled=false;
     button.textContent="ورود";
-
   }
-
 }
 
-
-/* =========================================================
-   PROFILE
-   ========================================================= */
+/* PROFILE */
 
 async function loadProfile(){
 
@@ -2302,17 +1839,13 @@ async function loadProfile(){
     throw new Error(
       "پروفایل این حساب پیدا نشد."
     );
-
   }
 
   currentProfile=
     result.data;
 }
 
-
-/* =========================================================
-   ENTER
-   ========================================================= */
+/* ENTER */
 
 async function enterApp(){
 
@@ -2353,10 +1886,7 @@ async function enterApp(){
   goHome();
 }
 
-
-/* =========================================================
-   SESSION
-   ========================================================= */
+/* SESSION */
 
 async function checkExistingSession(){
 
@@ -2387,13 +1917,9 @@ async function checkExistingSession(){
     await supabaseClient.auth.signOut();
 
   }
-
 }
 
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
+/* LOGOUT */
 
 async function logout(){
 
@@ -2418,10 +1944,7 @@ async function logout(){
   hideLoginError();
 }
 
-
-/* =========================================================
-   LOAD TRANSACTIONS
-   ========================================================= */
+/* LOAD */
 
 async function loadTransactions(){
 
@@ -2443,10 +1966,7 @@ async function loadTransactions(){
   updateDashboard();
 }
 
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
+/* DASHBOARD */
 
 function updateDashboard(){
 
@@ -2505,10 +2025,7 @@ function updateDashboard(){
       homeDate();
 }
 
-
-/* =========================================================
-   RECEIPT NUMBER
-   ========================================================= */
+/* RECEIPT NUMBER */
 
 function getNextReceiptNumber(type){
 
@@ -2544,7 +2061,6 @@ function getNextReceiptNumber(type){
           max,
           Number(match[1])
         );
-
     }
 
   });
@@ -2552,10 +2068,7 @@ function getNextReceiptNumber(type){
   return prefix+(max+1);
 }
 
-
-/* =========================================================
-   OPEN TYPE
-   ========================================================= */
+/* OPEN TYPE SECTION */
 
 function openTypePage(type){
 
@@ -2568,13 +2081,9 @@ function openTypePage(type){
     showPage("withdrawSectionPage");
 
   }
-
 }
 
-
-/* =========================================================
-   OPEN RECEIPT LIST
-   ========================================================= */
+/* OPEN RECEIPT LIST */
 
 async function openReceiptList(type){
 
@@ -2597,10 +2106,7 @@ async function openReceiptList(type){
   showPage("receiptListPage");
 }
 
-
-/* =========================================================
-   RENDER RECEIPTS
-   ========================================================= */
+/* RENDER RECEIPTS */
 
 function renderReceiptList(type){
 
@@ -2658,11 +2164,9 @@ function renderReceiptList(type){
           <div class="receipt-card-top">
 
             <div class="receipt-number">
-
               ${escapeHTML(
                 t.receipt||"-"
               )}
-
             </div>
 
             <div class="
@@ -2684,7 +2188,6 @@ function renderReceiptList(type){
 
           </div>
 
-
           <div class="receipt-card-name">
 
             ${escapeHTML(
@@ -2692,7 +2195,6 @@ function renderReceiptList(type){
             )}
 
           </div>
-
 
           <div class="
             receipt-card-amount
@@ -2707,7 +2209,6 @@ function renderReceiptList(type){
             AFN
 
           </div>
-
 
           <div class="receipt-card-info">
 
@@ -2732,19 +2233,14 @@ function renderReceiptList(type){
 
           </div>
 
-
           <div class="receipt-card-description">
 
-            <strong>
-              توضیحات:
-            </strong>
-
+            <strong>توضیحات:</strong>
             ${escapeHTML(
               t.dascription||"-"
             )}
 
           </div>
-
 
           <button
             class="card-print-btn"
@@ -2761,10 +2257,7 @@ function renderReceiptList(type){
     }).join("");
 }
 
-
-/* =========================================================
-   BACK FROM LIST
-   ========================================================= */
+/* BACK FROM LIST */
 
 function backFromReceiptList(){
 
@@ -2777,13 +2270,9 @@ function backFromReceiptList(){
     showPage("withdrawSectionPage");
 
   }
-
 }
 
-
-/* =========================================================
-   OPEN TRANSACTION
-   ========================================================= */
+/* OPEN TRANSACTION */
 
 function openTransactionPage(type){
 
@@ -2829,7 +2318,6 @@ function openTransactionPage(type){
 
     save.className=
       "save-btn save-withdraw";
-
   }
 
   document
@@ -2858,21 +2346,14 @@ function openTransactionPage(type){
   showPage("transactionPage");
 }
 
-
-/* =========================================================
-   BACK FROM TRANSACTION
-   ========================================================= */
+/* BACK FROM TRANSACTION */
 
 function goBackFromTransaction(){
 
   showPage(previousSection);
-
 }
 
-
-/* =========================================================
-   SAVE TRANSACTION
-   ========================================================= */
+/* SAVE */
 
 async function saveTransaction(event){
 
@@ -2917,28 +2398,19 @@ async function saveTransaction(event){
 
   if(!customerName){
 
-    alert(
-      "نام شخص را وارد کنید."
-    );
-
+    alert("نام شخص را وارد کنید.");
     return;
   }
 
   if(!amount||amount<=0){
 
-    alert(
-      "مبلغ معتبر وارد کنید."
-    );
-
+    alert("مبلغ معتبر وارد کنید.");
     return;
   }
 
   if(!description){
 
-    alert(
-      "توضیحات را وارد کنید."
-    );
-
+    alert("توضیحات را وارد کنید.");
     return;
   }
 
@@ -3051,28 +2523,19 @@ async function saveTransaction(event){
       type==="receive"
         ? "ثبت دریافت"
         : "ثبت برداشت";
-
   }
-
 }
 
-
-/* =========================================================
-   HOME
-   ========================================================= */
+/* HOME */
 
 function goHome(){
 
   showPage("homePage");
 
   updateDashboard();
-
 }
 
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
+/* HISTORY */
 
 async function openHistory(){
 
@@ -3095,10 +2558,7 @@ async function openHistory(){
   showPage("historyPage");
 }
 
-
-/* =========================================================
-   FILTER
-   ========================================================= */
+/* FILTER */
 
 function getFilteredHistory(){
 
@@ -3144,10 +2604,7 @@ function getFilteredHistory(){
   });
 }
 
-
-/* =========================================================
-   RENDER HISTORY
-   ========================================================= */
+/* RENDER HISTORY */
 
 function renderHistory(){
 
@@ -3163,12 +2620,8 @@ function renderHistory(){
 
     body.innerHTML=`
       <tr>
-        <td
-          colspan="9"
-          class="empty">
-
+        <td colspan="9" class="empty">
           تراکنشی پیدا نشد.
-
         </td>
       </tr>
     `;
@@ -3266,12 +2719,14 @@ function renderHistory(){
     }).join("");
 }
 
+/* RECEIPT */
 
-/* =========================================================
-   PROFESSIONAL RECEIPT
-   ========================================================= */
+function showReceipt(t){
 
-function buildReceiptHTML(t){
+  const printArea=
+    document.getElementById(
+      "printArea"
+    );
 
   const isReceive=
     t.type==="receive";
@@ -3281,4789 +2736,37 @@ function buildReceiptHTML(t){
 
   const shamsi=
     jalaliFromISO(date);
-
-  return`
-
-    <div class="receipt-box ${
-      isReceive
-        ? "receive-receipt"
-        : "withdraw-receipt"
-    }">
-
-
-      <div class="receipt-bank-head">
-
-
-        <div class="receipt-brand">
-
-
-          <svg
-            class="receipt-logo"
-            viewBox="0 0 300 300"
-            xmlns="http://www.w3.org/2000/svg">
-
-            <rect
-              width="300"
-              height="300"
-              rx="55"
-              fill="#1f2f25"/>
-
-            <circle
-              cx="150"
-              cy="150"
-              r="108"
-              fill="none"
-              stroke="#c9a85c"
-              stroke-width="7"/>
-
-            <text
-              x="150"
-              y="135"
-              text-anchor="middle"
-              fill="#c9a85c"
-              font-size="52"
-              font-family="Tahoma,Arial,sans-serif"
-              font-weight="bold">
-              همدرد
-            </text>
-
-            <text
-              x="150"
-              y="180"
-              text-anchor="middle"
-              fill="#ffffff"
-              font-size="25"
-              font-family="Arial,sans-serif">
-              HAMDARD
-            </text>
-
-          </svg>
-
-
-          <div class="receipt-bank-title">
-
-            <h2>
-              شرکت همدرد
-            </h2>
-
-            <h3>
-              سیستم حسابداری
-            </h3>
-
-          </div>
-
-
-        </div>
-
-
-        <div class="receipt-bank-number">
-
-          <div>
-            شماره رسید
-          </div>
-
-          <div>
-            ${escapeHTML(
-              t.receipt||"-"
-            )}
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-      <div class="receipt-date-box">
-
-        <div class="receipt-date">
-
-          <div class="date-bottom">
-            تاریخ: ${escapeHTML(shamsi)}
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <table class="receipt-table">
-
-
-        <tr>
-
-          <td>
-            نوع تراکنش
-          </td>
-
-          <td>
-
-            ${
-              isReceive
-                ? "رسید (دریافت)"
-                : "رسید (برداشت)"
-            }
-
-          </td>
-
-        </tr>
-
-
-        <tr>
-
-          <td>
-            نام مشتری / شخص
-          </td>
-
-          <td>
-            ${escapeHTML(
-              t.customer_name||"-"
-            )}
-          </td>
-
-        </tr>
-
-
-        <tr>
-
-          <td>
-            بابت / توضیحات
-          </td>
-
-          <td>
-            ${escapeHTML(
-              t.dascription||"-"
-            )}
-          </td>
-
-        </tr>
-
-
-        <tr>
-
-          <td>
-            ثبت‌کننده
-          </td>
-
-          <td>
-            ${escapeHTML(
-              t.registered_by||"-"
-            )}
-          </td>
-
-        </tr>
-
-
-        <tr>
-
-          <td>
-            ساعت
-          </td>
-
-          <td dir="ltr">
-            ${escapeHTML(
-              t.time||"-"
-            )}
-          </td>
-
-        </tr>
-
-
-        <tr class="amount-row">
-
-          <td>
-            مبلغ
-          </td>
-
-          <td>
-
-            ${formatNumber(t.amount)}
-            AFN
-
-          </td>
-
-        </tr>
-
-
-      </table>
-
-
-      <div class="receipt-footer">
-
-        <div>
-          امضای تحویل‌گیرنده / مشتری
-        </div>
-
-        <div>
-          مهر و امضای شرکت
-        </div>
-
-      </div>
-
-
-    </div>
-
-  `;
-}
-
-
-/* =========================================================
-   SHOW RECEIPT AFTER SAVE
-   ========================================================= */
-
-function showReceipt(t){
-
-  const printArea=
-    document.getElementById(
-      "printArea"
-    );
-
-  printArea.innerHTML=
-    buildReceiptHTML(t);
-
-  document.body.classList.add(
-    "receipt-print-mode"
-  );
-
-  setTimeout(()=>{
-
-    window.print();
-
-  },100);
-}
-
-
-/* =========================================================
-   PRINT RECEIPT FROM HISTORY
-   ========================================================= */
-
-function printReceiptById(id){
-
-  const transaction=
-    transactions.find(
-      t=>String(t.id)===String(id)
-    );
-
-  if(!transaction){
-
-    alert(
-      "رسید پیدا نشد."
-    );
-
-    return;
-  }
-
-  const receiptHTML=
-    buildReceiptHTML(transaction);
-
-
-  const printWindow=
-    window.open(
-      "",
-      "_blank",
-      "width=850,height=1000"
-    );
-
-
-  if(!printWindow){
-
-    alert(
-      "صفحه چاپ باز نشد. لطفاً اجازه باز شدن پنجره جدید را فعال کنید."
-    );
-
-    return;
-  }
-
-
-  printWindow.document.open();
-
-
-  printWindow.document.write(`
-
-    <!DOCTYPE html>
-
-    <html
-      lang="fa"
-      dir="rtl">
-
-    <head>
-
-      <meta charset="UTF-8">
-
-      <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1.0">
-
-
-      <title>
-        رسید ${escapeHTML(
-          transaction.receipt||""
-        )}
-      </title>
-
-
-      <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-
-      <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-
-      <link
-        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-
-
-      <style>
-
-        *{
-          box-sizing:border-box;
-          font-family:
-            "Vazirmatn",
-            Tahoma,
-            Arial,
-            sans-serif;
-        }
-
-
-        html,
-        body{
-          margin:0;
-          padding:0;
-          background:#fff;
-          color:#211f1c;
-        }
-
-
-        body{
-          padding:20px;
-        }
-
-
-        .receipt-box{
-          width:100%;
-          max-width:720px;
-          margin:0 auto;
-          background:#fff;
-          color:#211f1c;
-          padding:30px 28px 35px;
-          border:1px solid #ded9cf;
-          border-radius:4px;
-          page-break-inside:avoid;
-          break-inside:avoid;
-        }
-
-
-        .receipt-box.receive-receipt{
-          border-top:4px solid #16823d;
-        }
-
-
-        .receipt-box.withdraw-receipt{
-          border-top:4px solid #b32424;
-        }
-
-
-        .receipt-bank-head{
-          display:flex;
-          flex-direction:row;
-          justify-content:space-between;
-          align-items:center;
-          gap:20px;
-          padding-bottom:20px;
-          border-bottom:2px solid #211f1c;
-          margin-bottom:22px;
-        }
-
-
-        .receipt-brand{
-          display:flex;
-          align-items:center;
-          gap:14px;
-        }
-
-
-        .receipt-logo{
-          width:58px;
-          height:58px;
-          flex:none;
-        }
-
-
-        .receipt-bank-title{
-          text-align:right;
-        }
-
-
-        .receipt-bank-title h2{
-          margin:0 0 4px;
-          color:#211f1c;
-          font-size:25px;
-          font-weight:900;
-        }
-
-
-        .receipt-bank-title h3{
-          margin:0;
-          color:#77716a;
-          font-size:14px;
-          font-weight:500;
-        }
-
-
-        .receipt-bank-number{
-          text-align:left;
-          min-width:115px;
-        }
-
-
-        .receipt-bank-number div:first-child{
-          color:#77716a;
-          font-size:13px;
-          margin-bottom:4px;
-        }
-
-
-        .receipt-bank-number div:last-child{
-          color:#211f1c;
-          font-size:20px;
-          font-weight:900;
-          direction:ltr;
-        }
-
-
-        .receipt-date-box{
-          display:flex;
-          justify-content:flex-start;
-          margin-bottom:5px;
-        }
-
-
-        .receipt-date{
-          border:0;
-          padding:0;
-          background:transparent;
-          text-align:right;
-          line-height:1.8;
-        }
-
-
-        .receipt-date .date-bottom{
-          direction:rtl;
-          color:#77716a;
-          font-size:14px;
-          font-weight:500;
-        }
-
-
-        .receipt-table{
-          width:100%;
-          border-collapse:collapse;
-          margin-top:5px;
-        }
-
-
-        .receipt-table tr{
-          border-bottom:1px solid #e6e0d6;
-        }
-
-
-        .receipt-table td{
-          border:0;
-          padding:14px 4px;
-          vertical-align:middle;
-          font-size:16px;
-        }
-
-
-        .receipt-table td:first-child{
-          width:31%;
-          color:#77716a;
-          font-weight:500;
-          text-align:right;
-        }
-
-
-        .receipt-table td:last-child{
-          color:#211f1c;
-          font-weight:700;
-          text-align:left;
-        }
-
-
-        .receipt-table tr.amount-row{
-          border:0;
-        }
-
-
-        .receipt-table tr.amount-row td{
-          padding:22px 20px;
-          border:0;
-          background:#fff;
-        }
-
-
-        .receipt-table tr.amount-row td:first-child{
-          width:25%;
-          color:#211f1c;
-          font-size:18px;
-          font-weight:900;
-        }
-
-
-        .receipt-table tr.amount-row td:last-child{
-          border:2px solid #211f1c;
-          border-radius:12px;
-          font-size:25px;
-          font-weight:900;
-          text-align:left;
-          direction:ltr;
-          padding:18px 22px;
-        }
-
-
-        .receipt-box.withdraw-receipt
-        .receipt-table tr.amount-row td:last-child{
-          border-color:#b32424;
-        }
-
-
-        .receipt-footer{
-          margin-top:62px;
-          padding-top:10px;
-          display:flex;
-          justify-content:space-between;
-          gap:50px;
-          color:#211f1c;
-          font-size:14px;
-        }
-
-
-        .receipt-footer > div{
-          width:45%;
-          text-align:center;
-          padding-top:14px;
-          border-top:1px solid #211f1c;
-        }
-
-
-        @page{
-          size:A4;
-          margin:12mm;
-        }
-
-
-        @media(max-width:600px){
-
-          body{
-            padding:10px;
-          }
-
-          .receipt-box{
-            padding:20px 16px 25px;
-          }
-
-          .receipt-bank-head{
-            gap:10px;
-          }
-
-          .receipt-logo{
-            width:50px;
-            height:50px;
-          }
-
-          .receipt-bank-title h2{
-            font-size:19px;
-          }
-
-          .receipt-bank-title h3{
-            font-size:12px;
-          }
-
-          .receipt-bank-number{
-            min-width:85px;
-          }
-
-          .receipt-bank-number div:first-child{
-            font-size:10px;
-          }
-
-          .receipt-bank-number div:last-child{
-            font-size:15px;
-          }
-
-          .receipt-table td{
-            font-size:13px;
-            padding:12px 3px;
-          }
-
-          .receipt-table tr.amount-row td:last-child{
-            font-size:20px;
-            padding:15px;
-          }
-
-          .receipt-footer{
-            font-size:11px;
-            gap:15px;
-          }
-
-        }
-
-      </style>
-
-    </head>
-
-
-    <body>
-
-      ${receiptHTML}
-
-
-      <script>
-
-        window.addEventListener(
-          "load",
-          function(){
-
-            setTimeout(
-              function(){
-
-                window.focus();
-                window.print();
-
-              },
-              500
-            );
-
-          }
-        );
-
-
-        window.addEventListener(
-          "afterprint",
-          function(){
-
-            setTimeout(
-              function(){
-
-                window.close();
-
-              },
-              300
-            );
-
-          }
-        );
-
-      <\/script>
-
-
-    </body>
-
-    </html>
-
-  `);
-
-
-  printWindow.document.close();
-
-}
-
-
-/* =========================================================
-   PRINT HISTORY
-   ========================================================= */
-
-function printHistory(){
-
-  const list=
-    getFilteredHistory();
-
-  if(!list.length){
-
-    alert(
-      "برای این بازه تراکنشی وجود ندارد."
-    );
-
-    return;
-  }
-
-  const printArea=
-    document.getElementById(
-      "historyPrintArea"
-    );
-
-  printArea.innerHTML=`
-
-    <div>
-
-      <div class="history-print-title">
-
-        <h2>
-          سیستم حسابداری شرکت همدرد
-        </h2>
-
-        <h3>
-          گزارش تاریخچه تراکنش‌ها
-        </h3>
-
-      </div>
-
-
-      <table class="history-print-table">
-
-        <thead>
-
-          <tr>
-
-            <th>
-              ردیف
-            </th>
-
-            <th>
-              رسید
-            </th>
-
-            <th>
-              نام
-            </th>
-
-            <th>
-              تاریخ
-            </th>
-
-            <th>
-              ساعت
-            </th>
-
-            <th>
-              مبلغ
-            </th>
-
-            <th>
-              نوع
-            </th>
-
-            <th>
-              توضیحات
-            </th>
-
-            <th>
-              ثبت‌کننده
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${
-            list.map((t,index)=>{
-
-              const date=
-                dateToISO(t.date);
-
-              const shamsi=
-                jalaliFromISO(date);
-
-              return`
-
-                <tr>
-
-                  <td>
-                    ${index+1}
-                  </td>
-
-                  <td dir="ltr">
-                    ${escapeHTML(
-                      t.receipt||"-"
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHTML(
-                      t.customer_name||"-"
-                    )}
-                  </td>
-
-                  <td dir="ltr">
-                    ${shamsi}
-                  </td>
-
-                  <td dir="ltr">
-                    ${escapeHTML(
-                      t.time||"-"
-                    )}
-                  </td>
-
-                  <td dir="ltr">
-                    ${formatNumber(t.amount)}
-                    AFN
-                  </td>
-
-                  <td>
-
-                    ${
-                      t.type==="receive"
-                        ? "دریافت"
-                        : "برداشت"
-                    }
-
-                  </td>
-
-                  <td>
-                    ${escapeHTML(
-                      t.dascription||"-"
-                    )}
-                  </td>
-
-                  <td>
-                    ${escapeHTML(
-                      t.registered_by||"-"
-                    )}
-                  </td>
-
-                </tr>
-
-              `;
-
-            }).join("")
-          }
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-
-  document.body.classList.add(
-    "history-print-mode"
-  );
-
-
-  setTimeout(()=>{
-
-    window.print();
-
-  },100);
-
-}
-
-
-/* =========================================================
-   AMOUNT
-   ========================================================= */
-
-document.addEventListener(
-  "input",
-  function(event){
-
-    if(event.target.id==="amount"){
-
-      formatAmountInput();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   ENTER LOGIN
-   ========================================================= */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(
-      event.key==="Enter" &&
-      document.activeElement?.id===
-      "loginPassword"
-    ){
-
-      login();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   AFTER PRINT
-   ========================================================= */
-
-window.addEventListener(
-  "afterprint",
-  function(){
-
-    document.body.classList.remove(
-      "receipt-print-mode"
-    );
-
-    document.body.classList.remove(
-      "history-print-mode"
-    );
-
-    document
-      .getElementById("printArea")
-      .innerHTML="";
-
-    document
-      .getElementById("historyPrintArea")
-      .innerHTML="";
-
-  }
-);
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    checkExistingSession();
-
-  }
-);
-
-</script>
-
-
-<script>
-
-/* =========================================================
-
-   HAMDARD - PASSWORD RECOVERY
-
-   افزوده‌شده بدون تغییر بخش‌های حسابداری
-
-   ========================================================= */
-
-(function () {
-
-  "use strict";
-
-  const emailInput = document.getElementById("loginEmail");
-
-  const passwordInput = document.getElementById("loginPassword");
-
-  const loginButton = document.getElementById("loginButton");
-
-  const loginError = document.getElementById("loginError");
-
-  const loginBox = document.querySelector(".login-box");
-
-  if (!emailInput || !passwordInput || !loginButton || !loginBox) {
-
-    console.error("Password recovery: login elements not found.");
-
-    return;
-
-  }
-
-  const emailGroup = emailInput.closest(".input-group");
-
-  const passwordGroup = passwordInput.closest(".input-group");
-
-  const forgotButton = document.createElement("button");
-
-  forgotButton.type = "button";
-
-  forgotButton.textContent = "رمز عبور را فراموش کرده‌اید؟";
-
-  forgotButton.style.cssText =
-
-    "display:block;width:100%;margin-top:12px;padding:10px;" +
-
-    "background:none;border:0;color:#1f2f25;font-weight:700;" +
-
-    "font-family:inherit;cursor:pointer;";
-
-  const panel = document.createElement("div");
-
-  panel.id = "passwordRecoveryPanel";
-
-  panel.style.cssText =
-
-    "display:none;text-align:right;margin-top:20px;";
-
-  panel.innerHTML = `
-
-    <h3 id="recoveryTitle"
-
-        style="color:#1f2f25;font-size:19px;margin-bottom:15px;">
-
-      بازیابی رمز عبور
-
-    </h3>
-
-    <div id="recoveryEmailGroup" class="input-group">
-
-      <label for="recoveryEmail">ایمیل حساب</label>
-
-      <input id="recoveryEmail" type="email"
-
-             autocomplete="email"
-
-             placeholder="ایمیل حساب خود را وارد کنید"
-
-             style="width:100%;padding:13px 14px;border:1px solid #ddd;
-
-                    border-radius:10px;font-size:15px;">
-
-    </div>
-
-    <button id="sendRecoveryButton" type="button" class="login-btn">
-
-      ارسال لینک بازیابی
-
-    </button>
-
-    <div id="recoveryPasswordFields" style="display:none;margin-top:15px;">
-
-      <div class="input-group">
-
-        <label for="newRecoveryPassword">رمز عبور جدید</label>
-
-        <input id="newRecoveryPassword" type="password"
-
-               autocomplete="new-password"
-
-               placeholder="حداقل ۸ کاراکتر"
-
-               style="width:100%;padding:13px 14px;border:1px solid #ddd;
-
-                      border-radius:10px;font-size:15px;">
-
-      </div>
-
-      <div class="input-group">
-
-        <label for="confirmRecoveryPassword">تکرار رمز عبور جدید</label>
-
-        <input id="confirmRecoveryPassword" type="password"
-
-               autocomplete="new-password"
-
-               placeholder="رمز را دوباره وارد کنید"
-
-               style="width:100%;padding:13px 14px;border:1px solid #ddd;
-
-                      border-radius:10px;font-size:15px;">
-
-      </div>
-
-      <button id="saveRecoveryPasswordButton" type="button" class="login-btn">
-
-        ذخیره رمز جدید
-
-      </button>
-
-    </div>
-
-    <div id="recoveryMessage"
-
-         role="status"
-
-         style="display:none;margin-top:15px;padding:11px;
-
-                border-radius:9px;font-size:13px;overflow-wrap:anywhere;">
-
-    </div>
-
-    <button id="backToLoginButton" type="button"
-
-            style="margin-top:12px;width:100%;padding:11px;
-
-                   background:#eee;border:0;border-radius:9px;
-
-                   font-family:inherit;font-weight:700;cursor:pointer;">
-
-      برگشت به ورود
-
-    </button>
-
-  `;
-
-  loginButton.insertAdjacentElement("afterend", forgotButton);
-
-  forgotButton.insertAdjacentElement("afterend", panel);
-
-  const recoveryEmail = panel.querySelector("#recoveryEmail");
-
-  const recoveryMessage = panel.querySelector("#recoveryMessage");
-
-  const sendButton = panel.querySelector("#sendRecoveryButton");
-
-  const passwordFields = panel.querySelector("#recoveryPasswordFields");
-
-  const saveButton = panel.querySelector("#saveRecoveryPasswordButton");
-
-  const backButton = panel.querySelector("#backToLoginButton");
-
-  const recoveryTitle = panel.querySelector("#recoveryTitle");
-
-  let resetMode = false;
-
-  function message(text, isError) {
-
-    recoveryMessage.textContent = text;
-
-    recoveryMessage.style.display = "block";
-
-    recoveryMessage.style.background = isError ? "#ffe8e8" : "#e6f5eb";
-
-    recoveryMessage.style.color = isError ? "#a00000" : "#16823d";
-
-  }
-
-  function isRecoveryLink() {
-
-    const hash = new URLSearchParams(location.hash.replace(/^#/, ""));
-
-    const query = new URLSearchParams(location.search);
-
-    return hash.get("type") === "recovery" ||
-
-           query.get("type") === "recovery" ||
-
-           query.has("code");
-
-  }
-
-  function showPanel(isReset) {
-
-    resetMode = Boolean(isReset);
-
-    emailGroup.style.display = "none";
-
-    passwordGroup.style.display = "none";
-
-    loginButton.style.display = "none";
-
-    forgotButton.style.display = "none";
-
-    loginError.style.display = "none";
-
-    panel.style.display = "block";
-
-    recoveryEmail.value = recoveryEmail.value || emailInput.value.trim();
-
-    recoveryTitle.textContent = resetMode
-
-      ? "تعیین رمز عبور جدید"
-
-      : "بازیابی رمز عبور";
-
-    panel.querySelector("#recoveryEmailGroup").style.display =
-
-      resetMode ? "none" : "block";
-
-    sendButton.style.display = resetMode ? "none" : "block";
-
-    passwordFields.style.display = resetMode ? "block" : "none";
-
-    recoveryMessage.style.display = "none";
-
-  }
-
-  function backToLogin() {
-
-    resetMode = false;
-
-    panel.style.display = "none";
-
-    emailGroup.style.display = "";
-
-    passwordGroup.style.display = "";
-
-    loginButton.style.display = "";
-
-    forgotButton.style.display = "block";
-
-    loginError.style.display = "none";
-
-    passwordInput.value = "";
-
-    panel.querySelector("#newRecoveryPassword").value = "";
-
-    panel.querySelector("#confirmRecoveryPassword").value = "";
-
-    recoveryMessage.style.display = "none";
-
-    history.replaceState({}, document.title, location.pathname + location.search);
-
-  }
-
-  forgotButton.addEventListener("click", function () {
-
-    showPanel(false);
-
-  });
-
-  backButton.addEventListener("click", backToLogin);
-
-  sendButton.addEventListener("click", async function () {
-
-    const email = recoveryEmail.value.trim();
-
-    if (!email) {
-
-      message("ایمیل حساب خود را وارد کنید.", true);
-
-      return;
-
-    }
-
-    sendButton.disabled = true;
-
-    sendButton.textContent = "در حال ارسال...";
-
-    try {
-
-      const redirectTo = location.origin + location.pathname;
-
-      const result = await supabaseClient.auth.resetPasswordForEmail(email, {
-
-        redirectTo: redirectTo
-
-      });
-
-      if (result.error) throw result.error;
-
-      message(
-
-        "درخواست بازیابی ارسال شد. صندوق ورودی و پوشه Spam ایمیل خود را بررسی کنید.",
-
-        false
-
-      );
-
-    } catch (error) {
-
-      console.error("Password recovery request failed:", error);
-
-      message(
-
-        "ارسال لینک انجام نشد. اتصال اینترنت و تنظیمات ایمیل Supabase را بررسی کنید.",
-
-        true
-
-      );
-
-    } finally {
-
-      sendButton.disabled = false;
-
-      sendButton.textContent = "ارسال لینک بازیابی";
-
-    }
-
-  });
-
-  saveButton.addEventListener("click", async function () {
-
-    const password = panel.querySelector("#newRecoveryPassword").value;
-
-    const confirmation = panel.querySelector("#confirmRecoveryPassword").value;
-
-    if (password.length < 8) {
-
-      message("رمز جدید باید حداقل ۸ کاراکتر باشد.", true);
-
-      return;
-
-    }
-
-    if (password !== confirmation) {
-
-      message("رمز عبور و تکرار آن یکسان نیستند.", true);
-
-      return;
-
-    }
-
-    saveButton.disabled = true;
-
-    saveButton.textContent = "در حال ذخیره...";
-
-    try {
-
-      const result = await supabaseClient.auth.updateUser({
-
-        password: password
-
-      });
-
-      if (result.error) throw result.error;
-
-      message("رمز عبور با موفقیت تغییر کرد. اکنون می‌توانید وارد شوید.", false);
-
-      saveButton.disabled = true;
-
-      setTimeout(async function () {
-
-        try {
-
-          await supabaseClient.auth.signOut();
-
-        } catch (error) {
-
-          console.error(error);
-
-        }
-
-        backToLogin();
-
-      }, 1500);
-
-    } catch (error) {
-
-      console.error("Password update failed:", error);
-
-      message(
-
-        "تغییر رمز انجام نشد. ممکن است لینک منقضی شده باشد؛ دوباره لینک بازیابی بگیرید.",
-
-        true
-
-      );
-
-      saveButton.disabled = false;
-
-    } finally {
-
-      saveButton.textContent = "ذخیره رمز جدید";
-
-    }
-
-  });
-
-  /*
-
-   * جلوگیری از ورود مستقیم به داشبورد با نشست بازیابی رمز
-
-   */
-
-  const originalCheckExistingSession = window.checkExistingSession;
-
-  window.checkExistingSession = async function () {
-
-    if (isRecoveryLink()) {
-
-      showPanel(true);
-
-      return;
-
-    }
-
-    if (typeof originalCheckExistingSession === "function") {
-
-      return originalCheckExistingSession.apply(this, arguments);
-
-    }
-
-  };
-
-  /*
-
-   * Supabase پس از بازشدن لینک بازیابی این رویداد را ارسال می‌کند.
-
-   */
-
-  supabaseClient.auth.onAuthStateChange(function (event) {
-
-    if (event === "PASSWORD_RECOVERY") {
-
-      showPanel(true);
-
-    }
-
-  });
-  این رویداد را ارسال می‌کند.
-   */
-
-  supabaseClient.auth.onAuthStateChange(function (event) {
-    if (event === "PASSWORD_RECOVERY") {
-      showPanel(<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="google-site-verification" content="BgeVkg0cT_Qh_5NolEXH08rmN2Y1h4gM8o6kmc9Hkzc">
-
-<title>سیستم حسابداری شرکت همدرد</title>
-
-<meta name="description" content="سیستم حسابداری شرکت همدرد؛ سیستم داخلی مدیریت و ثبت دریافت، برداشت، موجودی و تاریخچه تراکنش‌ها به افغانی AFN.">
-
-<meta name="robots" content="index, follow">
-
-<meta property="og:title" content="سیستم حسابداری شرکت همدرد">
-<meta property="og:description" content="سیستم حسابداری شرکت همدرد برای مدیریت دریافت، برداشت، موجودی و تاریخچه تراکنش‌ها.">
-<meta property="og:type" content="website">
-
-<link rel="canonical" href="https://hamdardco.github.io/sarafi/">
-
-<!-- فونت حرفه‌ای فارسی -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-
-/* =========================================================
-   GLOBAL FONT
-   ========================================================= */
-
-*{
-  box-sizing:border-box;
-  font-family:
-    "Vazirmatn",
-    Tahoma,
-    Arial,
-    sans-serif;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  background:#f3f4f2;
-  color:#211f1c;
-  font-family:
-    "Vazirmatn",
-    Tahoma,
-    Arial,
-    sans-serif;
-}
-
-button,
-input,
-textarea,
-select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-input,
-textarea{
-  direction:rtl;
-}
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
-#loginPage{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background:#f3f4f2;
-}
-
-.login-box{
-  width:100%;
-  max-width:420px;
-  background:#fff;
-  padding:32px 26px;
-  border-radius:20px;
-  box-shadow:0 10px 35px rgba(0,0,0,.10);
-  text-align:center;
-}
-
-.login-logo{
-  width:95px;
-  height:95px;
-  margin:0 auto 15px;
-}
-
-.login-box h1{
-  margin:8px 0 5px;
-  color:#1f2f25;
-  font-size:24px;
-  font-weight:800;
-}
-
-.login-box p{
-  color:#777;
-  margin-bottom:25px;
-  font-size:14px;
-}
-
-.input-group{
-  text-align:right;
-  margin-bottom:15px;
-}
-
-.input-group label{
-  display:block;
-  margin-bottom:7px;
-  font-size:14px;
-  font-weight:700;
-}
-
-.input-group input{
-  width:100%;
-  padding:13px 14px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  outline:none;
-  font-size:15px;
-  transition:.2s;
-}
-
-.input-group input:focus{
-  border-color:#1f2f25;
-  box-shadow:0 0 0 3px rgba(31,47,37,.08);
-}
-
-.login-btn{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:10px;
-  background:#1f2f25;
-  color:#fff;
-  font-size:16px;
-  font-weight:800;
-}
-
-.login-btn:disabled{
-  opacity:.6;
-}
-
-.error{
-  display:none;
-  margin-top:15px;
-  padding:10px;
-  border-radius:9px;
-  background:#ffe8e8;
-  color:#a00000;
-  font-size:13px;
-}
-
-/* =========================================================
-   APP
-   ========================================================= */
-
-#appContainer{
-  display:none;
-  min-height:100vh;
-}
-
-.header{
-  background:#1f2f25;
-  color:#fff;
-  padding:22px 15px;
-  text-align:center;
-  box-shadow:0 3px 12px rgba(0,0,0,.15);
-}
-
-.logo-box{
-  display:flex;
-  justify-content:center;
-  margin-bottom:10px;
-}
-
-.main-logo{
-  width:90px;
-  height:90px;
-}
-
-.header h1{
-  margin:5px 0;
-  font-size:24px;
-  font-weight:800;
-}
-
-.header .date{
-  color:#d8c27a;
-  font-size:14px;
-  font-weight:500;
-}
-
-.user-bar{
-  max-width:1000px;
-  margin:15px auto 0;
-  padding:0 15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.user-info{
-  background:#fff;
-  border-radius:12px;
-  padding:12px 15px;
-  box-shadow:0 3px 12px rgba(0,0,0,.06);
-  flex:1;
-  font-size:14px;
-}
-
-.user-info strong{
-  font-weight:800;
-}
-
-.logout-btn{
-  border:0;
-  background:#8d2020;
-  color:#fff;
-  border-radius:10px;
-  padding:12px 18px;
-  font-weight:700;
-}
-
-/* =========================================================
-   HOME
-   ========================================================= */
-
-.container{
-  width:100%;
-  max-width:1000px;
-  margin:0 auto;
-  padding:15px;
-}
-
-.balance-card{
-  background:#1f2f25;
-  color:#fff;
-  border-radius:18px;
-  padding:25px;
-  text-align:center;
-  margin-bottom:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,.12);
-}
-
-.balance-card small{
-  color:#d8c27a;
-  font-weight:500;
-}
-
-.balance{
-  font-size:34px;
-  font-weight:900;
-  margin-top:8px;
-}
-
-.currency{
-  font-size:15px;
-  color:#ddd;
-}
-
-.summary{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.summary-box{
-  background:#fff;
-  padding:18px;
-  border-radius:15px;
-  text-align:center;
-  box-shadow:0 3px 12px rgba(0,0,0,.06);
-  font-size:14px;
-}
-
-.summary-box.receive strong{
-  color:#16823d;
-}
-
-.summary-box.withdraw strong{
-  color:#b32424;
-}
-
-.summary-box strong{
-  display:block;
-  font-size:20px;
-  margin-top:6px;
-  font-weight:800;
-}
-
-.action-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-bottom:15px;
-}
-
-.action-btn{
-  padding:20px 10px;
-  border:0;
-  border-radius:15px;
-  color:#fff;
-  font-size:18px;
-  font-weight:800;
-}
-
-.receive-btn{
-  background:#16823d;
-}
-
-.withdraw-btn{
-  background:#b32424;
-}
-
-.history-btn{
-  width:100%;
-  padding:16px;
-  border:0;
-  border-radius:14px;
-  background:#fff;
-  color:#1f2f25;
-  font-size:17px;
-  font-weight:800;
-  box-shadow:0 3px 12px rgba(0,0,0,.06);
-}
-
-/* =========================================================
-   PAGES
-   ========================================================= */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-.page-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.page-title h2{
-  margin:0;
-  color:#1f2f25;
-  font-size:22px;
-  font-weight:800;
-}
-
-.back-btn{
-  border:0;
-  background:#1f2f25;
-  color:#fff;
-  padding:10px 15px;
-  border-radius:10px;
-  font-weight:700;
-}
-
-/* =========================================================
-   TYPE MENU
-   ========================================================= */
-
-.type-menu{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-bottom:15px;
-}
-
-.type-menu-btn{
-  background:#fff;
-  border:0;
-  border-radius:17px;
-  padding:25px 15px;
-  box-shadow:0 4px 15px rgba(0,0,0,.07);
-  font-size:17px;
-  font-weight:800;
-  color:#1f2f25;
-}
-
-.type-menu-btn .menu-icon{
-  display:block;
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-.type-menu-btn.receive-menu{
-  border-top:4px solid #16823d;
-}
-
-.type-menu-btn.withdraw-menu{
-  border-top:4px solid #b32424;
-}
-
-/* =========================================================
-   RECEIPT CARDS
-   ========================================================= */
-
-.receipts-title{
-  margin:22px 0 12px;
-  color:#1f2f25;
-  font-size:18px;
-  font-weight:800;
-}
-
-.receipts-list{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:13px;
-}
-
-.receipt-card{
-  background:#fff;
-  border-radius:17px;
-  padding:18px;
-  box-shadow:0 4px 15px rgba(0,0,0,.07);
-  border-right:5px solid #1f2f25;
-}
-
-.receipt-card.receive-card{
-  border-right-color:#16823d;
-}
-
-.receipt-card.withdraw-card{
-  border-right-color:#b32424;
-}
-
-.receipt-card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding-bottom:12px;
-  border-bottom:1px solid #eee;
-}
-
-.receipt-number{
-  font-weight:800;
-  color:#1f2f25;
-}
-
-.receipt-type{
-  font-size:12px;
-  font-weight:800;
-  padding:5px 9px;
-  border-radius:20px;
-}
-
-.receipt-type.receive{
-  background:#e6f5eb;
-  color:#16823d;
-}
-
-.receipt-type.withdraw{
-  background:#fde8e8;
-  color:#b32424;
-}
-
-.receipt-card-name{
-  font-size:17px;
-  font-weight:800;
-  margin:13px 0 8px;
-}
-
-.receipt-card-amount{
-  font-size:21px;
-  font-weight:900;
-  margin-bottom:12px;
-}
-
-.receipt-card-amount.receive{
-  color:#16823d;
-}
-
-.receipt-card-amount.withdraw{
-  color:#b32424;
-}
-
-.receipt-card-info{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  font-size:13px;
-  color:#555;
-}
-
-.receipt-card-info div{
-  background:#f7f7f6;
-  padding:9px;
-  border-radius:8px;
-}
-
-.receipt-card-description{
-  margin-top:9px;
-  background:#f7f7f6;
-  padding:10px;
-  border-radius:8px;
-  font-size:13px;
-  color:#555;
-}
-
-.card-print-btn{
-  width:100%;
-  margin-top:12px;
-  padding:11px;
-  border:0;
-  border-radius:9px;
-  background:#1f2f25;
-  color:#fff;
-  font-weight:800;
-}
-
-.no-receipts{
-  background:#fff;
-  padding:30px;
-  text-align:center;
-  border-radius:15px;
-  color:#777;
-  box-shadow:0 3px 12px rgba(0,0,0,.05);
-}
-
-/* =========================================================
-   FORM
-   ========================================================= */
-
-.form-card{
-  background:#fff;
-  padding:20px;
-  border-radius:17px;
-  box-shadow:0 4px 15px rgba(0,0,0,.06);
-}
-
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:7px;
-  font-size:14px;
-  font-weight:700;
-}
-
-.form-group input,
-.form-group textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  outline:none;
-  font-size:15px;
-}
-
-.form-group input:focus,
-.form-group textarea:focus{
-  border-color:#1f2f25;
-  box-shadow:0 0 0 3px rgba(31,47,37,.07);
-}
-
-.form-group textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-.form-group input[readonly]{
-  background:#f5f5f5;
-  color:#555;
-}
-
-.save-btn{
-  width:100%;
-  padding:15px;
-  border:0;
-  border-radius:11px;
-  color:#fff;
-  font-size:17px;
-  font-weight:800;
-}
-
-.save-receive{
-  background:#16823d;
-}
-
-.save-withdraw{
-  background:#b32424;
-}
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
-
-.history-tools{
-  background:#fff;
-  padding:15px;
-  border-radius:15px;
-  margin-bottom:15px;
-  box-shadow:0 3px 12px rgba(0,0,0,.06);
-}
-
-.search-box{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  margin-bottom:12px;
-  outline:none;
-}
-
-.date-filters{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.date-filters label{
-  display:block;
-  font-size:12px;
-  margin-bottom:5px;
-}
-
-.date-filters input{
-  width:100%;
-  padding:11px;
-  border:1px solid #ddd;
-  border-radius:9px;
-}
-
-.print-history-btn{
-  width:100%;
-  margin-top:12px;
-  padding:13px;
-  border:0;
-  border-radius:10px;
-  background:#1f2f25;
-  color:#fff;
-  font-weight:800;
-}
-
-.table-wrap{
-  overflow-x:auto;
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 3px 12px rgba(0,0,0,.06);
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:850px;
-}
-
-th,
-td{
-  padding:11px 8px;
-  border-bottom:1px solid #eee;
-  text-align:center;
-  white-space:nowrap;
-  font-size:13px;
-}
-
-th{
-  background:#1f2f25;
-  color:#fff;
-  font-weight:800;
-}
-
-.receive-text{
-  color:#16823d;
-  font-weight:800;
-}
-
-.withdraw-text{
-  color:#b32424;
-  font-weight:800;
-}
-
-.receipt-btn{
-  border:0;
-  background:#eee;
-  color:#1f2f25;
-  padding:7px 10px;
-  border-radius:7px;
-  font-weight:700;
-}
-
-.empty{
-  text-align:center;
-  padding:30px;
-  color:#777;
-}
-
-/* =========================================================
-   PRINT CONTAINERS
-   ========================================================= */
-
-#printArea,
-#historyPrintArea{
-  display:none;
-}
-
-/* =========================================================
-   PROFESSIONAL RECEIPT PRINT
-   ========================================================= */
-
-@media print{
-
-  body.receipt-print-mode > *{
-    display:none !important;
-  }
-
-  body.receipt-print-mode #printArea{
-    display:block !important;
-  }
-
-  body.history-print-mode > *{
-    display:none !important;
-  }
-
-  body.history-print-mode #historyPrintArea{
-    display:block !important;
-  }
-
-  @page{
-    size:A4;
-    margin:12mm;
-  }
-
-  /* -------------------------
-     RECEIPT
-     ------------------------- */
-
-  .receipt-box{
-    width:100%;
-    max-width:720px;
-    margin:0 auto;
-    background:#fff;
-    color:#211f1c;
-    padding:30px 28px 35px;
-    border:1px solid #ded9cf;
-    border-radius:4px;
-    font-family:
-      "Vazirmatn",
-      Tahoma,
-      Arial,
-      sans-serif;
-    page-break-inside:avoid;
-    break-inside:avoid;
-  }
-
-  .receipt-box.receive-receipt{
-    border-top:4px solid #16823d;
-  }
-
-  .receipt-box.withdraw-receipt{
-    border-top:4px solid #b32424;
-  }
-
-  .receipt-bank-head{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    padding-bottom:20px;
-    border-bottom:2px solid #211f1c;
-    margin-bottom:22px;
-  }
-
-  .receipt-brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-
-  .receipt-logo{
-    width:58px;
-    height:58px;
-    flex:none;
-  }
-
-  .receipt-bank-title{
-    text-align:right;
-  }
-
-  .receipt-bank-title h2{
-    margin:0 0 4px;
-    color:#211f1c;
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:-.5px;
-  }
-
-  .receipt-bank-title h3{
-    margin:0;
-    color:#77716a;
-    font-size:14px;
-    font-weight:500;
-  }
-
-  .receipt-bank-number{
-    text-align:left;
-    min-width:115px;
-    border:0;
-    padding:0;
-  }
-
-  .receipt-bank-number div:first-child{
-    color:#77716a;
-    font-size:13px;
-    margin-bottom:4px;
-  }
-
-  .receipt-bank-number div:last-child{
-    color:#211f1c;
-    font-size:20px;
-    font-weight:900;
-    direction:ltr;
-  }
-
-  .receipt-date-box{
-    display:flex;
-    justify-content:flex-start;
-    margin-bottom:5px;
-  }
-
-  .receipt-date{
-    border:0;
-    padding:0;
-    min-width:0;
-    background:transparent;
-    text-align:right;
-    line-height:1.8;
-  }
-
-  .receipt-date .date-top{
-    display:none;
-  }
-
-  .receipt-date .date-bottom{
-    direction:rtl;
-    color:#77716a;
-    font-size:14px;
-    font-weight:500;
-  }
-
-  .receipt-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:5px;
-  }
-
-  .receipt-table tr{
-    border-bottom:1px solid #e6e0d6;
-  }
-
-  .receipt-table td{
-    border:0;
-    padding:14px 4px;
-    vertical-align:middle;
-    font-size:16px;
-  }
-
-  .receipt-table td:first-child{
-    width:31%;
-    background:transparent;
-    color:#77716a;
-    font-weight:500;
-    text-align:right;
-  }
-
-  .receipt-table td:last-child{
-    color:#211f1c;
-    font-weight:700;
-    text-align:left;
-  }
-
-  /* مبلغ */
-
-  .receipt-table tr.amount-row{
-    border:0;
-  }
-
-  .receipt-table tr.amount-row td{
-    padding:22px 20px;
-    border:0;
-    background:#fff;
-  }
-
-  .receipt-table tr.amount-row td:first-child{
-    width:25%;
-    border:0;
-    color:#211f1c;
-    font-size:18px;
-    font-weight:900;
-  }
-
-  .receipt-table tr.amount-row td:last-child{
-    border:2px solid #211f1c;
-    border-radius:12px;
-    font-size:25px;
-    font-weight:900;
-    text-align:left;
-    direction:ltr;
-    padding:18px 22px;
-  }
-
-  .receipt-box.withdraw-receipt
-  .receipt-table tr.amount-row td:last-child{
-    border-color:#b32424;
-  }
-
-  .receipt-footer{
-    margin-top:62px;
-    padding-top:10px;
-    display:flex;
-    justify-content:space-between;
-    gap:50px;
-    color:#211f1c;
-    font-size:14px;
-  }
-
-  .receipt-footer > div{
-    width:45%;
-    text-align:center;
-    padding-top:14px;
-    border-top:1px solid #211f1c;
-  }
-
-  /* -------------------------
-     HISTORY PRINT
-     ------------------------- */
-
-  .history-print-title{
-    text-align:center;
-    margin-bottom:15px;
-  }
-
-  .history-print-title h2{
-    font-weight:900;
-  }
-
-  .history-print-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
-    font-size:9px;
-  }
-
-  .history-print-table th,
-  .history-print-table td{
-    border:1px solid #777;
-    padding:5px 3px;
-    text-align:center;
-  }
-
-  .history-print-table th{
-    background:#eee !important;
-    color:#000 !important;
-  }
-
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:600px){
-
-  .header h1{
-    font-size:20px;
-  }
-
-  .main-logo{
-    width:78px;
-    height:78px;
-  }
-
-  .user-bar{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .action-btn{
-    font-size:16px;
-    padding:17px 8px;
-  }
-
-  .date-filters{
-    grid-template-columns:1fr;
-  }
-
-  .balance{
-    font-size:29px;
-  }
-
-  .type-menu{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .type-menu-btn{
-    padding:20px 8px;
-    font-size:15px;
-  }
-
-  .receipt-card-info{
-    grid-template-columns:1fr;
-  }
-
-}
-
-/* =========================================================
-   MOBILE PRINT WINDOW
-   ========================================================= */
-
-@media(max-width:600px){
-
-  .receipt-box{
-    padding:20px 16px 25px;
-  }
-
-  .receipt-bank-head{
-    gap:10px;
-  }
-
-  .receipt-logo{
-    width:50px;
-    height:50px;
-  }
-
-  .receipt-bank-title h2{
-    font-size:19px;
-  }
-
-  .receipt-bank-title h3{
-    font-size:12px;
-  }
-
-  .receipt-bank-number{
-    min-width:85px;
-  }
-
-  .receipt-bank-number div:first-child{
-    font-size:10px;
-  }
-
-  .receipt-bank-number div:last-child{
-    font-size:15px;
-  }
-
-  .receipt-table td{
-    font-size:13px;
-    padding:12px 3px;
-  }
-
-  .receipt-table tr.amount-row td:last-child{
-    font-size:20px;
-    padding:15px;
-  }
-
-  .receipt-footer{
-    font-size:11px;
-    gap:15px;
-  }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- =========================================================
-     LOGIN
-     ========================================================= -->
-
-<div id="loginPage">
-
-  <div class="login-box">
-
-    <svg
-      class="login-logo"
-      viewBox="0 0 300 300"
-      xmlns="http://www.w3.org/2000/svg">
-
-      <rect
-        width="300"
-        height="300"
-        rx="55"
-        fill="#1f2f25"/>
-
-      <circle
-        cx="150"
-        cy="150"
-        r="108"
-        fill="none"
-        stroke="#c9a85c"
-        stroke-width="7"/>
-
-      <text
-        x="150"
-        y="135"
-        text-anchor="middle"
-        fill="#c9a85c"
-        font-size="52"
-        font-family="Tahoma,Arial,sans-serif"
-        font-weight="bold">
-        همدرد
-      </text>
-
-      <text
-        x="150"
-        y="180"
-        text-anchor="middle"
-        fill="#ffffff"
-        font-size="25"
-        font-family="Arial,sans-serif">
-        HAMDARD
-      </text>
-
-    </svg>
-
-    <h1>
-      سیستم حسابداری شرکت همدرد
-    </h1>
-
-    <p>
-      ورود به سیستم
-    </p>
-
-    <div class="input-group">
-
-      <label>
-        ایمیل
-      </label>
-
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="ایمیل خود را وارد کنید">
-
-    </div>
-
-    <div class="input-group">
-
-      <label>
-        رمز عبور
-      </label>
-
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="رمز عبور">
-
-    </div>
-
-    <button
-      id="loginButton"
-      class="login-btn"
-      onclick="login()">
-
-      ورود
-
-    </button>
-
-    <div
-      id="loginError"
-      class="error">
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================================================
-     APP
-     ========================================================= -->
-
-<div id="appContainer">
-
-  <div class="header">
-
-    <div class="logo-box">
-
-      <svg
-        class="main-logo"
-        viewBox="0 0 300 300"
-        xmlns="http://www.w3.org/2000/svg">
-
-        <rect
-          width="300"
-          height="300"
-          rx="55"
-          fill="#1f2f25"/>
-
-        <circle
-          cx="150"
-          cy="150"
-          r="108"
-          fill="none"
-          stroke="#c9a85c"
-          stroke-width="7"/>
-
-        <text
-          x="150"
-          y="135"
-          text-anchor="middle"
-          fill="#c9a85c"
-          font-size="52"
-          font-family="Tahoma,Arial,sans-serif"
-          font-weight="bold">
-          همدرد
-        </text>
-
-        <text
-          x="150"
-          y="180"
-          text-anchor="middle"
-          fill="#ffffff"
-          font-size="25"
-          font-family="Arial,sans-serif">
-          HAMDARD
-        </text>
-
-      </svg>
-
-    </div>
-
-    <h1>
-      سیستم حسابداری شرکت همدرد
-    </h1>
-
-    <div
-      class="date"
-      id="currentDate">
-    </div>
-
-  </div>
-
-
-  <div
-    class="user-bar"
-    id="homeUserBar">
-
-    <div class="user-info">
-
-      <strong id="userName">
-        ---
-      </strong>
-
-      <span id="userRole">
-      </span>
-
-    </div>
-
-    <button
-      class="logout-btn"
-      onclick="logout()">
-
-      خروج
-
-    </button>
-
-  </div>
-
-
-  <!-- HOME -->
-
-  <main
-    id="homePage"
-    class="page active">
-
-    <div class="container">
-
-      <div class="balance-card">
-
-        <small>
-          موجودی فعلی
-        </small>
-
-        <div
-          class="balance"
-          id="balance">
-          0
-        </div>
-
-        <div class="currency">
-          افغانی AFN
-        </div>
-
-      </div>
-
-
-      <div class="summary">
-
-        <div class="summary-box receive">
-
-          <span>
-            دریافت امروز
-          </span>
-
-          <strong id="todayReceive">
-            0 AFN
-          </strong>
-
-        </div>
-
-        <div class="summary-box withdraw">
-
-          <span>
-            برداشت امروز
-          </span>
-
-          <strong id="todayWithdraw">
-            0 AFN
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <div class="action-buttons">
-
-        <button
-          class="action-btn receive-btn"
-          onclick="openTypePage('receive')">
-
-          ثبت دریافت
-
-        </button>
-
-        <button
-          class="action-btn withdraw-btn"
-          onclick="openTypePage('withdraw')">
-
-          ثبت برداشت
-
-        </button>
-
-      </div>
-
-
-      <button
-        class="history-btn"
-        onclick="openHistory()">
-
-        تاریخچه تراکنش‌ها
-
-      </button>
-
-    </div>
-
-  </main>
-
-
-  <!-- RECEIVE SECTION -->
-
-  <main
-    id="receiveSectionPage"
-    class="page">
-
-    <div class="container">
-
-      <div class="page-title">
-
-        <h2>
-          دریافت
-        </h2>
-
-        <button
-          class="back-btn"
-          onclick="goHome()">
-
-          برگشت
-
-        </button>
-
-      </div>
-
-
-      <div class="type-menu">
-
-        <button
-          class="type-menu-btn receive-menu"
-          onclick="openTransactionPage('receive')">
-
-          <span class="menu-icon">
-            ＋
-          </span>
-
-          ثبت دریافت
-
-        </button>
-
-        <button
-          class="type-menu-btn"
-          onclick="openReceiptList('receive')">
-
-          <span class="menu-icon">
-            ▤
-          </span>
-
-          دریافت‌ها
-
-        </button>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- WITHDRAW SECTION -->
-
-  <main
-    id="withdrawSectionPage"
-    class="page">
-
-    <div class="container">
-
-      <div class="page-title">
-
-        <h2>
-          برداشت
-        </h2>
-
-        <button
-          class="back-btn"
-          onclick="goHome()">
-
-          برگشت
-
-        </button>
-
-      </div>
-
-
-      <div class="type-menu">
-
-        <button
-          class="type-menu-btn withdraw-menu"
-          onclick="openTransactionPage('withdraw')">
-
-          <span class="menu-icon">
-            −
-          </span>
-
-          ثبت برداشت
-
-        </button>
-
-        <button
-          class="type-menu-btn"
-          onclick="openReceiptList('withdraw')">
-
-          <span class="menu-icon">
-            ▤
-          </span>
-
-          برداشت‌ها
-
-        </button>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- RECEIPT LIST -->
-
-  <main
-    id="receiptListPage"
-    class="page">
-
-    <div class="container">
-
-      <div class="page-title">
-
-        <h2 id="receiptListTitle">
-          دریافت‌ها
-        </h2>
-
-        <button
-          class="back-btn"
-          onclick="backFromReceiptList()">
-
-          برگشت
-
-        </button>
-
-      </div>
-
-
-      <div
-        id="receiptListBody"
-        class="receipts-list">
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- TRANSACTION -->
-
-  <main
-    id="transactionPage"
-    class="page">
-
-    <div class="container">
-
-      <div class="page-title">
-
-        <h2 id="transactionTitle">
-          ثبت دریافت
-        </h2>
-
-        <button
-          class="back-btn"
-          onclick="goBackFromTransaction()">
-
-          برگشت
-
-        </button>
-
-      </div>
-
-
-      <div class="form-card">
-
-        <form
-          id="transactionForm"
-          onsubmit="saveTransaction(event)">
-
-          <input
-            type="hidden"
-            id="transactionType">
-
-
-          <div class="form-group">
-
-            <label>
-              شماره رسید
-            </label>
-
-            <input
-              id="receipt"
-              type="text"
-              readonly>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              نام شخص / مشتری
-            </label>
-
-            <input
-              id="customerName"
-              type="text"
-              required
-              placeholder="نام شخص را وارد کنید">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              مبلغ را وارد کنید
-            </label>
-
-            <input
-              id="amount"
-              type="text"
-              inputmode="numeric"
-              required
-              placeholder="مبلغ را وارد کنید">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              توضیحات
-            </label>
-
-            <textarea
-              id="description"
-              required
-              placeholder="توضیحات">
-            </textarea>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              تاریخ
-            </label>
-
-            <input
-              id="transactionDate"
-              type="text"
-              readonly
-              tabindex="-1"
-              required>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              ساعت
-            </label>
-
-            <input
-              id="transactionTime"
-              type="text"
-              readonly
-              tabindex="-1"
-              required>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              ثبت‌کننده
-            </label>
-
-            <input
-              id="registeredBy"
-              type="text"
-              readonly>
-
-          </div>
-
-
-          <button
-            id="saveButton"
-            class="save-btn save-receive"
-            type="submit">
-
-            ثبت دریافت
-
-          </button>
-
-        </form>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- HISTORY -->
-
-  <main
-    id="historyPage"
-    class="page">
-
-    <div class="container">
-
-      <div class="page-title">
-
-        <h2>
-          تاریخچه تراکنش‌ها
-        </h2>
-
-        <button
-          class="back-btn"
-          onclick="goHome()">
-
-          برگشت
-
-        </button>
-
-      </div>
-
-
-      <div class="history-tools">
-
-        <input
-          id="historySearch"
-          class="search-box"
-          type="text"
-          placeholder="جستجو با شماره رسید یا نام شخص"
-          oninput="renderHistory()">
-
-
-        <div class="date-filters">
-
-          <div>
-
-            <label>
-              از تاریخ
-            </label>
-
-            <input
-              id="historyFrom"
-              type="date"
-              onchange="renderHistory()">
-
-          </div>
-
-
-          <div>
-
-            <label>
-              تا تاریخ
-            </label>
-
-            <input
-              id="historyTo"
-              type="date"
-              onchange="renderHistory()">
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="print-history-btn"
-          onclick="printHistory()">
-
-          چاپ گزارش این بازه
-
-        </button>
-
-      </div>
-
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                رسید
-              </th>
-
-              <th>
-                نام
-              </th>
-
-              <th>
-                زمان
-              </th>
-
-              <th>
-                تاریخ
-              </th>
-
-              <th>
-                مبلغ
-              </th>
-
-              <th>
-                نوع
-              </th>
-
-              <th>
-                توضیحات
-              </th>
-
-              <th>
-                ثبت‌کننده
-              </th>
-
-              <th>
-                چاپ
-              </th>
-
-            </tr>
-
-          </thead>
-
-          <tbody id="historyBody">
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-  </main>
-
-</div>
-
-
-<div id="printArea"></div>
-
-<div id="historyPrintArea"></div>
-
-
-<script>
-
-/* =========================================================
-   SUPABASE
-   ========================================================= */
-
-const SUPABASE_URL =
-"https://pxlvwdwznlklqdofbspv.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_5J-p7w5eYZTMsSGPYLtd9g_QiitckBc";
-
-const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-/* =========================================================
-   GLOBAL
-   ========================================================= */
-
-let currentUser=null;
-let currentProfile=null;
-let transactions=[];
-let currentTransactionType="receive";
-let previousSection="homePage";
-
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
-function todayISO(){
-
-  const d=new Date();
-
-  return(
-    d.getFullYear()+"-"+
-    String(d.getMonth()+1).padStart(2,"0")+"-"+
-    String(d.getDate()).padStart(2,"0")
-  );
-}
-
-
-/* =========================================================
-   TIME
-   ========================================================= */
-
-function currentTime(){
-
-  const d=new Date();
-
-  return(
-    String(d.getHours()).padStart(2,"0")+":"+
-    String(d.getMinutes()).padStart(2,"0")
-  );
-}
-
-
-/* =========================================================
-   NUMBER
-   ========================================================= */
-
-function formatNumber(value){
-
-  return Number(value||0)
-    .toLocaleString("en-US",{
-      maximumFractionDigits:0
-    });
-}
-
-
-function parseAmount(value){
-
-  return Number(
-    String(value)
-      .replace(/,/g,"")
-      .replace(/[^\d]/g,"")
-  );
-}
-
-
-function formatAmountInput(){
-
-  const input=
-    document.getElementById("amount");
-
-  if(!input)return;
-
-  const raw=
-    input.value.replace(/[^\d]/g,"");
-
-  if(!raw){
-
-    input.value="";
-    return;
-
-  }
-
-  input.value=
-    Number(raw).toLocaleString("en-US");
-}
-
-
-/* =========================================================
-   DATE DATABASE
-   ========================================================= */
-
-function dateToDB(dateValue){
-
-  if(!dateValue)return "";
-
-  const p=dateValue.split("-");
-
-  if(p.length!==3)return dateValue;
-
-  return p[0]+"/"+p[1]+"/"+p[2];
-}
-
-
-function dateToISO(dateValue){
-
-  if(!dateValue)return "";
-
-  const s=
-    String(dateValue).substring(0,10);
-
-  if(s.includes("-")){
-    return s;
-  }
-
-  const p=s.split("/");
-
-  if(p.length===3){
-
-    return(
-      p[0]+"-"+
-      p[1]+"-"+
-      p[2]
-    );
-
-  }
-
-  return s;
-}
-
-
-/* =========================================================
-   JALALI
-   ========================================================= */
-
-function gregorianToJalali(gy,gm,gd){
-
-  const gdm=[
-    0,31,59,90,120,151,
-    181,212,243,273,304,334
-  ];
-
-  let jy;
-
-  if(gy>1600){
-
-    jy=979;
-    gy-=1600;
-
-  }else{
-
-    jy=0;
-    gy-=621;
-
-  }
-
-  const gy2=
-    gm>2 ? gy+1 : gy;
-
-  let days=
-    365*gy+
-    Math.floor((gy2+3)/4)-
-    Math.floor((gy2+99)/100)+
-    Math.floor((gy2+399)/400)-
-    80+
-    gd+
-    gdm[gm-1];
-
-  jy+=
-    33*Math.floor(days/12053);
-
-  days%=12053;
-
-  jy+=
-    4*Math.floor(days/1461);
-
-  days%=1461;
-
-  if(days>365){
-
-    jy+=
-      Math.floor((days-1)/365);
-
-    days=
-      (days-1)%365;
-
-  }
-
-  let jm;
-
-  if(days<186){
-
-    jm=
-      1+
-      Math.floor(days/31);
-
-  }else{
-
-    jm=
-      7+
-      Math.floor((days-186)/30);
-
-  }
-
-  const jd=
-    1+
-    (
-      days<186
-        ? days%31
-        : (days-186)%30
-    );
-
-  return[jy,jm,jd];
-}
-
-
-function jalaliFromISO(iso){
-
-  const p=
-    dateToISO(iso).split("-");
-
-  if(p.length!==3){
-    return "-";
-  }
-
-  const gy=Number(p[0]);
-  const gm=Number(p[1]);
-  const gd=Number(p[2]);
-
-  if(!gy||!gm||!gd){
-    return "-";
-  }
-
-  const j=
-    gregorianToJalali(
-      gy,
-      gm,
-      gd
-    );
-
-  return(
-    j[0]+"/"+
-    String(j[1]).padStart(2,"0")+"/"+
-    String(j[2]).padStart(2,"0")
-  );
-}
-
-
-function gregorianDisplay(iso){
-
-  const p=
-    dateToISO(iso).split("-");
-
-  if(p.length!==3){
-    return "-";
-  }
-
-  return(
-    p[0]+"/"+
-    p[1]+"/"+
-    p[2]
-  );
-}
-
-
-/* =========================================================
-   HOME DATE
-   ========================================================= */
-
-function homeDate(){
-
-  const iso=todayISO();
-
-  const shamsi=
-    jalaliFromISO(iso);
 
   const miladi=
-    gregorianDisplay(iso);
+    gregorianDisplay(date);
 
-  return(
-    shamsi+
-    " | "+
-    miladi
-  );
-}
+  printArea.innerHTML=`
 
-
-/* =========================================================
-   ESCAPE
-   ========================================================= */
-
-function escapeHTML(value){
-
-  return String(value??"")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-
-/* =========================================================
-   PAGE
-   ========================================================= */
-
-function showPage(id){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(page=>{
-      page.classList.remove("active");
-    });
-
-  document
-    .getElementById(id)
-    .classList.add("active");
-
-  const bar=
-    document.getElementById(
-      "homeUserBar"
-    );
-
-  if(id==="homePage"){
-
-    bar.style.display="flex";
-
-  }else{
-
-    bar.style.display="none";
-
-  }
-
-}
-
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
-function showError(message){
-
-  const box=
-    document.getElementById(
-      "loginError"
-    );
-
-  box.textContent=message;
-  box.style.display="block";
-}
-
-
-function hideLoginError(){
-
-  document
-    .getElementById("loginError")
-    .style.display="none";
-}
-
-
-async function login(){
-
-  hideLoginError();
-
-  const email=
-    document
-      .getElementById("loginEmail")
-      .value.trim();
-
-  const password=
-    document
-      .getElementById("loginPassword")
-      .value;
-
-  const button=
-    document.getElementById(
-      "loginButton"
-    );
-
-  if(!email||!password){
-
-    showError(
-      "ایمیل و رمز عبور را وارد کنید."
-    );
-
-    return;
-  }
-
-  button.disabled=true;
-  button.textContent="در حال ورود...";
-
-  try{
-
-    const result=
-      await supabaseClient.auth
-        .signInWithPassword({
-          email,
-          password
-        });
-
-    if(result.error){
-      throw result.error;
-    }
-
-    currentUser=
-      result.data.user;
-
-    await loadProfile();
-
-    await enterApp();
-
-  }catch(error){
-
-    console.error(error);
-
-    showError(
-      error.message||
-      "ورود انجام نشد."
-    );
-
-  }finally{
-
-    button.disabled=false;
-    button.textContent="ورود";
-
-  }
-
-}
-
-
-/* =========================================================
-   PROFILE
-   ========================================================= */
-
-async function loadProfile(){
-
-  const result=
-    await supabaseClient
-      .from("profiles")
-      .select("*")
-      .eq("id",currentUser.id)
-      .maybeSingle();
-
-  if(result.error){
-    throw result.error;
-  }
-
-  if(!result.data){
-
-    throw new Error(
-      "پروفایل این حساب پیدا نشد."
-    );
-
-  }
-
-  currentProfile=
-    result.data;
-}
-
-
-/* =========================================================
-   ENTER
-   ========================================================= */
-
-async function enterApp(){
-
-  document
-    .getElementById("loginPage")
-    .style.display="none";
-
-  document
-    .getElementById("appContainer")
-    .style.display="block";
-
-  const fullName=
-    currentProfile.full_name||
-    currentProfile.name||
-    currentUser.email;
-
-  const role=
-    currentProfile.role||"";
-
-  document
-    .getElementById("userName")
-    .textContent=fullName;
-
-  document
-    .getElementById("userRole")
-    .textContent=
-      role ? " — "+role : "";
-
-  document
-    .getElementById("currentDate")
-    .textContent=
-      homeDate();
-
-  await loadTransactions();
-
-  updateDashboard();
-
-  goHome();
-}
-
-
-/* =========================================================
-   SESSION
-   ========================================================= */
-
-async function checkExistingSession(){
-
-  try{
-
-    const result=
-      await supabaseClient.auth
-        .getSession();
-
-    if(result.error)return;
-
-    const session=
-      result.data.session;
-
-    if(!session)return;
-
-    currentUser=
-      session.user;
-
-    await loadProfile();
-
-    await enterApp();
-
-  }catch(error){
-
-    console.error(error);
-
-    await supabaseClient.auth.signOut();
-
-  }
-
-}
-
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-async function logout(){
-
-  await supabaseClient.auth.signOut();
-
-  currentUser=null;
-  currentProfile=null;
-  transactions=[];
-
-  document
-    .getElementById("appContainer")
-    .style.display="none";
-
-  document
-    .getElementById("loginPage")
-    .style.display="flex";
-
-  document
-    .getElementById("loginPassword")
-    .value="";
-
-  hideLoginError();
-}
-
-
-/* =========================================================
-   LOAD TRANSACTIONS
-   ========================================================= */
-
-async function loadTransactions(){
-
-  const result=
-    await supabaseClient
-      .from("transaction")
-      .select("*")
-      .order("created_at",{
-        ascending:false
-      });
-
-  if(result.error){
-    throw result.error;
-  }
-
-  transactions=
-    result.data||[];
-
-  updateDashboard();
-}
-
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
-
-function updateDashboard(){
-
-  let balance=0;
-  let receive=0;
-  let withdraw=0;
-
-  const today=
-    todayISO();
-
-  transactions.forEach(t=>{
-
-    const amount=
-      Number(t.amount||0);
-
-    if(t.type==="receive"){
-
-      balance+=amount;
-
-      if(dateToISO(t.date)===today){
-        receive+=amount;
-      }
-
-    }
-
-    if(t.type==="withdraw"){
-
-      balance-=amount;
-
-      if(dateToISO(t.date)===today){
-        withdraw+=amount;
-      }
-
-    }
-
-  });
-
-  document
-    .getElementById("balance")
-    .textContent=
-      formatNumber(balance);
-
-  document
-    .getElementById("todayReceive")
-    .textContent=
-      formatNumber(receive)+" AFN";
-
-  document
-    .getElementById("todayWithdraw")
-    .textContent=
-      formatNumber(withdraw)+" AFN";
-
-  document
-    .getElementById("currentDate")
-    .textContent=
-      homeDate();
-}
-
-
-/* =========================================================
-   RECEIPT NUMBER
-   ========================================================= */
-
-function getNextReceiptNumber(type){
-
-  const prefix=
-    type==="receive"
-      ? "TPH-D"
-      : "TPH-B";
-
-  let max=0;
-
-  transactions.forEach(t=>{
-
-    if(t.type!==type)return;
-
-    const receipt=
-      String(t.receipt||"").trim();
-
-    const regex=
-      new RegExp(
-        "^"+
-        prefix.replace("-","\\-")+
-        "(\\d+)$",
-        "i"
-      );
-
-    const match=
-      receipt.match(regex);
-
-    if(match){
-
-      max=
-        Math.max(
-          max,
-          Number(match[1])
-        );
-
-    }
-
-  });
-
-  return prefix+(max+1);
-}
-
-
-/* =========================================================
-   OPEN TYPE
-   ========================================================= */
-
-function openTypePage(type){
-
-  if(type==="receive"){
-
-    showPage("receiveSectionPage");
-
-  }else{
-
-    showPage("withdrawSectionPage");
-
-  }
-
-}
-
-
-/* =========================================================
-   OPEN RECEIPT LIST
-   ========================================================= */
-
-async function openReceiptList(type){
-
-  await loadTransactions();
-
-  currentTransactionType=type;
-
-  const title=
-    document.getElementById(
-      "receiptListTitle"
-    );
-
-  title.textContent=
-    type==="receive"
-      ? "دریافت‌ها"
-      : "برداشت‌ها";
-
-  renderReceiptList(type);
-
-  showPage("receiptListPage");
-}
-
-
-/* =========================================================
-   RENDER RECEIPTS
-   ========================================================= */
-
-function renderReceiptList(type){
-
-  const body=
-    document.getElementById(
-      "receiptListBody"
-    );
-
-  const list=
-    transactions.filter(
-      t=>t.type===type
-    );
-
-  if(!list.length){
-
-    body.innerHTML=`
-      <div class="no-receipts">
-        هنوز هیچ ${
-          type==="receive"
-            ? "دریافتی"
-            : "برداشتی"
-        } ثبت نشده است.
-      </div>
-    `;
-
-    return;
-  }
-
-  body.innerHTML=
-    list.map(t=>{
-
-      const isReceive=
-        t.type==="receive";
-
-      const date=
-        dateToISO(t.date);
-
-      const shamsi=
-        jalaliFromISO(date);
-
-      const miladi=
-        gregorianDisplay(date);
-
-      return`
-
-        <div class="
-          receipt-card
-          ${
-            isReceive
-              ? "receive-card"
-              : "withdraw-card"
-          }
-        ">
-
-          <div class="receipt-card-top">
-
-            <div class="receipt-number">
-
-              ${escapeHTML(
-                t.receipt||"-"
-              )}
-
-            </div>
-
-            <div class="
-              receipt-type
-              ${
-                isReceive
-                  ? "receive"
-                  : "withdraw"
-              }
-            ">
-
-              ${
-                isReceive
-                  ? "دریافت"
-                  : "برداشت"
-              }
-
-            </div>
-
-          </div>
-
-
-          <div class="receipt-card-name">
-
-            ${escapeHTML(
-              t.customer_name||"-"
-            )}
-
-          </div>
-
-
-          <div class="
-            receipt-card-amount
-            ${
-              isReceive
-                ? "receive"
-                : "withdraw"
-            }
-          " dir="ltr">
-
-            ${formatNumber(t.amount)}
-            AFN
-
-          </div>
-
-
-          <div class="receipt-card-info">
-
-            <div>
-              تاریخ: ${escapeHTML(shamsi)}
-            </div>
-
-            <div dir="ltr">
-              ${escapeHTML(miladi)}
-            </div>
-
-            <div dir="ltr">
-              ساعت: ${escapeHTML(t.time||"-")}
-            </div>
-
-            <div>
-              ثبت‌کننده:
-              ${escapeHTML(
-                t.registered_by||"-"
-              )}
-            </div>
-
-          </div>
-
-
-          <div class="receipt-card-description">
-
-            <strong>
-              توضیحات:
-            </strong>
-
-            ${escapeHTML(
-              t.dascription||"-"
-            )}
-
-          </div>
-
-
-          <button
-            class="card-print-btn"
-            onclick="printReceiptById('${t.id}')">
-
-            چاپ رسید
-
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("");
-}
-
-
-/* =========================================================
-   BACK FROM LIST
-   ========================================================= */
-
-function backFromReceiptList(){
-
-  if(currentTransactionType==="receive"){
-
-    showPage("receiveSectionPage");
-
-  }else{
-
-    showPage("withdrawSectionPage");
-
-  }
-
-}
-
-
-/* =========================================================
-   OPEN TRANSACTION
-   ========================================================= */
-
-function openTransactionPage(type){
-
-  previousSection=
-    type==="receive"
-      ? "receiveSectionPage"
-      : "withdrawSectionPage";
-
-  currentTransactionType=type;
-
-  document
-    .getElementById("transactionForm")
-    .reset();
-
-  document
-    .getElementById("transactionType")
-    .value=type;
-
-  const title=
-    document.getElementById(
-      "transactionTitle"
-    );
-
-  const save=
-    document.getElementById(
-      "saveButton"
-    );
-
-  if(type==="receive"){
-
-    title.textContent="ثبت دریافت";
-
-    save.textContent="ثبت دریافت";
-
-    save.className=
-      "save-btn save-receive";
-
-  }else{
-
-    title.textContent="ثبت برداشت";
-
-    save.textContent="ثبت برداشت";
-
-    save.className=
-      "save-btn save-withdraw";
-
-  }
-
-  document
-    .getElementById("transactionDate")
-    .value=
-      todayISO();
-
-  document
-    .getElementById("transactionTime")
-    .value=
-      currentTime();
-
-  document
-    .getElementById("registeredBy")
-    .value=
-      currentProfile?.full_name||
-      currentProfile?.name||
-      currentUser?.email||
-      "";
-
-  document
-    .getElementById("receipt")
-    .value=
-      getNextReceiptNumber(type);
-
-  showPage("transactionPage");
-}
-
-
-/* =========================================================
-   BACK FROM TRANSACTION
-   ========================================================= */
-
-function goBackFromTransaction(){
-
-  showPage(previousSection);
-
-}
-
-
-/* =========================================================
-   SAVE TRANSACTION
-   ========================================================= */
-
-async function saveTransaction(event){
-
-  event.preventDefault();
-
-  const type=
-    document
-      .getElementById("transactionType")
-      .value;
-
-  const customerName=
-    document
-      .getElementById("customerName")
-      .value.trim();
-
-  const amount=
-    parseAmount(
-      document
-        .getElementById("amount")
-        .value
-    );
-
-  const description=
-    document
-      .getElementById("description")
-      .value.trim();
-
-  const dateInput=
-    document
-      .getElementById("transactionDate")
-      .value;
-
-  const time=
-    document
-      .getElementById("transactionTime")
-      .value;
-
-  const registeredBy=
-    document
-      .getElementById("registeredBy")
-      .value.trim();
-
-  if(!customerName){
-
-    alert(
-      "نام شخص را وارد کنید."
-    );
-
-    return;
-  }
-
-  if(!amount||amount<=0){
-
-    alert(
-      "مبلغ معتبر وارد کنید."
-    );
-
-    return;
-  }
-
-  if(!description){
-
-    alert(
-      "توضیحات را وارد کنید."
-    );
-
-    return;
-  }
-
-  const receipt=
-    getNextReceiptNumber(type);
-
-  const save=
-    document.getElementById(
-      "saveButton"
-    );
-
-  save.disabled=true;
-  save.textContent="در حال ثبت...";
-
-  try{
-
-    const data={
-
-      type:type,
-
-      currency:"AFN",
-
-      amount:amount,
-
-      dascription:description,
-
-      customer_name:customerName,
-
-      rate:null,
-
-      receipt:receipt,
-
-      date:dateToDB(dateInput),
-
-      time:time,
-
-      registered_by:registeredBy
-
-    };
-
-    const result=
-      await supabaseClient
-        .from("transaction")
-        .insert([data])
-        .select()
-        .single();
-
-    if(result.error){
-      throw result.error;
-    }
-
-    await loadTransactions();
-
-    alert(
-      type==="receive"
-        ? "دریافت با موفقیت ثبت شد."
-        : "برداشت با موفقیت ثبت شد."
-    );
-
-    showReceipt(result.data);
-
-    document
-      .getElementById("transactionForm")
-      .reset();
-
-    document
-      .getElementById("transactionType")
-      .value=
-        currentTransactionType;
-
-    document
-      .getElementById("receipt")
-      .value=
-        getNextReceiptNumber(
-          currentTransactionType
-        );
-
-    document
-      .getElementById("transactionDate")
-      .value=
-        todayISO();
-
-    document
-      .getElementById("transactionTime")
-      .value=
-        currentTime();
-
-    document
-      .getElementById("registeredBy")
-      .value=
-        currentProfile?.full_name||
-        currentProfile?.name||
-        currentUser?.email||
-        "";
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      error.message||
-      "ثبت انجام نشد."
-    );
-
-  }finally{
-
-    save.disabled=false;
-
-    save.textContent=
-      type==="receive"
-        ? "ثبت دریافت"
-        : "ثبت برداشت";
-
-  }
-
-}
-
-
-/* =========================================================
-   HOME
-   ========================================================= */
-
-function goHome(){
-
-  showPage("homePage");
-
-  updateDashboard();
-
-}
-
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
-
-async function openHistory(){
-
-  await loadTransactions();
-
-  document
-    .getElementById("historySearch")
-    .value="";
-
-  document
-    .getElementById("historyFrom")
-    .value="";
-
-  document
-    .getElementById("historyTo")
-    .value="";
-
-  renderHistory();
-
-  showPage("historyPage");
-}
-
-
-/* =========================================================
-   FILTER
-   ========================================================= */
-
-function getFilteredHistory(){
-
-  const search=
-    document
-      .getElementById("historySearch")
-      .value
-      .trim()
-      .toLowerCase();
-
-  const from=
-    document
-      .getElementById("historyFrom")
-      .value;
-
-  const to=
-    document
-      .getElementById("historyTo")
-      .value;
-
-  return transactions.filter(t=>{
-
-    const receipt=
-      String(t.receipt||"")
-        .toLowerCase();
-
-    const name=
-      String(t.customer_name||"")
-        .toLowerCase();
-
-    const date=
-      dateToISO(t.date);
-
-    return(
-      (!search||
-        receipt.includes(search)||
-        name.includes(search)
-      )&&
-      (!from||date>=from)&&
-      (!to||date<=to)
-    );
-
-  });
-}
-
-
-/* =========================================================
-   RENDER HISTORY
-   ========================================================= */
-
-function renderHistory(){
-
-  const body=
-    document.getElementById(
-      "historyBody"
-    );
-
-  const list=
-    getFilteredHistory();
-
-  if(!list.length){
-
-    body.innerHTML=`
-      <tr>
-        <td
-          colspan="9"
-          class="empty">
-
-          تراکنشی پیدا نشد.
-
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
-
-  body.innerHTML=
-    list.map(t=>{
-
-      const isReceive=
-        t.type==="receive";
-
-      const date=
-        dateToISO(t.date);
-
-      const shamsi=
-        jalaliFromISO(date);
-
-      return`
-
-        <tr>
-
-          <td>
-            ${escapeHTML(
-              t.receipt||"-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              t.customer_name||"-"
-            )}
-          </td>
-
-          <td dir="ltr">
-            ${escapeHTML(
-              t.time||"-"
-            )}
-          </td>
-
-          <td dir="ltr">
-            ${escapeHTML(shamsi)}
-          </td>
-
-          <td dir="ltr">
-            ${formatNumber(t.amount)}
-            AFN
-          </td>
-
-          <td class="${
-            isReceive
-              ? "receive-text"
-              : "withdraw-text"
-          }">
-
-            ${
-              isReceive
-                ? "دریافت"
-                : "برداشت"
-            }
-
-          </td>
-
-          <td>
-            ${escapeHTML(
-              t.dascription||
-              "-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              t.registered_by||
-              "-"
-            )}
-          </td>
-
-          <td>
-
-            <button
-              class="receipt-btn"
-              onclick="printReceiptById('${t.id}')">
-
-              چاپ رسید
-
-            </button>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }).join("");
-}
-
-
-/* =========================================================
-   PROFESSIONAL RECEIPT
-   ========================================================= */
-
-function buildReceiptHTML(t){
-
-  const isReceive=
-    t.type==="receive";
-
-  const date=
-    dateToISO(t.date);
-
-  const shamsi=
-    jalaliFromISO(date);
-
-  return`
-
-    <div class="receipt-box ${
-      isReceive
-        ? "receive-receipt"
-        : "withdraw-receipt"
-    }">
-
+    <div class="receipt-box">
 
       <div class="receipt-bank-head">
 
+        <div class="receipt-bank-title">
 
-        <div class="receipt-brand">
+          <h2>
+            سیستم حسابداری شرکت همدرد
+          </h2>
 
-
-          <svg
-            class="receipt-logo"
-            viewBox="0 0 300 300"
-            xmlns="http://www.w3.org/2000/svg">
-
-            <rect
-              width="300"
-              height="300"
-              rx="55"
-              fill="#1f2f25"/>
-
-            <circle
-              cx="150"
-              cy="150"
-              r="108"
-              fill="none"
-              stroke="#c9a85c"
-              stroke-width="7"/>
-
-            <text
-              x="150"
-              y="135"
-              text-anchor="middle"
-              fill="#c9a85c"
-              font-size="52"
-              font-family="Tahoma,Arial,sans-serif"
-              font-weight="bold">
-              همدرد
-            </text>
-
-            <text
-              x="150"
-              y="180"
-              text-anchor="middle"
-              fill="#ffffff"
-              font-size="25"
-              font-family="Arial,sans-serif">
-              HAMDARD
-            </text>
-
-          </svg>
-
-
-          <div class="receipt-bank-title">
-
-            <h2>
-              شرکت همدرد
-            </h2>
-
-            <h3>
-              سیستم حسابداری
-            </h3>
-
-          </div>
-
+          <h3>
+            ${
+              isReceive
+                ? "رسید دریافت"
+                : "رسید برداشت"
+            }
+          </h3>
 
         </div>
 
-
         <div class="receipt-bank-number">
 
-          <div>
-            شماره رسید
-          </div>
+          <div>شماره رسید</div>
 
-          <div>
+          <div dir="ltr">
             ${escapeHTML(
               t.receipt||"-"
             )}
@@ -8071,172 +2774,98 @@ function buildReceiptHTML(t){
 
         </div>
 
-
       </div>
-
 
       <div class="receipt-date-box">
 
         <div class="receipt-date">
 
+          <div class="date-top">
+            ${miladi}
+          </div>
+
           <div class="date-bottom">
-            تاریخ: ${escapeHTML(shamsi)}
+            ${shamsi}
           </div>
 
         </div>
 
       </div>
 
-
       <table class="receipt-table">
 
-
         <tr>
-
-          <td>
-            نوع تراکنش
-          </td>
-
-          <td>
-
-            ${
-              isReceive
-                ? "رسید (دریافت)"
-                : "رسید (برداشت)"
-            }
-
-          </td>
-
-        </tr>
-
-
-        <tr>
-
-          <td>
-            نام مشتری / شخص
-          </td>
-
+          <td>نام شخص / مشتری</td>
           <td>
             ${escapeHTML(
               t.customer_name||"-"
             )}
           </td>
-
         </tr>
 
+        <tr>
+          <td>مبلغ</td>
+          <td dir="ltr">
+            ${formatNumber(t.amount)}
+            AFN
+          </td>
+        </tr>
 
         <tr>
-
-          <td>
-            بابت / توضیحات
-          </td>
-
+          <td>توضیحات</td>
           <td>
             ${escapeHTML(
               t.dascription||"-"
             )}
           </td>
-
         </tr>
 
+        <tr>
+          <td>ساعت</td>
+          <td dir="ltr">
+            ${escapeHTML(t.time||"-")}
+          </td>
+        </tr>
 
         <tr>
-
-          <td>
-            ثبت‌کننده
-          </td>
-
+          <td>ثبت‌کننده</td>
           <td>
             ${escapeHTML(
               t.registered_by||"-"
             )}
           </td>
-
         </tr>
-
-
-        <tr>
-
-          <td>
-            ساعت
-          </td>
-
-          <td dir="ltr">
-            ${escapeHTML(
-              t.time||"-"
-            )}
-          </td>
-
-        </tr>
-
-
-        <tr class="amount-row">
-
-          <td>
-            مبلغ
-          </td>
-
-          <td>
-
-            ${formatNumber(t.amount)}
-            AFN
-
-          </td>
-
-        </tr>
-
 
       </table>
-
 
       <div class="receipt-footer">
 
         <div>
-          امضای تحویل‌گیرنده / مشتری
+          امضاء مشتری:
+          ......................
         </div>
 
         <div>
-          مهر و امضای شرکت
+          مهر و امضاء:
+          ......................
         </div>
 
       </div>
 
-
     </div>
 
   `;
-}
-
-
-/* =========================================================
-   SHOW RECEIPT AFTER SAVE
-   ========================================================= */
-
-function showReceipt(t){
-
-  const printArea=
-    document.getElementById(
-      "printArea"
-    );
-
-  printArea.innerHTML=
-    buildReceiptHTML(t);
 
   document.body.classList.add(
     "receipt-print-mode"
   );
 
   setTimeout(()=>{
-
     window.print();
-
   },100);
 }
 
-
-/* =========================================================
-   PRINT RECEIPT FROM HISTORY
-   ========================================================= */
+/* PRINT RECEIPT */
 
 function printReceiptById(id){
 
@@ -8247,16 +2876,146 @@ function printReceiptById(id){
 
   if(!transaction){
 
-    alert(
-      "رسید پیدا نشد."
-    );
-
+    alert("رسید پیدا نشد.");
     return;
   }
 
-  const receiptHTML=
-    buildReceiptHTML(transaction);
+  /*
+    فقط این بخش برای چاپ رسید تغییر کرده.
+    رسید در پنجره مستقل چاپ می‌شود تا
+    تغییر اندازه، کاغذ، Scale و Orientation
+    باعث ناپدید شدن آن نشود.
+  */
 
+  const isReceive=
+    transaction.type==="receive";
+
+  const date=
+    dateToISO(transaction.date);
+
+  const shamsi=
+    jalaliFromISO(date);
+
+  const miladi=
+    gregorianDisplay(date);
+
+  const receiptHTML=`
+
+    <div class="receipt-box">
+
+      <div class="receipt-bank-head">
+
+        <div class="receipt-bank-title">
+
+          <h2>
+            سیستم حسابداری شرکت همدرد
+          </h2>
+
+          <h3>
+            ${
+              isReceive
+                ? "رسید دریافت"
+                : "رسید برداشت"
+            }
+          </h3>
+
+        </div>
+
+        <div class="receipt-bank-number">
+
+          <div>شماره رسید</div>
+
+          <div dir="ltr">
+            ${escapeHTML(
+              transaction.receipt||"-"
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="receipt-date-box">
+
+        <div class="receipt-date">
+
+          <div class="date-top">
+            ${miladi}
+          </div>
+
+          <div class="date-bottom">
+            ${shamsi}
+          </div>
+
+        </div>
+
+      </div>
+
+      <table class="receipt-table">
+
+        <tr>
+          <td>نام شخص / مشتری</td>
+          <td>
+            ${escapeHTML(
+              transaction.customer_name||"-"
+            )}
+          </td>
+        </tr>
+
+        <tr>
+          <td>مبلغ</td>
+          <td dir="ltr">
+            ${formatNumber(transaction.amount)}
+            AFN
+          </td>
+        </tr>
+
+        <tr>
+          <td>توضیحات</td>
+          <td>
+            ${escapeHTML(
+              transaction.dascription||"-"
+            )}
+          </td>
+        </tr>
+
+        <tr>
+          <td>ساعت</td>
+          <td dir="ltr">
+            ${escapeHTML(
+              transaction.time||"-"
+            )}
+          </td>
+        </tr>
+
+        <tr>
+          <td>ثبت‌کننده</td>
+          <td>
+            ${escapeHTML(
+              transaction.registered_by||"-"
+            )}
+          </td>
+        </tr>
+
+      </table>
+
+      <div class="receipt-footer">
+
+        <div>
+          امضاء مشتری:
+          ......................
+        </div>
+
+        <div>
+          مهر و امضاء:
+          ......................
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
 
   const printWindow=
     window.open(
@@ -8264,7 +3023,6 @@ function printReceiptById(id){
       "_blank",
       "width=850,height=1000"
     );
-
 
   if(!printWindow){
 
@@ -8275,9 +3033,7 @@ function printReceiptById(id){
     return;
   }
 
-
   printWindow.document.open();
-
 
   printWindow.document.write(`
 
@@ -8295,268 +3051,118 @@ function printReceiptById(id){
         name="viewport"
         content="width=device-width,initial-scale=1.0">
 
-
       <title>
         رسید ${escapeHTML(
           transaction.receipt||""
         )}
       </title>
 
-
-      <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-
-      <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-
-      <link
-        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-
-
       <style>
 
         *{
           box-sizing:border-box;
-          font-family:
-            "Vazirmatn",
-            Tahoma,
-            Arial,
-            sans-serif;
+          font-family:Tahoma,Arial,sans-serif;
         }
-
 
         html,
         body{
           margin:0;
           padding:0;
-          background:#fff;
-          color:#211f1c;
+          background:white;
+          color:#222;
         }
-
 
         body{
           padding:20px;
         }
 
-
         .receipt-box{
-          width:100%;
+          border:1.5px solid #1f2f25;
+          border-radius:12px;
+          padding:25px;
           max-width:720px;
           margin:0 auto;
-          background:#fff;
-          color:#211f1c;
-          padding:30px 28px 35px;
-          border:1px solid #ded9cf;
-          border-radius:4px;
-          page-break-inside:avoid;
-          break-inside:avoid;
         }
-
-
-        .receipt-box.receive-receipt{
-          border-top:4px solid #16823d;
-        }
-
-
-        .receipt-box.withdraw-receipt{
-          border-top:4px solid #b32424;
-        }
-
 
         .receipt-bank-head{
           display:flex;
-          flex-direction:row;
           justify-content:space-between;
-          align-items:center;
-          gap:20px;
-          padding-bottom:20px;
-          border-bottom:2px solid #211f1c;
-          margin-bottom:22px;
+          align-items:flex-start;
+          gap:15px;
+          border-bottom:2px solid #1f2f25;
+          padding-bottom:16px;
+          margin-bottom:18px;
         }
-
-
-        .receipt-brand{
-          display:flex;
-          align-items:center;
-          gap:14px;
-        }
-
-
-        .receipt-logo{
-          width:58px;
-          height:58px;
-          flex:none;
-        }
-
 
         .receipt-bank-title{
           text-align:right;
         }
 
-
         .receipt-bank-title h2{
-          margin:0 0 4px;
-          color:#211f1c;
-          font-size:25px;
-          font-weight:900;
+          margin:0 0 7px;
+          color:#1f2f25;
         }
-
 
         .receipt-bank-title h3{
           margin:0;
-          color:#77716a;
-          font-size:14px;
-          font-weight:500;
+          font-size:15px;
+          color:#555;
         }
-
 
         .receipt-bank-number{
-          text-align:left;
-          min-width:115px;
+          border:1px solid #ccc;
+          border-radius:8px;
+          padding:8px 12px;
+          text-align:center;
+          font-weight:bold;
+          white-space:nowrap;
         }
-
-
-        .receipt-bank-number div:first-child{
-          color:#77716a;
-          font-size:13px;
-          margin-bottom:4px;
-        }
-
-
-        .receipt-bank-number div:last-child{
-          color:#211f1c;
-          font-size:20px;
-          font-weight:900;
-          direction:ltr;
-        }
-
 
         .receipt-date-box{
           display:flex;
-          justify-content:flex-start;
-          margin-bottom:5px;
+          justify-content:flex-end;
+          margin-bottom:18px;
         }
-
 
         .receipt-date{
-          border:0;
-          padding:0;
-          background:transparent;
-          text-align:right;
+          border:1px solid #ddd;
+          border-radius:8px;
+          padding:9px 15px;
+          text-align:center;
           line-height:1.8;
+          min-width:150px;
+          background:#fafafa;
         }
 
-
+        .receipt-date .date-top,
         .receipt-date .date-bottom{
-          direction:rtl;
-          color:#77716a;
-          font-size:14px;
-          font-weight:500;
+          direction:ltr;
+          font-weight:bold;
         }
-
 
         .receipt-table{
           width:100%;
           border-collapse:collapse;
-          margin-top:5px;
         }
-
-
-        .receipt-table tr{
-          border-bottom:1px solid #e6e0d6;
-        }
-
 
         .receipt-table td{
-          border:0;
-          padding:14px 4px;
-          vertical-align:middle;
-          font-size:16px;
-        }
-
-
-        .receipt-table td:first-child{
-          width:31%;
-          color:#77716a;
-          font-weight:500;
+          border:1px solid #999;
+          padding:11px;
           text-align:right;
         }
 
-
-        .receipt-table td:last-child{
-          color:#211f1c;
-          font-weight:700;
-          text-align:left;
+        .receipt-table td:first-child{
+          width:30%;
+          font-weight:bold;
+          background:#f5f5f5;
         }
-
-
-        .receipt-table tr.amount-row{
-          border:0;
-        }
-
-
-        .receipt-table tr.amount-row td{
-          padding:22px 20px;
-          border:0;
-          background:#fff;
-        }
-
-
-        .receipt-table tr.amount-row td:first-child{
-          width:25%;
-          color:#211f1c;
-          font-size:18px;
-          font-weight:900;
-        }
-
-
-        .receipt-table tr.amount-row td:last-child{
-          border:2px solid #211f1c;
-          border-radius:12px;
-          font-size:25px;
-          font-weight:900;
-          text-align:left;
-          direction:ltr;
-          padding:18px 22px;
-        }
-
-
-        .receipt-box.withdraw-receipt
-        .receipt-table tr.amount-row td:last-child{
-          border-color:#b32424;
-        }
-
 
         .receipt-footer{
-          margin-top:62px;
-          padding-top:10px;
+          margin-top:55px;
           display:flex;
           justify-content:space-between;
-          gap:50px;
-          color:#211f1c;
-          font-size:14px;
+          gap:20px;
         }
-
-
-        .receipt-footer > div{
-          width:45%;
-          text-align:center;
-          padding-top:14px;
-          border-top:1px solid #211f1c;
-        }
-
-
-        @page{
-          size:A4;
-          margin:12mm;
-        }
-
 
         @media(max-width:600px){
 
@@ -8565,51 +3171,52 @@ function printReceiptById(id){
           }
 
           .receipt-box{
-            padding:20px 16px 25px;
-          }
-
-          .receipt-bank-head{
-            gap:10px;
-          }
-
-          .receipt-logo{
-            width:50px;
-            height:50px;
-          }
-
-          .receipt-bank-title h2{
-            font-size:19px;
-          }
-
-          .receipt-bank-title h3{
-            font-size:12px;
-          }
-
-          .receipt-bank-number{
-            min-width:85px;
-          }
-
-          .receipt-bank-number div:first-child{
-            font-size:10px;
-          }
-
-          .receipt-bank-number div:last-child{
-            font-size:15px;
-          }
-
-          .receipt-table td{
-            font-size:13px;
-            padding:12px 3px;
-          }
-
-          .receipt-table tr.amount-row td:last-child{
-            font-size:20px;
             padding:15px;
           }
 
+          .receipt-bank-head{
+            gap:8px;
+          }
+
+          .receipt-bank-title h2{
+            font-size:18px;
+          }
+
+          .receipt-bank-title h3{
+            font-size:13px;
+          }
+
+          .receipt-bank-number{
+            font-size:12px;
+            padding:7px 8px;
+          }
+
           .receipt-footer{
-            font-size:11px;
-            gap:15px;
+            font-size:12px;
+          }
+
+        }
+
+        @media print{
+
+          html,
+          body{
+            width:100%;
+            background:white;
+          }
+
+          body{
+            padding:0;
+          }
+
+          .receipt-box{
+            page-break-inside:avoid;
+            break-inside:avoid;
+          }
+
+          @page{
+            size:auto;
+            margin:12mm;
           }
 
         }
@@ -8618,11 +3225,9 @@ function printReceiptById(id){
 
     </head>
 
-
     <body>
 
       ${receiptHTML}
-
 
       <script>
 
@@ -8637,12 +3242,11 @@ function printReceiptById(id){
                 window.print();
 
               },
-              500
+              400
             );
 
           }
         );
-
 
         window.addEventListener(
           "afterprint",
@@ -8662,22 +3266,16 @@ function printReceiptById(id){
 
       <\/script>
 
-
     </body>
 
     </html>
 
   `);
 
-
   printWindow.document.close();
-
 }
 
-
-/* =========================================================
-   PRINT HISTORY
-   ========================================================= */
+/* PRINT HISTORY */
 
 function printHistory(){
 
@@ -8714,53 +3312,33 @@ function printHistory(){
 
       </div>
 
-
       <table class="history-print-table">
 
         <thead>
 
           <tr>
 
-            <th>
-              ردیف
-            </th>
+            <th>ردیف</th>
 
-            <th>
-              رسید
-            </th>
+            <th>رسید</th>
 
-            <th>
-              نام
-            </th>
+            <th>نام</th>
 
-            <th>
-              تاریخ
-            </th>
+            <th>تاریخ</th>
 
-            <th>
-              ساعت
-            </th>
+            <th>ساعت</th>
 
-            <th>
-              مبلغ
-            </th>
+            <th>مبلغ</th>
 
-            <th>
-              نوع
-            </th>
+            <th>نوع</th>
 
-            <th>
-              توضیحات
-            </th>
+            <th>توضیحات</th>
 
-            <th>
-              ثبت‌کننده
-            </th>
+            <th>ثبت‌کننده</th>
 
           </tr>
 
         </thead>
-
 
         <tbody>
 
@@ -8809,13 +3387,11 @@ function printHistory(){
                   </td>
 
                   <td>
-
                     ${
                       t.type==="receive"
                         ? "دریافت"
                         : "برداشت"
                     }
-
                   </td>
 
                   <td>
@@ -8845,24 +3421,16 @@ function printHistory(){
 
   `;
 
-
   document.body.classList.add(
     "history-print-mode"
   );
 
-
   setTimeout(()=>{
-
     window.print();
-
   },100);
-
 }
 
-
-/* =========================================================
-   AMOUNT
-   ========================================================= */
+/* AMOUNT */
 
 document.addEventListener(
   "input",
@@ -8877,10 +3445,7 @@ document.addEventListener(
   }
 );
 
-
-/* =========================================================
-   ENTER LOGIN
-   ========================================================= */
+/* ENTER */
 
 document.addEventListener(
   "keydown",
@@ -8899,10 +3464,7 @@ document.addEventListener(
   }
 );
 
-
-/* =========================================================
-   AFTER PRINT
-   ========================================================= */
+/* AFTER PRINT */
 
 window.addEventListener(
   "afterprint",
@@ -8927,10 +3489,7 @@ window.addEventListener(
   }
 );
 
-
-/* =========================================================
-   START
-   ========================================================= */
+/* START */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -8943,465 +3502,5 @@ document.addEventListener(
 
 </script>
 
-
-<script>
-
-/* =========================================================
-
-   HAMDARD - PASSWORD RECOVERY
-
-   افزوده‌شده بدون تغییر بخش‌های حسابداری
-
-   ========================================================= */
-
-(function () {
-
-  "use strict";
-
-  const emailInput = document.getElementById("loginEmail");
-
-  const passwordInput = document.getElementById("loginPassword");
-
-  const loginButton = document.getElementById("loginButton");
-
-  const loginError = document.getElementById("loginError");
-
-  const loginBox = document.querySelector(".login-box");
-
-  if (!emailInput || !passwordInput || !loginButton || !loginBox) {
-
-    console.error("Password recovery: login elements not found.");
-
-    return;
-
-  }
-
-  const emailGroup = emailInput.closest(".input-group");
-
-  const passwordGroup = passwordInput.closest(".input-group");
-
-  const forgotButton = document.createElement("button");
-
-  forgotButton.type = "button";
-
-  forgotButton.textContent = "رمز عبور را فراموش کرده‌اید؟";
-
-  forgotButton.style.cssText =
-
-    "display:block;width:100%;margin-top:12px;padding:10px;" +
-
-    "background:none;border:0;color:#1f2f25;font-weight:700;" +
-
-    "font-family:inherit;cursor:pointer;";
-
-  const panel = document.createElement("div");
-
-  panel.id = "passwordRecoveryPanel";
-
-  panel.style.cssText =
-
-    "display:none;text-align:right;margin-top:20px;";
-
-  panel.innerHTML = `
-
-    <h3 id="recoveryTitle"
-
-        style="color:#1f2f25;font-size:19px;margin-bottom:15px;">
-
-      بازیابی رمز عبور
-
-    </h3>
-
-    <div id="recoveryEmailGroup" class="input-group">
-
-      <label for="recoveryEmail">ایمیل حساب</label>
-
-      <input id="recoveryEmail" type="email"
-
-             autocomplete="email"
-
-             placeholder="ایمیل حساب خود را وارد کنید"
-
-             style="width:100%;padding:13px 14px;border:1px solid #ddd;
-
-                    border-radius:10px;font-size:15px;">
-
-    </div>
-
-    <button id="sendRecoveryButton" type="button" class="login-btn">
-
-      ارسال لینک بازیابی
-
-    </button>
-
-    <div id="recoveryPasswordFields" style="display:none;margin-top:15px;">
-
-      <div class="input-group">
-
-        <label for="newRecoveryPassword">رمز عبور جدید</label>
-
-        <input id="newRecoveryPassword" type="password"
-
-               autocomplete="new-password"
-
-               placeholder="حداقل ۸ کاراکتر"
-
-               style="width:100%;padding:13px 14px;border:1px solid #ddd;
-
-                      border-radius:10px;font-size:15px;">
-
-      </div>
-
-      <div class="input-group">
-
-        <label for="confirmRecoveryPassword">تکرار رمز عبور جدید</label>
-
-        <input id="confirmRecoveryPassword" type="password"
-
-               autocomplete="new-password"
-
-               placeholder="رمز را دوباره وارد کنید"
-
-               style="width:100%;padding:13px 14px;border:1px solid #ddd;
-
-                      border-radius:10px;font-size:15px;">
-
-      </div>
-
-      <button id="saveRecoveryPasswordButton" type="button" class="login-btn">
-
-        ذخیره رمز جدید
-
-      </button>
-
-    </div>
-
-    <div id="recoveryMessage"
-
-         role="status"
-
-         style="display:none;margin-top:15px;padding:11px;
-
-                border-radius:9px;font-size:13px;overflow-wrap:anywhere;">
-
-    </div>
-
-    <button id="backToLoginButton" type="button"
-
-            style="margin-top:12px;width:100%;padding:11px;
-
-                   background:#eee;border:0;border-radius:9px;
-
-                   font-family:inherit;font-weight:700;cursor:pointer;">
-
-      برگشت به ورود
-
-    </button>
-
-  `;
-
-  loginButton.insertAdjacentElement("afterend", forgotButton);
-
-  forgotButton.insertAdjacentElement("afterend", panel);
-
-  const recoveryEmail = panel.querySelector("#recoveryEmail");
-
-  const recoveryMessage = panel.querySelector("#recoveryMessage");
-
-  const sendButton = panel.querySelector("#sendRecoveryButton");
-
-  const passwordFields = panel.querySelector("#recoveryPasswordFields");
-
-  const saveButton = panel.querySelector("#saveRecoveryPasswordButton");
-
-  const backButton = panel.querySelector("#backToLoginButton");
-
-  const recoveryTitle = panel.querySelector("#recoveryTitle");
-
-  let resetMode = false;
-
-  function message(text, isError) {
-
-    recoveryMessage.textContent = text;
-
-    recoveryMessage.style.display = "block";
-
-    recoveryMessage.style.background = isError ? "#ffe8e8" : "#e6f5eb";
-
-    recoveryMessage.style.color = isError ? "#a00000" : "#16823d";
-
-  }
-
-  function isRecoveryLink() {
-
-    const hash = new URLSearchParams(location.hash.replace(/^#/, ""));
-
-    const query = new URLSearchParams(location.search);
-
-    return hash.get("type") === "recovery" ||
-
-           query.get("type") === "recovery" ||
-
-           query.has("code");
-
-  }
-
-  function showPanel(isReset) {
-
-    resetMode = Boolean(isReset);
-
-    emailGroup.style.display = "none";
-
-    passwordGroup.style.display = "none";
-
-    loginButton.style.display = "none";
-
-    forgotButton.style.display = "none";
-
-    loginError.style.display = "none";
-
-    panel.style.display = "block";
-
-    recoveryEmail.value = recoveryEmail.value || emailInput.value.trim();
-
-    recoveryTitle.textContent = resetMode
-
-      ? "تعیین رمز عبور جدید"
-
-      : "بازیابی رمز عبور";
-
-    panel.querySelector("#recoveryEmailGroup").style.display =
-
-      resetMode ? "none" : "block";
-
-    sendButton.style.display = resetMode ? "none" : "block";
-
-    passwordFields.style.display = resetMode ? "block" : "none";
-
-    recoveryMessage.style.display = "none";
-
-  }
-
-  function backToLogin() {
-
-    resetMode = false;
-
-    panel.style.display = "none";
-
-    emailGroup.style.display = "";
-
-    passwordGroup.style.display = "";
-
-    loginButton.style.display = "";
-
-    forgotButton.style.display = "block";
-
-    loginError.style.display = "none";
-
-    passwordInput.value = "";
-
-    panel.querySelector("#newRecoveryPassword").value = "";
-
-    panel.querySelector("#confirmRecoveryPassword").value = "";
-
-    recoveryMessage.style.display = "none";
-
-    history.replaceState({}, document.title, location.pathname + location.search);
-
-  }
-
-  forgotButton.addEventListener("click", function () {
-
-    showPanel(false);
-
-  });
-
-  backButton.addEventListener("click", backToLogin);
-
-  sendButton.addEventListener("click", async function () {
-
-    const email = recoveryEmail.value.trim();
-
-    if (!email) {
-
-      message("ایمیل حساب خود را وارد کنید.", true);
-
-      return;
-
-    }
-
-    sendButton.disabled = true;
-
-    sendButton.textContent = "در حال ارسال...";
-
-    try {
-
-      const redirectTo = location.origin + location.pathname;
-
-      const result = await supabaseClient.auth.resetPasswordForEmail(email, {
-
-        redirectTo: redirectTo
-
-      });
-
-      if (result.error) throw result.error;
-
-      message(
-
-        "درخواست بازیابی ارسال شد. صندوق ورودی و پوشه Spam ایمیل خود را بررسی کنید.",
-
-        false
-
-      );
-
-    } catch (error) {
-
-      console.error("Password recovery request failed:", error);
-
-      message(
-
-        "ارسال لینک انجام نشد. اتصال اینترنت و تنظیمات ایمیل Supabase را بررسی کنید.",
-
-        true
-
-      );
-
-    } finally {
-
-      sendButton.disabled = false;
-
-      sendButton.textContent = "ارسال لینک بازیابی";
-
-    }
-
-  });
-
-  saveButton.addEventListener("click", async function () {
-
-    const password = panel.querySelector("#newRecoveryPassword").value;
-
-    const confirmation = panel.querySelector("#confirmRecoveryPassword").value;
-
-    if (password.length < 8) {
-
-      message("رمز جدید باید حداقل ۸ کاراکتر باشد.", true);
-
-      return;
-
-    }
-
-    if (password !== confirmation) {
-
-      message("رمز عبور و تکرار آن یکسان نیستند.", true);
-
-      return;
-
-    }
-
-    saveButton.disabled = true;
-
-    saveButton.textContent = "در حال ذخیره...";
-
-    try {
-
-      const result = await supabaseClient.auth.updateUser({
-
-        password: password
-
-      });
-
-      if (result.error) throw result.error;
-
-      message("رمز عبور با موفقیت تغییر کرد. اکنون می‌توانید وارد شوید.", false);
-
-      saveButton.disabled = true;
-
-      setTimeout(async function () {
-
-        try {
-
-          await supabaseClient.auth.signOut();
-
-        } catch (error) {
-
-          console.error(error);
-
-        }
-
-        backToLogin();
-
-      }, 1500);
-
-    } catch (error) {
-
-      console.error("Password update failed:", error);
-
-      message(
-
-        "تغییر رمز انجام نشد. ممکن است لینک منقضی شده باشد؛ دوباره لینک بازیابی بگیرید.",
-
-        true
-
-      );
-
-      saveButton.disabled = false;
-
-    } finally {
-
-      saveButton.textContent = "ذخیره رمز جدید";
-
-    }
-
-  });
-
-  /*
-
-   * جلوگیری از ورود مستقیم به داشبورد با نشست بازیابی رمز
-
-   */
-
-  const originalCheckExistingSession = window.checkExistingSession;
-
-  window.checkExistingSession = async function () {
-
-    if (isRecoveryLink()) {
-
-      showPanel(true);
-
-      return;
-
-    }
-
-    if (typeof originalCheckExistingSession === "function") {
-
-      return originalCheckExistingSession.apply(this, arguments);
-
-    }
-
-  };
-
-  /*
-
-   * Supabase پس از بازشدن لینک بازیابی این رویداد را ارسال می‌کند.
-
-   */
-
-  supabaseClient.auth.onAuthStateChange(function (event) {
-
-    if (event === "PASSWORD_RECOVERY") {
-
-      showPanel(true);
-
-    }
-
-  });
-supabaseClient.auth.onAuthStateChange(function (event) {
-  if (event === "PASSWORD_RECOVERY") {
-    showPanel(true);
-  }
-});
-
-})();
-</script>
 </body>
 </html>
