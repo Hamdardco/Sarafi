@@ -7,7 +7,7 @@
 
 <meta name="google-site-verification" content="BgeVkg0cT_Qh_5NolEXH08rmN2Y1h4gM8o6kmc9Hkzc">
 
-<title>سیستم حسابداری شهرک جدید</title>
+<title>سیستم حسابداری شرکت همدرد</title>
 
 <meta name="description" content="سیستم حسابداری شرکت همدرد؛ سیستم داخلی مدیریت و ثبت دریافت، برداشت، موجودی و تاریخچه تراکنش‌ها به افغانی AFN.">
 
@@ -17,7 +17,7 @@
 <meta property="og:description" content="سیستم حسابداری شرکت همدرد برای مدیریت دریافت، برداشت، موجودی و تاریخچه تراکنش‌ها.">
 <meta property="og:type" content="website">
 
-<link rel="canonical" href="https://kamalip316-ui.github.io/Sarafi/">
+<link rel="canonical" href="https://hamdardco.github.io/sarafi/">
 
 <!-- فونت حرفه‌ای فارسی -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1193,7 +1193,6 @@ th{
 
 </div>
 
-
 <!-- =========================================================
      APP
      ========================================================= -->
@@ -1259,7 +1258,6 @@ th{
 
   </div>
 
-
   <div
     class="user-bar"
     id="homeUserBar">
@@ -1284,7 +1282,6 @@ th{
     </button>
 
   </div>
-
 
   <!-- HOME -->
 
@@ -1311,7 +1308,6 @@ th{
         </div>
 
       </div>
-
 
       <div class="summary">
 
@@ -1341,7 +1337,6 @@ th{
 
       </div>
 
-
       <div class="action-buttons">
 
         <button
@@ -1362,7 +1357,6 @@ th{
 
       </div>
 
-
       <button
         class="history-btn"
         onclick="openHistory()">
@@ -1374,7 +1368,6 @@ th{
     </div>
 
   </main>
-
 
   <!-- RECEIVE SECTION -->
 
@@ -1399,7 +1392,6 @@ th{
         </button>
 
       </div>
-
 
       <div class="type-menu">
 
@@ -1433,7 +1425,6 @@ th{
 
   </main>
 
-
   <!-- WITHDRAW SECTION -->
 
   <main
@@ -1457,7 +1448,6 @@ th{
         </button>
 
       </div>
-
 
       <div class="type-menu">
 
@@ -1491,7 +1481,6 @@ th{
 
   </main>
 
-
   <!-- RECEIPT LIST -->
 
   <main
@@ -1516,7 +1505,6 @@ th{
 
       </div>
 
-
       <div
         id="receiptListBody"
         class="receipts-list">
@@ -1525,7 +1513,6 @@ th{
     </div>
 
   </main>
-
 
   <!-- TRANSACTION -->
 
@@ -1551,7 +1538,6 @@ th{
 
       </div>
 
-
       <div class="form-card">
 
         <form
@@ -1561,7 +1547,6 @@ th{
           <input
             type="hidden"
             id="transactionType">
-
 
           <div class="form-group">
 
@@ -1576,7 +1561,6 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
             <label>
@@ -1590,7 +1574,6 @@ th{
               placeholder="نام شخص را وارد کنید">
 
           </div>
-
 
           <div class="form-group">
 
@@ -1607,7 +1590,6 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
             <label>
@@ -1621,7 +1603,6 @@ th{
             </textarea>
 
           </div>
-
 
           <div class="form-group">
 
@@ -1638,7 +1619,6 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
             <label>
@@ -1654,7 +1634,6 @@ th{
 
           </div>
 
-
           <div class="form-group">
 
             <label>
@@ -1667,7 +1646,6 @@ th{
               readonly>
 
           </div>
-
 
           <button
             id="saveButton"
@@ -1685,7 +1663,6 @@ th{
     </div>
 
   </main>
-
 
   <!-- HISTORY -->
 
@@ -1711,7 +1688,6 @@ th{
 
       </div>
 
-
       <div class="history-tools">
 
         <input
@@ -1720,7 +1696,6 @@ th{
           type="text"
           placeholder="جستجو با شماره رسید یا نام شخص"
           oninput="renderHistory()">
-
 
         <div class="date-filters">
 
@@ -1737,7 +1712,6 @@ th{
 
           </div>
 
-
           <div>
 
             <label>
@@ -1753,7 +1727,6 @@ th{
 
         </div>
 
-
         <button
           class="print-history-btn"
           onclick="printHistory()">
@@ -1763,7 +1736,6 @@ th{
         </button>
 
       </div>
-
 
       <div class="table-wrap">
 
@@ -1826,11 +1798,9 @@ th{
 
 </div>
 
-
 <div id="printArea"></div>
 
 <div id="historyPrintArea"></div>
-
 
 <script>
 
@@ -1850,7 +1820,6 @@ window.supabase.createClient(
   SUPABASE_KEY
 );
 
-
 /* =========================================================
    GLOBAL
    ========================================================= */
@@ -1860,7 +1829,6 @@ let currentProfile=null;
 let transactions=[];
 let currentTransactionType="receive";
 let previousSection="homePage";
-
 
 /* =========================================================
    DATE
@@ -1877,7 +1845,6 @@ function todayISO(){
   );
 }
 
-
 /* =========================================================
    TIME
    ========================================================= */
@@ -1892,7 +1859,6 @@ function currentTime(){
   );
 }
 
-
 /* =========================================================
    NUMBER
    ========================================================= */
@@ -1905,7 +1871,6 @@ function formatNumber(value){
     });
 }
 
-
 function parseAmount(value){
 
   return Number(
@@ -1914,7 +1879,6 @@ function parseAmount(value){
       .replace(/[^\d]/g,"")
   );
 }
-
 
 function formatAmountInput(){
 
@@ -1937,7 +1901,6 @@ function formatAmountInput(){
     Number(raw).toLocaleString("en-US");
 }
 
-
 /* =========================================================
    DATE DATABASE
    ========================================================= */
@@ -1952,7 +1915,6 @@ function dateToDB(dateValue){
 
   return p[0]+"/"+p[1]+"/"+p[2];
 }
-
 
 function dateToISO(dateValue){
 
@@ -1979,7 +1941,6 @@ function dateToISO(dateValue){
 
   return s;
 }
-
 
 /* =========================================================
    JALALI
@@ -2065,7 +2026,6 @@ function gregorianToJalali(gy,gm,gd){
   return[jy,jm,jd];
 }
 
-
 function jalaliFromISO(iso){
 
   const p=
@@ -2097,7 +2057,6 @@ function jalaliFromISO(iso){
   );
 }
 
-
 function gregorianDisplay(iso){
 
   const p=
@@ -2113,7 +2072,6 @@ function gregorianDisplay(iso){
     p[2]
   );
 }
-
 
 /* =========================================================
    HOME DATE
@@ -2136,7 +2094,6 @@ function homeDate(){
   );
 }
 
-
 /* =========================================================
    ESCAPE
    ========================================================= */
@@ -2150,7 +2107,6 @@ function escapeHTML(value){
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
 }
-
 
 /* =========================================================
    PAGE
@@ -2185,7 +2141,6 @@ function showPage(id){
 
 }
 
-
 /* =========================================================
    LOGIN
    ========================================================= */
@@ -2201,14 +2156,12 @@ function showError(message){
   box.style.display="block";
 }
 
-
 function hideLoginError(){
 
   document
     .getElementById("loginError")
     .style.display="none";
 }
-
 
 async function login(){
 
@@ -2279,7 +2232,6 @@ async function login(){
 
 }
 
-
 /* =========================================================
    PROFILE
    ========================================================= */
@@ -2308,7 +2260,6 @@ async function loadProfile(){
   currentProfile=
     result.data;
 }
-
 
 /* =========================================================
    ENTER
@@ -2353,7 +2304,6 @@ async function enterApp(){
   goHome();
 }
 
-
 /* =========================================================
    SESSION
    ========================================================= */
@@ -2390,7 +2340,6 @@ async function checkExistingSession(){
 
 }
 
-
 /* =========================================================
    LOGOUT
    ========================================================= */
@@ -2418,7 +2367,6 @@ async function logout(){
   hideLoginError();
 }
 
-
 /* =========================================================
    LOAD TRANSACTIONS
    ========================================================= */
@@ -2442,7 +2390,6 @@ async function loadTransactions(){
 
   updateDashboard();
 }
-
 
 /* =========================================================
    DASHBOARD
@@ -2505,7 +2452,6 @@ function updateDashboard(){
       homeDate();
 }
 
-
 /* =========================================================
    RECEIPT NUMBER
    ========================================================= */
@@ -2552,7 +2498,6 @@ function getNextReceiptNumber(type){
   return prefix+(max+1);
 }
 
-
 /* =========================================================
    OPEN TYPE
    ========================================================= */
@@ -2570,7 +2515,6 @@ function openTypePage(type){
   }
 
 }
-
 
 /* =========================================================
    OPEN RECEIPT LIST
@@ -2596,7 +2540,6 @@ async function openReceiptList(type){
 
   showPage("receiptListPage");
 }
-
 
 /* =========================================================
    RENDER RECEIPTS
@@ -2684,7 +2627,6 @@ function renderReceiptList(type){
 
           </div>
 
-
           <div class="receipt-card-name">
 
             ${escapeHTML(
@@ -2692,7 +2634,6 @@ function renderReceiptList(type){
             )}
 
           </div>
-
 
           <div class="
             receipt-card-amount
@@ -2707,7 +2648,6 @@ function renderReceiptList(type){
             AFN
 
           </div>
-
 
           <div class="receipt-card-info">
 
@@ -2732,7 +2672,6 @@ function renderReceiptList(type){
 
           </div>
 
-
           <div class="receipt-card-description">
 
             <strong>
@@ -2744,7 +2683,6 @@ function renderReceiptList(type){
             )}
 
           </div>
-
 
           <button
             class="card-print-btn"
@@ -2760,7 +2698,6 @@ function renderReceiptList(type){
 
     }).join("");
 }
-
 
 /* =========================================================
    BACK FROM LIST
@@ -2779,7 +2716,6 @@ function backFromReceiptList(){
   }
 
 }
-
 
 /* =========================================================
    OPEN TRANSACTION
@@ -2858,7 +2794,6 @@ function openTransactionPage(type){
   showPage("transactionPage");
 }
 
-
 /* =========================================================
    BACK FROM TRANSACTION
    ========================================================= */
@@ -2868,7 +2803,6 @@ function goBackFromTransaction(){
   showPage(previousSection);
 
 }
-
 
 /* =========================================================
    SAVE TRANSACTION
@@ -3056,7 +2990,6 @@ async function saveTransaction(event){
 
 }
 
-
 /* =========================================================
    HOME
    ========================================================= */
@@ -3068,7 +3001,6 @@ function goHome(){
   updateDashboard();
 
 }
-
 
 /* =========================================================
    HISTORY
@@ -3094,7 +3026,6 @@ async function openHistory(){
 
   showPage("historyPage");
 }
-
 
 /* =========================================================
    FILTER
@@ -3143,7 +3074,6 @@ function getFilteredHistory(){
 
   });
 }
-
 
 /* =========================================================
    RENDER HISTORY
@@ -3266,7 +3196,6 @@ function renderHistory(){
     }).join("");
 }
 
-
 /* =========================================================
    PROFESSIONAL RECEIPT
    ========================================================= */
@@ -3290,12 +3219,9 @@ function buildReceiptHTML(t){
         : "withdraw-receipt"
     }">
 
-
       <div class="receipt-bank-head">
 
-
         <div class="receipt-brand">
-
 
           <svg
             class="receipt-logo"
@@ -3339,7 +3265,6 @@ function buildReceiptHTML(t){
 
           </svg>
 
-
           <div class="receipt-bank-title">
 
             <h2>
@@ -3352,9 +3277,7 @@ function buildReceiptHTML(t){
 
           </div>
 
-
         </div>
-
 
         <div class="receipt-bank-number">
 
@@ -3370,9 +3293,7 @@ function buildReceiptHTML(t){
 
         </div>
 
-
       </div>
-
 
       <div class="receipt-date-box">
 
@@ -3386,9 +3307,7 @@ function buildReceiptHTML(t){
 
       </div>
 
-
       <table class="receipt-table">
-
 
         <tr>
 
@@ -3408,7 +3327,6 @@ function buildReceiptHTML(t){
 
         </tr>
 
-
         <tr>
 
           <td>
@@ -3422,7 +3340,6 @@ function buildReceiptHTML(t){
           </td>
 
         </tr>
-
 
         <tr>
 
@@ -3438,7 +3355,6 @@ function buildReceiptHTML(t){
 
         </tr>
 
-
         <tr>
 
           <td>
@@ -3453,7 +3369,6 @@ function buildReceiptHTML(t){
 
         </tr>
 
-
         <tr>
 
           <td>
@@ -3467,7 +3382,6 @@ function buildReceiptHTML(t){
           </td>
 
         </tr>
-
 
         <tr class="amount-row">
 
@@ -3484,9 +3398,7 @@ function buildReceiptHTML(t){
 
         </tr>
 
-
       </table>
-
 
       <div class="receipt-footer">
 
@@ -3500,12 +3412,10 @@ function buildReceiptHTML(t){
 
       </div>
 
-
     </div>
 
   `;
 }
-
 
 /* =========================================================
    SHOW RECEIPT AFTER SAVE
@@ -3532,7 +3442,6 @@ function showReceipt(t){
   },100);
 }
 
-
 /* =========================================================
    PRINT RECEIPT FROM HISTORY
    ========================================================= */
@@ -3556,14 +3465,12 @@ function printReceiptById(id){
   const receiptHTML=
     buildReceiptHTML(transaction);
 
-
   const printWindow=
     window.open(
       "",
       "_blank",
       "width=850,height=1000"
     );
-
 
   if(!printWindow){
 
@@ -3574,9 +3481,7 @@ function printReceiptById(id){
     return;
   }
 
-
   printWindow.document.open();
-
 
   printWindow.document.write(`
 
@@ -3594,29 +3499,24 @@ function printReceiptById(id){
         name="viewport"
         content="width=device-width,initial-scale=1.0">
 
-
       <title>
         رسید ${escapeHTML(
           transaction.receipt||""
         )}
       </title>
 
-
       <link
         rel="preconnect"
         href="https://fonts.googleapis.com">
-
 
       <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
         crossorigin>
 
-
       <link
         href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-
 
       <style>
 
@@ -3629,7 +3529,6 @@ function printReceiptById(id){
             sans-serif;
         }
 
-
         html,
         body{
           margin:0;
@@ -3638,11 +3537,9 @@ function printReceiptById(id){
           color:#211f1c;
         }
 
-
         body{
           padding:20px;
         }
-
 
         .receipt-box{
           width:100%;
@@ -3657,16 +3554,13 @@ function printReceiptById(id){
           break-inside:avoid;
         }
 
-
         .receipt-box.receive-receipt{
           border-top:4px solid #16823d;
         }
 
-
         .receipt-box.withdraw-receipt{
           border-top:4px solid #b32424;
         }
-
 
         .receipt-bank-head{
           display:flex;
@@ -3679,13 +3573,11 @@ function printReceiptById(id){
           margin-bottom:22px;
         }
 
-
         .receipt-brand{
           display:flex;
           align-items:center;
           gap:14px;
         }
-
 
         .receipt-logo{
           width:58px;
@@ -3693,11 +3585,9 @@ function printReceiptById(id){
           flex:none;
         }
 
-
         .receipt-bank-title{
           text-align:right;
         }
-
 
         .receipt-bank-title h2{
           margin:0 0 4px;
@@ -3706,7 +3596,6 @@ function printReceiptById(id){
           font-weight:900;
         }
 
-
         .receipt-bank-title h3{
           margin:0;
           color:#77716a;
@@ -3714,19 +3603,16 @@ function printReceiptById(id){
           font-weight:500;
         }
 
-
         .receipt-bank-number{
           text-align:left;
           min-width:115px;
         }
-
 
         .receipt-bank-number div:first-child{
           color:#77716a;
           font-size:13px;
           margin-bottom:4px;
         }
-
 
         .receipt-bank-number div:last-child{
           color:#211f1c;
@@ -3735,13 +3621,11 @@ function printReceiptById(id){
           direction:ltr;
         }
 
-
         .receipt-date-box{
           display:flex;
           justify-content:flex-start;
           margin-bottom:5px;
         }
-
 
         .receipt-date{
           border:0;
@@ -3751,7 +3635,6 @@ function printReceiptById(id){
           line-height:1.8;
         }
 
-
         .receipt-date .date-bottom{
           direction:rtl;
           color:#77716a;
@@ -3759,18 +3642,15 @@ function printReceiptById(id){
           font-weight:500;
         }
 
-
         .receipt-table{
           width:100%;
           border-collapse:collapse;
           margin-top:5px;
         }
 
-
         .receipt-table tr{
           border-bottom:1px solid #e6e0d6;
         }
-
 
         .receipt-table td{
           border:0;
@@ -3779,7 +3659,6 @@ function printReceiptById(id){
           font-size:16px;
         }
 
-
         .receipt-table td:first-child{
           width:31%;
           color:#77716a;
@@ -3787,18 +3666,15 @@ function printReceiptById(id){
           text-align:right;
         }
 
-
         .receipt-table td:last-child{
           color:#211f1c;
           font-weight:700;
           text-align:left;
         }
 
-
         .receipt-table tr.amount-row{
           border:0;
         }
-
 
         .receipt-table tr.amount-row td{
           padding:22px 20px;
@@ -3806,14 +3682,12 @@ function printReceiptById(id){
           background:#fff;
         }
 
-
         .receipt-table tr.amount-row td:first-child{
           width:25%;
           color:#211f1c;
           font-size:18px;
           font-weight:900;
         }
-
 
         .receipt-table tr.amount-row td:last-child{
           border:2px solid #211f1c;
@@ -3825,12 +3699,10 @@ function printReceiptById(id){
           padding:18px 22px;
         }
 
-
         .receipt-box.withdraw-receipt
         .receipt-table tr.amount-row td:last-child{
           border-color:#b32424;
         }
-
 
         .receipt-footer{
           margin-top:62px;
@@ -3842,7 +3714,6 @@ function printReceiptById(id){
           font-size:14px;
         }
 
-
         .receipt-footer > div{
           width:45%;
           text-align:center;
@@ -3850,12 +3721,10 @@ function printReceiptById(id){
           border-top:1px solid #211f1c;
         }
 
-
         @page{
           size:A4;
           margin:12mm;
         }
-
 
         @media(max-width:600px){
 
@@ -3917,11 +3786,9 @@ function printReceiptById(id){
 
     </head>
 
-
     <body>
 
       ${receiptHTML}
-
 
       <script>
 
@@ -3942,7 +3809,6 @@ function printReceiptById(id){
           }
         );
 
-
         window.addEventListener(
           "afterprint",
           function(){
@@ -3961,18 +3827,15 @@ function printReceiptById(id){
 
       <\/script>
 
-
     </body>
 
     </html>
 
   `);
 
-
   printWindow.document.close();
 
 }
-
 
 /* =========================================================
    PRINT HISTORY
@@ -4012,7 +3875,6 @@ function printHistory(){
         </h3>
 
       </div>
-
 
       <table class="history-print-table">
 
@@ -4059,7 +3921,6 @@ function printHistory(){
           </tr>
 
         </thead>
-
 
         <tbody>
 
@@ -4144,11 +4005,9 @@ function printHistory(){
 
   `;
 
-
   document.body.classList.add(
     "history-print-mode"
   );
-
 
   setTimeout(()=>{
 
@@ -4157,7 +4016,6 @@ function printHistory(){
   },100);
 
 }
-
 
 /* =========================================================
    AMOUNT
@@ -4175,7 +4033,6 @@ document.addEventListener(
 
   }
 );
-
 
 /* =========================================================
    ENTER LOGIN
@@ -4197,7 +4054,6 @@ document.addEventListener(
 
   }
 );
-
 
 /* =========================================================
    AFTER PRINT
@@ -4225,7 +4081,6 @@ window.addEventListener(
 
   }
 );
-
 
 /* =========================================================
    START
