@@ -1805,7 +1805,7 @@ th{
 <script>
 
 /* =========================================================
-   SUPABASE
+   SUPABASE - PERSISTENT SESSION
    ========================================================= */
 
 const SUPABASE_URL =
@@ -1817,7 +1817,15 @@ const SUPABASE_KEY =
 const supabaseClient =
 window.supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_KEY
+  SUPABASE_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+      storage: window.localStorage
+    }
+  }
 );
 
 /* =========================================================
@@ -2305,26 +2313,34 @@ async function enterApp(){
 }
 
 /* =========================================================
-   SESSION
+   SESSION - AUTO LOGIN
    ========================================================= */
+
+let sessionCheckRunning = false;
 
 async function checkExistingSession(){
 
+  if(sessionCheckRunning) return;
+
+  sessionCheckRunning = true;
+
   try{
 
-    const result=
-      await supabaseClient.auth
-        .getSession();
+    const result =
+      await supabaseClient.auth.getSession();
 
-    if(result.error)return;
+    if(result.error){
+      throw result.error;
+    }
 
-    const session=
+    const session =
       result.data.session;
 
-    if(!session)return;
+    if(!session){
+      return;
+    }
 
-    currentUser=
-      session.user;
+    currentUser = session.user;
 
     await loadProfile();
 
@@ -2332,9 +2348,24 @@ async function checkExistingSession(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Session restore error:",
+      error
+    );
 
-    await supabaseClient.auth.signOut();
+    /*
+      نشست را حذف نمی‌کنیم.
+      اگر اینترنت یا بارگذاری اطلاعات
+      موقتاً مشکل داشته باشد، ورود محفوظ می‌ماند.
+    */
+
+    showError(
+      "نشست ورود محفوظ است، اما بارگذاری اطلاعات انجام نشد. اینترنت را بررسی کرده و صفحه را دوباره بارگذاری کنید."
+    );
+
+  }finally{
+
+    sessionCheckRunning = false;
 
   }
 
